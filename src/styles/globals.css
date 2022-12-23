@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@font-face {
+    font-family: "Monserrat";
+    src: url("../../public/fonts/monserrat-alt/MontserratAlt1-Regular.otf");
+}
+
+@font-face {
+  font-family: "Chivo-Mono";
+  src: url("../../public/fonts/chivo-mono/ChivoMono-Light.otf");
+}
+
+body {
+  background-color: #eeeeee;
+}
+
+.react-terminal-wrapper {
+  background-color: #2e3131 !important;
+}
