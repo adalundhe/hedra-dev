@@ -148,9 +148,6 @@ const TerminalController = () => {
     ])
 
     const currentMessageIdx = useRef(0);
-    const viewportRef = useRef(null);
-    const runConsole = useRef(true);
-    const [terminalMessage, setMessage] = useState("");
     const sliceEnd = useRef(0);
 
 
@@ -158,7 +155,6 @@ const TerminalController = () => {
 
     const [terminalLineData, setTerminalLineData] = useState([
         <TerminalOutput key={`message-${currentMessageIdx.current}`}>
-            {terminalMessage}
         </TerminalOutput>
     ]);
 

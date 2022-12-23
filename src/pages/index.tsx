@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Create T3 App</title>
+        <title>Hedra - Testing at scale</title>
         <meta name="description" content="Hedra - Testing at scale" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
