@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, createRef } from 'react';
 import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
 import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 
 const commandOutputs = [
@@ -110,7 +111,7 @@ const writeToConsole = ({
             const nextMessage = currentMessage.slice(0, sliceEnd)
 
             setTerminalLineData([
-                <TerminalOutput>
+                <TerminalOutput key={`message-${idx}`}>
                 {nextMessage}
             </TerminalOutput>
 
@@ -119,7 +120,7 @@ const writeToConsole = ({
         }
         else {
             setTerminalLineData([
-                <TerminalOutput>
+                <TerminalOutput key={`message-${idx}`}>
                 {
                     `${currentMessage}
                     ${commandOutputs[idx]}
@@ -147,7 +148,7 @@ const TerminalController = () => {
     ])
 
     const currentMessageIdx = useRef(0);
-
+    const viewportRef = useRef(null);
     const runConsole = useRef(true);
     const [terminalMessage, setMessage] = useState("");
     const sliceEnd = useRef(0);
@@ -156,15 +157,31 @@ const TerminalController = () => {
     const [time, setTime] = useState(Date.now());
 
     const [terminalLineData, setTerminalLineData] = useState([
-        <TerminalOutput>
+        <TerminalOutput key={`message-${currentMessageIdx.current}`}>
             {terminalMessage}
         </TerminalOutput>
     ]);
 
+    
+    const { ref, inView } = useInView();
+
+
 
     useEffect(() => {
         
-        if (runConsole.current === true){
+        if (inView){
+
+            writeToConsole({
+                messages: ["Let's start!"],
+                commandOutputs: [""],
+                idx: 0,
+                sliceEnd: sliceEnd.current,
+                setTime,
+                setTerminalLineData
+
+            })
+
+            sliceEnd.current = 0;
             
             
             const messagesInterval = setInterval(() => {
@@ -201,17 +218,19 @@ const TerminalController = () => {
             };
         } 
         
-        runConsole.current = false;
 
-    }, []);
+    }, [inView]);
 
 
   // Terminal has 100% width by default so it should usually be wrapped in a container div
   return (
-    <div className="h-full">
-      <Terminal colorMode={ ColorMode.Dark }>
+    <div className="h-full" ref={ref}>
+      {
+        inView ? 
+        <Terminal colorMode={ ColorMode.Dark }>
         {terminalLineData}
-      </Terminal>
+      </Terminal> : null
+      }
     </div>
   )
 };

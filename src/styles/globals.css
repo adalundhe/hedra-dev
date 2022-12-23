@@ -20,4 +20,6 @@ body {
 
 .react-terminal-wrapper {
   background-color: #2e3131 !important;
+
+  overflow: hidden;
 }
