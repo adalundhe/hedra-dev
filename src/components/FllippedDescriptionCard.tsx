@@ -14,7 +14,7 @@ const FlippedDescriptionCard = () => <div className="w-full row-span-3 h-100 tex
             <TerminalController />
         </div>
         <div className="text-3xl 2xl:w-1/2 w-full flex items-center justify-center bg-[#eeeeee] py-10">
-            <ul className="w-1/2 w-full p-10">
+            <ul className="w-1/2 w-full py-10">
                 <li className="my-20 text-left flex items-center">
                     <p className="text-6xl mr-2">
                         <DiGit />
