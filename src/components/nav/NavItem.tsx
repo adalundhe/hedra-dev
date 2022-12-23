@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 const NavItem = ({ 
     navText,
-    navLink
+    navLink,
 }: {
     navText: string,
     navLink: string
@@ -13,7 +13,7 @@ const NavItem = ({
     return (
         <div className='w-100 py-8'>
             <button 
-                className='w-100 text-xl lowercase font-monserrat hover:underline'
+                className='w-100 md:text-2xl text-3xl lowercase font-rany hover:underline hover:text-[#14151a]'
                 type="button" 
                 onClick={() => router.push(navLink)}
             >

@@ -1,58 +1,52 @@
-import { CodeBlock, a11yDark } from "react-code-blocks";
 import { TerminalController } from "./terminal";
-
-const codeExample = `
-from hedra import (
-	Setup,
-	Execute,
-	action,
-	Analyze,
-	JSONConfig,
-	Submit,
-	depends,
-)
-
-class SetupStage(Setup):
-    batch_size=1000
-    total_time='1m'
+import { DiGit } from 'react-icons/di'
+import { TbReportAnalytics } from 'react-icons/tb'
+import { GoTerminal } from 'react-icons/go'
+import { TfiPlug } from 'react-icons/tfi'
 
 
-@depends(SetupStage)
-class ExecuteHTTPStage(Execute):
-
-    @action()
-    async def http_get(self):
-        return await self.client.http.get('https://httpbin.org/get')
-
-
-@depends(ExecuteHTTPStage)
-class AnalyzeStage(Analyze):
-    pass
-
-
-@depends(AnalyzeStage)
-class SubmitJSONResultsStage(Submit):
-    config=JSONConfig(
-        events_filepath='./events.json',
-        metrics_filepath='./metrics.json'
-    )
-
-`
-
-const FlippedDescriptionCard = () => <div className="w-100 row-span-3 h-100 text-center font-monserrat grid grid-rows-6 bg-[#2e3131]">
-    <div className="row-span-1 flex justify-center items-center shadow-inner">
-        <h3 className="text-2xl w-100 text-[#eeeeee]">Use the powerful CLI to manage and run test projects.</h3>
+const FlippedDescriptionCard = () => <div className="w-full row-span-3 h-100 text-center font-rany flex flex-col bg-[#2e3131]">
+    <div className="flex justify-center items-center shadow-md 2xl:border-none border-b border-[#14151a] mx-10 2xl:border-none border-t border-[#14151a]">
+        <h3 className="text-3xl w-full text-[#eeeeee] py-20">Use the powerful CLI to manage and run test projects.</h3>
     </div>
-    <div className="w-100 row-span-5 flex shadow-inner">
-        <div className="font-sans text-left text-base w-1/2 border-t border-[#14151a]">
+    <div className="w-full flex 2xl:flex-row flex-col">
+        <div className="font-sans text-left text-base 2xl:w-1/2 w-full shadow-2xl">
             <TerminalController />
         </div>
-        <div className="text-2xl w-1/2 flex items-center justify-center bg-[#eeeeee]">
-            <ul className="list-disc w-1/2">
-                <li className="my-20 text-left">Keep your tests in sync with the built-in Git integration</li>
-                <li className="my-20 text-left">Comprehesive start template generation to get you up and running</li>
-                <li className="my-20 text-left">One CLI - whether running tests on your laptop or in the cloud</li>
-                <li className="my-20 text-left">Intuitive UI presents the information you need when you need it</li>
+        <div className="text-3xl 2xl:w-1/2 w-full flex items-center justify-center bg-[#eeeeee] py-10">
+            <ul className="w-1/2 w-full p-10">
+                <li className="my-20 text-left flex items-center">
+                    <p className="text-6xl mr-2">
+                        <DiGit />
+                    </p>
+                    <p className="ml-4">
+                        Keep your tests organized with Projects and in sync with the built-in Git integration
+                    </p>
+                </li>
+                <li className="my-20 text-left flex items-center">
+                    <p className="text-6xl mr-2">
+                        <TbReportAnalytics />
+                    </p>
+                    <p className="ml-4">
+                        Comprehesive start template generation to get you up and running
+                    </p>
+                </li>
+                <li className="my-20 text-left flex items-center">
+                    <p className="text-6xl mr-2">
+                        <GoTerminal />
+                    </p>
+                    <p className="ml-4">
+                        One CLI - whether running tests on your laptop or in the cloud
+                    </p>
+                </li>
+                <li className="my-20 text-left flex items-center">
+                    <p className="text-6xl mr-2">
+                        <TfiPlug />
+                    </p>
+                    <p className="ml-4">
+                        Powerul yet friendly plugin API - just generate, create, and use, no compilation or awkward extra steps
+                    </p>
+                </li>
             </ul>
         </div>   
     </div>

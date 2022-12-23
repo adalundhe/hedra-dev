@@ -220,12 +220,16 @@ const TerminalController = () => {
 
   // Terminal has 100% width by default so it should usually be wrapped in a container div
   return (
-    <div className="h-full" ref={ref}>
+    <div className="h-full w-full p-10 flex items-center justify-center bg-[#2e3131]" ref={ref}>
       {
         inView ? 
         <Terminal colorMode={ ColorMode.Dark }>
         {terminalLineData}
-      </Terminal> : null
+      </Terminal> : <div className='h-full w-full p-10 grid grid-rows-6'>
+        <div className='row-size-2'></div>
+        <div className='row-size-2'></div>
+        <div className='row-size-2'></div>
+      </div>
       }
     </div>
   )

@@ -10,16 +10,54 @@
 }
 
 @font-face {
-  font-family: "Chivo-Mono";
-  src: url("../../public/fonts/chivo-mono/ChivoMono-Light.otf");
+  font-family: "Rany";
+  src: url("../../public/fonts/rany/Rany-Light.otf");
 }
 
 body {
+  overflow-x: hidden;
+  width: fit-content;
   background-color: #eeeeee;
 }
 
 .react-terminal-wrapper {
-  background-color: #2e3131 !important;
+  padding: auto !important;
+  background-color: #2e3131 !important; 
+  font-size: 1vmin !important;
+}
 
+
+.react-terminal {
+  width: 100%;
+}
+
+.react-terminal-line {
   overflow: hidden;
 }
+
+@media only screen and (max-width: 480px) {
+  .react-terminal {
+    width: 150vmin;
+  }
+  .react-terminal-wrapper {
+    background-color: #2e3131 !important; 
+    font-size: 2.2vmin !important;
+  }
+  .react-terminal-line {
+    min-width: 100%;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  .react-terminal-wrapper {
+    background-color: #2e3131 !important; 
+    font-size: 2.5vmin !important;
+  }
+  .react-terminal-line {
+    min-width: 100%;
+    overflow: hidden;
+  }
+}
+
+

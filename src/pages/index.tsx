@@ -6,7 +6,10 @@ import {
   RepoDisplay, 
   NavBar, 
   DescriptionCard,
-  FlippedDescriptionCard 
+  FlippedDescriptionCard,
+  TenantsCard,
+  Footer,
+  ParticlesBackground
 } from '../components'
 
 const Home: NextPage = () => {
@@ -19,17 +22,20 @@ const Home: NextPage = () => {
         <meta name="description" content="Hedra - Testing at scale" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="w-[100%] h-[100vh] bg-[#eeeeee]">
+      <main className="2xl:w-[100vw] w-full h-[100vh] bg-[#eeeeee]">
         <NavBar />
-        <div className="flex flex-col">
-          <div className="w-100 h-100 grid grid-rows-6">
+        <div className="flex flex-col w-full">
+          <ParticlesBackground />
+          <div className="w-full h-100 grid grid-rows-6">
             <TitleCard />
             <RepoDisplay />
             <DescriptionCard />
           </div>
-          <div className="w-100 h-100 grid grid-rows-6">
+          <div className="w-full h-100 grid grid-rows-6">
             <FlippedDescriptionCard />
+            <TenantsCard />
           </div>
+          <Footer/>
         </div>
       </main>
     </>
