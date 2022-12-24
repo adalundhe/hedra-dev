@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 
 const NavItem = ({ 
@@ -8,17 +8,14 @@ const NavItem = ({
     navText: string,
     navLink: string
 }) => {
-    const router = useRouter()
     
     return (
         <div className='w-100 py-8'>
-            <button 
-                className='w-100 md:text-2xl text-3xl lowercase font-rany hover:underline hover:text-[#14151a]'
-                type="button" 
-                onClick={() => router.push(navLink)}
-            >
+            {
+                <Link href={navLink} className="w-100 md:text-2xl text-3xl lowercase font-rany hover:bold hover:text-[#038aff]">
                 {navText}
-            </button>
+                </Link>
+            }
 
         </div>
     )
