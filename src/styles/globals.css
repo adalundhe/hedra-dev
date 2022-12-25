@@ -21,41 +21,86 @@ body {
 }
 
 .react-terminal-wrapper {
-  padding: auto !important;
-  background-color: #2e3131 !important; 
-  font-size: 1vmin !important;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  background-color: #24252a !important; 
+  font-size: 1.1vmin !important;
+  line-height: 1.1vmin !important;
+  overflow: hidden !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  padding-left: 20px !important;
+  padding-top: 55px !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+  width: 100% !important;
 }
 
 
 .react-terminal {
   width: 100%;
+  overflow: hidden !important;
+  flex-shrink: 0;
 }
 
 .react-terminal-line {
   overflow: hidden;
 }
 
-@media only screen and (max-width: 480px) {
-  .react-terminal {
-    width: 150vmin;
-  }
+@media only screen and (max-width: 2300px) {
   .react-terminal-wrapper {
-    background-color: #2e3131 !important; 
-    font-size: 2.2vmin !important;
+    font-size: 0.95vmin !important;
+    line-height: 0.95vmin !important;
   }
-  .react-terminal-line {
-    min-width: 100%;
-    overflow: hidden;
+
+  .react-terminal {
+    height: 30vmin !important;
   }
+  
 }
 
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 2048px) {
   .react-terminal-wrapper {
-    background-color: #2e3131 !important; 
-    font-size: 2.5vmin !important;
+    font-size: 1.3vmin !important;
+    line-height: 1.3vmin !important;
   }
-  .react-terminal-line {
-    min-width: 100%;
-    overflow: hidden;
+
+  .react-terminal {
+    height: 40vmin !important;
   }
+  
+}
+
+
+@media only screen and (max-width: 1024px) {
+  .react-terminal-wrapper {
+    font-size: 1.5vmin !important;
+    line-height: 1.5vmin !important;
+  }
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+  
+}
+
+
+
+@media only screen and (max-width: 640px) {
+  .react-terminal-wrapper {
+    font-size: 1.5vmin !important;
+    line-height: 1.5vmin !important;
+  }
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+  
+}
+
+
+
+.code-block > span {
+  width: inherit;
 }

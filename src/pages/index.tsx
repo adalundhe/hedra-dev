@@ -25,12 +25,12 @@ const Home: NextPage = () => {
         <NavBar />
         <div className="flex flex-col w-full">
           <ParticlesBackground />
-          <div className="w-full h-100 grid grid-rows-6">
+          <div className="w-full h-100 grid sm:grid-rows-6 grid-rows-5">
             <TitleCard />
             <RepoDisplay />
             <DescriptionCard />
           </div>
-          <div className="w-full h-100 grid grid-rows-6">
+          <div className="w-full h-100 grid grid-rows-5">
             <FlippedDescriptionCard />
             <TenantsCard />
           </div>

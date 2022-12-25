@@ -7,8 +7,8 @@ const Badge = ({
     badgeLink: string,
     altText: string, 
 }) =>  (
-    <a href={badgeLink} className="h-full w-100">
-        <img src={badgeImageURL} alt={altText} className="w-100 h-22"/>
+    <a href={badgeLink} className="w-100 h-[1.5rem]">
+        <img src={badgeImageURL} alt={altText} className="w-[100%] object-fill h-[100%]"/>
     </a>
 )
 

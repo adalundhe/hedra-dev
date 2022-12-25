@@ -1,7 +1,6 @@
-import { useState, useRef, createRef } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
 import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 
 const commandOutputs = [
@@ -77,10 +76,13 @@ Loading graph - Example
 
 ✔ Executing stages - Idle - Group Time Elapsed: 4s
 ✔ Validated - 4 stages - Group Time Elapsed: 5s
-✔ Setup for - ExecuteHTTPStage - complete - Group Time Elapsed: 5s
-✔ Stage - ExecuteHTTPStage completed 397757 actions at 6520 actions/second over 61 seconds - Group Time Elapsed: 1m.13s
-✔ Completed results analysis for 397757 actions and 1 stages over 11 seconds - Group Time Elapsed: 16s
-✔ Successfully submitted the results for 397757 actions via Json reporter - Group Time Elapsed: 5s
+✔ Setup for - RunTest - complete - Group Time Elapsed: 5s
+✔ Stage - RunTest completed 397757 actions at 6520 actions/second 
+  over 61 seconds - Group Time Elapsed: 1m.13s
+✔ Completed results analysis for 397757 actions and 1 stages over 
+  11 seconds - Group Time Elapsed: 16s
+✔ Successfully submitted the results for 397757 actions via 
+  Json reporter - Group Time Elapsed: 5s
 
 Graph - Example - completed! Total Time Elapsed: 1m.49s
 
@@ -123,6 +125,8 @@ const writeToConsole = ({
                 <TerminalOutput key={`message-${idx}`}>
                 {
                     `${currentMessage}
+
+
                     ${commandOutputs[idx]}
                     `
                 }
@@ -158,84 +162,72 @@ const TerminalController = () => {
         </TerminalOutput>
     ]);
 
-    
-    const { ref, inView } = useInView();
-
 
 
     useEffect(() => {
+
+        writeToConsole({
+            messages: ["Let's start!"],
+            commandOutputs: [""],
+            idx: 0,
+            sliceEnd: sliceEnd.current,
+            setTime,
+            setTerminalLineData
+
+        })
+
+        sliceEnd.current = 0;
         
-        if (inView){
+        
+        const messagesInterval = setInterval(() => {
 
-            writeToConsole({
-                messages: ["Let's start!"],
-                commandOutputs: [""],
-                idx: 0,
-                sliceEnd: sliceEnd.current,
-                setTime,
-                setTerminalLineData
+            if (currentMessageIdx.current < messages.current.length){
 
-            })
+                
+                writeToConsole({
+                    messages: messages.current,
+                    commandOutputs,
+                    idx: currentMessageIdx.current,
+                    sliceEnd: sliceEnd.current,
+                    setTime,
+                    setTerminalLineData
 
-            sliceEnd.current = 0;
-            
-            
-            const messagesInterval = setInterval(() => {
-
-                if (currentMessageIdx.current < messages.current.length){
-
-                    
-                    writeToConsole({
-                        messages: messages.current,
-                        commandOutputs,
-                        idx: currentMessageIdx.current,
-                        sliceEnd: sliceEnd.current,
-                        setTime,
-                        setTerminalLineData
-
-                    })
-                    currentMessageIdx.current += 1
-                    sliceEnd.current = 0
-                    
-                }
-                else {                  
-                    
-                    currentMessageIdx.current = 0
-                    sliceEnd.current = 0
-                }
+                })
+                currentMessageIdx.current += 1
+                sliceEnd.current = 0
+                
+            }
+            else {                  
+                
+                currentMessageIdx.current = 0
+                sliceEnd.current = 0
+            }
 
 
-            }, 3750)
-            
-       
-            
-            return () => {
-                clearInterval(messagesInterval);
-            };
-        } 
+        }, 3750)
+        
+    
+        
+        return () => {
+            clearInterval(messagesInterval);
+        };
+
         
 
-    }, [inView]);
+    }, []);
 
 
   // Terminal has 100% width by default so it should usually be wrapped in a container div
   return (
-    <div className="h-full w-full p-10 flex items-center justify-center bg-[#2e3131]" ref={ref}>
-      {
-        inView ? 
-        <Terminal colorMode={ ColorMode.Dark }>
+    <div className="h-[100%] w-[95%] px-2 2xl:px-10 mb-20 flex items-center justify-center md:shrink-0 transition-all duration-500s">
+      <Terminal colorMode={ ColorMode.Dark }>
         {terminalLineData}
-      </Terminal> : <div className='h-full w-full p-10 grid grid-rows-6'>
-        <div className='row-size-2'></div>
-        <div className='row-size-2'></div>
-        <div className='row-size-2'></div>
-      </div>
-      }
+      </Terminal> 
     </div>
   )
 };
 
 
 export {
-    TerminalController
+    TerminalController,
 }

@@ -12,7 +12,7 @@ const InstallCommandText = () => {
 
     return(
         <div className="text-center my-12">   
-            <button className='h-full cursor-pointer'
+            <button className='h-full cursor-pointer font-rany'
                 id='copy-pip-install'
                 type='button'
                 onMouseEnter={()=> setTooltipText("Copy me!")}
@@ -26,7 +26,7 @@ const InstallCommandText = () => {
                     setTooltipText("Copied!")
                 }}
             >
-                <code className="bg-[#14151a] text-white text-4xl py-3 px-6 rounded">
+                <code className="bg-[#14151a] text-white 2xl:text-4xl text-2xl py-3 px-6 rounded">
                 {installCommand}
                 </code>
             </button>

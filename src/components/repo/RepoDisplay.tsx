@@ -1,8 +1,8 @@
 import { BadgeDisplay } from "./badges"
 import { InstallCommandText } from "./InstallCommandText"
 
-const RepoDisplay = () => <div className="w-100 h-full bg-[#2e3131] flex justify-center items-center shadow-2xl">
-    <div className="grid grid-rows-2">
+const RepoDisplay = () => <div className="w-100 flex justify-center items-center bg-[#2e3131] row-span-1 h-[100%]">
+    <div className="flex flex-col items-center justify-between md:py-10 w-full">
         <InstallCommandText />
         <BadgeDisplay />
     </div>
