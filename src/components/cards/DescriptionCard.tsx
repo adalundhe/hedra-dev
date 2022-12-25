@@ -69,18 +69,18 @@ const DescriptionCard = () => {
 
     return (
         <div className="w-full row-span-3 text-center font-rany flex flex-col items-center bg-[#eeeeee] " ref={leaveRef.ref}>
-            <div className="flex justify-center items-center px-10 h-[420px] mt-20">
-                <h3 className="md:text-4xl xs:text-2xl text-[2rem] text-[3rem] break-words w-full text-[#2e3131] py-20 flex flex-col items-center justify-center h-[100%]" ref={textInView.ref}>
+            <div className="flex justify-center items-center px-10 h-[480px]">
+                <h3 className="md:text-4xl xs:text-2xl text-[2rem] break-words w-full text-[#2e3131] py-20 flex flex-col items-center justify-center h-[100%]" ref={textInView.ref}>
                     <p>
                     {tagLine}
                     </p>
-                    <div className="mt-2">
+                    <div className="mt-4">
                     {textInView.inView || tagLine.length == tagLineText.current.length ? <FaPython /> : null}
                     </div>
                 </h3>
             </div>
-            <div className="border-t border-[#14151a] w-1/2" ref={ref}></div>
-            <div className="w-full grid min-[2048px]:grid-cols-2 grid-cols-1 ">
+            <div ref={ref}></div>
+            <div className="w-full grid min-[2048px]:grid-cols-2 grid-cols-1 mb-10">
                 <div className="text-3xl w-full flex justify-center bg-[#eeeeee] ">
                     <div className="w-[95%] px-2 h-[1536px] flex items-center">
                         <ul className="w-full flex flex-col justify-center ">
