@@ -5,9 +5,9 @@ const TitleCard = () => {
 
 
     return (
-            <div className="w-100 h-full sm:row-span-2 shadow">
-                <div className="w-100 h-[768px] text-center font-monserrat flex flex-col justify-center text-[#2e3131] bg-transparent">
-                    <Transition
+            <div className="w-screen h-screen flex justify-center items-center bg-transparent text-center font-monserrat text-[#2e3131] gap-20">
+          
+                <Transition
                         appear={true}
                         show={true}
                         enter="transition-opacity duration-200"
@@ -21,7 +21,6 @@ const TitleCard = () => {
                             <h3 className="text-5xl w-100 font-rany">Test at scale</h3>
                                 
                     </Transition>
-                </div>   
             </div>
 
     )

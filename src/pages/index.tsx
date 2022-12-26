@@ -21,19 +21,18 @@ const Home: NextPage = () => {
         <meta name="description" content="Hedra - Testing at scale" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="2xl:w-[100vw] w-full h-[100vh] bg-[#eeeeee]">
+      <main className="w-screen h-screen bg-[#eeeeee]">
         <NavBar />
-        <div className="flex flex-col w-full">
-          <ParticlesBackground />
-          <div className="w-full h-100 grid sm:grid-rows-6 grid-rows-5">
-            <TitleCard />
-            <RepoDisplay />
-            <DescriptionCard />
+        <ParticlesBackground />
+        <div className="h-screen w-screen">
+          <TitleCard />
+          <RepoDisplay />
+          <DescriptionCard />
+          <FlippedDescriptionCard />
+          <div className="w-screen flex justify-center">
+            <div className="border-t border-[#14151a] w-1/2"></div>
           </div>
-          <div className="w-full h-100 grid grid-rows-5">
-            <FlippedDescriptionCard />
-            <TenantsCard />
-          </div>
+          <TenantsCard />
           <Footer/>
         </div>
       </main>

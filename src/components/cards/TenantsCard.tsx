@@ -9,11 +9,10 @@ const TenantsCard = () => {
     const leaveRef= useInView()
 
     return (
-        <div className="row-span-2 flex flex-col items-center" ref={leaveRef.ref}>
-            <div className="border-t border-[#14151a] w-1/2"></div>
-            <div className="text-center flex items-center w-1/2 font-rany mt-20 mb-20">
-                <ul className="grid grid-rows-3 w-full">  
-                        <li className="my-20" ref={ref}>
+        <div className="h-screen w-screen my-10" ref={leaveRef.ref}>
+            <div className="text-center flex justify-center font-rany">
+                <ul className="h-screen w-screen grid grid-rows-3 gap-10">  
+                        <li ref={ref} className="flex justify-center items-center">
                             <Transition
                                 show={inView || leaveRef.inView}
                                 enter="transition-opacity duration-[1500ms] delay-[1000ms]"
@@ -27,7 +26,7 @@ const TenantsCard = () => {
 
                             </Transition>
                         </li>  
-                        <li  className="my-20">
+                        <li className="flex justify-center items-center">
                             <Transition
                                 show={inView || leaveRef.inView}
                                 enter="transition-opacity duration-[3500ms] delay-[1500ms]"
@@ -41,7 +40,7 @@ const TenantsCard = () => {
 
                         </Transition>
                         </li>
-                    <li  className="my-20">
+                    <li className="flex justify-center items-center">
                         <Transition
                             show={inView || leaveRef.inView}
                             enter="transition-opacity duration-[4500ms] delay-[2000ms]"

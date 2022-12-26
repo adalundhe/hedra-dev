@@ -1,15 +1,18 @@
 const Badge = ({ 
-    badgeImageURL,
-    badgeLink, 
-    altText 
+    label,
+    value,
+    badgeLink
 }: { 
-    badgeImageURL: string,
-    badgeLink: string,
-    altText: string, 
+    label: string,
+    value: string,
+    badgeLink: string
 }) =>  (
-    <a href={badgeLink} className="w-100 h-[1.5rem]">
-        <img src={badgeImageURL} alt={altText} className="w-[100%] object-fill h-[100%]"/>
-    </a>
+    <div className="mx-[20%]">
+        <a href={badgeLink} className="w-100 h-fit text-[2vmin] text-center font-rany subpixel-antialiased">
+            <p className="bg-[#2e3131]/70 w-full flex justify-center items-center text-[#eeeeee] shadow-2xl rounded-sm">{label}</p>
+            <p className="w-full flex justify-center items-center bg-[#eeeeee]">{value}</p>
+        </a>
+    </div>
 )
 
 export {

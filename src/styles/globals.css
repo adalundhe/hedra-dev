@@ -23,9 +23,9 @@ body {
 .react-terminal-wrapper {
   box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   background-color: #24252a !important; 
-  font-size: 1.1vmin !important;
-  line-height: 1.1vmin !important;
   overflow: hidden !important;
+  font-size: 1rem !important;
+  line-height: 1rem !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,61 +42,115 @@ body {
   width: 100%;
   overflow: hidden !important;
   flex-shrink: 0;
+  
 }
 
 .react-terminal-line {
   overflow: hidden;
 }
 
-@media only screen and (max-width: 2300px) {
-  .react-terminal-wrapper {
-    font-size: 0.95vmin !important;
-    line-height: 0.95vmin !important;
-  }
-
-  .react-terminal {
-    height: 30vmin !important;
-  }
-  
-}
-
-@media only screen and (max-width: 2048px) {
-  .react-terminal-wrapper {
-    font-size: 1.3vmin !important;
-    line-height: 1.3vmin !important;
-  }
-
-  .react-terminal {
-    height: 40vmin !important;
-  }
-  
-}
-
-
-@media only screen and (max-width: 1024px) {
-  .react-terminal-wrapper {
-    font-size: 1.5vmin !important;
-    line-height: 1.5vmin !important;
-  }
+@media only screen and (min-width: 200px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.1rem !important;  
+    line-height: 0.2rem !important;
+  } 
 
   .react-terminal {
     height: 50vmin !important;
   }
-  
 }
 
 
-
-@media only screen and (max-width: 640px) {
-  .react-terminal-wrapper {
-    font-size: 1.5vmin !important;
-    line-height: 1.5vmin !important;
-  }
+@media only screen and (min-width: 300px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.2rem !important;  
+    line-height: 0.3rem !important;
+  } 
 
   .react-terminal {
     height: 50vmin !important;
   }
-  
+}
+
+@media only screen and (min-width: 400px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.3rem !important;  
+    line-height: 0.4rem !important;
+  } 
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+}
+
+@media only screen and (min-width: 500px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.45rem !important;  
+    line-height: 0.55rem !important;
+  } 
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+}
+
+@media only screen and (min-width: 600px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.55rem !important;  
+    line-height: 0.65rem !important;
+  } 
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+}
+
+
+@media only screen and (min-width: 700px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.65rem !important;  
+    line-height: 0.75rem !important;
+  } 
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+}
+
+@media only screen and (min-width: 800px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.75rem !important;  
+    line-height: 0.85rem !important;
+  } 
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+}
+
+@media only screen and (min-width: 900px)  {  
+  .react-terminal-wrapper  { 
+    font-size: 0.85rem !important;  
+    line-height: 95rem !important;
+  } 
+
+  .react-terminal {
+    height: 50vmin !important;
+  }
+}
+
+@media only screen and (min-width: 1000px) {  
+  .react-terminal-wrapper  { 
+    font-size: 0.95rem !important;  
+    line-height: 1.05rem !important;
+  } 
+}
+
+@media only screen and (min-width: 1100px) {  
+  .react-terminal-wrapper  { 
+    font-size: 1rem !important;  
+    line-height: 1.1rem !important;
+  } 
 }
 
 

@@ -32,9 +32,9 @@ const NavBar = () => {
 
     return (
         <div 
-            className='w-full flex flex-col md:items-end items-center bg-gradient-to-b from-[#eeeeee]/50 to-transparent'
+            className='w-screen flex flex-col md:items-end items-center bg-gradient-to-b from-[#eeeeee]/50 to-transparent'
         >
-            <div className='h-full grid grid-cols-4 gap-20 px-20'>
+            <div className='h-full w-screen grid grid-cols-4'>
                 {
                     navItems.current.map(navItem => {
                         const { navText, navLink, key } = navItem;
@@ -49,7 +49,7 @@ const NavBar = () => {
                     })
                 }
             </div>
-            <div className='md:border-b md:border-[#2e3131]/50 w-1/4'>
+            <div className='md:border-b md:border-[#2e3131]/50 w-4/5'>
 
             </div>
         </div> 

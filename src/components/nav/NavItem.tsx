@@ -10,9 +10,9 @@ const NavItem = ({
 }) => {
     
     return (
-        <div className='w-100 py-8'>
+        <div className='w-100 py-8 flex justify-center text-center'>
             {
-                <Link href={navLink} className="w-100 md:text-2xl text-3xl lowercase font-rany hover:bold hover:text-[#038aff]">
+                <Link href={navLink} className="w-100 text-2xl lowercase font-rany hover:bold hover:text-[#038aff]">
                 {navText}
                 </Link>
             }

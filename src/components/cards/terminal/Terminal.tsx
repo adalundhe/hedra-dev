@@ -1,6 +1,7 @@
 import { useState, useRef, useLayoutEffect } from 'react';
 import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
 import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 
 const commandOutputs = [
@@ -161,67 +162,72 @@ const TerminalController = () => {
         <TerminalOutput key={`message-${currentMessageIdx.current}`}>
         </TerminalOutput>
     ]);
-
-
+    
+    const { ref, inView } = useInView();
 
     useEffect(() => {
-
-        writeToConsole({
-            messages: ["Let's start!"],
-            commandOutputs: [""],
-            idx: 0,
-            sliceEnd: sliceEnd.current,
-            setTime,
-            setTerminalLineData
-
-        })
-
-        sliceEnd.current = 0;
         
-        
-        const messagesInterval = setInterval(() => {
+        if (inView){
 
-            if (currentMessageIdx.current < messages.current.length){
+            console.log(inView)
 
-                
-                writeToConsole({
-                    messages: messages.current,
-                    commandOutputs,
-                    idx: currentMessageIdx.current,
-                    sliceEnd: sliceEnd.current,
-                    setTime,
-                    setTerminalLineData
-
-                })
-                currentMessageIdx.current += 1
-                sliceEnd.current = 0
-                
-            }
-            else {                  
-                
-                currentMessageIdx.current = 0
-                sliceEnd.current = 0
-            }
-
-
-        }, 3750)
-        
+            writeToConsole({
+                messages: ["Let's start!"],
+                commandOutputs: [""],
+                idx: 0,
+                sliceEnd: sliceEnd.current,
+                setTime,
+                setTerminalLineData
     
+            })
+    
+            sliceEnd.current = 0;
+            
+            const messagesInterval = setInterval(() => {
+    
+                if (currentMessageIdx.current < messages.current.length){
+    
+                    
+                    writeToConsole({
+                        messages: messages.current,
+                        commandOutputs,
+                        idx: currentMessageIdx.current,
+                        sliceEnd: sliceEnd.current,
+                        setTime,
+                        setTerminalLineData
+    
+                    })
+                    currentMessageIdx.current += 1
+                    sliceEnd.current = 0
+                    
+                }
+                else {                  
+                    
+                    currentMessageIdx.current = 0
+                    sliceEnd.current = 0
+                }
+    
+    
+            }, 3750)
+            
         
-        return () => {
-            clearInterval(messagesInterval);
-        };
-
+            
+            return () => {
+                clearInterval(messagesInterval);
+            };
+        }
         
 
-    }, []);
+    }, [inView]);
 
 
   // Terminal has 100% width by default so it should usually be wrapped in a container div
   return (
-    <div className="h-[100%] w-[95%] px-2 2xl:px-10 mb-20 flex items-center justify-center md:shrink-0 transition-all duration-500s">
-      <Terminal colorMode={ ColorMode.Dark }>
-        {terminalLineData}
+    <div className="h-[100%] w-[90%] px-2 flex items-center justify-center" ref={ref}>
+      <Terminal colorMode={ ColorMode.Dark} onInput={null}>
+        {
+            inView ? terminalLineData : "Let's start!"
+        }
       </Terminal> 
     </div>
   )
