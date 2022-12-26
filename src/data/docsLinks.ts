@@ -16,9 +16,7 @@ const useData = () => {
                     "What is Hedra?",
                     "Core tenants",
                     "Workflows as graphs",
-                    "Graphs as tests",
-                    "When should I performance test?",
-                    "What should I do with results?"
+                    "Graphs as tests"
                 ]
             },
             {

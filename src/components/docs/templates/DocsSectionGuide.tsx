@@ -35,7 +35,7 @@ const DocsSectionGuide = ({
                 data.subsections[selectedSection]?.map(subSectionName => {
 
                     const subSectionStyle = subSectionName === selectedSubSection ? 
-                    'text-[1.75vmin] text-[#038aff] cursor-pointer hover:text-[#038aff] w-fit' : 'text-[1.75vmin] text-[#14151a] cursor-pointer hover:text-[#038aff] w-fit' ;
+                    'text-[1.5vmin] text-[#038aff] cursor-pointer hover:text-[#038aff] w-fit' : 'text-[1.5vmin] text-[#14151a] cursor-pointer hover:text-[#038aff] w-fit' ;
 
 
                     return (
