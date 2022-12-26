@@ -1,4 +1,6 @@
-import { docsSubSections } from "../../../data";
+import { useData } from "../../../data";
+import { useState, useContext, useEffect } from "react";
+import { useWindowDimensions } from '../../../hooks'
 
 
 const DocsSectionGuide = ({
@@ -14,21 +16,32 @@ const DocsSectionGuide = ({
 
 }) => {
 
+    const data = useData();
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    const { width } = useWindowDimensions();
+
+    useEffect(() => {
+        
+        setWindowWidth(width)
+
+    }, [windowWidth, width])
+
     return (
-        <div className="fixed grid grid-cols-6 w-full">
-            <div className="col-span-4"></div>
-            <div className="col-span-2 flex flex-col items-center h-full w-full font-rany px-20 ml-52 my-20 pt-24 w-1/2">
-            {
-                docsSubSections[selectedSection]?.map(subSectionName => {
+        windowWidth > 1536 ? 
+        <div className="2xl:col-span-5 col-span-6 w-full flex justify-center items-center h-full font-ran font-rany">
+           <div className="flex w-full md:mx-20 mx-4">
+           {
+                data.subsections[selectedSection]?.map(subSectionName => {
 
                     const subSectionStyle = subSectionName === selectedSubSection ? 
-                    'text-lg text-[#038aff] hover:bold cursor-pointer hover:text-[#038aff] w-fit' : 'text-lg text-[#14151a] hover:bold cursor-pointer hover:text-[#038aff] w-fit' ;
+                    'text-[1.75vmin] text-[#038aff] cursor-pointer hover:text-[#038aff] w-fit' : 'text-[1.75vmin] text-[#14151a] cursor-pointer hover:text-[#038aff] w-fit' ;
 
 
                     return (
                         <button
                             key={`${selectedSection}-${subSectionName}-Section-Guide`}
-                            className="w-full"
+                            className="w-full flex justify-center mx-2"
                             type="button" 
                             onClick={() => {
                                 setSelectedSection(selectedSection)
@@ -40,8 +53,8 @@ const DocsSectionGuide = ({
                     )
                 })
             }
-        </div>
-        </div>
+           </div>
+        </div> : <div></div>
     )
 }
 

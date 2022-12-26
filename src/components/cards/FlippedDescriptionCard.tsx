@@ -44,14 +44,15 @@ const FlippedDescriptionCard = () => {
                 </h3>
             </div>
             <div className="w-screen grid-rows-2">
-                <div className="w-screen flex justify-center" ref={leaveRef.ref}>
-                    <div className="w-[1160px] font-sans text-left text-base flex justify-center" ref={ref}>         
+                <div className="w-screen flex justify-center" ref={ref}>
+                    <div className="w-[1160px] font-sans text-left text-base flex justify-center">         
                         {
                             inView || leaveRef.inView ? <TerminalController /> : <p></p>
                         }
                     </div>
                 </div>
                 <div className="text-3xl bg-[#eeeeee] my-20">
+                    <div ref={leaveRef.ref}></div>
                     <ul className="w-screen grid grid-rows-4 auto-rows-min gap-10">
                         <li className="my-10 flex justify-center items-center">
                             <Transition

@@ -68,7 +68,7 @@ const DescriptionCard = () => {
     }, [textInView.inView])
 
     return (
-        <div className="w-screen text-center font-rany flex flex-col items-center bg-[#eeeeee] " ref={leaveRef.ref}>
+        <div className="w-screen text-center font-rany flex flex-col items-center bg-[#eeeeee] ">
             <div className="flex justify-center items-center px-10 h-[768px]">
                 <h3 className="md:text-4xl xs:text-2xl text-[2rem] break-words w-full text-[#2e3131] py-20 flex flex-col items-center justify-center h-[100%]" ref={textInView.ref}>
                     <p>
@@ -165,6 +165,7 @@ const DescriptionCard = () => {
 
                     </div>
                 </div>
+                <div ref={leaveRef.ref}></div>
                 <div className="flex justify-center">
                     <div className="w-[95%] code-block text-[2vmin] leading-[2vmin] font-sans text-left shadow-2xl bg-[#2e3131]  h-[100%]">
                         <CodeBlock 

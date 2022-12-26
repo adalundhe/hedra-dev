@@ -1,1 +1,1 @@
-export { docsLinks, docsSubSections } from './docsLinks'
+export { useData } from './docsLinks'
