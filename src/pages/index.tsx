@@ -1,5 +1,4 @@
 import { type NextPage } from "next";
-import { useContext } from "react";
 import Head from "next/head";
 import { 
   MainPageView,
@@ -8,6 +7,7 @@ import {
 } from '../components'
 
 const Home: NextPage = () => {
+
 
   return (
     <>
@@ -18,10 +18,14 @@ const Home: NextPage = () => {
       </Head>
 
       <MobileNavView>
-        <main className="w-screen h-screen bg-[#eeeeee] inline-block">
-          <NavBar />   
-          <MainPageView />
-        </main>
+        <>
+        <header>
+          <NavBar /> 
+        </header>
+          <main className="w-screen h-screen bg-[#eeeeee] inline-block overflow-y-scroll">
+            <MainPageView />
+          </main>
+        </>
         </MobileNavView>
     </>
   );

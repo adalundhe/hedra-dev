@@ -26,13 +26,20 @@ const useData = () => {
                     "Introduction to Hooks",
                     "Introduction to Stages",
                     "Introduction to Graphs",
+                    "Introduction to Projects",
+                    "Engines, Personas, Optimizers and Reporters",
                     "Putting it all together",
-                    "Personas and Hook Schedulng",
+                ]
+        
+            },
+            {
+                sectionName: "Deeper Dive",
+                sectionPath: "/docs/deeper_dive",
+                sectionSubsections: [
                     "Engines and Hook Lifecycle",
+                    "Personas and Hook Schedulng",
                     "Optimizers and automated test configuration",
                     "Getting results with Reporters",
-                    "Projects and Test Graph management",
-                    "Plugins and plugin development"
                 ]
         
             },
@@ -41,17 +48,31 @@ const useData = () => {
                 sectionPath: "/docs/command_line",
                 sectionSubsections: [
                     "CLI Overview",
+                    "CLI Reference",
+                    "CLI Logging Options"
+                ]
+        
+            },
+            {
+                sectionName: "Working with Graphs",
+                sectionPath: "/docs/working_with_graphs",
+                sectionSubsections: [
                     "Running an existing graph",
                     "Validating graph changes",
-                    "Creating a graph from template",
+                    "Creating a graph from template"
+                ]
+        
+            },
+            {
+                sectionName: "Working with Projects",
+                sectionPath: "/docs/working_with_projects",
+                sectionSubsections: [
                     "Initializing a project",
                     "Hedra config and .hedra.json",
                     "Referencing graphs by name",
                     "Getting a project from Github",
-                    "Adding a plugin",
                     "Checking the project",
                     "Syncing updates",
-                    "Logging"
                 ]
         
             },
@@ -60,7 +81,6 @@ const useData = () => {
                 sectionPath: "/docs/projects",
                 sectionSubsections: [
                     "Projects Overview",
-                    "Project CLI commands",
                     "Directory structure",
                     "Config options for .hedra.json",
                     "Remote projects and project management"
@@ -220,14 +240,15 @@ const useData = () => {
         
             },
             {
-                sectionName: "Writing Plugins",
-                sectionPath: "/docs/writing_plugins",
+                sectionName: "Plugins",
+                sectionPath: "/docs/plugins",
                 sectionSubsections: [
-                    "Painless Extensibility",
-                    "Engine Plugins",
-                    "Optimizer Plugins",
-                    "Persona Plugins",
-                    "Reporter Plugins"
+                    "Plugin development",
+                    "Engine plugins",
+                    "Optimizer plugins",
+                    "Persona plugins",
+                    "Reporter plugins",
+                    "Using plugins"
                 ]
         
             },

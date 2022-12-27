@@ -6,10 +6,18 @@ import { Footer } from "./footer";
 
 
 
-const DocsPageView = ({}) => {
+const DocsPageView = ({
+    selectedSection,
+    selectedSubSection,
+    setSelectedSection,
+    setSelectedSubSection
+}: {
+    selectedSection: string,
+    selectedSubSection: string,
+    setSelectedSection(sectionName: string): void,
+    setSelectedSubSection(subSectionName: string): void
+}) => {
 
-    const [selectedSection, setSelectedSection] = useState("Introduction");
-    const [selectedSubSection, setSelectedSubSection] = useState("Welcome");
     const [windowWidth, setWindowWidth] = useState(0);
 
     const { width } = useWindowDimensions();
@@ -25,8 +33,8 @@ const DocsPageView = ({}) => {
     return (
         !isOpen || width > 768 ?
         <>
-            <div className="flex flex-col w-full flex-[1_0_auto]">
-                <div className="w-full h-100 grid grid-cols-6">
+            <div className="flex flex-col w-full flex-[1_0_auto] overflow-hidden">
+                <div className="w-full h-100 2xl:grid 2xl:grid-cols-6 flex flex-col items-center justify-center">
                     {
                         windowWidth > 1536 ?
                         <DocsNav 
