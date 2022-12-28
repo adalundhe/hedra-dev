@@ -32,7 +32,7 @@ const NavBar = () => {
 
     return (
         <div 
-            className='w-screen flex flex-col items-center sticky top-0 opacity-100 bg-[#eeeeee]'
+            className='w-screen flex flex-col items-center sticky top-0 bg-[#eeeeee] shadow-lg'
         >
                 <div className='h-full w-1/2 hidden md:grid grid-cols-4 h-[97px]'>
                     {
@@ -49,12 +49,10 @@ const NavBar = () => {
                         })
                     }
                 </div>
-                <div className='h-full w-screen grid grid-cols-4 md:hidden h-[97px] opacity-100 bg-[#eeeeee'>
+                <div className='h-full w-screen grid grid-cols-4 md:hidden h-[97px] opacity-100 bg-[#eeeeee]'>
         
                     <MobileNav navItems={navItems.current} />
                 </div>
-            <div className='md:border-b md:border-[#2e3131]/50 w-4/5'>
-            </div>
         </div> 
     )
 }

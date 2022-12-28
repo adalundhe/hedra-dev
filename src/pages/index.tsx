@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         <header>
           <NavBar /> 
         </header>
-          <main className="w-screen h-screen bg-[#eeeeee] inline-block overflow-y-scroll">
+          <main className="w-screen h-screen bg-[#eeeeee] inline-block overflow-y-scroll overflow-x-hidden">
             <MainPageView />
           </main>
         </>
