@@ -19,7 +19,7 @@ const MobileNav = ({
 
     return (
         <div 
-            className={`w-full py-6 px-2 flex text-center text-[#2e3131] ${isOpen && width <= 768 ? 'h-screen fixed overflow-clip bg-[#eeeeee]' : ''}`}
+            className={`w-full py-4 px-2 flex text-center text-[#2e3131] ${isOpen && width <= 768 ? 'h-screen fixed overflow-clip bg-[#eeeeee]' : ''}`}
         >
 
             <Menu as="div" className="relative inline-block text-left">

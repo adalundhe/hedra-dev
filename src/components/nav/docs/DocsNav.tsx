@@ -1,22 +1,24 @@
 import { Transition } from "@headlessui/react";
-import { useData } from "../../../data";
 import { DocsNavSection } from "./DocsNavSection";
-import { DocsLinkItem } from "./types";
+import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
 
 
 const DocsNav = ({
+    docsData,
     selectedSection,
     selectedSubSection,
     setSelectedSection,
     setSelectedSubSection
 }: {
+    docsData: {
+        all: DocsLinkItem[],
+        subsections: DocsLinkSubsections
+    },
     selectedSection: string,
     selectedSubSection: string,
     setSelectedSection(sectionName: string): void,
     setSelectedSubSection(subSectionName: string): void
 }) => {
-
-    const docsLinks = useData();
 
     return (
         <Transition
@@ -37,10 +39,10 @@ const DocsNav = ({
                 </div>
                 <div className="overflow-y-scroll px-8 h-[70vh] w-full">
                 {
-                    docsLinks.all.map((docsLink: DocsLinkItem, idx: number) => 
+                    docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
                         <DocsNavSection 
                             docsLink={docsLink}
-                            docsSubsections={docsLinks.subsections}
+                            docsSubsections={docsData.subsections}
                             selectedSection={selectedSection}
                             selectedSubSection={selectedSubSection}
                             setSelectedSection={setSelectedSection}

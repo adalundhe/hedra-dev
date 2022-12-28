@@ -1,6 +1,6 @@
 
 import { RxCaretRight, RxCaretDown } from 'react-icons/rx'
-import { DocsLinkItem, DocsLinkSubsections } from "./types";
+import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
 import { DocsNavItems } from './DocNavItems'
 import { useState } from "react";
 

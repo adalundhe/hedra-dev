@@ -55,28 +55,30 @@ const DocsNavItems = ({
                                     'text-xl text-[#038aff]/70 hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit font-medium underline' : 'text-xl text-[#14151a] hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit font-light' ;
                         
                         const caretStyle = subSectionName === selectedSubSection ? 
-                            "h-full text-xl mr-2 text-[#038aff]/70 hover:text-[#038aff]/70" : "h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70";
+                            "h-full text-xl mr-2 text-[#038aff]/80 hover:text-[#038aff]/70" : "h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70";
 
                         return (
                             <div
                                 key={`${sectionName}-${subSectionName}-Section-Guide`}
                                 className='pb-2'
                             >
-                                <button 
-                                    className="w-fit text-left flex items-center"
-                                    type="button" 
-                                    onClick={() => {
-                                        setSelectedSection(sectionName)
-                                        setSelectedSubSection(subSectionName)
-                                    }}
-                                >
-                                    <div className={caretStyle}>
-                                        {
-                                            subSectionName === selectedSubSection ? <RxDotFilled /> : <RxDot className="opacity-0" />
-                                        }
-                                    </div>
-                                    <p className={subSectionStyle}>{subSectionName}</p>
-                                </button>
+                                <div className={`${subSectionName === selectedSubSection ? 'bg-[#038aff]/5 rounded-sm py-2' : ''}`}>
+                                    <button 
+                                        className="w-fit text-left flex items-center"
+                                        type="button" 
+                                        onClick={() => {
+                                            setSelectedSection(sectionName)
+                                            setSelectedSubSection(subSectionName)
+                                        }}
+                                    >
+                                        <div className={caretStyle}>
+                                            {
+                                                subSectionName === selectedSubSection ? <RxDotFilled /> : <RxDot className="opacity-0" />
+                                            }
+                                        </div>
+                                        <p className={subSectionStyle}>{subSectionName}</p>
+                                    </button>
+                                </div>
                             </div>
                         )
 

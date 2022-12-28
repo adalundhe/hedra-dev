@@ -1,7 +1,6 @@
 import { Transition } from "@headlessui/react";
-import { useData } from "../../../data";
 import { DocsNavSection } from "./DocsNavSection";
-import { DocsLinkItem } from "./types";
+import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
 import { NavOpenContext } from "../main/NavProvider"
 import { useContext } from "react"
 import { useWindowDimensions } from '../../../hooks'
@@ -11,18 +10,21 @@ import { GrClose } from 'react-icons/gr'
 
 
 const DocsNavMobile = ({
+    docsData,
     selectedSection,
     selectedSubSection,
     setSelectedSection,
     setSelectedSubSection
 }: {
+    docsData: {
+        all: DocsLinkItem[],
+        subsections: DocsLinkSubsections
+    },
     selectedSection: string,
     selectedSubSection: string,
     setSelectedSection(sectionName: string): void,
     setSelectedSubSection(subSectionName: string): void
 }) => {
-
-    const docsLinks = useData();
 
     const { width } = useWindowDimensions();
     const { isOpen, setIsOpen } = useContext(NavOpenContext);
@@ -59,10 +61,10 @@ const DocsNavMobile = ({
                             </div>
                             <div className="px-8 h-[70vh] w-full">
                             {
-                                docsLinks.all.map((docsLink: DocsLinkItem, idx: number) => 
+                                docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
                                     <DocsNavSection 
                                         docsLink={docsLink}
-                                        docsSubsections={docsLinks.subsections}
+                                        docsSubsections={docsData.subsections}
                                         selectedSection={selectedSection}
                                         selectedSubSection={selectedSubSection}
                                         setSelectedSection={setSelectedSection}

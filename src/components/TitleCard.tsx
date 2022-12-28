@@ -5,7 +5,7 @@ const TitleCard = () => {
 
 
     return (
-            <div className="w-screen h-screen flex justify-center items-center bg-transparent text-center font-monserrat text-[#2e3131] gap-20">
+            <div className="w-screen h-screen flex justify-center items-center bg-transparent text-center font-monserrat text-[#2e3131] gap-20 md:bg-[url('../../public/hedra_logo.png')] bg-contain bg-no-repeat bg-center md:mt-20">
           
                 <Transition
                         appear={true}

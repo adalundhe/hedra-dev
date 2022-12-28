@@ -1,26 +1,23 @@
 import { cloneElement, useEffect, useState } from "react";
-import { useData } from "../../../data";
 import { useWindowDimensions } from "../../../hooks";
-import { Footer } from "../../footer";
 
 
 const DocsArticle = ({ 
     children,
     selectedSection,
     selectedSubSection,
+    pageSubSections,
     setSelectedSection,
     setSelectedSubSection
 }: {
         children: JSX.Element,
         selectedSection: string,
         selectedSubSection: string,
+        pageSubSections: string[],
         setSelectedSection(sectionName: string): void,
         setSelectedSubSection(subSectionName: string): void
 }) => {
 
-    const docsLinks = useData();
-    const pageSubSections = docsLinks.subsections[selectedSection] ?? [];
-    const subSectionIdx = pageSubSections.indexOf(selectedSubSection);
     const [windowWidth, setWindowWidth] = useState(0);
 
     const { width } = useWindowDimensions()
@@ -38,8 +35,10 @@ const DocsArticle = ({
                 {
                 cloneElement(children, {
                         subSections: pageSubSections, 
-                        selectedSection, 
-                        selectedSubSection: subSectionIdx
+                        selectedSection: selectedSection, 
+                        selectedSubSection: selectedSubSection,
+                        setSelectedSection: setSelectedSection,
+                        setSelectedSubSection: setSelectedSubSection
                     })
                 }
                 </div>

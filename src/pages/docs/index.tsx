@@ -9,13 +9,10 @@ import {
     DocsNavMobile,
     Footer
 } from '../../components'
-import { useState } from "react";
+
 import { WelcomeArticle } from "../../components";
 
 const Docs: NextPage = () => {
-
-    const [selectedSection, setSelectedSection] = useState("Introduction");
-    const [selectedSubSection, setSelectedSubSection] = useState("Welcome");
 
     return (
         <>
@@ -31,14 +28,9 @@ const Docs: NextPage = () => {
                 <header className="shrink-0">
                     <NavBar />
                 </header>
-                <DocsPageView 
-                            selectedSection={selectedSection}
-                            selectedSubSection={selectedSubSection}
-                            setSelectedSection={setSelectedSection}
-                            setSelectedSubSection={setSelectedSubSection}
-                    >
-                        <WelcomeArticle />
-                    </DocsPageView>
+                <DocsPageView >
+                    <WelcomeArticle />
+                </DocsPageView>
             </div>
         </MobileNavView>
         </>
