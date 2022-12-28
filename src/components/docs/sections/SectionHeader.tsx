@@ -20,7 +20,6 @@ const SectionHeader = ({
     const { ref, inView } = useInView();
 
     useEffect(() => {
-        console.log(subSectionName, inView)
         if (inView && setSelectedSection && setSelectedSubSection){
             setSelectedSection(selectedSection)
             setSelectedSubSection(subSectionName)
