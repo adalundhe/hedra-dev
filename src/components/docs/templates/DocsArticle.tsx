@@ -1,6 +1,7 @@
 import { cloneElement, useEffect, useState } from "react";
 import { useData } from "../../../data";
 import { useWindowDimensions } from "../../../hooks";
+import { Footer } from "../../footer";
 
 
 const DocsArticle = ({ 
@@ -31,9 +32,9 @@ const DocsArticle = ({
     }, [windowWidth, width])
 
     return (
-        <div className="col-span-6 2xl:col-span-5 my-20 overflow-y-scroll h-[70vh] grid grid-cols-6">
-            <div className="h-full font-rany text-[1.25vmin] 2xl:col-span-5 col-span-6 flex justify-center">
-                <div className="w-3/4">
+        <div className="max-w-6xl ml-0 2xl:mx-auto overflow-x-hidden">
+            <div className="font-rany text-[18px] leading-[30px] mb-auto">
+                <div className="w-full">
                 {
                 cloneElement(children, {
                         subSections: pageSubSections, 

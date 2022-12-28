@@ -1,5 +1,5 @@
 export { MainPageView } from './MainPageView'
-export { NavBar, DocsNav, MobileNavView } from './nav'
+export { NavBar, DocsNav, MobileNavView, DocsNavMobile } from './nav'
 export { Footer } from './footer'
 export { DocsArticle, WelcomeArticle, DocsSectionGuide } from './docs'
 export { DocsPageView } from './DocsPageView'

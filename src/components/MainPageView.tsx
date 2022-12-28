@@ -17,7 +17,7 @@ const MainPageView = () => {
 
     return (
         !isOpen || width > 768 ? 
-        <div className="w-screen h-screen">
+        <div className="w-screen">
             <ParticlesBackground />
             <TitleCard />
             <RepoDisplay />
@@ -27,7 +27,6 @@ const MainPageView = () => {
             <div className="border-t border-[#14151a] w-1/2"></div>
             </div>
             <TenantsCard />
-            <Footer/>
         </div> : <div></div>
     )
 }

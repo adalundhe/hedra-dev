@@ -4,7 +4,7 @@ import { AiOutlineMenu } from 'react-icons/ai'
 import { GrClose } from 'react-icons/gr'
 import { NavOpenContext } from "./NavProvider"
 import { useContext } from "react"
-import { useWindowDimensions } from '../../hooks'
+import { useWindowDimensions } from '../../../hooks'
 import { MobileNavItems } from './MobileNavItems'
 
 

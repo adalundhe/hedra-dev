@@ -3,15 +3,17 @@ import { useState, useContext, useEffect } from "react";
 import { NavOpenContext, DocsNav } from "./nav"
 import { useWindowDimensions } from '../hooks'
 import { Footer } from "./footer";
-
-
+import { DocsSectionGuide } from "./docs";
+import { DocsNavMobile } from "./nav";
 
 const DocsPageView = ({
+    children,
     selectedSection,
     selectedSubSection,
     setSelectedSection,
     setSelectedSubSection
 }: {
+    children: JSX.Element,
     selectedSection: string,
     selectedSubSection: string,
     setSelectedSection(sectionName: string): void,
@@ -31,34 +33,44 @@ const DocsPageView = ({
     const { isOpen } = useContext(NavOpenContext);
 
     return (
-        !isOpen || width > 768 ?
         <>
-            <div className="flex flex-col w-full flex-[1_0_auto] overflow-hidden">
-                <div className="w-full h-100 2xl:grid 2xl:grid-cols-6 flex flex-col items-center justify-center">
-                    {
-                        windowWidth > 1536 ?
-                        <DocsNav 
+            <DocsNavMobile   
+                selectedSection={selectedSection}
+                selectedSubSection={selectedSubSection}
+                setSelectedSection={setSelectedSection}
+                setSelectedSubSection={setSelectedSubSection}
+            />
+           <div className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen || width <= 768 ?  'hidden' : ''}`}>
+                <DocsNav 
+                    selectedSection={selectedSection}
+                    selectedSubSection={selectedSubSection}
+                    setSelectedSection={setSelectedSection}
+                    setSelectedSubSection={setSelectedSubSection}
+
+                /> 
+                <main className="bg-[#eeeeee] min-w-0 lg:pl-6 h-full">
+                    
+            
+                    <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
+                        <DocsArticle
                             selectedSection={selectedSection}
                             selectedSubSection={selectedSubSection}
                             setSelectedSection={setSelectedSection}
                             setSelectedSubSection={setSelectedSubSection}
-
-                        /> : null
-                    }
-                    <DocsArticle
-                        selectedSection={selectedSection}
-                        selectedSubSection={selectedSubSection}
-                        setSelectedSection={setSelectedSection}
-                        setSelectedSubSection={setSelectedSubSection}
-                    >
-                        <WelcomeArticle />
-                    </DocsArticle>
-                </div>
+                        >
+                        {children}
+                        </DocsArticle>
+                    </div> 
+                    <Footer />
+                </main>
+                <DocsSectionGuide 
+                    selectedSection={selectedSection}
+                    selectedSubSection={selectedSubSection}
+                    setSelectedSection={setSelectedSection}
+                    setSelectedSubSection={setSelectedSubSection}    
+                />
             </div>
-            <div className="shrink-0 w-full">
-            <Footer />
-        </div>
-       </> : <div></div>
+        </>
     )
 }
 

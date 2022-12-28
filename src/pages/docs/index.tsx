@@ -4,10 +4,13 @@ import {
     DocsPageView,
     MobileNavView,
     NavBar, 
-    DocsSectionGuide
+    DocsSectionGuide,
+    DocsNav,
+    DocsNavMobile,
+    Footer
 } from '../../components'
 import { useState } from "react";
-
+import { WelcomeArticle } from "../../components";
 
 const Docs: NextPage = () => {
 
@@ -23,27 +26,20 @@ const Docs: NextPage = () => {
         </Head>
 
         <MobileNavView>
-            <>
-                <header>
+                
+            <div className="flex flex-col h-[99.99vh]">
+                <header className="shrink-0">
                     <NavBar />
                 </header>
-                <DocsSectionGuide 
-                    selectedSection={selectedSection}
-                    selectedSubSection={selectedSubSection}
-                    setSelectedSection={setSelectedSection}
-                    setSelectedSubSection={setSelectedSubSection}    
-                />
-                <main className="w-screen h-screen bg-[#eeeeee] inline-block overflow-hidden">
-                    
-                    <DocsPageView 
+                <DocsPageView 
                             selectedSection={selectedSection}
                             selectedSubSection={selectedSubSection}
                             setSelectedSection={setSelectedSection}
                             setSelectedSubSection={setSelectedSubSection}
-                        />
-                
-                </main>
-            </>
+                    >
+                        <WelcomeArticle />
+                    </DocsPageView>
+            </div>
         </MobileNavView>
         </>
     );

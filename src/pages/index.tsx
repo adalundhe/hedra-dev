@@ -3,7 +3,8 @@ import Head from "next/head";
 import { 
   MainPageView,
   NavBar, 
-  MobileNavView
+  MobileNavView,
+  Footer
 } from '../components'
 
 const Home: NextPage = () => {

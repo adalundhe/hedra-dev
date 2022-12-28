@@ -1,3 +1,2 @@
-export { NavBar } from './NavBar'
-export { DocsNav } from './DocsNav'
-export { NavOpenContext, MobileNavView } from './NavProvider'
+export { DocsNav, DocsNavMobile } from './docs'
+export { NavOpenContext, MobileNavView, NavBar } from './main'

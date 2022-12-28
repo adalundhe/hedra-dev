@@ -1,6 +1,7 @@
 
 import { Transition } from "@headlessui/react";
 import { useInView } from 'react-intersection-observer';
+import { Footer } from "../footer";
 
 
 const TenantsCard = () => {
@@ -9,10 +10,10 @@ const TenantsCard = () => {
     const leaveRef= useInView()
 
     return (
-        <div className="h-screen w-screen my-10" ref={leaveRef.ref}>
-            <div className="text-center flex justify-center font-rany">
-                <ul className="h-screen w-screen grid grid-rows-3 gap-10">  
-                        <li ref={ref} className="flex justify-center items-center">
+        <div className="w-screen my-10" ref={leaveRef.ref}>
+            <div className="text-center flex flex-col items-center font-rany">
+                <ul className="h-full w-screen grid grid-rows-[auto] gap-10">  
+                        <li ref={ref} className="flex justify-center items-center py-96">
                             <Transition
                                 show={inView || leaveRef.inView}
                                 enter="transition-opacity duration-[1500ms] delay-[1000ms]"
@@ -26,7 +27,7 @@ const TenantsCard = () => {
 
                             </Transition>
                         </li>  
-                        <li className="flex justify-center items-center">
+                        <li className="flex justify-center items-center pb-96">
                             <Transition
                                 show={inView || leaveRef.inView}
                                 enter="transition-opacity duration-[3500ms] delay-[1500ms]"
@@ -40,7 +41,7 @@ const TenantsCard = () => {
 
                         </Transition>
                         </li>
-                    <li className="flex justify-center items-center">
+                    <li className="flex justify-center items-center pb-96">
                         <Transition
                             show={inView || leaveRef.inView}
                             enter="transition-opacity duration-[4500ms] delay-[2000ms]"
@@ -56,6 +57,7 @@ const TenantsCard = () => {
                     </li>
                 </ul>
             </div>
+            <Footer />
         </div>
     )
 }

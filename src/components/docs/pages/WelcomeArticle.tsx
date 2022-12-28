@@ -2,7 +2,7 @@ const WelcomeArticle = ({
     subSections
 }: {
     subSections?: string[]
-}) => <div>
+}) => <div className="w-full">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Integer vitae justo eget magna fermentum iaculis. In vitae turpis massa sed. Eros donec ac odio tempor orci dapibus ultrices in. Proin sed libero enim sed. Mattis enim ut tellus elementum sagittis vitae et leo duis. Lacus laoreet non curabitur gravida arcu ac. Gravida dictum fusce ut placerat orci nulla pellentesque dignissim enim. In hac habitasse platea dictumst quisque sagittis. Dignissim sodales ut eu sem integer vitae justo eget magna. Tincidunt dui ut ornare lectus sit. Auctor augue mauris augue neque. Consectetur adipiscing elit duis tristique sollicitudin nibh sit. Est ultricies integer quis auctor elit sed.
 
 Massa placerat duis ultricies lacus sed turpis tincidunt id. Posuere urna nec tincidunt praesent semper feugiat nibh sed. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Ornare arcu dui vivamus arcu. Ut diam quam nulla porttitor massa id neque. Pellentesque elit eget gravida cum sociis natoque penatibus et magnis. Justo eget magna fermentum iaculis eu. Vulputate mi sit amet mauris. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Diam sollicitudin tempor id eu nisl nunc mi ipsum. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis. Vitae aliquet nec ullamcorper sit.

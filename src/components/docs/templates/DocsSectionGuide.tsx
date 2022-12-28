@@ -28,18 +28,19 @@ const DocsSectionGuide = ({
     }, [windowWidth, width])
 
     return (
-        windowWidth > 1536 ? 
-        <div className="top-[58px] absolute left-[82.5%]">
-             <div className="flex flex-col justify-center items-center font-rany w-[20vmin] mt-20">
-            <h3 className="text-[1.75vmin] text-left w-full ml-14">On this page</h3>
-            {
+        <div className="hidden lg:max-w-xs 2xl:block sticky top-0 left-0 right-0 py-0 z-50 h-[88vh]">
+            <div className="flex flex-col justify-center items-center font-rany w-[20vmin]">
+                <div className="py-4 px-4 w-full">
+                    <h3 className="text-2xl text-left w-full">On this page</h3>
+                </div>
+                {
                     data.subsections[selectedSection]?.map(subSectionName => {
 
                         const subSectionStyle = subSectionName === selectedSubSection ? 
-                        'text-[1.40vmin] text-[#038aff] cursor-pointer hover:text-[#038aff]  w-fit font-medium underline' : 'text-[1.40vmin] text-[#14151a] cursor-pointer hover:text-[#038aff] w-fit font-light' ;
+                        'text-xl text-[#038aff]/70 cursor-pointer hover:text-[#038aff]/70  w-fit font-medium underline' : 'text-xl text-[#14151a] cursor-pointer hover:text-[#038aff]/70 w-fit font-light' ;
 
                         const caretStyle = subSectionName === selectedSubSection ? 
-                        "h-full text-[1.40vmin] mr-2 text-[#038aff] hover:text-[#038aff]" : "h-full text-[1.40vmin] mr-2 text-[#14151a] hover:text-[#038aff]";
+                        "text-xl mr-2 text-[#038aff]/70 hover:text-[#038aff]/70" : "text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70";
 
 
                         return (
@@ -67,7 +68,7 @@ const DocsSectionGuide = ({
                     })
                 }
             </div>
-        </div> : <div></div>
+        </div>
     )
 }
 

@@ -3,7 +3,7 @@ import { Menu } from '@headlessui/react'
 import { Transition } from "@headlessui/react"
 import { NavOpenContext } from "./NavProvider"
 import { useContext } from "react"
-import { useWindowDimensions } from '../../hooks'
+import { useWindowDimensions } from '../../../hooks'
 import Link from "next/link"
 import { NavItem } from "./types"
 
@@ -19,7 +19,7 @@ const MobileNavItems = ({
  }) => {
     
     const { width } = useWindowDimensions();
-    const { isOpen, setIsOpen } = useContext(NavOpenContext);
+    const { setIsOpen } = useContext(NavOpenContext);
 
     useEffect(() => {
         if (width > 768){
@@ -44,7 +44,7 @@ const MobileNavItems = ({
                 {
                     navItems.map(navItem => 
                         <Menu.Item key={navItem.key}>
-                            <div className="py-10 font-rany hover:bold hover:text-[#038aff] text-2xl">
+                            <div className="py-10 font-rany hover:bold hover:text-[#038aff]/70 text-2xl">
                                 <Link href={navItem.navLink}>{navItem.navText}</Link>
                             </div>
                         </Menu.Item>    
