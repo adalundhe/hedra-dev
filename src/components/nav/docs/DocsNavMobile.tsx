@@ -62,14 +62,16 @@ const DocsNavMobile = ({
                             <div className="px-8 h-[70vh] w-full">
                             {
                                 docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
-                                    <DocsNavSection 
-                                        docsLink={docsLink}
-                                        docsSubsections={docsData.subsections}
-                                        selectedSection={selectedSection}
-                                        selectedSubSection={selectedSubSection}
-                                        setSelectedSection={setSelectedSection}
-                                        setSelectedSubSection={setSelectedSubSection}
-                                    />
+                                    <div key={`docs-group-mobile-${idx}`}>
+                                        <DocsNavSection 
+                                            docsLink={docsLink}
+                                            docsSubsections={docsData.subsections}
+                                            selectedSection={selectedSection}
+                                            selectedSubSection={selectedSubSection}
+                                            setSelectedSection={setSelectedSection}
+                                            setSelectedSubSection={setSelectedSubSection}
+                                        />
+                                    </div>
                                 )
                             }
                             </div>

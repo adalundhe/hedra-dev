@@ -41,7 +41,7 @@ const DocsPageView = ({
                 setSelectedSection={setSelectedSection}
                 setSelectedSubSection={setSelectedSubSection}
             />
-           <div className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen || windowWidth <= 768 ?  'hidden' : ''}`}>
+           <div className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}>
                 <DocsNav 
                     docsData={docsLinks}
                     selectedSection={selectedSection}
@@ -52,7 +52,6 @@ const DocsPageView = ({
                 /> 
                 <main className="bg-[#eeeeee] min-w-0 lg:pl-6 h-full">
                     
-            
                     <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
                         <DocsArticle
                             selectedSection={selectedSection}
@@ -64,7 +63,7 @@ const DocsPageView = ({
                         {children}
                         </DocsArticle>
                     </div> 
-                    <div className="pt-10 flex justify-center">
+                    <div className="flex justify-center">
                         <button className="px-8 mx-4 py-2 font-rany text-2xl">
                             <p>Next</p>
                         </button>
