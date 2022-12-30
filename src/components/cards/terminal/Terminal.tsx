@@ -169,8 +169,6 @@ const TerminalController = () => {
         
         if (inView){
 
-            console.log(inView)
-
             writeToConsole({
                 messages: ["Let's start!"],
                 commandOutputs: [""],

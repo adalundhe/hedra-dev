@@ -1,9 +1,10 @@
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect, useRef } from "react"
 import { Menu } from '@headlessui/react'
 import { Transition } from "@headlessui/react"
 import { useWindowDimensions } from '../../../hooks'
 import Link from "next/link"
 import { RxDotFilled, RxDot } from 'react-icons/rx'
+import { useInView } from "react-intersection-observer"
 
 
 const DocsNavItems = ({ 
@@ -34,6 +35,14 @@ const DocsNavItems = ({
         }
     }, [width])
 
+    useEffect(() => {
+
+        if (sectionName === selectedSection){
+            setSectionOpen(true)
+        }
+
+    }, [selectedSection, selectedSubSection])
+
     return (
         <Transition
             as={Fragment}
@@ -44,7 +53,7 @@ const DocsNavItems = ({
             enterTo="transform opacity-100 scale-100"
             leave="transition ease-in duration-75"
             leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
+            leaveTo="transform opacity-0 cale-95"
             >
             <div className="font-rany hover:bold hover:text-[#038aff]/70 text-2xl">
                 <div className="bg-[#eeeeee] flex flex-col">
@@ -76,7 +85,9 @@ const DocsNavItems = ({
                                                 subSectionName === selectedSubSection ? <RxDotFilled /> : <RxDot className="opacity-0" />
                                             }
                                         </div>
-                                        <p className={subSectionStyle}>{subSectionName}</p>
+                                        <a href={`#${subSectionName.toLowerCase().replace(/\s+/g, '-')}`}>
+                                            <p className={subSectionStyle}>{subSectionName}</p>
+                                        </a>
                                     </button>
                                 </div>
                             </div>

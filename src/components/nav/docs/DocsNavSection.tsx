@@ -2,7 +2,7 @@
 import { RxCaretRight, RxCaretDown } from 'react-icons/rx'
 import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
 import { DocsNavItems } from './DocNavItems'
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const DocsNavSection = ({
     docsLink,
@@ -20,12 +20,20 @@ const DocsNavSection = ({
     setSelectedSubSection(subSectionName: string): void
 }) => {
 
-
+    const sectionRef = useRef<HTMLInputElement>(null);
     const [sectionOpen, setSectionOpen] = useState(selectedSection == docsLink.sectionName);
+
+    useEffect(() => {
+
+        if (docsLink.sectionName === selectedSection && sectionRef.current){
+            sectionRef.current.scrollTo(0,0);
+        }
+
+    }, [selectedSection, selectedSubSection])
 
     return (
         <div key={docsLink.sectionPath} className='py-4'>
-            <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
+            <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7" ref={sectionRef}>
                 {
                     sectionOpen &&docsLink.sectionName === selectedSection  ?
                     <button

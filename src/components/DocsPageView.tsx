@@ -1,4 +1,4 @@
-import { DocsArticle, WelcomeArticle } from "./docs";
+import { DocsArticle } from "./docs";
 import { useState, useContext, useEffect } from "react";
 import { NavOpenContext, DocsNav } from "./nav"
 import { useWindowDimensions } from '../hooks'
@@ -6,6 +6,8 @@ import { Footer } from "./footer";
 import { DocsSectionGuide } from "./docs";
 import { DocsNavMobile } from "./nav";
 import { useData } from "../data";
+import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
+
 
 const DocsPageView = ({
     children
@@ -31,6 +33,11 @@ const DocsPageView = ({
     const docsLinks = useData();
 
     const pageSubSections = docsLinks.subsections[selectedSection] ?? [];
+
+    const docsSectionNames = docsLinks.all.map(docsLink => docsLink.sectionName);
+    const currentSectionIdx = docsSectionNames.indexOf(selectedSection);
+    const previousSection = currentSectionIdx - 1 > 0 ? docsSectionNames[currentSectionIdx - 1] : undefined;
+    const nextSection = currentSectionIdx + 1 < docsSectionNames.length ? docsSectionNames[currentSectionIdx + 1] : undefined;
 
     return (
         <>
@@ -63,13 +70,45 @@ const DocsPageView = ({
                         {children}
                         </DocsArticle>
                     </div> 
-                    <div className="flex justify-center">
-                        <button className="px-8 mx-4 py-2 font-rany text-2xl">
-                            <p>Next</p>
-                        </button>
-                        <button className="px-8 mx-4 py-2 font-rany  text-2xl">
-                            <p>Previous</p>
-                        </button>
+                    <div className="grid grid-cols-2 max-w-6xl ml-0 2xl:mx-auto">
+                        <div className="flex justify-center items-center">
+                        {
+                            previousSection ? 
+                            <button 
+                                className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
+                                onClick={() => {
+                                    setSelectedSection(previousSection);
+                                    setSelectedSubSection(docsLinks.subsections[previousSection]?.at(0) as string)
+                                }}
+                            >
+                                <RxCaretLeft />
+                                <div className="flex flex-col items-center justify-center ml-4">
+                                    
+                                     <p>Previous</p>
+                                    <p className="mt-2">{previousSection}</p>        
+                                </div>
+                            </button> : null
+                        }
+                        </div>
+                        <div className="flex justify-center items-center">
+                        {
+                            nextSection ? 
+                            <button 
+                                className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
+                                onClick={() => {
+                                    setSelectedSection(nextSection);
+                                    setSelectedSubSection(docsLinks.subsections[nextSection]?.at(0) as string)
+                                }}
+                            >
+                                <div className="flex flex-col items-center justify-center mr-4">
+                                    
+                                     <p>Next</p>
+                                    <p className="mt-2">{nextSection}</p>        
+                                </div>
+                                <RxCaretRight />
+                            </button> : null
+                        }
+                        </div>
                     </div>
                     <Footer />
                 </main>

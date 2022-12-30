@@ -37,8 +37,7 @@ const NavBar = () => {
         >
                 <div className='h-full w-1/4 md:flex hidden pl-10 items-center font-monserrat uppercase'>
                     <Link href="/" className='flex items-center'>
-                        <img src='/hedra_logo.png' className='h-[75px] w-[75px]' />
-                        <p className='ml-2'>Hedra</p>
+                        <p className='ml-2 text-2xl'>Hedra</p>
                     </Link>
                 </div>
                 <div className='h-full w-1/2 hidden md:grid grid-cols-4 h-[97px]'>

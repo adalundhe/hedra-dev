@@ -24,7 +24,7 @@ const MainPageView = () => {
             <DescriptionCard />
             <FlippedDescriptionCard />
             <div className="w-screen flex justify-center">
-            <div className="border-t border-[#14151a] w-1/2"></div>
+                <div className="border-t border-[#14151a] w-1/2"></div>
             </div>
             <TenantsCard />
         </div> : <div></div>

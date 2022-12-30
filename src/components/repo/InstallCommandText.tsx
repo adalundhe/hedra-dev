@@ -31,9 +31,6 @@ const InstallCommandText = () => {
     
     const { ref, inView } = useInView();
 
-    console.log(inView)
-
-
     return(
         <div className="text-center">   
             <button 

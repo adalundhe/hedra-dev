@@ -2,7 +2,7 @@ import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
 import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
 import { NavOpenContext } from "../main/NavProvider"
-import { useContext } from "react"
+import { useContext, Fragment } from "react"
 import { useWindowDimensions } from '../../../hooks'
 import { Menu } from '@headlessui/react'
 import { IoMdBook } from 'react-icons/io'
@@ -42,8 +42,7 @@ const DocsNavMobile = ({
                     </Menu.Button>
                 </div>
                 <Transition
-                    as='div'
-                    className={`w-full py-6 px-2 flex text-center text-[#2e3131]`}
+                    as={Fragment}
                     appear={true}
                     show={isOpen && width <= 1024 }
                     enter="transition ease-out duration-100"
@@ -53,30 +52,32 @@ const DocsNavMobile = ({
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                 >
-                <div className="flex flex-col font-rany items-center shadow-2xl w-full overflow-y-scroll pt-10">
-                    <div className="flex flex-col justify-center text-left w-full h-full">
-                            <div className="py-4 px-8 w-full">
+                    <div className="w-full py-6 px-2 flex text-center text-[#2e3131]">
+                        <div className="flex flex-col font-rany items-center shadow-2xl w-full overflow-y-scroll pt-10">
+                            <div className="flex flex-col justify-center text-left w-full h-full">
+                                    <div className="py-4 px-8 w-full">
 
-                                <h3 className="text-2xl">Version: 0.6.21</h3>
-                            </div>
-                            <div className="px-8 h-[70vh] w-full">
-                            {
-                                docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
-                                    <div key={`docs-group-mobile-${idx}`}>
-                                        <DocsNavSection 
-                                            docsLink={docsLink}
-                                            docsSubsections={docsData.subsections}
-                                            selectedSection={selectedSection}
-                                            selectedSubSection={selectedSubSection}
-                                            setSelectedSection={setSelectedSection}
-                                            setSelectedSubSection={setSelectedSubSection}
-                                        />
+                                        <h3 className="text-2xl">Version: 0.6.21</h3>
                                     </div>
-                                )
-                            }
-                            </div>
+                                    <div className="px-8 h-[70vh] w-full">
+                                    {
+                                        docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
+                                            <div key={`docs-group-mobile-${idx}`}>
+                                                <DocsNavSection 
+                                                    docsLink={docsLink}
+                                                    docsSubsections={docsData.subsections}
+                                                    selectedSection={selectedSection}
+                                                    selectedSubSection={selectedSubSection}
+                                                    setSelectedSection={setSelectedSection}
+                                                    setSelectedSubSection={setSelectedSubSection}
+                                                />
+                                            </div>
+                                        )
+                                    }
+                                    </div>
+                                </div>
                         </div>
-                </div>
+                    </div>
                 </Transition>
             </Menu>
     )

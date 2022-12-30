@@ -1,6 +1,7 @@
 import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
 import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
+import { useEffect } from "react";
 
 
 const DocsNav = ({
