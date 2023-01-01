@@ -8,6 +8,7 @@ function getWindowDimensions() {
   };
 }
 
+
 const useWindowDimensions = () => {
     if (typeof window !== "undefined") {
         const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());

@@ -2,10 +2,11 @@ import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
 import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
 import { NavOpenContext } from "../main/NavProvider"
-import { useContext, Fragment } from "react"
+import { useContext, Fragment, useState } from "react"
 import { useWindowDimensions } from '../../../hooks'
 import { Menu } from '@headlessui/react'
 import { IoMdBook } from 'react-icons/io'
+import { DocsNavSearch } from "./DocsNavSearch";
 import { GrClose } from 'react-icons/gr'
 
 
@@ -27,6 +28,7 @@ const DocsNavMobile = ({
 }) => {
 
     const { width } = useWindowDimensions();
+    const [searchVisible, setSearchVisible] = useState(false);
     const { isOpen, setIsOpen } = useContext(NavOpenContext);
 
     return (
@@ -57,8 +59,16 @@ const DocsNavMobile = ({
                             <div className="flex flex-col justify-center text-left w-full h-full">
                                     <div className="py-4 px-8 w-full">
 
-                                        <h3 className="text-2xl">Version: 0.6.21</h3>
+                                        <h3 className="text-lg">Version: 0.6.21</h3>
                                     </div>
+                                    <DocsNavSearch 
+                                        docsData={docsData}
+                                        selectedSection={selectedSection}
+                                        selectedSubSection={selectedSubSection}
+                                        setSelectedSection={setSelectedSection}
+                                        setSelectedSubSection={setSelectedSubSection}
+                                        setSearchVisible={setSearchVisible}
+                                    />
                                     <div className="px-8 h-[70vh] w-full">
                                     {
                                         docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
