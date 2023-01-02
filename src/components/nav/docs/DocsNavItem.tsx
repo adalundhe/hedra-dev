@@ -34,7 +34,7 @@ const DocsNavItem = ({
     useEffect(() => {
 
         if (selectedSubSection === subSectionName){
-            linkRef.current?.scrollTo(0,0);
+            linkRef.current?.scrollIntoView({behavior: 'smooth', block: "center"});
         }
 
     }, [selectedSection, selectedSubSection]);
