@@ -25,8 +25,8 @@ const DocsNavSection = ({
 
     useEffect(() => {
 
-        if (docsLink.sectionName === selectedSection && sectionRef.current){
-            sectionRef.current.scrollTo(0,0);
+        if (docsLink.sectionName === selectedSection){
+            sectionRef.current?.scrollTo(0,0);
         }
 
     }, [selectedSection, selectedSubSection])

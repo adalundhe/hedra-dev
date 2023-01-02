@@ -1,10 +1,10 @@
 import { useState, useRef } from "react";
 
 
-const useFocus = () => {
+const useFocus = <T extends HTMLElement>() => {
 
     const [isFocused, setIsFocused] = useState(false);
-    const ref = useRef<HTMLDivElement>(null)
+    const ref = useRef<T>(null)
 
 
     document.addEventListener("mousedown", (event: MouseEvent) => {

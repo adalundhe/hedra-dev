@@ -16,26 +16,28 @@ const SectionHeader = ({
     setSelectedSubSection?(subSectionName: string): void
 }) => {
 
-    const sectionRef = useRef<HTMLInputElement>(null);
-    const { ref, inView } = useInView();
+    const scrollRef = useRef<HTMLDivElement>(null)
+    const { ref, inView } = useInView()
+
 
     useEffect(() => {
-        if (inView && setSelectedSection && setSelectedSubSection){
-            // setSelectedSection(selectedSection)
+
+        if (inView && setSelectedSubSection){
             setSelectedSubSection(subSectionName)
         }
-    }, [inView])
 
-    useEffect(() => {
-        if (subSectionName === selectedSubSection){
+        if (subSectionName === selectedSubSection && setSelectedSection && setSelectedSubSection && !inView){
 
-            sectionRef.current?.scrollIntoView({behavior: "smooth"});
+            scrollRef.current?.click();
+            scrollRef.current?.scrollIntoView({behavior: 'smooth', block: 'center'})
         }
-    }, [selectedSection])
+    }, [selectedSection, selectedSubSection, inView])
+
+    const sectionHref = subSectionName.toLowerCase().replace(/\s+/g, '-');
 
     return (
-        <div ref={sectionRef}>
-            <a id={subSectionName.toLowerCase().replace(/\s+/g, '-')}>
+        <div ref={scrollRef}>
+            <a id={sectionHref} href={`#${sectionHref}`}>
                 <h1 ref={ref} className="text-2xl mb-4">{subSectionName}</h1>
             </a>
         </div>

@@ -13,9 +13,8 @@ const useKeyCommand = ({
 
     const handleKeyPress = useCallback((event: KeyboardEvent) => {
 
-        const keyName = event.key.toLocaleLowerCase()
-        if (pressed.current.indexOf(keyName) < 0 && command.includes(keyName)){
-            pressed.current.push(keyName)
+        if (pressed.current.indexOf(event.key) < 0 && command.includes(event.key)){
+            pressed.current.push(event.key)
         }
 
         if (pressed.current.length === command.length){
@@ -27,9 +26,8 @@ const useKeyCommand = ({
 
     const handleKeyRelease = useCallback((event: KeyboardEvent) => {
 
-        const keyName = event.key.toLowerCase();
-        if (pressed.current.includes(keyName)){
-            pressed.current.splice(pressed.current.indexOf(keyName));
+        if (pressed.current.includes(event.key)){
+            pressed.current.splice(pressed.current.indexOf(event.key));
         }
     }, [])
     

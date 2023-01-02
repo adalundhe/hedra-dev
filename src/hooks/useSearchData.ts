@@ -1,5 +1,5 @@
 import { useData } from "../data"
-import { useMemo } from "react"
+import { useCallback, useMemo } from "react"
 
 
 const useSearchData = (): {[itemName: string]: {
@@ -17,10 +17,10 @@ const useSearchData = (): {[itemName: string]: {
         subSection: string
     }} = {}
 
-    const titles = useMemo(() => {
+    useMemo(() => {
 
         data.all.forEach(docsItem => {
-            searchData[docsItem.sectionName] = {
+            searchData[docsItem.sectionName.toLowerCase()] = {
                 name: docsItem.sectionName,
                 link: `${docsItem.sectionPath}#${docsItem.sectionSubsections[0]}`,
                 section: docsItem.sectionName,
@@ -32,7 +32,7 @@ const useSearchData = (): {[itemName: string]: {
     }, 
     [data])
 
-    const subSections = useMemo(() => {
+    useMemo(() => {
         const docsSubSections: {[subsectionName: string]: string} = {};
     
         data.all.forEach(docsItem => {

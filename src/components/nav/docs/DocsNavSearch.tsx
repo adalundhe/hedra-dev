@@ -1,25 +1,17 @@
 import { GoSearch } from 'react-icons/go'
 import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDocsSearch, useKeyCommand, useFocus } from '../../../hooks';
 import { AiFillMacCommand } from 'react-icons/ai'
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 
 const DocsNavSearch = ({
-    docsData,
-    selectedSection,
-    selectedSubSection,
     setSelectedSection,
     setSelectedSubSection,
     setSearchVisible
 }: {
-    docsData: {
-        all: DocsLinkItem[],
-        subsections: DocsLinkSubsections
-    },
-    selectedSection: string,
-    selectedSubSection: string,
     setSelectedSection(sectionName: string): void,
     setSelectedSubSection(subSectionName: string): void,
     setSearchVisible(searchVisible: boolean): void
@@ -27,27 +19,40 @@ const DocsNavSearch = ({
     
     const { query, setQuery, matches } = useDocsSearch();
 
-    const { isFocused, setIsFocused, ref } = useFocus();
+    const { isFocused, setIsFocused, ref } = useFocus<HTMLInputElement>();
+    const router = useRouter();
 
     useEffect(() => {
         setSearchVisible(isFocused)
-        setQuery("")
     }, [isFocused])
 
     useKeyCommand({
-        command: ["control", 'k'],
-        callback: () => setIsFocused(true)
+        command: ["Control", 'k'],
+        callback: () => {
+            setIsFocused(true)
+            ref.current?.focus();
+            ref.current?.click();
+        }
+    })
+
+    useKeyCommand({
+        command: ['Escape'],
+        callback: () => {
+            setIsFocused(false);
+            ref.current?.blur();
+        }
     })
 
     return (
         <div className="w-full px-8 relative inline-block">
             <form className='flex flex-col'>
-               <div className={`flex border ${isFocused ? 'border-[#038aff]/70': 'border-transparent'} border-[2px] rounded bg-[#2e3131]/5 w-full text-lg `} ref={ref}>
+               <div className={`flex border ${isFocused ? 'border-[#038aff]/70': 'border-transparent'} border-[2px] rounded bg-[#2e3131]/5 w-full text-lg `}>
                     <div className='flex items-center justify-center max-w-fit mx-2'>
                         <GoSearch className={`${isFocused ? 'text-[#2e3131]' : 'text-[#2e3131]/50'} shadow-2xl`} />
                     </div>
                     <div className='w-full'>
                         <input 
+                            ref={ref}
                             type="text"
                             onChange={(event) => setQuery(event.target.value)}
                             onFocus={() => setIsFocused(true)}     
@@ -66,24 +71,31 @@ const DocsNavSearch = ({
                </div>
             </form>
             <div className='w-full'>
-                <div className='max-h-[50vh] overflow-x-hidden overflow-y-scroll mt-2'>
+                <div className='max-h-[30vh] overflow-x-hidden overflow-y-scroll mt-2'>
                 {
-                    Object.keys(matches).sort().map(matchName => 
-                        <div className='text-xl rounded-sm w-full' ref={ref}>
-                            <button 
-                                className='mr-4 w-[95%] hover:bg-[#038aff]/5 hover:text-[#038aff]/70 py-4 px-2 text-left'
-                                onClick={() => {
-                                    
-                                    console.log(matches[matchName]?.section , matches[matchName]?.subSection)
-                                    setIsFocused(false)
-                                }}
-                            >
-                                <Link href={matches[matchName]?.link as string} className='w-full h-full'>
-                                    <p>{matches[matchName]?.name}</p>
-                                </Link>
-                            </button>
-                        </div>
-                    )
+                    Object.keys(matches).sort().map((matchName: string, idx: number) => {
+                        
+                        const sectionName = matches[matchName]?.section as string;
+                        const subSectionName = matches[matchName]?.subSection as string;
+                        return (
+                            <div key={`search-item-${idx}`}>
+                                <button 
+                                    className="text-left flex items-center rounded-sm py-2 pl-2 hover:bg-[#038aff]/5 w-full"
+                                    type="button" 
+                                    onClick={() => {
+                                        setSelectedSection(sectionName);
+                                        setSelectedSubSection(subSectionName);
+                                        setQuery("");
+                                        setIsFocused(false);
+                                        ref.current?.blur();
+                                        router.push(`${sectionName}/#${subSectionName.toLowerCase().replace(/\s+/g, '-')}`)
+                                    }}
+                                >   
+                                    <p className='h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70'>{matches[matchName]?.name}</p>
+                                </button>
+                            </div>
+                        )
+                    })
                 }
                 </div>
             </div>

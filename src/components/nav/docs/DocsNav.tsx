@@ -46,9 +46,6 @@ const DocsNav = ({
                         <h3 className="text-lg">Version: 0.6.21</h3>
                     </div>
                     <DocsNavSearch 
-                        docsData={docsData}
-                        selectedSection={selectedSection}
-                        selectedSubSection={selectedSubSection}
                         setSelectedSection={setSelectedSection}
                         setSelectedSubSection={setSelectedSubSection}
                         setSearchVisible={setSearchVisible}

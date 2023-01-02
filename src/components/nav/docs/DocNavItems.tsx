@@ -1,10 +1,7 @@
-import { Fragment, useEffect, useRef } from "react"
-import { Menu } from '@headlessui/react'
+import { Fragment, useEffect } from "react"
 import { Transition } from "@headlessui/react"
 import { useWindowDimensions } from '../../../hooks'
-import Link from "next/link"
-import { RxDotFilled, RxDot } from 'react-icons/rx'
-import { useInView } from "react-intersection-observer"
+import { DocsNavItem } from "./DocsNavItem"
 
 
 const DocsNavItems = ({ 
@@ -57,42 +54,20 @@ const DocsNavItems = ({
             <div className="font-rany hover:bold hover:text-[#038aff]/70 text-2xl">
                 <div className="bg-[#eeeeee] flex flex-col">
                 {
-                    docsItemSubsections?.map((subSectionName: string) => {
+                    docsItemSubsections?.map((subSectionName: string) => 
+                        <div key={`${sectionName}-${subSectionName}-Section-Guide`}>
+                            <DocsNavItem 
 
-                        const subSectionStyle = subSectionName === selectedSubSection ? 
-                                    'text-xl text-[#038aff]/70 hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit font-medium underline' : 'text-xl text-[#14151a] hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit font-light' ;
-                        
-                        const caretStyle = subSectionName === selectedSubSection ? 
-                            "h-full text-xl mr-2 text-[#038aff]/80 hover:text-[#038aff]/70" : "h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70";
-
-                        return (
-                            <div
-                                key={`${sectionName}-${subSectionName}-Section-Guide`}
-                                className='pb-2'
-                            >
-                                <div className={`${subSectionName === selectedSubSection ? 'bg-[#038aff]/5 rounded-sm py-2' : ''}`}>
-                                    <button 
-                                        className="w-fit text-left flex items-center"
-                                        type="button" 
-                                        onClick={() => {
-                                            setSelectedSection(sectionName)
-                                            setSelectedSubSection(subSectionName)
-                                        }}
-                                    >
-                                        <div className={caretStyle}>
-                                            {
-                                                subSectionName === selectedSubSection ? <RxDotFilled /> : <RxDot className="opacity-0" />
-                                            }
-                                        </div>
-                                        <a href={`#${subSectionName.toLowerCase().replace(/\s+/g, '-')}`}>
-                                            <p className={subSectionStyle}>{subSectionName}</p>
-                                        </a>
-                                    </button>
-                                </div>
-                            </div>
-                        )
-
-                    })
+                                sectionName={sectionName}
+                                selectedSection={selectedSection}
+                                subSectionName={subSectionName}
+                                selectedSubSection={selectedSubSection}
+                                docsItemSubsections={docsItemSubsections}
+                                setSelectedSection={setSelectedSection}
+                                setSelectedSubSection={setSelectedSubSection}
+                            />
+                        </div>
+                    )
                 }
                 </div>
             </div>

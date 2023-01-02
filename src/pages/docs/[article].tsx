@@ -1,6 +1,5 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { 
     DocsPageView,
     MobileNavView,
@@ -10,10 +9,6 @@ import {
 import { WelcomeArticle } from "../../components";
 
 const Docs: NextPage = () => {
-
-    const router = useRouter();
-
-    const { article } = router.query;
 
     return (
         <>

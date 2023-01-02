@@ -17,7 +17,7 @@ const useDocsSearch = () => {
 
         if (query.length > 0){
             for (const searchable in searchData){
-                if (searchable.includes(query.toLocaleLowerCase())){
+                if (searchable.includes(query.toLowerCase())){
                     searchMatches[searchable] = searchData[searchable] as {
                         name: string,
                         link: string,
@@ -30,7 +30,7 @@ const useDocsSearch = () => {
 
         return searchMatches;
 
-    }, [query, searchData]);
+    }, [query]);
 
     return {
         query,
