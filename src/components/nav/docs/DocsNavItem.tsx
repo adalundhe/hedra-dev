@@ -20,7 +20,7 @@ const DocsNavItem = ({
     setSelectedSection(sectionName: string): void,
     setSelectedSubSection(subSectionName: string): void
  }) => {
-
+    
     const subSectionStyle = subSectionName === selectedSubSection ? 
                 'text-xl text-[#038aff]/70 hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit font-medium underline' : 'text-xl text-[#14151a] hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit font-light' ;
     
@@ -29,21 +29,23 @@ const DocsNavItem = ({
 
     const subSectionSlug = `#${subSectionName.toLowerCase().replace(/\s+/g, '-')}`;
 
-    const linkRef = useRef<HTMLDivElement>(null);
+    const linkRef = useRef<HTMLAnchorElement>(null);
+
+    const { ref, inView } = useInView();
 
     useEffect(() => {
+        
 
-        if (selectedSubSection === subSectionName){
-            linkRef.current?.scrollIntoView({behavior: 'smooth', block: "center"});
+        if (selectedSubSection === subSectionName && !inView){
+            linkRef.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
         }
 
-    }, [selectedSection, selectedSubSection]);
+    }, [selectedSection, selectedSubSection, inView]);
 
 
     return (
         <div
             className='pb-2'
-            ref={linkRef}
         >
             <div className={`${subSectionName === selectedSubSection ? 'bg-[#038aff]/5 rounded-sm py-2' : ''}`}>
                 <button 
@@ -59,8 +61,8 @@ const DocsNavItem = ({
                             subSectionName === selectedSubSection ? <RxDotFilled /> : <RxDot className="opacity-0" />
                         }
                     </div>
-                    <a href={subSectionSlug} id={subSectionSlug}>
-                        <p className={subSectionStyle}>{subSectionName}</p>
+                    <a href={subSectionSlug} id={subSectionSlug} ref={linkRef}>
+                        <p ref={ref} className={subSectionStyle}>{subSectionName}</p>
                     </a>
                 </button>
             </div>

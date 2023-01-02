@@ -16,7 +16,7 @@ const SectionHeader = ({
     setSelectedSubSection?(subSectionName: string): void
 }) => {
 
-    const scrollRef = useRef<HTMLDivElement>(null)
+    const scrollRef = useRef<HTMLAnchorElement>(null)
     const { ref, inView } = useInView()
 
 
@@ -26,18 +26,13 @@ const SectionHeader = ({
             setSelectedSubSection(subSectionName)
         }
 
-        if (subSectionName === selectedSubSection && setSelectedSection && setSelectedSubSection && !inView){
-
-            scrollRef.current?.click();
-            scrollRef.current?.scrollIntoView({behavior: 'smooth', block: 'center'})
-        }
     }, [selectedSection, selectedSubSection, inView])
 
     const sectionHref = subSectionName.toLowerCase().replace(/\s+/g, '-');
 
     return (
-        <div ref={scrollRef}>
-            <a id={sectionHref} href={`#${sectionHref}`}>
+        <div >
+            <a ref={scrollRef} id={sectionHref} href={`#${sectionHref}`}>
                 <h1 ref={ref} className="text-2xl mb-4">{subSectionName}</h1>
             </a>
         </div>

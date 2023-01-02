@@ -3,6 +3,9 @@ import { RxCaretRight, RxCaretDown } from 'react-icons/rx'
 import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
 import { DocsNavItems } from './DocNavItems'
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from 'next/router';
+import { useInView } from 'react-intersection-observer';
+
 
 const DocsNavSection = ({
     docsLink,
@@ -22,14 +25,17 @@ const DocsNavSection = ({
 
     const sectionRef = useRef<HTMLInputElement>(null);
     const [sectionOpen, setSectionOpen] = useState(selectedSection == docsLink.sectionName);
+    const router = useRouter();
+
+    const { ref, inView } = useInView()
 
     useEffect(() => {
 
-        if (docsLink.sectionName === selectedSection){
-            sectionRef.current?.scrollTo(0,0);
+        if (docsLink.sectionName === selectedSection && !inView){
+            sectionRef.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
         }
 
-    }, [selectedSection, selectedSubSection])
+    }, [selectedSection, selectedSubSection, inView])
 
     return (
         <div key={docsLink.sectionPath} className='py-4'>
@@ -43,7 +49,7 @@ const DocsNavSection = ({
                             setSectionOpen(docsLink.sectionName === selectedSection ? !sectionOpen : false)
                         }}
                     >
-                        <div className="mr-2">
+                        <div className="mr-2" ref={ref}>
                             <RxCaretDown className={docsLink.sectionName === selectedSection ? "text-xl text-[#038aff]/70" : "text-xl text-[#14151a]"} />
                         </div>
                         <h3 className={
@@ -60,12 +66,14 @@ const DocsNavSection = ({
                         onClick={() => {
                             setSectionOpen(docsLink.sectionName === selectedSection ? !sectionOpen : true)
                             setSelectedSection(docsLink.sectionName)
-                            setSelectedSubSection(
-                                docsLink.sectionSubsections .includes(selectedSubSection) ? selectedSubSection :  docsLink.sectionSubsections[0] as string
-                            )
+
+                            const updatedSubSection =  docsLink.sectionSubsections .includes(selectedSubSection) ? selectedSubSection :  docsLink.sectionSubsections[0] as string
+                            setSelectedSubSection(updatedSubSection)
+
+                            router.push(`${docsLink.sectionName}/#${updatedSubSection.toLowerCase().replace(/\s+/g, '-')}`)
                         }}
                     >
-                        <div className="mr-2">
+                        <div className="mr-2" ref={ref}>
 
                             <RxCaretRight className="text-xl text-[#14151a]" /> 
                         </div>
