@@ -3,16 +3,8 @@ import { Section } from "../sections"
 
 const WelcomeArticle = ({
     subSections,
-    selectedSection: selectedSection, 
-    selectedSubSection: selectedSubSection,
-    setSelectedSection,
-    setSelectedSubSection: setSelectedSubSection
 }: {
-    subSections?: string[],
-    selectedSection?: string,
-    selectedSubSection?: string,
-    setSelectedSection?(sectionName: string): void,
-    setSelectedSubSection?(subSectionName: string): void
+    subSections?: string[]
 }) => {
 
     return (
@@ -21,10 +13,6 @@ const WelcomeArticle = ({
         subSections?.map(subSectionName => 
             <Section 
                 subSectionName={subSectionName}
-                selectedSection={selectedSection as string}
-                selectedSubSection={selectedSubSection as string}
-                setSelectedSection={setSelectedSection}
-                setSelectedSubSection={setSelectedSubSection}
             >
                 <div>
                     <p>

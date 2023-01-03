@@ -1,41 +1,47 @@
 import { useMemo, useState } from "react";
-import { useSearchData } from "./useSearchData";
+import { useDocsStore } from "../store";
+import { SearchDoc } from "../store/types";
 
 
 const useDocsSearch = () => {
 
-    const searchData = useSearchData();
     const [query, setQuery] = useState("")
-    const searchMatches: {[key: string]: {
-        name: string,
-        link: string,
-        section: string,
-        subSection: string
-    }} = {};
-    
-    const matches = useMemo(() => {
 
-        if (query.length > 0){
-            for (const searchable in searchData){
-                if (searchable.includes(query.toLowerCase())){
-                    searchMatches[searchable] = searchData[searchable] as {
-                        name: string,
-                        link: string,
-                        section: string,
-                        subSection: string
-                    };
-                }
-            }    
+    if (useDocsStore){
+        const searchData = useDocsStore((state) => state.searchDocs)
+
+        const searchMatches: {[key: string]: SearchDoc} = {};
+        
+        const matches = useMemo(() => {
+
+            if (query.length > 0){
+                for (const searchable in searchData){
+                    if (searchable.includes(query.toLowerCase())){
+                        searchMatches[searchable] = searchData[searchable] as {
+                            name: string,
+                            link: string,
+                            section: string,
+                            subSection: string
+                        };
+                    }
+                }    
+            }
+
+            return searchMatches;
+
+        }, [query]);
+
+        return {
+            query,
+            setQuery,
+            matches
         }
-
-        return searchMatches;
-
-    }, [query]);
+    }
 
     return {
         query,
         setQuery,
-        matches
+        matches: {}
     }
 }
 

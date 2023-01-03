@@ -1,26 +1,13 @@
 import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
-import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
+import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
 import { DocsNavSearch } from "./DocsNavSearch";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useDocsStore } from "../../../store";
+import shallow from 'zustand/shallow'
 
 
-const DocsNav = ({
-    docsData,
-    selectedSection,
-    selectedSubSection,
-    setSelectedSection,
-    setSelectedSubSection
-}: {
-    docsData: {
-        all: DocsLinkItem[],
-        subsections: DocsLinkSubsections
-    },
-    selectedSection: string,
-    selectedSubSection: string,
-    setSelectedSection(sectionName: string): void,
-    setSelectedSubSection(subSectionName: string): void
-}) => {
+const DocsNav = () => {
 
     const [ready, setReady] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
@@ -28,6 +15,12 @@ const DocsNav = ({
     useEffect(() => {
         setReady(true)
     }, [])
+
+    const { 
+        articles
+    } = useDocsStore(useCallback((state) => ({
+        articles: state.articles
+    }), []), shallow)
 
     return (
         <div className="lg:flex hidden lg:sticky top-0 left-0 right-0 py-0 z-50 h-[88vh]">
@@ -46,21 +39,14 @@ const DocsNav = ({
                         <h3 className="text-lg">Version: 0.6.21</h3>
                     </div>
                     <DocsNavSearch 
-                        setSelectedSection={setSelectedSection}
-                        setSelectedSubSection={setSelectedSubSection}
                         setSearchVisible={setSearchVisible}
                     />
                     <div className={`overflow-y-scroll px-8 h-[70vh] w-full ${searchVisible ? 'invisible' : ''}`}>
                     {
-                        docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
+                        articles.map((docsLink: DocsLinkItem, idx: number) => 
                             <div key={`docs-group-${idx}`}>
                                 <DocsNavSection 
                                     docsLink={docsLink}
-                                    docsSubsections={docsData.subsections}
-                                    selectedSection={selectedSection}
-                                    selectedSubSection={selectedSubSection}
-                                    setSelectedSection={setSelectedSection}
-                                    setSelectedSubSection={setSelectedSubSection}
                                 />
                             </div>
                         )

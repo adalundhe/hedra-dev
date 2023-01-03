@@ -1,19 +1,16 @@
 import { GoSearch } from 'react-icons/go'
-import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
+import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDocsSearch, useKeyCommand, useFocus } from '../../../hooks';
 import { AiFillMacCommand } from 'react-icons/ai'
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useDocsStore } from '../../../store';
+import shallow from 'zustand/shallow'
 
 
 const DocsNavSearch = ({
-    setSelectedSection,
-    setSelectedSubSection,
     setSearchVisible
 }: {
-    setSelectedSection(sectionName: string): void,
-    setSelectedSubSection(subSectionName: string): void,
     setSearchVisible(searchVisible: boolean): void
 }) => {
     
@@ -42,6 +39,15 @@ const DocsNavSearch = ({
             ref.current?.blur();
         }
     })
+
+    const { 
+        setSection, 
+        setSubSection
+    } = useDocsStore(useCallback((state) => ({
+        setSubSections: state.setSubSections,
+        setSection: state.setSelectedSection,
+        setSubSection: state.setSelectedSubSection
+    }), []), shallow)
 
     return (
         <div className="w-full px-8 relative inline-block">
@@ -83,8 +89,8 @@ const DocsNavSearch = ({
                                     className="text-left flex items-center rounded-sm py-2 pl-2 hover:bg-[#038aff]/5 w-full"
                                     type="button" 
                                     onClick={() => {
-                                        setSelectedSection(sectionName);
-                                        setSelectedSubSection(subSectionName);
+                                        setSection(sectionName);
+                                        setSubSection(subSectionName);
                                         setQuery("");
                                         setIsFocused(false);
                                         ref.current?.blur();

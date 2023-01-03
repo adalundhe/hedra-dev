@@ -1,49 +1,51 @@
-import { Fragment, useEffect } from "react"
+import { Fragment, useCallback, useEffect } from "react"
 import { Transition } from "@headlessui/react"
 import { useWindowDimensions } from '../../../hooks'
 import { DocsNavItem } from "./DocsNavItem"
+import { useDocsStore } from "../../../store"
+import shallow from 'zustand/shallow'
 
 
 const DocsNavItems = ({ 
     sectionName,
-    selectedSection,
-    selectedSubSection,
     open,
     setSectionOpen,
-    docsItemSubsections,
-    setSelectedSection,
-    setSelectedSubSection
+    docsItemSubsections
  }: {
     sectionName: string,
-    selectedSection: string,
-    selectedSubSection: string,
     open: boolean,
     setSectionOpen: (open: boolean) => void,
     docsItemSubsections: string[]
-    setSelectedSection(sectionName: string): void,
-    setSelectedSubSection(subSectionName: string): void
  }) => {
+
+    const { 
+        section,
+        subsection,
+    } = useDocsStore(useCallback((state) => ({
+        section: state.selectedSection,
+        subsection: state.selectedSubSection
+    }), []), shallow)
     
     const { width } = useWindowDimensions();
 
     useEffect(() => {
-        if (width < 1024 || selectedSection !== sectionName){
+        if (width < 1024 || section !== sectionName){
             setSectionOpen(false)
         }
     }, [width])
 
     useEffect(() => {
 
-        if (sectionName === selectedSection){
+        if (sectionName === section){
             setSectionOpen(true)
         }
 
-    }, [selectedSection, selectedSubSection])
+    }, [section, subsection])
 
     return (
         <Transition
             as={Fragment}
-            show={sectionName === selectedSection && open}
+            show={sectionName === section && open}
             enter="transition ease-out duration-100"
             enterFrom="transform opacity-0 scale-95"
             enterTo="transform opacity-100 scale-100"
@@ -59,12 +61,7 @@ const DocsNavItems = ({
                             <DocsNavItem 
 
                                 sectionName={sectionName}
-                                selectedSection={selectedSection}
                                 subSectionName={subSectionName}
-                                selectedSubSection={selectedSubSection}
-                                docsItemSubsections={docsItemSubsections}
-                                setSelectedSection={setSelectedSection}
-                                setSelectedSubSection={setSelectedSubSection}
                             />
                         </div>
                     )

@@ -1,35 +1,28 @@
 import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
-import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
+import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
 import { NavOpenContext } from "../main/NavProvider"
-import { useContext, Fragment, useState } from "react"
+import { useContext, Fragment, useState, useCallback } from "react"
 import { useWindowDimensions } from '../../../hooks'
 import { Menu } from '@headlessui/react'
 import { IoMdBook } from 'react-icons/io'
 import { DocsNavSearch } from "./DocsNavSearch";
 import { GrClose } from 'react-icons/gr'
+import { useDocsStore } from "../../../store";
+import shallow from 'zustand/shallow'
 
 
-const DocsNavMobile = ({
-    docsData,
-    selectedSection,
-    selectedSubSection,
-    setSelectedSection,
-    setSelectedSubSection
-}: {
-    docsData: {
-        all: DocsLinkItem[],
-        subsections: DocsLinkSubsections
-    },
-    selectedSection: string,
-    selectedSubSection: string,
-    setSelectedSection(sectionName: string): void,
-    setSelectedSubSection(subSectionName: string): void
-}) => {
+const DocsNavMobile = () => {
 
     const { width } = useWindowDimensions();
     const [searchVisible, setSearchVisible] = useState(false);
     const { isOpen, setIsOpen } = useContext(NavOpenContext);
+
+    const { 
+        articles
+    } = useDocsStore(useCallback((state) => ({
+        articles: state.articles
+    }), []), shallow)
 
     return (
         
@@ -62,21 +55,14 @@ const DocsNavMobile = ({
                                         <h3 className="text-lg">Version: 0.6.21</h3>
                                     </div>
                                     <DocsNavSearch 
-                                        setSelectedSection={setSelectedSection}
-                                        setSelectedSubSection={setSelectedSubSection}
                                         setSearchVisible={setSearchVisible}
                                     />
                                     <div className="px-8 h-[70vh] w-full">
                                     {
-                                        docsData.all.map((docsLink: DocsLinkItem, idx: number) => 
+                                        articles.map((docsLink: DocsLinkItem, idx: number) => 
                                             <div key={`docs-group-mobile-${idx}`}>
                                                 <DocsNavSection 
                                                     docsLink={docsLink}
-                                                    docsSubsections={docsData.subsections}
-                                                    selectedSection={selectedSection}
-                                                    selectedSubSection={selectedSubSection}
-                                                    setSelectedSection={setSelectedSection}
-                                                    setSelectedSubSection={setSelectedSubSection}
                                                 />
                                             </div>
                                         )

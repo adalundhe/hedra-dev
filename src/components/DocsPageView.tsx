@@ -1,12 +1,14 @@
 import { DocsArticle } from "./docs";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useCallback, useRef } from "react";
 import { NavOpenContext, DocsNav } from "./nav"
 import { useWindowDimensions } from '../hooks'
 import { Footer } from "./footer";
 import { DocsSectionGuide } from "./docs";
 import { DocsNavMobile } from "./nav";
-import { useData } from "../data";
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
+import { useDocsStore } from "../store";
+import shallow from 'zustand/shallow'
+import { useRouter } from "next/router";
 
 
 const DocsPageView = ({
@@ -27,46 +29,70 @@ const DocsPageView = ({
 
     const { isOpen } = useContext(NavOpenContext);
 
-    const [selectedSection, setSelectedSection] = useState("Introduction");
-    const [selectedSubSection, setSelectedSubSection] = useState("Welcome");
+    const [ready, setReady] = useState(false);
 
-    const docsLinks = useData();
+    const router = useRouter();
 
-    const pageSubSections = docsLinks.subsections[selectedSection] ?? [];
+    const { article } = router.query;
 
-    const docsSectionNames = docsLinks.all.map(docsLink => docsLink.sectionName);
-    const currentSectionIdx = docsSectionNames.indexOf(selectedSection);
-    const previousSection = currentSectionIdx - 1 > 0 ? docsSectionNames[currentSectionIdx - 1] : undefined;
+
+    const { 
+        articles,
+        section,
+        subsection,
+        subsections,
+        setSection, 
+        setSubSection
+    } = useDocsStore(useCallback((state) => ({
+        articles: state.articles,
+        subsections: state.subsections,
+        section: state.selectedSection,
+        subsection: state.selectedSubSection,
+        setSection: state.setSelectedSection,
+        setSubSection: state.setSelectedSubSection
+    }), []), shallow)
+
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+
+        if (router.isReady){
+
+            const routerPath = router.asPath.split('#')
+            const slugs: {[articleName: string]: {[slug: string]: string}} = articles.reduce((slugs, article) => ({
+                ...slugs,
+                [article.sectionName]: article.slugs
+            }), {})
+
+            const articleSlugs = slugs[article as string] ?? {}
+
+            const subsectionPath = routerPath.length > 1 ? articleSlugs[routerPath.at(1) as string] as string : subsection;
+            console.log(subsectionPath)
+            setSection(article as string)
+            setSubSection(subsectionPath as string)
+            setReady(true)
+            ref.current?.scrollTo(0, 0)
+        }
+        
+    }, [router.isReady])
+
+    const docsSectionNames = articles.map(article => article.sectionName);
+    const currentSectionIdx = docsSectionNames.indexOf(section);
+    const previousSection = currentSectionIdx - 1 >= 0 ? docsSectionNames[currentSectionIdx - 1] : undefined;
     const nextSection = currentSectionIdx + 1 < docsSectionNames.length ? docsSectionNames[currentSectionIdx + 1] : undefined;
 
     return (
-        <>
-            <DocsNavMobile   
-                docsData={docsLinks}
-                selectedSection={selectedSection}
-                selectedSubSection={selectedSubSection}
-                setSelectedSection={setSelectedSection}
-                setSelectedSubSection={setSelectedSubSection}
-            />
-           <div className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}>
-                <DocsNav 
-                    docsData={docsLinks}
-                    selectedSection={selectedSection}
-                    selectedSubSection={selectedSubSection}
-                    setSelectedSection={setSelectedSection}
-                    setSelectedSubSection={setSelectedSubSection}
-
-                /> 
+        ready ? <>
+            <DocsNavMobile />
+           <div 
+                className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}
+                ref={ref}
+            >
+                <DocsNav /> 
                 <main className="bg-[#eeeeee] min-w-0 lg:pl-6 h-full">
                     
                     <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
-                        <DocsArticle
-                            selectedSection={selectedSection}
-                            selectedSubSection={selectedSubSection}
-                            pageSubSections={pageSubSections}
-                            setSelectedSection={setSelectedSection}
-                            setSelectedSubSection={setSelectedSubSection}
-                        >
+                        <DocsArticle>
                         {children}
                         </DocsArticle>
                     </div> 
@@ -77,15 +103,17 @@ const DocsPageView = ({
                             <button 
                                 className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
                                 onClick={() => {
-                                    setSelectedSection(previousSection);
-                                    setSelectedSubSection(docsLinks.subsections[previousSection]?.at(0) as string)
+                                    setSection(previousSection);
+                                    setSubSection(subsections[previousSection]?.at(0) as string)
                                 }}
                             >
                                 <RxCaretLeft />
                                 <div className="flex flex-col items-center justify-center ml-4">
                                     
                                      <p>Previous</p>
-                                    <p className="mt-2">{previousSection}</p>        
+                                     <a href={`#${subsections[previousSection]?.at(0)}`}>
+                                        <p className="mt-2">{previousSection}</p>      
+                                    </a>  
                                 </div>
                             </button> : null
                         }
@@ -96,8 +124,8 @@ const DocsPageView = ({
                             <button 
                                 className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
                                 onClick={() => {
-                                    setSelectedSection(nextSection);
-                                    setSelectedSubSection(docsLinks.subsections[nextSection]?.at(0) as string)
+                                    setSection(nextSection);
+                                    setSubSection(subsections[nextSection]?.at(0) as string)
                                 }}
                             >
                                 <div className="flex flex-col items-center justify-center mr-4">
@@ -112,15 +140,9 @@ const DocsPageView = ({
                     </div>
                     <Footer />
                 </main>
-                <DocsSectionGuide 
-                    docsData={docsLinks}
-                    selectedSection={selectedSection}
-                    selectedSubSection={selectedSubSection}
-                    setSelectedSection={setSelectedSection}
-                    setSelectedSubSection={setSelectedSubSection}    
-                />
+                <DocsSectionGuide />
             </div>
-        </>
+        </> : <div></div>
     )
 }
 

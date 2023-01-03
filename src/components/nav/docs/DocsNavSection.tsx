@@ -1,56 +1,61 @@
 
 import { RxCaretRight, RxCaretDown } from 'react-icons/rx'
-import { DocsLinkItem, DocsLinkSubsections } from "../../../data/types";
+import { DocsLinkItem } from "../../../store/types";
 import { DocsNavItems } from './DocNavItems'
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from 'next/router';
 import { useInView } from 'react-intersection-observer';
+import { useDocsStore } from '../../../store';
+import shallow from 'zustand/shallow'
 
 
-const DocsNavSection = ({
-    docsLink,
-    docsSubsections,
-    selectedSection,
-    selectedSubSection,
-    setSelectedSection,
-    setSelectedSubSection
-}: {
-    docsLink: DocsLinkItem,
-    docsSubsections: DocsLinkSubsections,
-    selectedSection: string,
-    selectedSubSection: string,
-    setSelectedSection(sectionName: string): void,
-    setSelectedSubSection(subSectionName: string): void
-}) => {
+const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
 
     const sectionRef = useRef<HTMLInputElement>(null);
-    const [sectionOpen, setSectionOpen] = useState(selectedSection == docsLink.sectionName);
     const router = useRouter();
 
     const { ref, inView } = useInView()
 
+    const { 
+        section,
+        subsection,
+        setSection, 
+        setSubSection
+    } = useDocsStore(useCallback((state) => ({
+        articles: state.articles,
+        section: state.selectedSection,
+        subsection: state.selectedSubSection,
+        setSection: state.setSelectedSection,
+        setSubSection: state.setSelectedSubSection
+    }), []), shallow)
+
+
+    const [sectionOpen, setSectionOpen] = useState(section == docsLink.sectionName);
+
     useEffect(() => {
 
-        if (docsLink.sectionName === selectedSection && !inView){
-            sectionRef.current?.scrollIntoView({behavior: 'smooth', block: 'center'});
+        if (docsLink.sectionName === section && !inView){
+            sectionRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+            setSectionOpen(true)
         }
 
-    }, [selectedSection, selectedSubSection, inView])
+    }, [section, subsection, inView])
 
     return (
         <div key={docsLink.sectionPath} className='py-4'>
             <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7" ref={sectionRef}>
                 {
-                    sectionOpen &&docsLink.sectionName === selectedSection  ?
+                    sectionOpen &&docsLink.sectionName === section  ?
                     <button
                         className="text-left flex items-center"
                         type="button"
                         onClick={() => {
-                            setSectionOpen(docsLink.sectionName === selectedSection ? !sectionOpen : false)
+
+                            setSectionOpen(docsLink.sectionName === section ? !sectionOpen : false)
                         }}
                     >
                         <div className="mr-2" ref={ref}>
-                            <RxCaretDown className={docsLink.sectionName === selectedSection ? "text-xl text-[#038aff]/70" : "text-xl text-[#14151a]"} />
+                            <RxCaretDown className={docsLink.sectionName === section ? "text-xl text-[#038aff]/70" : "text-xl text-[#14151a]"} />
                         </div>
                         <h3 className={
                             "text-xl text-[#14151a] hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit"
@@ -64,13 +69,14 @@ const DocsNavSection = ({
                         className="text-left flex items-center"
                         type="button"
                         onClick={() => {
-                            setSectionOpen(docsLink.sectionName === selectedSection ? !sectionOpen : true)
-                            setSelectedSection(docsLink.sectionName)
 
-                            const updatedSubSection =  docsLink.sectionSubsections .includes(selectedSubSection) ? selectedSubSection :  docsLink.sectionSubsections[0] as string
-                            setSelectedSubSection(updatedSubSection)
+                            setSection(docsLink.sectionName)
+
+                            const updatedSubSection =  docsLink.sectionSubsections.includes(subsection) ? subsection :  docsLink.sectionSubsections.at(0) as string;
+                            setSubSection(updatedSubSection)
 
                             router.push(`${docsLink.sectionName}/#${updatedSubSection.toLowerCase().replace(/\s+/g, '-')}`)
+                            setSectionOpen(docsLink.sectionName === section ? !sectionOpen : true)
                         }}
                     >
                         <div className="mr-2" ref={ref}>
@@ -89,13 +95,9 @@ const DocsNavSection = ({
             </div>
             <DocsNavItems 
                 sectionName={docsLink.sectionName}
-                selectedSection={selectedSection}
-                selectedSubSection={selectedSubSection}
                 open={sectionOpen}
                 setSectionOpen={setSectionOpen}
-                docsItemSubsections={docsSubsections[docsLink.sectionName] as string[]}
-                setSelectedSection={setSelectedSection}
-                setSelectedSubSection={setSelectedSubSection}
+                docsItemSubsections={docsLink.sectionSubsections as string[]}
             />
         </div>
     )
