@@ -1,12 +1,11 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import { 
-  MainPageView,
   NavBar, 
   MobileNavView
-} from '../components'
+} from '../../components'
 
-const Home: NextPage = () => {
+const Post: NextPage = () => {
 
 
   return (
@@ -23,7 +22,7 @@ const Home: NextPage = () => {
           <NavBar /> 
         </header>
           <main className="w-screen h-screen bg-[#eeeeee] inline-block overflow-y-scroll overflow-x-hidden">
-            <MainPageView />
+     
           </main>
         </>
         </MobileNavView>
@@ -31,4 +30,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Post;

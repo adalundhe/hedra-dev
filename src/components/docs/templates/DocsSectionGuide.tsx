@@ -47,6 +47,12 @@ const DocsSectionGuide = () => {
                         const caretStyle = subSectionName === subsection ? 
                         "text-xl mr-2 text-[#038aff]/70 hover:text-[#038aff]/80" : "text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70";
 
+                        let subSectionSlug = subSectionName?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
+                        if (subSectionSlug[subSectionSlug.length -1] === '-'){
+                            subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
+                        }
+                    
+
 
                         return (
                             <div
@@ -58,7 +64,6 @@ const DocsSectionGuide = () => {
                                         className={`text-left w-fit flex items-center`}
                                         type="button" 
                                         onClick={() => {
-                                            const subSectionSlug = subSectionName?.toLowerCase().replace(/\s+/g, '-');
                                             history.pushState(window.history.state, "page 2", `${section}#${subSectionSlug}`);
                                             setSection(section)
                                             setSubSection(subSectionName)
@@ -71,7 +76,7 @@ const DocsSectionGuide = () => {
                                                 subSectionName === subsection ? <RxDotFilled /> : <RxDot className="opacity-0" />
                                             }
                                         </div>
-                                        <a href={`#${subSectionName.toLowerCase().replace(/\s+/g, '-')}`}>
+                                        <a href={`#${subSectionSlug}`}>
                                             <p className={`${subSectionStyle} flex`}>{subSectionName}</p>
                                         </a>
                                     </button>

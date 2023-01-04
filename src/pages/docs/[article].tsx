@@ -1,20 +1,35 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { 
     DocsPageView,
     MobileNavView,
     NavBar
 } from '../../components'
 
-import { WelcomeArticle } from "../../components";
+import { Articles } from "../../components";
 
 const Docs: NextPage = () => {
+
+    const router = useRouter();
+
+    let [selectedArticle, setSelectedArticle] = useState<JSX.Element>()
+
+    useEffect(() => {
+
+        const { article } = router.query;
+
+        setSelectedArticle(Articles[article as string])
+
+
+    }, [router.query])
 
     return (
         <>
         <Head>
-            <title>Hedra - Testing at scale</title>
-            <meta name="description" content="Hedra - Testing at scale" />
+            <title>Hedra - Test at scale</title>
+            <meta name="description" content="Hedra - Test at scale" />
             <link rel="icon" href="/favicon.ico" />
         </Head>
 
@@ -25,7 +40,10 @@ const Docs: NextPage = () => {
                     <NavBar />
                 </header>
                 <DocsPageView >
-                    <WelcomeArticle />
+                    {
+                        router.isReady ? 
+                        (selectedArticle ?? <div></div>) : <div></div>
+                    }
                 </DocsPageView>
             </div>
         </MobileNavView>

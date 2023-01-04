@@ -1,14 +1,20 @@
 import { useRef } from "react";
 import { Badge } from "./Badge";
+import getConfig from "next/config";
+
+
+const { publicRuntimeConfig } = getConfig();
 
 
 const BadgeDisplay = () => {
+
+    const supportedPythonVersions = publicRuntimeConfig.hedraSupportedPythonVersions.join(' | ')
 
     const badges = useRef([
         {
             badgeLink: 'https://img.shields.io/pypi/pyversions/hedra?color=%23eeeeee&label=Supports%20Python&style=for-the-badge',
             label: 'python',
-            value: '3.8.6+',
+            value: supportedPythonVersions,
             key: 'supported-python-versions'
         },
         {

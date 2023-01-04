@@ -83,6 +83,12 @@ const DocsNavSearch = ({
                         
                         const sectionName = matches[matchName]?.section as string;
                         const subSectionName = matches[matchName]?.subSection as string;
+
+                        let subSectionSlug = subSectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-');
+                        if (subSectionSlug[subSectionSlug.length -1] === '-'){
+                            subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
+                        }
+                        
                         return (
                             <div key={`search-item-${idx}`}>
                                 <button 
@@ -94,7 +100,7 @@ const DocsNavSearch = ({
                                         setQuery("");
                                         setIsFocused(false);
                                         ref.current?.blur();
-                                        router.push(`${sectionName}/#${subSectionName.toLowerCase().replace(/\s+/g, '-')}`)
+                                        router.push(`${sectionName}/#${subSectionSlug}`)
                                     }}
                                 >   
                                     <p className='h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70'>{matches[matchName]?.name}</p>

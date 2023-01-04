@@ -10,6 +10,9 @@ import { DocsNavSearch } from "./DocsNavSearch";
 import { GrClose } from 'react-icons/gr'
 import { useDocsStore } from "../../../store";
 import shallow from 'zustand/shallow'
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig()
 
 
 const DocsNavMobile = () => {
@@ -52,7 +55,7 @@ const DocsNavMobile = () => {
                             <div className="flex flex-col justify-center text-left w-full h-full">
                                     <div className="py-4 px-8 w-full">
 
-                                        <h3 className="text-lg">Version: 0.6.21</h3>
+                                        <h3 className="text-lg">Version: {publicRuntimeConfig.hedraVersion}</h3>
                                     </div>
                                     <DocsNavSearch 
                                         setSearchVisible={setSearchVisible}

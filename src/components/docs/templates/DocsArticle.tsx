@@ -28,7 +28,7 @@ const DocsArticle = ({ children}: {children: JSX.Element}) => {
                 <div className="w-full">
                 {
                 cloneElement(children, {
-                        subSections: subsections
+                        subsections
                     })
                 }
                 </div>

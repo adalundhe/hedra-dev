@@ -31,7 +31,11 @@ const DocsNavItem = ({
     const caretStyle = subSectionName === subsection ? 
         "h-full text-xl mr-2 text-[#038aff]/80 hover:text-[#038aff]/70" : "h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70";
 
-    const subSectionSlug = `#${subSectionName.toLowerCase().replace(/\s+/g, '-')}`;
+    let subSectionSlug = `#${subSectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')}`;
+    if (subSectionSlug[subSectionSlug.length -1] === '-'){
+        subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
+    }
+
 
     const linkRef = useRef<HTMLAnchorElement>(null);
 

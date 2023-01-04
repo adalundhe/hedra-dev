@@ -45,7 +45,7 @@ const MobileNavItems = ({
                     navItems.map(navItem => 
                         <Menu.Item key={navItem.key}>
                             <div className="py-10 font-rany hover:bold hover:text-[#038aff]/70 text-2xl">
-                                <Link href={navItem.navLink}>{navItem.navText}</Link>
+                                <Link href={navItem.navLink} target={navItem.navTarget}>{navItem.navText}</Link>
                             </div>
                         </Menu.Item>    
                     )

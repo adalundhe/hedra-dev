@@ -17,3 +17,17 @@ export type SearchDoc = {
     section: string,
     subSection: string
 }
+
+
+export type NewsPostSummary = {
+    summaryIntro: string;
+    summaryItems: string[];
+}
+
+
+export type NewsPost = {
+    title: string;
+    link: string;
+    summary?: NewsPostSummary;
+    publishedDate: string;
+}

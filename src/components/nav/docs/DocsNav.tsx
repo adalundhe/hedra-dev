@@ -5,6 +5,9 @@ import { DocsNavSearch } from "./DocsNavSearch";
 import { useCallback, useEffect, useState } from "react";
 import { useDocsStore } from "../../../store";
 import shallow from 'zustand/shallow'
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig()
 
 
 const DocsNav = () => {
@@ -36,7 +39,7 @@ const DocsNav = () => {
             >
                 <div className="font-rany shadow-2x flex flex-col justify-center text-left w-full h-3/4">
                     <div className="py-4 px-8 w-full">
-                        <h3 className="text-lg">Version: 0.6.21</h3>
+                        <h3 className="text-lg">Version: {publicRuntimeConfig.hedraVersion}</h3>
                     </div>
                     <DocsNavSearch 
                         setSearchVisible={setSearchVisible}

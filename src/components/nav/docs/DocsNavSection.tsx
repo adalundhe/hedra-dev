@@ -75,7 +75,7 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
                             const updatedSubSection =  docsLink.sectionSubsections.includes(subsection) ? subsection :  docsLink.sectionSubsections.at(0) as string;
                             setSubSection(updatedSubSection)
 
-                            router.push(`${docsLink.sectionName}/#${updatedSubSection.toLowerCase().replace(/\s+/g, '-')}`)
+                            router.push(`${docsLink.sectionName}/#${updatedSubSection.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')}`)
                             setSectionOpen(docsLink.sectionName === section ? !sectionOpen : true)
                         }}
                     >

@@ -25,20 +25,26 @@ const SectionHeader = ({
     useEffect(() => {
         if (inView){
             setSubsection(subSectionName)
-            const subSectionSlug = subSectionName.toLowerCase().replace(/\s+/g, '-')
-            history.pushState(window.history.state, "page 2", `${section}#${subSectionSlug}`);
-            scrollRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'})
+            let subSectionSlug = subSectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
+            if (subSectionSlug[subSectionSlug.length -1] === '-'){
+                subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
+            }
 
+            history.pushState(window.history.state, "page 2", `${section}#${subSectionSlug}`);
+            
         }
 
-    }, [inView, section])
+    }, [inView])
 
-    const sectionHref = subSectionName.toLowerCase().replace(/\s+/g, '-');
+    let sectionHref = subSectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-');
+    if (sectionHref[sectionHref.length -1] === '-'){
+        sectionHref = sectionHref.slice(0, sectionHref.length - 1)
+    }
 
     return (
         <div ref={scrollRef}>
             <a id={sectionHref} href={`#${sectionHref}`}>
-                <h1 ref={ref} className="text-2xl mb-4">{subSectionName}</h1>
+                <h1 ref={ref} className="text-[2rem] mb-4 font-semibold">{subSectionName}</h1>
             </a>
         </div>
     )

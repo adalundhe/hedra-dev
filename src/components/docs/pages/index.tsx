@@ -1,1 +1,7 @@
-export { WelcomeArticle } from './WelcomeArticle'
+import { Introduction } from './introduction'
+
+const articles: {[key: string]: JSX.Element} = {
+    'Introduction': <Introduction />
+}
+
+export default articles

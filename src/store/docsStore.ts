@@ -1,6 +1,5 @@
-import { RefObject, useRef } from 'react';
 import create from 'zustand'
-import { DocsLinkItem, DocsLinkSubsections, SearchDoc } from './types';
+import { DocsLinkItem, DocsLinkSubsections, SearchDoc, NewsPost } from './types';
 
 
 export interface DocsState {
@@ -18,6 +17,7 @@ export interface DocsState {
   setSearchDocs: (updatedSearchDocs: SearchDoc) => void;
 }
 
+
 const useDocsStore = create<DocsState>()((set, get) => {
 
     const initialSection = "Introduction";
@@ -29,23 +29,26 @@ const useDocsStore = create<DocsState>()((set, get) => {
           sectionPath: "/docs/introduction",
           sectionSubsections: [
               "Welcome",
-              "What is performance testing?",
-              "What is Hedra?",
-              "Core tenants",
-              "Workflows as graphs",
-              "Graphs as tests"
+              "System requirements",
+              "Setup",
+              "Developer setup"
           ]
       },
       {
           sectionName: "Core Concepts",
           sectionPath: "/docs/core_concepts",
           sectionSubsections: [
-              "Introduction to Hooks",
-              "Introduction to Stages",
-              "Introduction to Graphs",
-              "Introduction to Projects",
-              "Engines, Personas, Optimizers and Reporters",
-              "Putting it all together",
+                "What is performance testing?",
+                "What is Hedra?",
+                "Core tenants",
+                "Workflows as graphs",
+                "Graphs as tests",
+                "Introduction to Hooks",
+                "Introduction to Stages",
+                "Introduction to Graphs",
+                "Introduction to Projects",
+                "Engines, Personas, Optimizers and Reporters",
+                "Putting it all together",
           ]
   
       },
@@ -324,9 +327,14 @@ const useDocsStore = create<DocsState>()((set, get) => {
 
   articles.forEach(docsItem => {
       docsItem.sectionSubsections.forEach(subsectionName => {
+
+        let subSectionSlug = subsectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-');
+        if (subSectionSlug[subSectionSlug.length -1] === '-'){
+            subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
+        }
           searchData[subsectionName.toLowerCase()] = {
               name: subsectionName,
-              link: `${docsItem.sectionPath}#${subsectionName.toLowerCase().replace(/\s+/g, '-')}`,
+              link: `${docsItem.sectionPath}#${subSectionSlug}`,
               section: docsItem.sectionName,
               subSection: subsectionName
           };
@@ -341,11 +349,16 @@ const useDocsStore = create<DocsState>()((set, get) => {
         ...article,
         slugs: article.sectionSubsections.reduce((slugsMap, subsectionName) => {
 
-          const slug = subsectionName.toLowerCase().replace(/\s+/g, '-')
-          return ({
-            ...slugsMap,
-            [slug]: subsectionName
-          })
+        let slug = subsectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
+        
+        if (slug[slug.length -1] === '-'){
+            slug = slug.slice(0, slug.length - 1)
+        }
+
+        return ({
+        ...slugsMap,
+        [slug]: subsectionName
+        })
         }, {})
       })),
       subsections: subsections,

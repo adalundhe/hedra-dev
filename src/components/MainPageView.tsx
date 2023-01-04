@@ -1,12 +1,8 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { ParticlesBackground } from './ParticlesBackground'
-import { TitleCard } from "./TitleCard"
 import { RepoDisplay } from "./repo"
-import { DescriptionCard } from "./cards"
-import { FlippedDescriptionCard } from "./cards"
-import { TenantsCard } from "./cards"
+import { TitleCard, DescriptionCard, FlippedDescriptionCard, TenantsCard } from "./cards"
 import { NavOpenContext } from "./nav"
-import { Footer } from "./footer"
 import { useWindowDimensions } from '../hooks'
 
 
