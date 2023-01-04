@@ -42,7 +42,7 @@ const useDocsStore = create<DocsState>()((set, get) => {
                 "What is Hedra?",
                 "Core tenants",
                 "Workflows as graphs",
-                "Graphs as tests",
+                "Tests as workflows",
                 "Introduction to Hooks",
                 "Introduction to Stages",
                 "Introduction to Graphs",

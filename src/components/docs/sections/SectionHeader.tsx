@@ -44,7 +44,8 @@ const SectionHeader = ({
     return (
         <div ref={scrollRef}>
             <a id={sectionHref} href={`#${sectionHref}`}>
-                <h1 ref={ref} className="text-[2rem] mb-4 font-semibold">{subSectionName}</h1>
+                <div ref={ref}></div>
+                <h1 className="text-[2rem] mb-4 font-semibold">{subSectionName}</h1>
             </a>
         </div>
     )
