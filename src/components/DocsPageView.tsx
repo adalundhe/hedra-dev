@@ -56,38 +56,12 @@ const DocsPageView = ({
     }), []), shallow)
 
     const ref = useRef<HTMLDivElement>(null);
-    const trackingRef = useRef<HTMLDivElement>(null)
-
-    // useCallback(() => , [subSectionRefs])
+    const trackingRef = useRef<HTMLDivElement>(null);
 
     const [scrollDir, setScrollDir] = useState("none");
     const [lastScrollY, setLastScrollY] = useState(0);
     const [lastScrollDist, setLastScrollDist] = useState(0);
-
-    useEffect(() => {
-      const threshold = 10
-    
-      const onScroll = () => {
-        const scrollY = ref.current?.scrollTop ?? 0;
-        const scrollDistance = Math.abs(scrollY - lastScrollY);
-    
-        if (scrollDistance >= threshold) {
-
-            const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
-            
-            setLastScrollDist(scrollDir === nextScrollDir ? (scrollDistance + lastScrollDist) : scrollDistance);
-            setScrollDir(nextScrollDir);
-            setLastScrollY(scrollY > 0 ? scrollY : 0)
-        }
-      };
-    
-    
-      ref.current?.addEventListener("scroll", onScroll);
-    
-      return () => ref.current?.removeEventListener("scroll", onScroll);
-    }, [lastScrollY]);
-    
-
+    const scrollThreshold = 10;
 
     useEffect(() => {
 
@@ -124,6 +98,19 @@ const DocsPageView = ({
                 className={`${ready ? '' : 'overflow-y-hidden'} grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}
                 ref={ref}
                 onScroll={() => {
+                    
+                    const scrollY = ref.current?.scrollTop ?? 0;
+                    const scrollDistance = Math.abs(scrollY - lastScrollY);
+                
+                    if (scrollDistance >= scrollThreshold) {
+
+                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                        
+                        setLastScrollDist(scrollDir === nextScrollDir ? (scrollDistance + lastScrollDist) : scrollDistance);
+                        setScrollDir(nextScrollDir);
+                        setLastScrollY(scrollY > 0 ? scrollY : 0)
+                    }
+
                     const currentSubsections = subsections[section] ?? [];
                     const sectionHeight = refs[subsection]?.height ?? 0;
 
