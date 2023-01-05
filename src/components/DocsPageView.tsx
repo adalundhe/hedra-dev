@@ -1,7 +1,7 @@
 import { DocsArticle } from "./docs";
-import { useState, useContext, useEffect, useCallback, useRef } from "react";
+import { useState, useContext, useEffect, useCallback, useRef, RefObject, useMemo } from "react";
 import { NavOpenContext, DocsNav } from "./nav"
-import { useWindowDimensions } from '../hooks'
+import { useWindowDimensions, useScrollDirection } from '../hooks'
 import { Footer } from "./footer";
 import { DocsSectionGuide } from "./docs";
 import { DocsNavMobile } from "./nav";
@@ -41,6 +41,7 @@ const DocsPageView = ({
         section,
         subsection,
         subsections,
+        refs,
         setSection, 
         setSubSection
     } = useDocsStore(useCallback((state) => ({
@@ -48,11 +49,43 @@ const DocsPageView = ({
         subsections: state.subsections,
         section: state.selectedSection,
         subsection: state.selectedSubSection,
+        refs: state.subSectionRefs,
         setSection: state.setSelectedSection,
-        setSubSection: state.setSelectedSubSection
+        setSubSection: state.setSelectedSubSection,
+        setRefs: state.setSubSectionRefs
     }), []), shallow)
 
     const ref = useRef<HTMLDivElement>(null);
+    const trackingRef = useRef<HTMLDivElement>(null)
+
+    // useCallback(() => , [subSectionRefs])
+
+    const [scrollDir, setScrollDir] = useState("none");
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+      const threshold = 10
+    
+      const onScroll = () => {
+        const scrollY = ref.current?.scrollTop ?? 0;
+        const scrollDistance = Math.abs(scrollY - lastScrollY);
+    
+        if (scrollDistance >= threshold) {
+
+            const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+            
+            setScrollDir(nextScrollDir);
+            setLastScrollY(scrollY > 0 ? scrollY : 0)
+        }
+      };
+    
+    
+      ref.current?.addEventListener("scroll", onScroll);
+    
+      return () => ref.current?.removeEventListener("scroll", onScroll);
+    }, [lastScrollY]);
+    
+
 
     useEffect(() => {
 
@@ -64,14 +97,15 @@ const DocsPageView = ({
                 [article.sectionName]: article.slugs
             }), {})
 
-            const articleSlugs = slugs[article as string] ?? {}
+            const articleSlugs = slugs[article as string] ?? {};
 
+            
             const subsectionPath = routerPath.length > 1 ? articleSlugs[routerPath.at(1) as string] as string : subsection;
-            console.log(subsectionPath)
+    
             setSection(article as string)
             setSubSection(subsectionPath as string)
+
             setReady(true)
-            ref.current?.scrollTo(0, 0)
         }
         
     }, [router.isReady])
@@ -85,13 +119,29 @@ const DocsPageView = ({
         ready ? <>
             <DocsNavMobile />
            <div 
-                className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}
+                className={`${ready ? '' : 'overflow-y-hidden'} grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}
                 ref={ref}
+                onScroll={() => {
+                    const currentSubsections = subsections[section] ?? [];
+                    const sectionHeight = refs[subsection]?.height ?? 0;
+
+
+                    const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number;
+                    const nextSubSection = currentSubsections[(currentSubSectionIdx + 1) < currentSubsections.length ? (currentSubSectionIdx + 1) : currentSubsections.length - 1] as string;
+                    const previousSubSection = currentSubsections[(currentSubSectionIdx - 1) > 0 ? (currentSubSectionIdx - 1) : 0] as string;
+
+                    if (scrollDir === 'down' && lastScrollY > sectionHeight){
+                            setSubSection(nextSubSection)
+
+                    } else if (scrollDir === 'up' && lastScrollY < sectionHeight){
+                        setSubSection(previousSubSection)
+                    }
+
+                }}
             >
                 <DocsNav /> 
                 <main className="bg-[#eeeeee] min-w-0 lg:pl-6 h-full">
-                    
-                    <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
+                    <div className={`max-w-7xl mx-auto px-5 sm:px-12 break-words block`}>
                         <DocsArticle>
                         {children}
                         </DocsArticle>

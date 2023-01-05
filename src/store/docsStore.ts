@@ -1,5 +1,6 @@
+import { RefObject, useRef } from 'react';
 import create from 'zustand'
-import { DocsLinkItem, DocsLinkSubsections, SearchDoc, NewsPost } from './types';
+import { DocsLinkItem, DocsLinkSubsections, SearchDoc, ScrollRef } from './types';
 
 
 export interface DocsState {
@@ -9,12 +10,14 @@ export interface DocsState {
   articles: DocsLinkItem[];
   subsections: DocsLinkSubsections;
   searchDocs: {[docName: string]: SearchDoc};
+  subSectionRefs: {[subSection: string]: ScrollRef};
   setSelectedSection: (updatedSection: string) => void;
   setSelectedSubSection: (updatedSubSection: string) => void;
   setSelectedSubSections: (updatedSection: string) => void;
   setArticles: (updatedArticles: DocsLinkItem[]) => void;
   setSubSections: (updatedSubSections: DocsLinkSubsections) => void;
   setSearchDocs: (updatedSearchDocs: SearchDoc) => void;
+  setSubSectionRefs: (updatedRefs: {[subSection: string]: ScrollRef}) => void;
 }
 
 
@@ -345,6 +348,7 @@ const useDocsStore = create<DocsState>()((set, get) => {
       selectedSection: initialSection,
       selectedSubSection: initialSubSection, 
       selectedSubSections: [],
+      subSectionRefs: {},
       articles: articles.map((article) => ({
         ...article,
         slugs: article.sectionSubsections.reduce((slugsMap, subsectionName) => {
@@ -368,7 +372,8 @@ const useDocsStore = create<DocsState>()((set, get) => {
       setSelectedSubSections: (updatedSection) => set(() => ({ selectedSubSections: get().subsections[updatedSection] })),
       setArticles: (updatedArticles) => set(() => ({ articles: updatedArticles })),
       setSubSections: (updatedSubSections) => set((() => ({ subsections: updatedSubSections, selectedSubSections: updatedSubSections[get().selectedSection] }))),
-      setSearchDocs: (updatedSearchDoc) => set((() => ({ searchDocs: {...get().searchDocs, [updatedSearchDoc.name.toLowerCase()]: updatedSearchDoc} })))
+      setSearchDocs: (updatedSearchDoc) => set((() => ({ searchDocs: {...get().searchDocs, [updatedSearchDoc.name.toLowerCase()]: updatedSearchDoc} }))),
+      setSubSectionRefs: (updatedRefs) => set(() => ({ subSectionRefs: updatedRefs }))
     })
 })
 

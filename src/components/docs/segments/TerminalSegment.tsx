@@ -10,11 +10,7 @@ const TerminalSegment = ({
     command: string
 }) => {
 
-
-    const currentMessageIdx = useRef(0);    
     const { ref, inView } = useInView();
-
-
 
 
   // Terminal has 100% width by default so it should usually be wrapped in a container div

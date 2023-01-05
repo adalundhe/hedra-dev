@@ -10,12 +10,12 @@ const Introduction = ({
 
     return (
         <div className="w-full">
-    {
-        subsections?.map(subSectionName => 
-            <IntroductionSection subSectionName={subSectionName} />
-        )
-    }
-</div>
+            {
+                subsections?.map(subSectionName => 
+                    <IntroductionSection subSectionName={subSectionName} />
+                )
+            }
+        </div>
     )
 }
 

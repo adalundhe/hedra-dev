@@ -1,4 +1,5 @@
 import { type } from "os";
+import { RefObject } from "react";
 
 export type DocsLinkItem = {
     sectionPath: string;
@@ -30,4 +31,12 @@ export type NewsPost = {
     link: string;
     summary?: NewsPostSummary;
     publishedDate: string;
+}
+
+
+export type ScrollRef = {
+    scrollRef?: RefObject<HTMLElement>;
+    viewRef?: (node?: Element | null | undefined) => void;
+    inView?: boolean;
+    height?: number;
 }

@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useRef } from "react";
+import { RefObject, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { useInView } from "react-intersection-observer"
 import { useDocsStore } from "../../../store";
 import shallow from 'zustand/shallow';
+import { ScrollRef } from "../../../store/types";
 
 const SectionHeader = ({
     subSectionName
@@ -13,28 +14,21 @@ const SectionHeader = ({
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const { 
-        section,
-        setSubsection,
+        refs,
+        setRefs
     } = useDocsStore(useCallback((state) => ({
-        section: state.selectedSection,
-        setSubsection: state.setSelectedSubSection,
+        refs: state.subSectionRefs,
+        setRefs: state.setSubSectionRefs
     }), []), shallow)
 
+    refs[subSectionName] = {
+        scrollRef: scrollRef,
+        inView: inView,
+        viewRef: ref,
+        height: refs[subSectionName]?.height ?? 0
+    }
 
-
-    useEffect(() => {
-        if (inView){
-            setSubsection(subSectionName)
-            let subSectionSlug = subSectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
-            if (subSectionSlug[subSectionSlug.length -1] === '-'){
-                subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
-            }
-
-            history.pushState(window.history.state, "page 2", `${section}#${subSectionSlug}`);
-            
-        }
-
-    }, [inView])
+    setRefs(refs)
 
     let sectionHref = subSectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-');
     if (sectionHref[sectionHref.length -1] === '-'){
@@ -42,12 +36,12 @@ const SectionHeader = ({
     }
 
     return (
-        <div ref={scrollRef}>
-            <a id={sectionHref} href={`#${sectionHref}`}>
-                <div ref={ref}></div>
-                <h1 className="text-[2rem] mb-4 font-semibold">{subSectionName}</h1>
+        refs[subSectionName]?.scrollRef ?
+        <div >
+            <a id={sectionHref} href={`#${sectionHref}`} ref={refs[subSectionName]?.viewRef}>
+                <h1 ref={refs[subSectionName]?.scrollRef as RefObject<HTMLHeadingElement>} className="text-[2rem] mb-4 font-semibold">{subSectionName}</h1>
             </a>
-        </div>
+        </div> : <></>
     )
 }
 
