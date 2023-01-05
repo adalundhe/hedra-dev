@@ -62,6 +62,7 @@ const DocsPageView = ({
 
     const [scrollDir, setScrollDir] = useState("none");
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [lastScrollDist, setLastScrollDist] = useState(0);
 
     useEffect(() => {
       const threshold = 10
@@ -74,6 +75,7 @@ const DocsPageView = ({
 
             const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
             
+            setLastScrollDist(scrollDir === nextScrollDir ? (scrollDistance + lastScrollDist) : scrollDistance);
             setScrollDir(nextScrollDir);
             setLastScrollY(scrollY > 0 ? scrollY : 0)
         }
@@ -129,6 +131,8 @@ const DocsPageView = ({
                     const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number;
                     const nextSubSection = currentSubsections[(currentSubSectionIdx + 1) < currentSubsections.length ? (currentSubSectionIdx + 1) : currentSubsections.length - 1] as string;
                     const previousSubSection = currentSubsections[(currentSubSectionIdx - 1) > 0 ? (currentSubSectionIdx - 1) : 0] as string;
+
+                    console.log(sectionHeight, lastScrollY)
 
                     if (scrollDir === 'down' && lastScrollY > sectionHeight){
                             setSubSection(nextSubSection)
