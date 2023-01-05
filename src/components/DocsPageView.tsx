@@ -1,5 +1,5 @@
 import { DocsArticle } from "./docs";
-import { useState, useContext, useEffect, useCallback, useRef, RefObject, useMemo } from "react";
+import { useState, useContext, useEffect, useCallback, useRef, RefObject, useMemo, UIEventHandler, UIEvent } from "react";
 import { NavOpenContext, DocsNav } from "./nav"
 import { useWindowDimensions, useScrollDirection } from '../hooks'
 import { Footer } from "./footer";
@@ -97,8 +97,9 @@ const DocsPageView = ({
            <div 
                 className={`${ready ? '' : 'overflow-y-hidden'} grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}
                 ref={ref}
-                onScroll={() => {
-                    
+                onScroll={(event: UIEvent<HTMLDivElement>) => {
+                    event.preventDefault();
+                    ref.current?.focus({preventScroll: true});
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
                 
