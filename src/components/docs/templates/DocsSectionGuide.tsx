@@ -67,8 +67,8 @@ const DocsSectionGuide = () => {
                         "h-full text-xl mr-2 text-[#038aff]/70 hover:text-[#038aff]" : "h-full text-xl mr-2 text-[#14151a] hover:text-[#14151a]";
 
                         let subSectionSlug = subSectionName?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
-                        if (subSectionSlug[subSectionSlug.length -1] === '-'){
-                            subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
+                        if (subSectionSlug[subSectionSlug?.length -1] === '-'){
+                            subSectionSlug = subSectionSlug?.slice(0, subSectionSlug?.length - 1)
                         }
                     
 
