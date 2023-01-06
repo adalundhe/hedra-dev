@@ -37,10 +37,10 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
 
     useEffect(() => {
 
-        if (docsLink.sectionName === section && !sectionOpen){
+        if (docsLink.sectionName === section){
 
-            setSectionOpen(true)
             sectionRef?.current?.scrollIntoView({  block: 'start', behavior: 'smooth' })
+            setSectionOpen(true)
         }
 
 

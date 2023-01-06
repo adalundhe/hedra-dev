@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDocsSearch, useKeyCommand, useFocus } from '../../../hooks';
 import { AiFillMacCommand } from 'react-icons/ai'
 import { useRouter } from 'next/router';
-import { useDocsStore } from '../../../store';
+import { useDocsStore, useScrollStore } from '../../../store';
 import shallow from 'zustand/shallow'
 
 
@@ -41,15 +41,34 @@ const DocsNavSearch = ({
     })
 
     const { 
+        section,
+        subsection,
+        refs,
+        subsections,
         navRefs,
         setSection, 
         setSubSection
     } = useDocsStore(useCallback((state) => ({
+        section: state.selectedSection,
+        subsection: state.selectedSubSection,
+        refs: state.subSectionRefs,
+        subsections: state.subsections,
         navRefs: state.docsNavRefs,
         setSubSections: state.setSubSections,
         setSection: state.setSelectedSection,
         setSubSection: state.setSelectedSubSection
     }), []), shallow)
+
+
+    const {
+        scrollRef,
+        setLastScrollY
+
+    } = useScrollStore(useCallback((state) => ({
+        scrollRef: state.scrollRef,
+        setLastScrollY: state.setLastScrollY
+    }), []))
+    
 
     return (
         <div className="w-full px-8 relative inline-block">
@@ -98,19 +117,31 @@ const DocsNavSearch = ({
                                     type="button" 
                                     onClick={() => {
                                         
+                            
+                                        setSection(sectionName);
+                                        setSubSection(subSectionName);
+                                        
+                                        setQuery("");
+                                        setIsFocused(false);
+                                        ref.current?.blur();
+
                                         navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({ 
                                             inline: 'start',
                                             block: 'start',
                                             behavior: 'smooth'
                                          })
 
+                                        if (sectionName !== section || subSectionName !== subsection){
+                                            const selectedSubSectionIdx = subsections[sectionName]?.indexOf(subSectionName) as number
+                                            const sectionHeight = subsections[sectionName]?.slice(0, selectedSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
 
-                                        setSection(sectionName);
-                                        setSubSection(subSectionName);
-                                        setQuery("");
-                                        setIsFocused(false);
-                                        ref.current?.blur();
+                                            setLastScrollY(sectionHeight)
+                                
+                                            refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'nearest', block: 'center' })
+                                            scrollRef?.current?.focus({preventScroll: true})
+                                        }
 
+                                        
                                         
                                     }}
                                 >   
