@@ -24,7 +24,7 @@ const DocsArticle = ({ children}: {children: JSX.Element}) => {
 
     return (
         <div className="max-w-6xl ml-0 2xl:mx-auto overflow-x-hidden">
-            <div className="font-rany text-[18px] leading-[30px] mb-auto">
+            <div className="font-rany text-[18px] leading-[30px]">
                 <div className="w-full">
                 {
                 cloneElement(children, {

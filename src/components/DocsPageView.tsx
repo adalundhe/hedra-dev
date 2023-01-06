@@ -6,7 +6,7 @@ import { Footer } from "./footer";
 import { DocsSectionGuide } from "./docs";
 import { DocsNavMobile } from "./nav";
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
-import { useDocsStore } from "../store";
+import { useDocsStore, useScrollStore } from "../store";
 import shallow from 'zustand/shallow'
 import { useRouter } from "next/router";
 
@@ -55,13 +55,23 @@ const DocsPageView = ({
         setRefs: state.setSubSectionRefs
     }), []), shallow)
 
+    const {
+        scrollDirection,
+        lastScrollY,
+        scrollThreshold,
+        setScrollDirection,
+        setLastScrollY
+
+    } = useScrollStore(useCallback((state) => ({
+        scrollDirection: state.scrollDirection,
+        lastScrollY: state.lastScrollY,
+        scrollThreshold: state.scrollThreshold,
+        setScrollDirection: state.setScrollDirection,
+        setLastScrollY: state.setLastScrollY
+    }), []))
+
     const ref = useRef<HTMLDivElement>(null);
     const trackingRef = useRef<HTMLDivElement>(null);
-
-    const [scrollDir, setScrollDir] = useState("none");
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const [lastScrollDist, setLastScrollDist] = useState(0);
-    const scrollThreshold = 10;
 
     useEffect(() => {
 
@@ -77,6 +87,7 @@ const DocsPageView = ({
 
             
             const subsectionPath = routerPath.length > 1 ? articleSlugs[routerPath.at(1) as string] as string : subsection;
+            ref.current?.focus({preventScroll: true});
     
             setSection(article as string)
             setSubSection(subsectionPath as string)
@@ -86,20 +97,48 @@ const DocsPageView = ({
         
     }, [router.isReady])
 
+
+    const currentSubsection = useMemo(() => {
+        let subSectionSlug = subsection?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
+        if (subSectionSlug[subSectionSlug.length -1] === '-'){
+            subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
+        }
+
+        if (typeof window !== "undefined"){
+
+            history.pushState(window.history.state, "page 2", `${section}#${subSectionSlug}`);
+        }
+
+        const currentSubsections = subsections[section] ?? [];
+        const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number
+        const sectionHeight = subsections[section]?.slice(0, currentSubSectionIdx + 1).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+
+        const nextSubSection = currentSubsections[(currentSubSectionIdx + 1) < currentSubsections.length ? (currentSubSectionIdx + 1) : currentSubsections.length - 1] as string;
+        const previousSubSection = currentSubsections[(currentSubSectionIdx - 1) > 0 ? (currentSubSectionIdx - 1) : 0] as string
+
+        return ({
+            height: sectionHeight,
+            next: nextSubSection,
+            previous: previousSubSection,
+            slug: subSectionSlug
+        });
+
+    }, [subsection, section]);
+    
+
     const docsSectionNames = articles.map(article => article.sectionName);
     const currentSectionIdx = docsSectionNames.indexOf(section);
     const previousSection = currentSectionIdx - 1 >= 0 ? docsSectionNames[currentSectionIdx - 1] : undefined;
     const nextSection = currentSectionIdx + 1 < docsSectionNames.length ? docsSectionNames[currentSectionIdx + 1] : undefined;
 
     return (
-        ready ? <>
+        <>
             <DocsNavMobile />
            <div 
-                className={`${ready ? '' : 'overflow-y-hidden'} grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0 h-full mt-10 ${isOpen ?  'hidden' : ''}`}
+                className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0  mt-10 ${isOpen ?  'hidden' : ''}`}
                 ref={ref}
                 onScroll={(event: UIEvent<HTMLDivElement>) => {
                     event.preventDefault();
-                    ref.current?.focus({preventScroll: true});
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
                 
@@ -107,36 +146,29 @@ const DocsPageView = ({
 
                         const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
                         
-                        setLastScrollDist(scrollDir === nextScrollDir ? (scrollDistance + lastScrollDist) : scrollDistance);
-                        setScrollDir(nextScrollDir);
+                        setScrollDirection(nextScrollDir);
                         setLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
 
-                    const currentSubsections = subsections[section] ?? [];
-                    const sectionHeight = refs[subsection]?.height ?? 0;
 
+                    if (scrollDirection === 'down' && lastScrollY > currentSubsection.height){
+                            ref.current?.focus({preventScroll: true});
+                            setSubSection(currentSubsection.next)
 
-                    const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number;
-                    const nextSubSection = currentSubsections[(currentSubSectionIdx + 1) < currentSubsections.length ? (currentSubSectionIdx + 1) : currentSubsections.length - 1] as string;
-                    const previousSubSection = currentSubsections[(currentSubSectionIdx - 1) > 0 ? (currentSubSectionIdx - 1) : 0] as string;
-
-                    console.log(sectionHeight, lastScrollY)
-
-                    if (scrollDir === 'down' && lastScrollY > sectionHeight){
-                            setSubSection(nextSubSection)
-
-                    } else if (scrollDir === 'up' && lastScrollY < sectionHeight){
-                        setSubSection(previousSubSection)
+                    } else if (scrollDirection === 'up' && lastScrollY < currentSubsection.height){
+                        ref.current?.focus({preventScroll: true});
+                        setSubSection(currentSubsection.previous)
                     }
 
                 }}
             >
                 <DocsNav /> 
-                <main className="bg-[#eeeeee] min-w-0 lg:pl-6 h-full">
-                    <div className={`max-w-7xl mx-auto px-5 sm:px-12 break-words block`}>
+                <main className="bg-[#eeeeee] min-w-0 lg:pl-6">
+                    <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
                         <DocsArticle>
                         {children}
                         </DocsArticle>
+                       
                     </div> 
                     <div className="grid grid-cols-2 max-w-6xl ml-0 2xl:mx-auto">
                         <div className="flex justify-center items-center">
@@ -180,11 +212,12 @@ const DocsPageView = ({
                         }
                         </div>
                     </div>
-                    <Footer />
                 </main>
                 <DocsSectionGuide />
             </div>
-        </> : <div></div>
+                   
+        </>
+        
     )
 }
 

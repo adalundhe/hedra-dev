@@ -14,10 +14,14 @@
   src: url("../../public/fonts/rany/Rany-Light.otf");
 }
 
+
 body {
   overflow: hidden;
-  width: fit-content;
   background-color: #eeeeee;
+}
+
+.page {
+  height: calc();
 }
 
 .react-terminal-wrapper {

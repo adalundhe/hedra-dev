@@ -19,10 +19,8 @@ const Home: NextPage = () => {
 
       <MobileNavView>
         <>
-        <header>
           <NavBar /> 
-        </header>
-          <main className="w-screen h-screen bg-[#eeeeee] inline-block overflow-y-scroll overflow-x-hidden">
+          <main className="w-screen h-screen bg-[#eeeeee] inline-block fixed overflow-y-scroll overflow-x-hidden">
             <MainPageView />
           </main>
         </>

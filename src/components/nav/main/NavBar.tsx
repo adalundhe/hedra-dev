@@ -36,9 +36,10 @@ const NavBar = () => {
 
 
     return (
-        <div 
-            className='w-screen flex flex-col justify-center items-center sticky top-0 bg-[#eeeeee] shadow-lg'
+        <header 
+            className='w-full sticky top-0 bg-[#eeeeee]/50 shadow-lg'
         >
+            <div className='flex flex-col justify-center items-center w-full'>
             <AnnouncementBanner />
             <div className='w-full md:max-w-7xl md:px-5'>
                 <div className='max-w-6xl md:mx-auto '>
@@ -75,7 +76,8 @@ const NavBar = () => {
                     </div>
                 </div>
             </div>
-        </div> 
+            </div>
+        </header> 
     )
 }
 

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 import shallow from "zustand/shallow";
 import { useDocsStore } from "../../../store";
 import { SectionHeader } from "./SectionHeader";
@@ -15,7 +16,7 @@ const Section = ({
 }) => {
 
     const router = useRouter()
-
+    const { ref, inView } = useInView()
     const sectionRef = useRef<HTMLDivElement>(null);
     const { 
         refs,
@@ -29,6 +30,9 @@ const Section = ({
 
     useEffect(() => {
         refs[subSectionName] = {
+            scrollRef: sectionRef,
+            inView: inView,
+            viewRef: ref,
             height: sectionRef.current?.clientHeight
         }
     
@@ -36,14 +40,14 @@ const Section = ({
 
     }, [router.isReady])
 
-
-
     return (
-        <div className="pb-8" ref={sectionRef}>
-            <SectionHeader      
-                subSectionName={subSectionName}
-            />
-            {children}
+        <div ref={ref}>
+            <div className="pb-8" ref={sectionRef} >
+                <SectionHeader      
+                    subSectionName={subSectionName}
+                />
+                {children}
+            </div>
         </div>
     )
 }

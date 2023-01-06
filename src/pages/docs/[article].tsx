@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { 
     DocsPageView,
     MobileNavView,
-    NavBar
+    NavBar,
+    Footer
 } from '../../components'
 
 import { Articles } from "../../components";
@@ -34,18 +35,18 @@ const Docs: NextPage = () => {
         </Head>
 
         <MobileNavView>
-                
-            <div className="flex flex-col h-[99.99vh]">
-                <header className="shrink-0">
-                    <NavBar />
-                </header>
-                <DocsPageView >
-                    {
-                        router.isReady ? 
-                        (selectedArticle ?? <div></div>) : <div></div>
-                    }
-                </DocsPageView>
-            </div>
+            <>
+                <NavBar />    
+                <div className={`page fixed w-screen flex flex-col h-[91vh]`}>
+                    <DocsPageView >
+                        {
+                            router.isReady ? 
+                            (selectedArticle ?? <div></div>) : <div></div>
+                        }
+                    </DocsPageView>
+                    <Footer />
+                </div>
+            </>
         </MobileNavView>
         </>
     );

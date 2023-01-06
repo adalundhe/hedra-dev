@@ -1,5 +1,5 @@
 import { Section } from "../../../sections"
-import { CodeSegment, CodeShortSegment, TerminalSegment } from "../../../segments"
+import { CodeSegment } from "../../../segments"
 
 
 const installCommand = `# clone the repo abd change to the destination directory
@@ -18,28 +18,7 @@ pip install -r requirements.in
 python setup.py develop
 `
 
-const hedraOutput = `
-      :::    :::       ::::::::::       :::::::::       :::::::::           :::  
-     :+:    :+:       :+:              :+:    :+:      :+:    :+:        :+: :+: 
-    +:+    +:+       +:+              +:+    +:+      +:+    +:+       +:+   +:+ 
-   +#++:++#++       +#++:++#         +#+    +:+      +#++:++#:       +#++:++#++: 
-  +#+    +#+       +#+              +#+    +#+      +#+    +#+      +#+     +#+  
- #+#    #+#       #+#              #+#    #+#      #+#    #+#      #+#     #+#   
-###    ###       ##########       #########       ###    ###      ###     ###     0.6.21
 
-
-Usage: hedra [OPTIONS] COMMAND [ARGS]...
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  cloud    Commands to run graphs on and manage distributed instances of...
-  graph    Commands to run, lint, generate, and manage graphs.
-  ping     Ping the specified uri to ensure it can be reached.
-  plugin   Commands for creating and managing Hedra plugins.
-  project  Commands for managing collections of Hedra graphs.
-`
 
 const DeveloperSetup = ({
     subSectionName
@@ -68,12 +47,6 @@ const DeveloperSetup = ({
             <CodeSegment showLines={false} theme={bashTheme} language="bash">
                 {installCommand}
             </CodeSegment>
-            <p>Then run:</p>
-            <CodeShortSegment>hedra</CodeShortSegment>
-            <p>which should output:</p>
-            <TerminalSegment 
-                command={hedraOutput}
-            />
         </div>
         </Section>
 

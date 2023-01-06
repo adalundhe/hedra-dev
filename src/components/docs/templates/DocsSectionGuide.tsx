@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useWindowDimensions } from '../../../hooks'
 import { RxDotFilled, RxDot } from 'react-icons/rx'
 import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
-import { useDocsStore } from "../../../store";
+import { useDocsStore, useScrollStore } from "../../../store";
 import shallow from 'zustand/shallow'
 
 
@@ -19,12 +19,14 @@ const DocsSectionGuide = () => {
     }, [windowWidth, width])
 
     const { 
+        refs,
         section,
         subsection,
         subsections,
         setSection, 
         setSubSection
     } = useDocsStore(useCallback((state) => ({
+        refs: state.subSectionRefs,
         section: state.selectedSection,
         subsection: state.selectedSubSection,
         subsections: state.selectedSubSections,
@@ -32,14 +34,26 @@ const DocsSectionGuide = () => {
         setSubSection: state.setSelectedSubSection
     }), []), shallow)
 
+    const {
+        setLastScrollY
+
+    } = useScrollStore(useCallback((state) => ({
+        scrollDirection: state.scrollDirection,
+        lastScrollY: state.lastScrollY,
+        scrollThreshold: state.scrollThreshold,
+        setScrollDirection: state.setScrollDirection,
+        setLastScrollY: state.setLastScrollY
+    }), []))
+    
+
     return (
-        <div className="hidden lg:max-w-xs 2xl:block sticky top-0 left-0 right-0 py-0 z-50 h-[88vh]">
+        <div className="hidden lg:max-w-xs 2xl:block sticky top-0 left-0 right-0 py-0 z-50 h-[70vh]">
             <div className="flex flex-col justify-center items-center font-rany w-[20vmin]">
                 <div className="py-4 px-4 w-full">
                     <h3 className="text-2xl text-left w-full">On this page</h3>
                 </div>
                 {
-                    subsections.map(subSectionName => {
+                    subsections?.map(subSectionName => {
 
                         const subSectionStyle = subSectionName === subsection ? 
                         'text-xl text-[#038aff]/70 cursor-pointer hover:text-[#038aff]/70  w-fit font-medium underline' : 'text-xl text-[#14151a] cursor-pointer hover:text-[#038aff]/70 w-fit font-light' ;
@@ -64,11 +78,17 @@ const DocsSectionGuide = () => {
                                         className={`text-left w-fit flex items-center`}
                                         type="button" 
                                         onClick={() => {
-                                            history.pushState(window.history.state, "page 2", `${section}#${subSectionSlug}`);
+
+                                            const currentSubSectionIdx = subsections?.indexOf(subSectionName) as number
+                                            const sectionHeight = subsections?.slice(0, currentSubSectionIdx + 1).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+
+                                            setLastScrollY(sectionHeight + 1)
+                                            refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ block: 'start' })
+
                                             setSection(section)
                                             setSubSection(subSectionName)
+                                            
 
-                                            console.log(subSectionName)
                                         }}
                                     >
                                         <div className={caretStyle}>
@@ -76,9 +96,7 @@ const DocsSectionGuide = () => {
                                                 subSectionName === subsection ? <RxDotFilled /> : <RxDot className="opacity-0" />
                                             }
                                         </div>
-                                        <a href={`#${subSectionSlug}`}>
-                                            <p className={`${subSectionStyle} flex`}>{subSectionName}</p>
-                                        </a>
+                                        <p className={`${subSectionStyle} flex`}>{subSectionName}</p>
                                     </button>
                                 </div>
                             </div>

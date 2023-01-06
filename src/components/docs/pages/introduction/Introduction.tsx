@@ -12,7 +12,9 @@ const Introduction = ({
         <div className="w-full">
             {
                 subsections?.map(subSectionName => 
-                    <IntroductionSection subSectionName={subSectionName} />
+                    <div key={`sub-section-${subSectionName.toLowerCase().replace(/\s+./, '-')}`}>
+                        <IntroductionSection subSectionName={subSectionName} />
+                    </div>
                 )
             }
         </div>
