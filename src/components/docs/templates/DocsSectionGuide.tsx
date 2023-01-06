@@ -35,9 +35,12 @@ const DocsSectionGuide = () => {
     }), []), shallow)
 
     const {
+        scrollThreshold,
+        scrollRef,
         setLastScrollY
 
     } = useScrollStore(useCallback((state) => ({
+        scrollRef: state.scrollRef,
         scrollDirection: state.scrollDirection,
         lastScrollY: state.lastScrollY,
         scrollThreshold: state.scrollThreshold,
@@ -73,21 +76,23 @@ const DocsSectionGuide = () => {
                                 key={`${section}-${subSectionName}-Section-Guide`}
                                 className='w-full pb-2'
                             >   
-                                <div className={`${subSectionName === subsection ? 'bg-[#038aff]/5 rounded-sm py-2' : ''}`}>
+                                <div className={`${subSectionName === subsection ? 'bg-[#038aff]/5 rounded-sm py-2' : ''} my-1`}>
                                     <button
                                         className={`text-left w-fit flex items-center`}
                                         type="button" 
                                         onClick={() => {
 
-                                            const currentSubSectionIdx = subsections?.indexOf(subSectionName) as number
-                                            const sectionHeight = subsections?.slice(0, currentSubSectionIdx + 1).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+                                            if (subSectionName !== subsection){
+                                                const selectedSubSectionIdx = subsections?.indexOf(subSectionName) as number
+                                                const sectionHeight = subsections?.slice(0, selectedSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+                                                
+                                                setLastScrollY(sectionHeight)
+                                                setSection(section)
+                                                setSubSection(subSectionName)
 
-                                            setLastScrollY(sectionHeight + 1)
-                                            refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ block: 'start' })
-
-                                            setSection(section)
-                                            setSubSection(subSectionName)
-                                            
+                                                refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'center', block: 'center' })
+                                                scrollRef?.current?.focus({preventScroll: true})
+                                            }
 
                                         }}
                                     >
@@ -96,7 +101,7 @@ const DocsSectionGuide = () => {
                                                 subSectionName === subsection ? <RxDotFilled /> : <RxDot className="opacity-0" />
                                             }
                                         </div>
-                                        <p className={`${subSectionStyle} flex`}>{subSectionName}</p>
+                                         <p className={subSectionStyle}>{subSectionName}</p>
                                     </button>
                                 </div>
                             </div>

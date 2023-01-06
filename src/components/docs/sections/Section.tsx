@@ -33,7 +33,7 @@ const Section = ({
             scrollRef: sectionRef,
             inView: inView,
             viewRef: ref,
-            height: sectionRef.current?.clientHeight
+            height: sectionRef.current?.scrollHeight
         }
     
         setRefs(refs)

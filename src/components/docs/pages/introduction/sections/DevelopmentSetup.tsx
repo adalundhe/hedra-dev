@@ -20,7 +20,7 @@ python setup.py develop
 
 
 
-const DeveloperSetup = ({
+const DevelopmentSetup = ({
     subSectionName
 }: {
     subSectionName: string
@@ -54,5 +54,5 @@ const DeveloperSetup = ({
 }
 
 export {
-    DeveloperSetup
+    DevelopmentSetup
 }

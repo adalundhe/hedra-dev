@@ -20,29 +20,34 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
         section,
         subsection,
         setSection, 
-        setSubSection
+        setSubSection,
     } = useDocsStore(useCallback((state) => ({
+        docsNavRefs: state.docsNavRefs,
         articles: state.articles,
         section: state.selectedSection,
         subsection: state.selectedSubSection,
         setSection: state.setSelectedSection,
-        setSubSection: state.setSelectedSubSection
+        setSubSection: state.setSelectedSubSection,
+        setDocsNavRefs: state.setDocsNavRefs
     }), []), shallow)
 
 
-    const [sectionOpen, setSectionOpen] = useState(section == docsLink.sectionName);
+    const [sectionOpen, setSectionOpen] = useState(true);
+
 
     useEffect(() => {
 
-        if (docsLink.sectionName === section && !inView){
-            sectionRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+        if (docsLink.sectionName === section && !sectionOpen){
+
             setSectionOpen(true)
+            sectionRef?.current?.scrollIntoView({  block: 'start', behavior: 'smooth' })
         }
 
-    }, [section, subsection, inView])
+
+    }, [section, subsection])
 
     return (
-        <div key={docsLink.sectionPath} className='py-4'>
+        <div key={docsLink.sectionPath} className='py-4' ref={ref}>
             <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7" ref={sectionRef}>
                 {
                     sectionOpen &&docsLink.sectionName === section  ?
@@ -54,7 +59,7 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
                             setSectionOpen(docsLink.sectionName === section ? !sectionOpen : false)
                         }}
                     >
-                        <div className="mr-2" ref={ref}>
+                        <div className="mr-2">
                             <RxCaretDown className={docsLink.sectionName === section ? "text-xl text-[#038aff]/70" : "text-xl text-[#14151a]"} />
                         </div>
                         <h3 className={

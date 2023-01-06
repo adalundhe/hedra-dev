@@ -37,7 +37,7 @@ const Docs: NextPage = () => {
         <MobileNavView>
             <>
                 <NavBar />    
-                <div className={`page fixed w-screen flex flex-col h-[91vh]`}>
+                <div className={`page fixed w-screen flex flex-col h-[93vh]`}>
                     <DocsPageView >
                         {
                             router.isReady ? 

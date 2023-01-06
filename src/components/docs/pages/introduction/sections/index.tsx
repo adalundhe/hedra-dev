@@ -1,7 +1,7 @@
 import { Setup } from './Setup';
 import { SystemRequirements } from './SystemRequirements';
 import { Welcome } from './Welcome';
-import { DeveloperSetup } from './DeveloperSetup';
+import { DevelopmentSetup } from './DevelopmentSetup';
 
 type Section = typeof Welcome | typeof SystemRequirements | typeof Setup
 
@@ -16,7 +16,7 @@ const IntroductionSection = ({
         'Setup': Setup,
         'System requirements': SystemRequirements,
         'Welcome': Welcome,
-        "Developer setup": DeveloperSetup
+        "Development setup": DevelopmentSetup
     }
 
     const Section = sections[subSectionName];

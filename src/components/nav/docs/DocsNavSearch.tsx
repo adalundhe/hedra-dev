@@ -41,9 +41,11 @@ const DocsNavSearch = ({
     })
 
     const { 
+        navRefs,
         setSection, 
         setSubSection
     } = useDocsStore(useCallback((state) => ({
+        navRefs: state.docsNavRefs,
         setSubSections: state.setSubSections,
         setSection: state.setSelectedSection,
         setSubSection: state.setSelectedSubSection
@@ -95,12 +97,21 @@ const DocsNavSearch = ({
                                     className="text-left flex items-center rounded-sm py-2 pl-2 hover:bg-[#038aff]/5 w-full"
                                     type="button" 
                                     onClick={() => {
+                                        
+                                        navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({ 
+                                            inline: 'start',
+                                            block: 'start',
+                                            behavior: 'smooth'
+                                         })
+
+
                                         setSection(sectionName);
                                         setSubSection(subSectionName);
                                         setQuery("");
                                         setIsFocused(false);
                                         ref.current?.blur();
-                                        router.push(`${sectionName}/#${subSectionSlug}`)
+
+                                        
                                     }}
                                 >   
                                     <p className='h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70'>{matches[matchName]?.name}</p>

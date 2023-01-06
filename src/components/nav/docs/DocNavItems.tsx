@@ -57,7 +57,7 @@ const DocsNavItems = ({
                 <div className="bg-[#eeeeee] flex flex-col">
                 {
                     docsItemSubsections?.map((subSectionName: string) => 
-                        <div key={`${sectionName}-${subSectionName}-Section-Guide`}>
+                        <div key={`${sectionName}-${subSectionName}-Section-Guide`} className='my-1'>
                             <DocsNavItem 
 
                                 sectionName={sectionName}

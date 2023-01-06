@@ -2,7 +2,7 @@ import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
 import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
 import { DocsNavSearch } from "./DocsNavSearch";
-import { useCallback, useEffect, useState } from "react";
+import { UIEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useDocsStore } from "../../../store";
 import shallow from 'zustand/shallow'
 import getConfig from 'next/config';
@@ -12,6 +12,7 @@ const { publicRuntimeConfig } = getConfig()
 
 const DocsNav = () => {
 
+    const ref = useRef<HTMLDivElement>(null);
     const [ready, setReady] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
 
@@ -44,7 +45,15 @@ const DocsNav = () => {
                     <DocsNavSearch 
                         setSearchVisible={setSearchVisible}
                     />
-                    <div className={`overflow-y-scroll px-8 h-[70vh] w-full ${searchVisible ? 'invisible' : ''}`}>
+                    <div 
+                        className={`overflow-y-scroll px-8 h-[70vh] w-full ${searchVisible ? 'invisible' : ''}`}
+                        ref={ref}
+                        onScroll={(event: UIEvent<HTMLDivElement>) => {
+                            event.preventDefault()
+                            ref.current?.focus({preventScroll: true})
+
+                        }}
+                    >
                     {
                         articles.map((docsLink: DocsLinkItem, idx: number) => 
                             <div key={`docs-group-${idx}`}>

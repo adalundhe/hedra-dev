@@ -11,6 +11,7 @@ export interface DocsState {
   subsections: DocsLinkSubsections;
   searchDocs: {[docName: string]: SearchDoc};
   subSectionRefs: {[subSection: string]: ScrollRef};
+  docsNavRefs: {[subSection: string]: ScrollRef},
   setSelectedSection: (updatedSection: string) => void;
   setSelectedSubSection: (updatedSubSection: string) => void;
   setSelectedSubSections: (updatedSection: string) => void;
@@ -18,6 +19,7 @@ export interface DocsState {
   setSubSections: (updatedSubSections: DocsLinkSubsections) => void;
   setSearchDocs: (updatedSearchDocs: SearchDoc) => void;
   setSubSectionRefs: (updatedRefs: {[subSection: string]: ScrollRef}) => void;
+  setDocsNavRefs: (updatedDocsNavRefs: {[subSection: string]: ScrollRef}) => void;
 }
 
 
@@ -34,7 +36,7 @@ const useDocsStore = create<DocsState>()((set, get) => {
               "Welcome",
               "System requirements",
               "Setup",
-              "Developer setup"
+              "Development setup"
           ]
       },
       {
@@ -367,13 +369,15 @@ const useDocsStore = create<DocsState>()((set, get) => {
       })),
       subsections: subsections,
       searchDocs: searchData,
+      docsNavRefs: {},
       setSelectedSection: (updatedSection) => set(() => ({ selectedSection: updatedSection, selectedSubSections: get().subsections[updatedSection] })),
       setSelectedSubSection: (updatedSubSection) => set(() => ({ selectedSubSection: updatedSubSection })),
       setSelectedSubSections: (updatedSection) => set(() => ({ selectedSubSections: get().subsections[updatedSection] })),
       setArticles: (updatedArticles) => set(() => ({ articles: updatedArticles })),
       setSubSections: (updatedSubSections) => set((() => ({ subsections: updatedSubSections, selectedSubSections: updatedSubSections[get().selectedSection] }))),
       setSearchDocs: (updatedSearchDoc) => set((() => ({ searchDocs: {...get().searchDocs, [updatedSearchDoc.name.toLowerCase()]: updatedSearchDoc} }))),
-      setSubSectionRefs: (updatedRefs) => set(() => ({ subSectionRefs: updatedRefs }))
+      setSubSectionRefs: (updatedRefs) => set(() => ({ subSectionRefs: updatedRefs })),
+      setDocsNavRefs: (updatedDocsNavRefs) => set(() => ({ docsNavRefs: updatedDocsNavRefs }))
     })
 })
 

@@ -60,19 +60,19 @@ const DocsPageView = ({
         lastScrollY,
         scrollThreshold,
         setScrollDirection,
-        setLastScrollY
+        setLastScrollY,
+        setScrollRef
 
     } = useScrollStore(useCallback((state) => ({
         scrollDirection: state.scrollDirection,
         lastScrollY: state.lastScrollY,
         scrollThreshold: state.scrollThreshold,
         setScrollDirection: state.setScrollDirection,
-        setLastScrollY: state.setLastScrollY
+        setLastScrollY: state.setLastScrollY,
+        setScrollRef: state.setScrollRef
     }), []))
 
     const ref = useRef<HTMLDivElement>(null);
-    const trackingRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
 
         if (router.isReady){
@@ -89,8 +89,9 @@ const DocsPageView = ({
             const subsectionPath = routerPath.length > 1 ? articleSlugs[routerPath.at(1) as string] as string : subsection;
             ref.current?.focus({preventScroll: true});
     
-            setSection(article as string)
-            setSubSection(subsectionPath as string)
+            setSection(article as string);
+            setSubSection(subsectionPath as string);
+            setScrollRef(ref);
 
             setReady(true)
         }
@@ -111,8 +112,9 @@ const DocsPageView = ({
 
         const currentSubsections = subsections[section] ?? [];
         const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number
-        const sectionHeight = subsections[section]?.slice(0, currentSubSectionIdx + 1).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
-
+        let sectionHeight = subsections[section]?.slice(0, currentSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+        sectionHeight += (refs[subsection]?.height ?? 0)/2
+1
         const nextSubSection = currentSubsections[(currentSubSectionIdx + 1) < currentSubsections.length ? (currentSubSectionIdx + 1) : currentSubsections.length - 1] as string;
         const previousSubSection = currentSubsections[(currentSubSectionIdx - 1) > 0 ? (currentSubSectionIdx - 1) : 0] as string
 
@@ -138,7 +140,7 @@ const DocsPageView = ({
                 className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0  mt-10 ${isOpen ?  'hidden' : ''}`}
                 ref={ref}
                 onScroll={(event: UIEvent<HTMLDivElement>) => {
-                    event.preventDefault();
+                    event.preventDefault()
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
                 
@@ -152,11 +154,9 @@ const DocsPageView = ({
 
 
                     if (scrollDirection === 'down' && lastScrollY > currentSubsection.height){
-                            ref.current?.focus({preventScroll: true});
                             setSubSection(currentSubsection.next)
 
                     } else if (scrollDirection === 'up' && lastScrollY < currentSubsection.height){
-                        ref.current?.focus({preventScroll: true});
                         setSubSection(currentSubsection.previous)
                     }
 
