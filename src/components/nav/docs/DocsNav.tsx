@@ -48,11 +48,6 @@ const DocsNav = () => {
                     <div 
                         className={`overflow-y-scroll px-8 h-[70vh] w-full ${searchVisible ? 'invisible' : ''}`}
                         ref={ref}
-                        onScroll={(event: UIEvent<HTMLDivElement>) => {
-                            event.preventDefault()
-                            ref.current?.focus({preventScroll: true})
-
-                        }}
                     >
                     {
                         articles.map((docsLink: DocsLinkItem, idx: number) => 
