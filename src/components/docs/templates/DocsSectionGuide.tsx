@@ -37,7 +37,8 @@ const DocsSectionGuide = () => {
     const {
         scrollThreshold,
         scrollRef,
-        setLastScrollY
+        setLastScrollY,
+        setClickedScroll
 
     } = useScrollStore(useCallback((state) => ({
         scrollRef: state.scrollRef,
@@ -45,12 +46,13 @@ const DocsSectionGuide = () => {
         lastScrollY: state.lastScrollY,
         scrollThreshold: state.scrollThreshold,
         setScrollDirection: state.setScrollDirection,
-        setLastScrollY: state.setLastScrollY
+        setLastScrollY: state.setLastScrollY,
+        setClickedScroll: state.setClickedScroll
     }), []))
     
 
     return (
-        <div className="hidden lg:max-w-xs 2xl:block sticky top-0 left-0 right-0 py-0 z-50 h-[70vh]">
+        <div className="hidden lg:max-w-xs 2xl:block sticky top-0 left-0 right-0 py-0 z-50 h-[70vh] pt-10">
             <div className="flex flex-col justify-center items-center font-rany w-[20vmin]">
                 <div className="py-4 px-4 w-full">
                     <h3 className="text-2xl text-left w-full">On this page</h3>
@@ -59,10 +61,10 @@ const DocsSectionGuide = () => {
                     subsections?.map(subSectionName => {
 
                         const subSectionStyle = subSectionName === subsection ? 
-                        'text-xl text-[#038aff]/70 cursor-pointer hover:text-[#038aff]/70  w-fit font-medium underline' : 'text-xl text-[#14151a] cursor-pointer hover:text-[#038aff]/70 w-fit font-light' ;
+                        'text-xl hover:bold cursor-pointer w-fit font-medium underline' : 'text-xl hover:bold cursor-pointer w-fit font-light' ;
 
                         const caretStyle = subSectionName === subsection ? 
-                        "text-xl mr-2 text-[#038aff]/70 hover:text-[#038aff]/80" : "text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70";
+                        "h-full text-xl mr-2 text-[#038aff]/70 hover:text-[#038aff]" : "h-full text-xl mr-2 text-[#14151a] hover:text-[#14151a]";
 
                         let subSectionSlug = subSectionName?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
                         if (subSectionSlug[subSectionSlug.length -1] === '-'){
@@ -74,36 +76,39 @@ const DocsSectionGuide = () => {
                         return (
                             <div
                                 key={`${section}-${subSectionName}-Section-Guide`}
-                                className='w-full pb-2'
+                                className='w-full'
                             >   
-                                <div className={`${subSectionName === subsection ? 'bg-[#038aff]/5 rounded-sm py-2' : ''} my-1`}>
-                                    <button
-                                        className={`text-left w-fit flex items-center`}
-                                        type="button" 
-                                        onClick={() => {
+                                <button
+                                    className={`my-2 text-left outline-none w-[85%] cursor-pointer py-4 flex items-center ${subSectionName === subsection ? 'bg-[#038aff]/5 hover:text-[#038aff] text-[#038aff]/70  rounded-sm' : 'hover:bg-[#2e3131]/5 text-[#14151a]/70 hover:text-[#14151a]'}`}
+                                    type="button" 
+                                    onClick={() => {
 
-                                            if (subSectionName !== subsection){
-                                                const selectedSubSectionIdx = subsections?.indexOf(subSectionName) as number
-                                                const sectionHeight = subsections?.slice(0, selectedSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
-                                                
-                                                setLastScrollY(sectionHeight)
-                                                setSection(section)
-                                                setSubSection(subSectionName)
+                                        if (subSectionName !== subsection){
+                                            const selectedSubSectionIdx = subsections?.indexOf(subSectionName) as number
+                                            const sectionHeight = subsections?.slice(0, selectedSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+                                            
+                                            setClickedScroll(true)
+                                            setLastScrollY(sectionHeight)
+                                            setSection(section)
+                                            setSubSection(subSectionName)
+                                            
+                                            
+                                            refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'start', block: 'start' })
 
-                                                refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'center', block: 'center' })
-                                                scrollRef?.current?.focus({preventScroll: true})
-                                            }
+                                            scrollRef?.current?.focus({preventScroll: true})
 
-                                        }}
-                                    >
-                                        <div className={caretStyle}>
-                                            {
-                                                subSectionName === subsection ? <RxDotFilled /> : <RxDot className="opacity-0" />
-                                            }
-                                        </div>
-                                         <p className={subSectionStyle}>{subSectionName}</p>
-                                    </button>
-                                </div>
+                                            // setClickedScroll(false)
+                                        }
+
+                                    }}
+                                >
+                                    <div className={caretStyle}>
+                                        {
+                                            subSectionName === subsection ? <RxDotFilled /> : <RxDot className="opacity-0" />
+                                        }
+                                    </div>
+                                        <p className={subSectionStyle}>{subSectionName}</p>
+                                </button>
                             </div>
                         )
                     })

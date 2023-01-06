@@ -42,7 +42,7 @@ const Section = ({
 
     return (
         <div ref={ref}>
-            <div className="pb-8" ref={sectionRef} >
+            <div className="py-8 text-xl" ref={sectionRef}>
                 <SectionHeader      
                     subSectionName={subSectionName}
                 />

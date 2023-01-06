@@ -27,7 +27,7 @@ const DocsNav = () => {
     }), []), shallow)
 
     return (
-        <div className="lg:flex hidden lg:sticky top-0 left-0 right-0 py-0 z-50 h-[70vh]">
+        <div className="lg:flex hidden lg:sticky top-0 left-0 right-0 py-0 z-50 h-[70vh] pt-10">
             <Transition
                 appear={true}
                 show={ready}

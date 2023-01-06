@@ -15,10 +15,11 @@ const SectionHeader = ({
         sectionHref = sectionHref.slice(0, sectionHref.length - 1)
     }
 
+
     return (
         <div>
             <a id={sectionHref} href={`#${sectionHref}`} >
-                <h1 className="text-[2rem] mb-4 font-semibold">{subSectionName}</h1>
+                <h1 className="text-[2rem] mb-8 font-semibold">{subSectionName}</h1>
             </a>
         </div>
     )

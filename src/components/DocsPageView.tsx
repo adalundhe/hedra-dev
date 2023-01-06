@@ -56,20 +56,28 @@ const DocsPageView = ({
     }), []), shallow)
 
     const {
+        clickedScroll,
         scrollDirection,
         lastScrollY,
         scrollThreshold,
+        scrollTimer,
         setScrollDirection,
         setLastScrollY,
-        setScrollRef
+        setScrollRef,
+        setClickedScroll,
+        setScrollTimer
 
     } = useScrollStore(useCallback((state) => ({
+        clickedScroll: state.clickedScroll,
         scrollDirection: state.scrollDirection,
         lastScrollY: state.lastScrollY,
         scrollThreshold: state.scrollThreshold,
+        scrollTimer: state.scrollTimer,
         setScrollDirection: state.setScrollDirection,
         setLastScrollY: state.setLastScrollY,
-        setScrollRef: state.setScrollRef
+        setScrollRef: state.setScrollRef,
+        setClickedScroll: state.setClickedScroll,
+        setScrollTimer: state.setScrollTimer
     }), []))
 
     const ref = useRef<HTMLDivElement>(null);
@@ -100,6 +108,8 @@ const DocsPageView = ({
 
 
     const currentSubsection = useMemo(() => {
+
+        refs[subsection]?.scrollRef?.current?.focus({preventScroll: true})
         let subSectionSlug = subsection?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
         if (subSectionSlug[subSectionSlug.length -1] === '-'){
             subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
@@ -113,7 +123,11 @@ const DocsPageView = ({
         const currentSubsections = subsections[section] ?? [];
         const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number
         let sectionHeight = subsections[section]?.slice(0, currentSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
-        sectionHeight += (refs[subsection]?.height ?? 0)/2
+        const heightBuffer = (refs[subsection]?.height ?? 0)/2
+        
+        if ((sectionHeight + heightBuffer) < (ref.current?.clientHeight ?? 0)){
+            sectionHeight += heightBuffer;
+        }
 1
         const nextSubSection = currentSubsections[(currentSubSectionIdx + 1) < currentSubsections.length ? (currentSubSectionIdx + 1) : currentSubsections.length - 1] as string;
         const previousSubSection = currentSubsections[(currentSubSectionIdx - 1) > 0 ? (currentSubSectionIdx - 1) : 0] as string
@@ -137,33 +151,55 @@ const DocsPageView = ({
         <>
             <DocsNavMobile />
            <div 
-                className={`grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden mt-0  mt-10 ${isOpen ?  'hidden' : ''}`}
+                className={` mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'hidden' : ''}`}
                 ref={ref}
                 onScroll={(event: UIEvent<HTMLDivElement>) => {
                     event.preventDefault()
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
-                
-                    if (scrollDistance >= scrollThreshold) {
 
-                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                    const interval = setTimeout(() => {}, 150)
+
+                    if (scrollTimer !== null){
+                        clearTimeout(scrollTimer)
+                        setScrollTimer(null)
+                    } else {
+
                         
-                        setScrollDirection(nextScrollDir);
-                        setLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
+            
 
 
-                    if (scrollDirection === 'down' && lastScrollY > currentSubsection.height){
+                    if (clickedScroll === false){
+
+
+                        if (scrollDistance >= scrollThreshold) {
+
+                            const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                            
+                            setScrollDirection(nextScrollDir);
+                            setLastScrollY(scrollY > 0 ? scrollY : 0)
+                        }
+
+                        if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
                             setSubSection(currentSubsection.next)
 
-                    } else if (scrollDirection === 'up' && lastScrollY < currentSubsection.height){
-                        setSubSection(currentSubsection.previous)
+                        } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
+                            setSubSection(currentSubsection.previous)
+                        }
+                    } else {
+                        setScrollTimer(
+                            setTimeout(() => {
+                                setClickedScroll(false)
+                            }, 50)
+                        )
+
                     }
 
                 }}
             >
                 <DocsNav /> 
-                <main className="bg-[#eeeeee] min-w-0 lg:pl-6">
+                <main className="bg-[#eeeeee] min-w-0 lg:pl-6 mt-10">
                     <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
                         <DocsArticle>
                         {children}

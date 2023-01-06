@@ -60,7 +60,7 @@ const DocsNavMobile = () => {
                                     <DocsNavSearch 
                                         setSearchVisible={setSearchVisible}
                                     />
-                                    <div className="px-8 h-[70vh] w-full">
+                                    <div className={`px-8 h-[70vh] w-full ${searchVisible ? 'invisible' : ''}`}>
                                     {
                                         articles.map((docsLink: DocsLinkItem, idx: number) => 
                                             <div key={`docs-group-mobile-${idx}`}>
