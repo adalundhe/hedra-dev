@@ -32,7 +32,7 @@ const WhyHedra = ({
             >
             <div>
                 <p>
-                    Hedra's was written to solve the following problems:
+                    Hedra was written to solve the following problems:
                 </p>
                 <PointList 
                     name="performance-testing-issues-items"
@@ -40,8 +40,7 @@ const WhyHedra = ({
                     points={performanceTestingIssuePoints}
                 />
                 <p>
-                    Performance testing frameworks struggle with scalability for a variety of reasons, but among the most common are 
-                    convoluted deployment process, resource mismanagement making use in modern CI/CD or containerized environments difficult,
+                    Performance testing frameworks struggle with scalability for a variety of reasons, most commonly convoluted deployment process, resource mismanagement and inefficiency,
                     and frail distributed architecture. Hedra addresses each of these issues by:
                 </p>
                 <PointList 
@@ -56,7 +55,7 @@ const WhyHedra = ({
                     and/or notably slow (thus requiring more machines running tests to generate appropriate load).
                 </p>
                 <PointList 
-                    name="scalability-solution-items"
+                    name="resource-solution-items"
                     icons={[
                         <GrDeploy />
                     ]}
@@ -73,7 +72,7 @@ const WhyHedra = ({
                     users. We embrace bboth the cutting edge of Python features like per-process and proven optimization techniques.
                 </p>
                 <PointList 
-                    name="scalability-solution-items"
+                    name="adoption-solution-items"
                     icons={[
                         <GrDeploy />
                     ]}
@@ -88,7 +87,7 @@ const WhyHedra = ({
                     in the language in which it was developed.
                 </p>
                 <PointList 
-                    name="scalability-solution-items"
+                    name="results-solution-items"
                     icons={[
                         <GrDeploy />
                     ]}
@@ -102,7 +101,7 @@ const WhyHedra = ({
                     bloat while offering comprehensive integration options - add only the ones you need as pip install extras
                 </p>
                 <PointList 
-                    name="scalability-solution-items"
+                    name="extensibility-solution-items"
                     icons={[
                         <GrDeploy />
                     ]}
@@ -116,7 +115,7 @@ const WhyHedra = ({
                     We aim to avoid additional steps like compilation or convoluted linking/path setting.
                 </p>
                 <PointList 
-                    name="scalability-solution-items"
+                    name="openness-solution-items"
                     icons={[
                         <GrDeploy />
                     ]}
@@ -125,7 +124,7 @@ const WhyHedra = ({
                     ]}
                 />
                 <p>
-                    We began writing this framework due to frustration with the stability of existing open source options and the exorbitant pricing of paid 
+                    Hedra was created out of frustration with the limitations of existing open source options and the exorbitant pricing of paid 
                     ones for key features. What was initially spite-driven-development has grown into a genuine passion project that seeks to
                     make performance testing intuitive, insightful, and even fun.
                 </p>
