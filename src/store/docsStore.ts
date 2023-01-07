@@ -40,14 +40,21 @@ const useDocsStore = create<DocsState>()((set, get) => {
           ]
       },
       {
-          sectionName: "Core Concepts",
+          sectionName: "Philosophy",
           sectionPath: "/docs/core_concepts",
           sectionSubsections: [
                 "What is performance testing?",
-                "What is Hedra?",
+                "Why Hedra?",
                 "Core tenants",
                 "Workflows as graphs",
-                "Tests as workflows",
+                "Tests as workflows"
+          ]
+  
+      },
+      {
+          sectionName: "Core Concepts",
+          sectionPath: "/docs/core_concepts",
+          sectionSubsections: [
                 "Introduction to Hooks",
                 "Introduction to Stages",
                 "Introduction to Graphs",

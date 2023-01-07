@@ -27,7 +27,7 @@ const DocsPageView = ({
 
     }, [windowWidth, width])
 
-    const { isOpen } = useContext(NavOpenContext);
+    const { isOpen, docsNavOpen } = useContext(NavOpenContext);
 
     const [ready, setReady] = useState(false);
 
@@ -151,7 +151,7 @@ const DocsPageView = ({
         <>
             <DocsNavMobile />
            <div 
-                className={`overscroll-none mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'hidden' : ''}`}
+                className={`overscroll-none lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
                 ref={ref}
                 onWheel={(() => {
 
@@ -190,12 +190,11 @@ const DocsPageView = ({
                 }}
             >
                 <DocsNav /> 
-                <main className="bg-[#eeeeee] min-w-0 lg:pl-6 mt-10">
+                <main className={`bg-[#eeeeee] min-w-0 lg:pl-6 lg:mt-10`}>
                     <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
                         <DocsArticle>
                         {children}
                         </DocsArticle>
-                       
                     </div> 
                     <div className="grid grid-cols-2 max-w-6xl ml-0 2xl:mx-auto">
                         <div className="flex justify-center items-center">

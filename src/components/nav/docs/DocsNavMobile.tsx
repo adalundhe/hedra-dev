@@ -8,6 +8,7 @@ import { Menu } from '@headlessui/react'
 import { IoMdBook } from 'react-icons/io'
 import { DocsNavSearch } from "./DocsNavSearch";
 import { GrClose } from 'react-icons/gr'
+import { GiSpellBook } from 'react-icons/gi'
 import { useDocsStore } from "../../../store";
 import shallow from 'zustand/shallow'
 import getConfig from 'next/config';
@@ -19,7 +20,7 @@ const DocsNavMobile = () => {
 
     const { width } = useWindowDimensions();
     const [searchVisible, setSearchVisible] = useState(false);
-    const { isOpen, setIsOpen } = useContext(NavOpenContext);
+    const { isOpen, docsNavOpen, setDocsNavOpen } = useContext(NavOpenContext);
 
     const { 
         articles
@@ -29,20 +30,20 @@ const DocsNavMobile = () => {
 
     return (
         
-            <Menu as="div" className={`lg:hidden inline-block w-full relative text-left mt-10  ${isOpen && width <= 1024 ? 'h-screen overflow-clip bg-[#eeeeee]' : ''}`}>
+            <Menu as="div" className={`lg:hidden inline-block w-full text-left mt-10 sticky top-0 z-50  ${docsNavOpen && width <= 1024 ? 'bg-[#eeeeee]' : ''} ${isOpen ? 'hidden' : ''}`}>
                 <div className="flex justify-center">
                     <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
                         {
-                            !isOpen ?
-                            <IoMdBook className="text-[3rem] hover:text-[#038aff]/70" onClick={() => setIsOpen(true)}/> :  
-                            <GrClose className="text-[3rem] hover:text-[#038aff]/70" onClick={() => setIsOpen(false)}/>
+                            !docsNavOpen ?
+                            <GiSpellBook className="text-[3rem] hover:text-[#038aff]/70" onClick={() => setDocsNavOpen(true)}/> :  
+                            <GrClose className="text-[3rem] hover:text-[#038aff]/70" onClick={() => setDocsNavOpen(false)}/>
                         }
                     </Menu.Button>
                 </div>
                 <Transition
                     as={Fragment}
                     appear={true}
-                    show={isOpen && width <= 1024 }
+                    show={docsNavOpen && width <= 1024 }
                     enter="transition ease-out duration-100"
                     enterFrom="transform opacity-0 scale-95"
                     enterTo="transform opacity-100 scale-100"
@@ -51,7 +52,7 @@ const DocsNavMobile = () => {
                     leaveTo="transform opacity-0 scale-95"
                 >
                     <div className="w-full py-6 px-2 flex text-center text-[#2e3131]">
-                        <div className="flex flex-col font-rany items-center shadow-2xl w-full overflow-y-scroll pt-10">
+                        <div className="flex flex-col font-rany items-center w-full overflow-y-scroll pt-10">
                             <div className="flex flex-col justify-center text-left w-full h-full">
                                     <div className="py-4 px-8 w-full">
 
@@ -60,7 +61,7 @@ const DocsNavMobile = () => {
                                     <DocsNavSearch 
                                         setSearchVisible={setSearchVisible}
                                     />
-                                    <div className={`px-8 h-[70vh] w-full ${searchVisible ? 'invisible' : ''}`}>
+                                    <div className={`px-8 h-[60vh] w-full ${searchVisible ? 'invisible' : ''}`}>
                                     {
                                         articles.map((docsLink: DocsLinkItem, idx: number) => 
                                             <div key={`docs-group-mobile-${idx}`}>

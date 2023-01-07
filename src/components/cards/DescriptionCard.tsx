@@ -1,7 +1,7 @@
 import { CodeBlock, a11yDark } from "react-code-blocks";
-import { GiBoxingGlove } from 'react-icons/gi'
-import { BsGearWide } from 'react-icons/bs'
-import { FaPython } from 'react-icons/fa'
+import { GiBoxingGlove } from 'react-icons/gi';
+import { BsGearWide } from 'react-icons/bs';
+import { FaPython } from 'react-icons/fa';
 import { HiOutlineDocumentReport } from 'react-icons/hi'
 import { GoBeaker } from 'react-icons/go'
 import { Transition } from "@headlessui/react";

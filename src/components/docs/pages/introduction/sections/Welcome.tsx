@@ -1,5 +1,8 @@
 import { Section } from "../../../sections"
-import { ArticleLink, ExternalLink, TutorialLink } from "../../../segments"
+import { ExternalLink, TutorialLink, PointList } from "../../../segments"
+import { RiDiscussFill } from 'react-icons/ri'
+import { GiBrain } from 'react-icons/gi';
+import { GoBeaker } from 'react-icons/go';
 
 
 const Welcome = ({
@@ -26,11 +29,20 @@ const Welcome = ({
             <p>
                 These docs are broken into three general sections:
             </p>
-            <ul className="list-disc ml-10 mb-8">
-                <li>Conceptual discussion</li>
-                <li>API reference</li>
-                <li>Tutorial/guide</li>
-            </ul>
+            <PointList 
+                name="docs-section-items"
+                icons={[
+                    <RiDiscussFill />,
+                    <GoBeaker />,
+                    <GiBrain />
+
+                ]}
+                points={[
+                    "Conceptual discussion",
+                    "API reference",
+                    "Tutorial/guide"
+                ]}
+            />
             <p>If you want to look up specfic topics, use the search on the left or simply browse the topics navbar to find what you need. The right hand side section guide is useful for jumping between sections of an topic as well.</p>
             <br/>
             <p>

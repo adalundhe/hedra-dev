@@ -1,6 +1,8 @@
 import { Section } from "../../../sections"
 import getConfig from "next/config"
-import { WarningSegment } from "../../../segments";
+import { WarningSegment, PointList } from "../../../segments";
+import { BsGearWide } from 'react-icons/bs';
+import { FaPython } from 'react-icons/fa';
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -17,11 +19,11 @@ const SystemRequirements = ({
         <Section subSectionName={subSectionName}>
             <div>
                 <p>Hedra supports Python versions:</p>
-                <ul className="list-disc mx-10 mb-8">
-                    {
-                        supportedPythonVersions.map(supportedVersion => <li key={`supported-version-${supportedVersion}`}>{supportedVersion}</li>)
-                    }
-                </ul>
+                <PointList 
+                    name="supported-version-items"
+                    icons={supportedPythonVersions.map(_ => <FaPython />)}
+                    points={supportedPythonVersions}
+                />
                 <p>with newer versions supported as soon as core dependencies are compatible with the release (i.e. as soon as Numpy, Aiodns, etc. support the newest Python version).</p>
                 <WarningSegment 
                     text="Python 3.11 is still new and under active development. Hedra is compatibile with Python 3.11 releases, however unpredictable or reduced performance may occur." 
@@ -31,10 +33,17 @@ const SystemRequirements = ({
                     and currently does not support alternative implementations such as PyPy or MicroPython. Hedra is a performance testing framework, and
                     we recommend running on instances or machines with a minimum of:
                 </p>
-                <ul className="list-disc mx-10 mb-8">
-                    <li >4 CPU cores (virtual or physical)</li>
-                    <li>8GB of RAM</li>
-                </ul>
+                <PointList 
+                    name="recommend-hardware-items"
+                    icons={[
+                        <BsGearWide />,
+                        <BsGearWide />
+                    ]}
+                    points={[
+                        "4 CPU cores (virtual or physical)",
+                        "8GB of RAM"
+                    ]}
+                />
                 <p>
                     for best performance. We also recommend CPUs with high clock speed. If you are saving results or checkpointing data to disk, we recommend
                     SSD storage. We also recommend machines running Hedra use a wired LAN connection, as wireless networks may throttle Hedra's performance and negatively impact

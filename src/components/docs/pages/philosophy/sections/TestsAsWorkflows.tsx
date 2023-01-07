@@ -2,19 +2,19 @@ import { Section } from "../../../sections"
 
 
 
-const WhatIsPerformanceTesting = ({
+const TestsAsWorkflows = ({
     subSectionName
 }: {
     subSectionName: string
 }) => <Section 
         subSectionName={subSectionName}
         >
-        <div>
- 
-        </div>
+            <div>
+    
+            </div>
         </Section>
 
 
 export {
-    WhatIsPerformanceTesting
+    TestsAsWorkflows
 }

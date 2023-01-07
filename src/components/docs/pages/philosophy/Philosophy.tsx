@@ -1,7 +1,7 @@
-import { IntroductionSection } from "./sections"
+import { PhilosophySection } from "./sections"
 
 
-const Introduction = ({
+const Philosophy = ({
     subsections,
 }: {
     subsections?: string[]
@@ -12,7 +12,7 @@ const Introduction = ({
             {
                 subsections?.map(subSectionName => 
                     <div key={`sub-section-${subSectionName.toLowerCase().replace(/\s+./, '-')}`}>
-                        <IntroductionSection subSectionName={subSectionName} />
+                        <PhilosophySection subSectionName={subSectionName} />
                     </div>
                 )
             }
@@ -22,5 +22,5 @@ const Introduction = ({
 
 
 export {
-    Introduction
+    Philosophy
 }
