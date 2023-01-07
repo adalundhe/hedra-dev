@@ -86,23 +86,31 @@ const DocsNavItem = ({
                 type="button" 
                 onClick={() => {
 
-
+                    setClickedScroll(true)
                     if (sectionName !== section || subSectionName !== subsection){
 
-                        setClickedScroll(true)
 
-                        const selectedSubSectionIdx = subsections[sectionName]?.indexOf(subSectionName) as number
-                        const sectionHeight = subsections[sectionName]?.slice(0, selectedSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+                        const selectedSubSectionIdx = subsections[sectionName]?.indexOf(subSectionName) as number;
+                        const subsectionCount = subsections[sectionName]?.length ?? 1;
+                        const sectionHeight = subsections[sectionName]?.slice(0, selectedSubSectionIdx + 1).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
 
                         setLastScrollY(sectionHeight)
-                        
-                        refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'start', block: 'start' })
-                        scrollRef?.current?.focus({preventScroll: true})
+                        setSection(sectionName)
+                        setSubSection(subSectionName)
 
+                        if (selectedSubSectionIdx === 0){
+                            refs[subSectionName]?.scrollRef?.current?.scrollTo({top: 0});
+
+                        } else if (selectedSubSectionIdx === (subsectionCount - 1)){
+                            scrollRef?.current?.scrollTo({top: scrollRef.current.clientHeight})
+
+                        }
+
+                        router.push(`/docs/${section}#${subSectionName}`)
+                        
                     }
                     
-                    setSection(sectionName)
-                    setSubSection(subSectionName)
+                    
                 
                 }}
             >

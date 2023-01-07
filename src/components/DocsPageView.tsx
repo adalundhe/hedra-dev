@@ -110,7 +110,7 @@ const DocsPageView = ({
     const currentSubsection = useMemo(() => {
 
         refs[subsection]?.scrollRef?.current?.focus({preventScroll: true})
-        let subSectionSlug = subsection?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')
+        let subSectionSlug = subsection?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-') ?? ""
         if (subSectionSlug[subSectionSlug.length -1] === '-'){
             subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)
         }
@@ -151,49 +151,40 @@ const DocsPageView = ({
         <>
             <DocsNavMobile />
            <div 
-                className={` mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'hidden' : ''}`}
+                className={`overscroll-none mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'hidden' : ''}`}
                 ref={ref}
-                onScroll={(event: UIEvent<HTMLDivElement>) => {
-                    event.preventDefault()
-                    const scrollY = ref.current?.scrollTop ?? 0;
-                    const scrollDistance = Math.abs(scrollY - lastScrollY);
-
-                    const interval = setTimeout(() => {}, 150)
+                onWheel={(() => {
 
                     if (scrollTimer !== null){
                         clearTimeout(scrollTimer)
                         setScrollTimer(null)
-                    } else {
+                    } 
 
+
+                    const scrollY = ref.current?.scrollTop ?? 0;
+                    const scrollDistance = Math.abs(scrollY - lastScrollY);
+
+
+                    if (scrollDistance >= scrollThreshold) {
+
+                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
                         
+                        setScrollDirection(nextScrollDir);
+                        setLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
-            
 
+                    if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
+                        setSubSection(currentSubsection.next)
 
-                    if (clickedScroll === false){
-
-
-                        if (scrollDistance >= scrollThreshold) {
-
-                            const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
-                            
-                            setScrollDirection(nextScrollDir);
-                            setLastScrollY(scrollY > 0 ? scrollY : 0)
-                        }
-
-                        if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
-                            setSubSection(currentSubsection.next)
-
-                        } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
-                            setSubSection(currentSubsection.previous)
-                        }
-                    } else {
-                        setScrollTimer(
-                            setTimeout(() => {
-                                setClickedScroll(false)
-                            }, 50)
-                        )
-
+                    } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
+                        setSubSection(currentSubsection.previous)
+                    }
+                })}
+                onScroll={(event: UIEvent<HTMLDivElement>) => {
+                    
+                    if (clickedScroll){
+                        event.stopPropagation()
+                        event.preventDefault()
                     }
 
                 }}
