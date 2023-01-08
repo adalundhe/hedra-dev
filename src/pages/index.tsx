@@ -3,7 +3,8 @@ import Head from "next/head";
 import { 
   MainPageView,
   NavBar, 
-  MobileNavView
+  MobileNavView,
+  Footer
 } from '../components'
 
 const Home: NextPage = () => {
@@ -20,8 +21,9 @@ const Home: NextPage = () => {
       <MobileNavView>
         <>
           <NavBar /> 
-          <main className="w-screen h-screen bg-[#eeeeee] inline-block fixed overflow-y-scroll overflow-x-hidden">
+          <main className="w-screen h-[93vh] bg-[#eeeeee] flex flex-col fixed overflow-y-scroll overflow-x-hidden">
             <MainPageView />
+            <Footer />
           </main>
         </>
         </MobileNavView>

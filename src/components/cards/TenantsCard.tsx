@@ -10,7 +10,7 @@ const TenantsCard = () => {
     const leaveRef= useInView()
 
     return (
-        <div className="w-screen my-10" ref={leaveRef.ref}>
+        <div className="w-screen my-10 h-[99vh]" ref={leaveRef.ref}>
             <div className="text-center flex flex-col items-center font-rany">
                 <ul className="h-full w-screen grid grid-rows-[auto] gap-10">  
                         <li ref={ref} className="flex justify-center items-center py-96">
@@ -57,7 +57,6 @@ const TenantsCard = () => {
                     </li>
                 </ul>
             </div>
-            <Footer />
         </div>
     )
 }

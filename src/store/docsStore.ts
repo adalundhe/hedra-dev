@@ -45,7 +45,7 @@ const useDocsStore = create<DocsState>()((set, get) => {
           sectionSubsections: [
                 "What is performance testing?",
                 "Why Hedra?",
-                "Core tenants",
+                "Guiding principles",
                 "Workflows as graphs",
                 "Tests as workflows"
           ]

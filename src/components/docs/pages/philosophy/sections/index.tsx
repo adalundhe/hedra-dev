@@ -1,11 +1,11 @@
-import { CoreTenants } from './CoreTenants';
+import { GuidingPrinciples } from './GuidingPrinciples';
 import { TestsAsWorkflows } from './TestsAsWorkflows';
 import { WhyHedra } from './WhyHedra';
 import { WhatIsPerformanceTesting } from './WhatIsPerformanceTesting';
 import { WorkflowsAsGraphs } from './WorkflowsAsGraphs'
 
 
-type Section = typeof CoreTenants | typeof TestsAsWorkflows | typeof WhyHedra | typeof WhatIsPerformanceTesting | typeof WorkflowsAsGraphs
+type Section = typeof GuidingPrinciples | typeof TestsAsWorkflows | typeof WhyHedra | typeof WhatIsPerformanceTesting | typeof WorkflowsAsGraphs
 
 
 const PhilosophySection = ({
@@ -15,7 +15,7 @@ const PhilosophySection = ({
 }) => {
 
     const sections: {[key:string]: Section} = {
-        'Core tenants': CoreTenants,
+        'Guiding principles': GuidingPrinciples,
         'Tests as workflows': TestsAsWorkflows,
         'Why Hedra?': WhyHedra,
         "What is performance testing?": WhatIsPerformanceTesting,

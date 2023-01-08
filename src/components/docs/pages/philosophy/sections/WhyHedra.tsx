@@ -20,7 +20,7 @@ const WhyHedra = ({
     ]
 
     const scalabilitySolutionItems = [
-        "Ready container image and Helm charts",
+        "Offering ready and tested container images and Helm charts",
         "Install via pip with additional features available via pip install extras",
         "CLI and API that ensure that running tests locally or distributed are as similar as possible",
         "Managment of graph collections as Projects via built-in Git integration"
