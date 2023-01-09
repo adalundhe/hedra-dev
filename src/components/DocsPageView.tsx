@@ -204,7 +204,7 @@ const DocsPageView = () => {
                             {
                                 previousSection ? 
                                 <button 
-                                    className="pl-4 pr-8 mx-4 py-2 font-rany text-2xl w-2xl flex items-center hover:bg-[#2e3131]/5 rounded-sm"
+                                    className="px-4 mx-4 w-[20rem] h-[8rem] font-rany text-2xl flex justify-start items-center hover:bg-[#2e3131]/5 rounded-sm break-words"
                                     onClick={() => {
 
                                         setClickedScroll(true)
@@ -221,11 +221,11 @@ const DocsPageView = () => {
                                     }}
                                 >
                                     <RxCaretLeft />
-                                    <div className="flex flex-col items-start justify-center ml-6">
+                                    <div className="flex flex-col justify-center items-start justify-center ml-6">
                                         
                                         <p>Previous</p>
                                         <a href={`#${subsections[previousSection]?.at(0)}`}>
-                                            <p className="mt-2 text-[#038aff]">{previousSection}</p>      
+                                            <p className="mt-2 text-[#038aff] text-left text-[1.35rem]">{previousSection}</p>      
                                         </a>  
                                     </div>
                                 </button> : null
@@ -235,7 +235,7 @@ const DocsPageView = () => {
                             {
                                 nextSection ? 
                                 <button 
-                                    className="pr-4 pl-8 mx-4 py-2 w-2xl font-rany text-2xl flex items-center hover:bg-[#2e3131]/5 rounded-sm"
+                                    className="px-4 mx-4 w-[20rem] h-[8rem] font-rany text-2xl flex justify-end items-center hover:bg-[#2e3131]/5 rounded-sm break-words"
                                     onClick={() => {
 
                                         setClickedScroll(true)
@@ -251,10 +251,10 @@ const DocsPageView = () => {
                                         router.push(`/docs/${section}#${selectedSubSection}`)
                                     }}
                                 >
-                                    <div className="flex flex-col items-end justify-center mr-6">
+                                    <div className="flex flex-col justify-center items-end justify-center mr-6">
                                         
                                         <p>Next</p>
-                                        <p className="mt-2 text-[#038aff]">{nextSection}</p>        
+                                        <p className="mt-2 text-[#038aff] text-right text-[1.35rem]">{nextSection}</p>        
                                     </div>
                                     <RxCaretRight />
                                 </button> : null
