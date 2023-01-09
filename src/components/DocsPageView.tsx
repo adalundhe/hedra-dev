@@ -9,13 +9,10 @@ import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
 import { useDocsStore, useScrollStore } from "../store";
 import shallow from 'zustand/shallow'
 import { useRouter } from "next/router";
+import Articles from "./docs/pages";
 
 
-const DocsPageView = ({
-    children
-}: {
-    children: JSX.Element
-}) => {
+const DocsPageView = () => {
 
     const [windowWidth, setWindowWidth] = useState(0);
 
@@ -99,9 +96,10 @@ const DocsPageView = ({
     
             setSection(article as string);
             setSubSection(subsectionPath as string);
+
             setScrollRef(ref);
 
-            setReady(true)
+            setReady(true);
         }
         
     }, [router.isReady])
@@ -146,6 +144,8 @@ const DocsPageView = ({
     const currentSectionIdx = docsSectionNames.indexOf(section);
     const previousSection = currentSectionIdx - 1 >= 0 ? docsSectionNames[currentSectionIdx - 1] : undefined;
     const nextSection = currentSectionIdx + 1 < docsSectionNames.length ? docsSectionNames[currentSectionIdx + 1] : undefined;
+
+    const selectedArticle = useMemo(() => Articles[section] ?? <div></div>, [section]);
 
     return (
         <>
@@ -193,7 +193,9 @@ const DocsPageView = ({
                 <main className={`bg-[#eeeeee] min-w-0 lg:pl-6 lg:mt-10`}>
                     <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
                         <DocsArticle>
-                        {children}
+                        {
+                            router.isReady ? selectedArticle : <div></div>
+                        }
                         </DocsArticle>
                     </div> 
                     <div className="grid grid-cols-2 max-w-6xl ml-0 2xl:mx-auto">
@@ -203,8 +205,18 @@ const DocsPageView = ({
                             <button 
                                 className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
                                 onClick={() => {
+
+                                    setClickedScroll(true)
+
+                                    const sectionHeight = 0;
+                                    const selectedSubSection = subsections[previousSection]?.at(0) as string;
+
+                                    setLastScrollY(sectionHeight);
                                     setSection(previousSection);
-                                    setSubSection(subsections[previousSection]?.at(0) as string)
+                                    setSubSection(selectedSubSection);
+                                    refs[previousSection]?.scrollRef?.current?.scrollTo({top: 0});
+
+                                    router.push(`/docs/${section}#${selectedSubSection}`)
                                 }}
                             >
                                 <RxCaretLeft />
@@ -224,8 +236,18 @@ const DocsPageView = ({
                             <button 
                                 className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
                                 onClick={() => {
+
+                                    setClickedScroll(true)
+
+                                    const sectionHeight = 0;
+                                    const selectedSubSection = subsections[nextSection]?.at(0) as string;
+
+                                    setLastScrollY(sectionHeight);
                                     setSection(nextSection);
-                                    setSubSection(subsections[nextSection]?.at(0) as string)
+                                    setSubSection(selectedSubSection);
+                                    refs[nextSection]?.scrollRef?.current?.scrollTo({top: 0});
+
+                                    router.push(`/docs/${section}#${selectedSubSection}`)
                                 }}
                             >
                                 <div className="flex flex-col items-center justify-center mr-4">

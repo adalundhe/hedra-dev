@@ -31,7 +31,7 @@ const useDocsStore = create<DocsState>()((set, get) => {
     const articles = [
       {
           sectionName: "Introduction",
-          sectionPath: "/docs/introduction",
+          sectionPath: "/docs/Introduction",
           sectionSubsections: [
               "Welcome",
               "System requirements",
@@ -41,19 +41,20 @@ const useDocsStore = create<DocsState>()((set, get) => {
       },
       {
           sectionName: "Philosophy",
-          sectionPath: "/docs/core_concepts",
+          sectionPath: "/docs/Philosophy",
           sectionSubsections: [
                 "What is performance testing?",
                 "Why Hedra?",
                 "Guiding principles",
                 "Workflows as graphs",
-                "Tests as workflows"
+                "Tests as workflows",
+                "Where Hedra comes in"
           ]
   
       },
       {
           sectionName: "Core Concepts",
-          sectionPath: "/docs/core_concepts",
+          sectionPath: "/docs/CoreConcepts",
           sectionSubsections: [
                 "Introduction to Hooks",
                 "Introduction to Stages",
@@ -66,7 +67,7 @@ const useDocsStore = create<DocsState>()((set, get) => {
       },
       {
           sectionName: "Deeper Dive",
-          sectionPath: "/docs/deeper_dive",
+          sectionPath: "/docs/DeeperDive",
           sectionSubsections: [
               "Engines and Hook Lifecycle",
               "Personas and Hook Schedulng",

@@ -3,7 +3,7 @@ import { useWindowDimensions } from "../../../hooks";
 import { useDocsStore } from "../../../store";
 import shallow from 'zustand/shallow'
 
-const DocsArticle = ({ children}: {children: JSX.Element}) => {
+const DocsArticle = ({ children }: {children: JSX.Element}) => {
 
     const [windowWidth, setWindowWidth] = useState(0);
 

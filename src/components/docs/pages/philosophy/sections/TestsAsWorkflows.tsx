@@ -11,11 +11,11 @@ const TestsAsWorkflows = ({
         subSectionName={subSectionName}
         >
             <div>
-                <p>
+                <div>
                     When writing tests, we are most familiar with writing test code as a series of steps to be executed in sequential order. When
                     testing realistic usage of a system - while this representation might be suitable for simulating a user's surface level interactions - 
                     the underlying processes and events that triggered by those interactions are <HighlightedText>not</HighlightedText> sequential.
-                </p>
+                </div>
                 <br/>
                 <p>
                     Consider a user submitting a form. The user enters some text into inputs, clicks some checkboxes, and then submits the form. On surface 
@@ -54,7 +54,13 @@ const TestsAsWorkflows = ({
                     Instead of integration or end-to-end tests - to accurately test user impact on a system it makes more 
                     sense to compose unit tests into graph workflows.
                 </CenterTextBlock>
-                <div className="text-[2.5rem] text-center flex items-center justify-center pb-12">
+                <p>
+                    However, the granularity of unit tests can make composing them into meaningful tests arduous compared to writing integration or end-to-end 
+                    tests. The answer is a balance - tests that allow for assessing higher-level integrated functionality while retaining as much of the efficiency 
+                    and independence of unit tests as possible. This sort of test allows our tests maximize the benefits of test workflow orchestration while ensuring
+                    test workflows do not become overly complex.
+                </p>
+                <div className="text-[2.5rem] text-center flex items-center justify-center my-12">
                     <AiOutlineNodeExpand/>
                 </div>
             </div>

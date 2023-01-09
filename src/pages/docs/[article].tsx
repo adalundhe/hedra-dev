@@ -9,22 +9,8 @@ import {
     Footer
 } from '../../components'
 
-import { Articles } from "../../components";
 
 const Docs: NextPage = () => {
-
-    const router = useRouter();
-
-    let [selectedArticle, setSelectedArticle] = useState<JSX.Element>()
-
-    useEffect(() => {
-
-        const { article } = router.query;
-
-        setSelectedArticle(Articles[article as string])
-
-
-    }, [router.query])
 
     return (
         <>
@@ -38,12 +24,7 @@ const Docs: NextPage = () => {
             <>
                 <NavBar />    
                 <div className={`page fixed w-screen flex flex-col h-[93vh]`}>
-                    <DocsPageView >
-                        {
-                            router.isReady ? 
-                            (selectedArticle ?? <div></div>) : <div></div>
-                        }
-                    </DocsPageView>
+                    <DocsPageView/>
                     <Footer />
                 </div>
             </>

@@ -29,11 +29,11 @@ const WorkflowsAsGraphs = ({
                     popularized and made evident the power of this approach for data science and data analysis.
                 </p>
                 <br/>
-                <p>
+                <div>
                     What Airflow, Spark, and other "workflow" centeric tooling commonly share is the use of <HighlightedText>graphs</HighlightedText> 
                     to characterize the dependencies between tasks, determine and group execution order, and even provision required resources. Graphs
                     are powerful data structures that make determining relationships between two disparate "things" computationally efficient.
-                </p>
+                </div>
                 <br/>
                 <p>
                     The benefits of graphs in representing and managing workflows are numerous:

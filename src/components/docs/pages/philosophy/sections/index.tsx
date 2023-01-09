@@ -3,6 +3,7 @@ import { TestsAsWorkflows } from './TestsAsWorkflows';
 import { WhyHedra } from './WhyHedra';
 import { WhatIsPerformanceTesting } from './WhatIsPerformanceTesting';
 import { WorkflowsAsGraphs } from './WorkflowsAsGraphs'
+import { WhereHedraComesIn } from './WhereHedraComesIn';
 
 
 type Section = typeof GuidingPrinciples | typeof TestsAsWorkflows | typeof WhyHedra | typeof WhatIsPerformanceTesting | typeof WorkflowsAsGraphs
@@ -19,7 +20,8 @@ const PhilosophySection = ({
         'Tests as workflows': TestsAsWorkflows,
         'Why Hedra?': WhyHedra,
         "What is performance testing?": WhatIsPerformanceTesting,
-        "Workflows as graphs": WorkflowsAsGraphs
+        "Workflows as graphs": WorkflowsAsGraphs,
+        "Where Hedra comes in": WhereHedraComesIn
     }
 
     const Section = sections[subSectionName];
