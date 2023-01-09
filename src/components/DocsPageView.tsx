@@ -198,66 +198,68 @@ const DocsPageView = () => {
                         }
                         </DocsArticle>
                     </div> 
-                    <div className="grid grid-cols-2 max-w-6xl ml-0 2xl:mx-auto">
-                        <div className="flex justify-center items-center">
-                        {
-                            previousSection ? 
-                            <button 
-                                className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
-                                onClick={() => {
+                    <div className="max-w-7xl mx-auto px-5 sm:px-12 mb-12">
+                        <div className="max-w-6xl ml-0 2xl:mx-auto overflow-x-hidden grid grid-cols-2">
+                            <div className="flex items-center justify-self-start">
+                            {
+                                previousSection ? 
+                                <button 
+                                    className="pl-4 pr-8 mx-4 py-2 font-rany text-2xl w-2xl flex items-center hover:bg-[#2e3131]/5 rounded-sm"
+                                    onClick={() => {
 
-                                    setClickedScroll(true)
+                                        setClickedScroll(true)
 
-                                    const sectionHeight = 0;
-                                    const selectedSubSection = subsections[previousSection]?.at(0) as string;
+                                        const sectionHeight = 0;
+                                        const selectedSubSection = subsections[previousSection]?.at(0) as string;
 
-                                    setLastScrollY(sectionHeight);
-                                    setSection(previousSection);
-                                    setSubSection(selectedSubSection);
-                                    refs[previousSection]?.scrollRef?.current?.scrollTo({top: 0});
+                                        setLastScrollY(sectionHeight);
+                                        setSection(previousSection);
+                                        setSubSection(selectedSubSection);
+                                        refs[previousSection]?.scrollRef?.current?.scrollTo({top: 0});
 
-                                    router.push(`/docs/${section}#${selectedSubSection}`)
-                                }}
-                            >
-                                <RxCaretLeft />
-                                <div className="flex flex-col items-center justify-center ml-4">
-                                    
-                                     <p>Previous</p>
-                                     <a href={`#${subsections[previousSection]?.at(0)}`}>
-                                        <p className="mt-2">{previousSection}</p>      
-                                    </a>  
-                                </div>
-                            </button> : null
-                        }
-                        </div>
-                        <div className="flex justify-center items-center">
-                        {
-                            nextSection ? 
-                            <button 
-                                className="px-8 mx-4 py-2 font-rany text-2xl flex items-center"
-                                onClick={() => {
+                                        router.push(`/docs/${section}#${selectedSubSection}`)
+                                    }}
+                                >
+                                    <RxCaretLeft />
+                                    <div className="flex flex-col items-start justify-center ml-6">
+                                        
+                                        <p>Previous</p>
+                                        <a href={`#${subsections[previousSection]?.at(0)}`}>
+                                            <p className="mt-2 text-[#038aff]">{previousSection}</p>      
+                                        </a>  
+                                    </div>
+                                </button> : null
+                            }
+                            </div>
+                            <div className="flex items-center justify-self-end">
+                            {
+                                nextSection ? 
+                                <button 
+                                    className="pr-4 pl-8 mx-4 py-2 w-2xl font-rany text-2xl flex items-center hover:bg-[#2e3131]/5 rounded-sm"
+                                    onClick={() => {
 
-                                    setClickedScroll(true)
+                                        setClickedScroll(true)
 
-                                    const sectionHeight = 0;
-                                    const selectedSubSection = subsections[nextSection]?.at(0) as string;
+                                        const sectionHeight = 0;
+                                        const selectedSubSection = subsections[nextSection]?.at(0) as string;
 
-                                    setLastScrollY(sectionHeight);
-                                    setSection(nextSection);
-                                    setSubSection(selectedSubSection);
-                                    refs[nextSection]?.scrollRef?.current?.scrollTo({top: 0});
+                                        setLastScrollY(sectionHeight);
+                                        setSection(nextSection);
+                                        setSubSection(selectedSubSection);
+                                        refs[nextSection]?.scrollRef?.current?.scrollTo({top: 0});
 
-                                    router.push(`/docs/${section}#${selectedSubSection}`)
-                                }}
-                            >
-                                <div className="flex flex-col items-center justify-center mr-4">
-                                    
-                                     <p>Next</p>
-                                    <p className="mt-2">{nextSection}</p>        
-                                </div>
-                                <RxCaretRight />
-                            </button> : null
-                        }
+                                        router.push(`/docs/${section}#${selectedSubSection}`)
+                                    }}
+                                >
+                                    <div className="flex flex-col items-end justify-center mr-6">
+                                        
+                                        <p>Next</p>
+                                        <p className="mt-2 text-[#038aff]">{nextSection}</p>        
+                                    </div>
+                                    <RxCaretRight />
+                                </button> : null
+                            }
+                            </div>
                         </div>
                     </div>
                 </main>

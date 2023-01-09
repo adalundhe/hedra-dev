@@ -42,7 +42,7 @@ const DevelopmentSetup = ({
         <Section 
         subSectionName={subSectionName}
         >
-        <div>
+        <div className="mb-12">
             <p>Setting up Hedra for local development can bet done by running the following:</p>
             <CodeSegment showLines={false} theme={bashTheme} language="bash">
                 {installCommand}

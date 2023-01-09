@@ -45,8 +45,8 @@ const WhereHedraComesIn = ({
                     these tests far beyond what any traditional unit, integration, or end-to-end frameworks allow so that you can assess a system for both 
                     correctness <HighlightedText>and</HighlightedText> performance.         
                 </div>
-                <div className="text-[2.5rem] text-center flex items-center justify-center my-12">
-                    <RiTestTubeFill className="rotate-45"/>
+                <div className="text-[2.5rem] w-full text-center flex items-center justify-center my-12">
+                    <RiTestTubeFill className="rotate-45 text-center"/>
                 </div>
             </div>
         </Section>
