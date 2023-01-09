@@ -60,7 +60,7 @@ const useDocsStore = create<DocsState>()((set, get) => {
                 "Introduction to Stages",
                 "Introduction to Graphs",
                 "Introduction to Projects",
-                "Engines, Personas, Optimizers and Reporters",
+                "Engines, Personas, Optimizers, and Reporters",
                 "Putting it all together",
           ]
   
