@@ -199,7 +199,7 @@ const DocsPageView = () => {
                         </DocsArticle>
                     </div> 
                     <div className="max-w-7xl mx-auto px-5 sm:px-12 mb-12">
-                        <div className="max-w-6xl ml-0 2xl:mx-auto overflow-x-hidden grid grid-cols-2">
+                        <div className="max-w-6xl ml-0 2xl:mx-auto overflow-x-hidden lg:grid grid-cols-2 flex flex-col items-center justify-center">
                             <div className="flex items-center justify-self-start">
                             {
                                 previousSection ? 
