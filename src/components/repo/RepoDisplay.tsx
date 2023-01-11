@@ -1,7 +1,7 @@
 import { BadgeDisplay } from "./badges"
 import { InstallCommandText } from "./InstallCommandText"
 
-const RepoDisplay = () => <div className="h-[25vh] grid grid-rows-2 auto-rows-min my-10">
+const RepoDisplay = () => <div className="h-screen flex flex-col items-center justify-center my-10">
 <InstallCommandText />
 {/* <div className="flex justify-center">
     <BadgeDisplay />

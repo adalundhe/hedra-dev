@@ -2,7 +2,7 @@ import { DocsArticle } from "./docs";
 import { useState, useContext, useEffect, useCallback, useRef, RefObject, useMemo, UIEventHandler, UIEvent } from "react";
 import { NavOpenContext, DocsNav } from "./nav"
 import { useWindowDimensions, useScrollDirection } from '../hooks'
-import { Footer } from "./footer";
+import { ArticleFooter } from "./footer";
 import { DocsSectionGuide } from "./docs";
 import { DocsNavMobile } from "./nav";
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
@@ -151,7 +151,7 @@ const DocsPageView = () => {
         <>
             <DocsNavMobile />
            <div 
-                className={`overscroll-none lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
+                className={`h-screen overscroll-none lg:my-10 my-4 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
                 ref={ref}
                 onWheel={(() => {
 
@@ -190,7 +190,7 @@ const DocsPageView = () => {
                 }}
             >
                 <DocsNav /> 
-                <main className={`bg-[#eeeeee] min-w-0 lg:pl-6 lg:mt-10`}>
+                <div className={`bg-[#eeeeee] min-w-0 lg:pl-6 lg:mt-10`}>
                     <div className="max-w-7xl mx-auto px-5 sm:px-12 break-words block">
                         <DocsArticle>
                         {
@@ -262,7 +262,7 @@ const DocsPageView = () => {
                             </div>
                         </div>
                     </div>
-                </main>
+                </div>
                 <DocsSectionGuide />
             </div>
                    

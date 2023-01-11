@@ -68,7 +68,7 @@ const DescriptionCard = () => {
     }, [textInView.inView])
 
     return (
-        <div className="w-screen text-center font-rany flex flex-col items-center bg-[#eeeeee] ">
+        <div className="w-screen text-center font-rany flex flex-col items-center bg-[#eeeeee] " ref={leaveRef.ref}>
             <div className="flex justify-center items-center px-10 h-[768px]">
                 <h3 className="md:text-4xl xs:text-2xl text-[2rem] break-words w-full text-[#2e3131] py-20 flex flex-col items-center justify-center h-[100%]" ref={textInView.ref}>
                     <p>
@@ -90,10 +90,10 @@ const DescriptionCard = () => {
                             <li className="my-10 flex justify-center items-center">
                                 <Transition
                                     show={inView || leaveRef.inView}
-                                    enter="transition-opacity duration-[5000ms] delay-[1000ms]"
+                                    enter="transition-opacity duration-[1500ms] delay-[500ms]"
                                     enterFrom="opacity-0"
                                     enterTo="opacity-100"
-                                    leave="transition-opacity duration-[5000ms]  delay-[1000ms]"
+                                    leave="transition-opacity duration-[1000ms]  delay-[1000ms]"
                                     leaveFrom="opacity-100"
                                     leaveTo="opacity-0"
                                 >
@@ -108,10 +108,10 @@ const DescriptionCard = () => {
                             <li className="my-10 min-[2048]:text-left flex justify-center  items-center">
                                 <Transition
                                     show={inView || leaveRef.inView}
-                                    enter="transition-opacity duration-[3500ms]  delay-[1500ms]"
+                                    enter="transition-opacity duration-[1500ms]  delay-[1000ms]"
                                     enterFrom="opacity-0"
                                     enterTo="opacity-100"
-                                    leave="transition-opacity duration-[5000ms]  delay-[1500ms]"
+                                    leave="transition-opacity duration-[1000ms]  delay-[1000ms]"
                                     leaveFrom="opacity-100"
                                     leaveTo="opacity-0"
                                 >
@@ -127,10 +127,10 @@ const DescriptionCard = () => {
                             <li className="my-10 text-left flex justify-center  items-center">
                                 <Transition
                                     show={inView || leaveRef.inView}
-                                    enter="transition-opacity duration-[4500ms]  delay-[2000ms]"
+                                    enter="transition-opacity duration-[1500ms]  delay-[1500ms]"
                                     enterFrom="opacity-0"
                                     enterTo="opacity-100"
-                                    leave="transition-opacity duration-[5000ms]  delay-[2000ms]"
+                                    leave="transition-opacity duration-[1000ms]  delay-[1000ms]"
                                     leaveFrom="opacity-100"
                                     leaveTo="opacity-0"
                                 >
@@ -145,10 +145,10 @@ const DescriptionCard = () => {
                             <li className="my-10 text-left flex justify-center items-center">
                                 <Transition
                                     show={inView || leaveRef.inView}
-                                    enter="transition-opacity duration-[5500ms]  delay-[2500ms]"
+                                    enter="transition-opacity duration-[1500ms]  delay-[2000ms]"
                                     enterFrom="opacity-0"
                                     enterTo="opacity-100"
-                                    leave="transition-opacity duration-[5000ms]  delay-[2500ms]"
+                                    leave="transition-opacity duration-[1000ms]  delay-[1000ms]"
                                     leaveFrom="opacity-100"
                                     leaveTo="opacity-0"
                                 >
@@ -165,7 +165,6 @@ const DescriptionCard = () => {
 
                     </div>
                 </div>
-                <div ref={leaveRef.ref}></div>
                 <div className="flex justify-center">
                     <div className="w-[95%] code-block text-[2vmin] leading-[2vmin] font-sans text-left shadow-2xl bg-[#2e3131]  h-[100%]">
                         <CodeBlock 

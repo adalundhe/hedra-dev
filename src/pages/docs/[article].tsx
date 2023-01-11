@@ -23,10 +23,10 @@ const Docs: NextPage = () => {
         <MobileNavView>
             <>
                 <NavBar />    
-                <div className={`page fixed w-screen flex flex-col h-[93vh]`}>
+                <main className={`page fixed w-screen flex flex-col h-[calc(100%_-_140px)]`}>
                     <DocsPageView/>
-                    <Footer />
-                </div>
+                    <Footer/>
+                </main>
             </>
         </MobileNavView>
         </>

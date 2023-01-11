@@ -4,6 +4,7 @@ import { RepoDisplay } from "./repo"
 import { TitleCard, DescriptionCard, FlippedDescriptionCard, TenantsCard } from "./cards"
 import { NavOpenContext } from "./nav"
 import { useWindowDimensions } from '../hooks'
+import { Footer } from "./footer"
 
 
 const MainPageView = () => {
@@ -13,7 +14,7 @@ const MainPageView = () => {
 
     return (
         !isOpen || width > 768 ? 
-        <div className="w-screen">
+        <>
             <ParticlesBackground />
             <TitleCard />
             <RepoDisplay />
@@ -23,7 +24,8 @@ const MainPageView = () => {
                 <div className="border-t border-[#14151a] w-1/2"></div>
             </div>
             <TenantsCard />
-        </div> : <div></div>
+            <Footer/>
+        </> : <div></div>
     )
 }
 

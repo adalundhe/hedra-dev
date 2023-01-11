@@ -32,7 +32,7 @@ const InstallCommandText = () => {
     const { ref, inView } = useInView();
 
     return(
-        <div className="text-center">   
+        <div className="text-center w-screen h-[50vh]">   
             <button 
                 className='cursor-pointer font-rany'
                 id='copy-pip-install'

@@ -10,8 +10,8 @@ const IntroductionToHooks = ({
         >
         <div>
             <p>
-                Hooks are the fundamental unit of a Hedra test - they represent the individual actions or tasks that
-                you want the framework to execute.
+                Hooks are the fundamental unit of a Hedra test - they represent the individual actions or tasks that you want the framework
+                to execute.
             </p>
         </div>
         </Section>

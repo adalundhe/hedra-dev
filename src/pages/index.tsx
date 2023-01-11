@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import { useRef } from "react";
 import { 
   MainPageView,
   NavBar, 
@@ -8,7 +9,6 @@ import {
 } from '../components'
 
 const Home: NextPage = () => {
-
 
   return (
     <>
@@ -21,9 +21,9 @@ const Home: NextPage = () => {
       <MobileNavView>
         <>
           <NavBar /> 
-          <main className="w-screen h-[93vh] bg-[#eeeeee] flex flex-col fixed overflow-y-scroll overflow-x-hidden">
+          <main className="page w-screen h-full bg-[#eeeeee] fixed overflow-y-scroll overflow-x-hidden flex flex-col">
             <MainPageView />
-            <Footer />
+            <Footer/>
           </main>
         </>
         </MobileNavView>

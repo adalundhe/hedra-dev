@@ -67,13 +67,8 @@ const NavBar = () => {
                         </div>
                     </div>
                 </div>
-                <div className='h-full w-full grid grid-cols-4 md:hidden h-[97px] opacity-100 bg-[#eeeeee]'>
+                <div className='h-full w-full md:hidden h-full opacity-100 bg-[#eeeeee]'>
                     <MobileNav navItems={navItems.current} />
-                    <div className='col-span-2 h-full w-full md:hidden flex items-center justify-center font-monserrat uppercase pr-4'>
-                        <Link href="/" className='flex items-center'>
-                            <p className='ml-2 text-2xl'>Hedra</p>
-                        </Link>
-                    </div>
                 </div>
             </div>
             </div>

@@ -30,7 +30,7 @@ const DocsNavMobile = () => {
 
     return (
         
-            <Menu as="div" className={`lg:hidden inline-block w-full text-left mt-10 sticky top-0 z-50  ${docsNavOpen && width <= 1024 ? 'bg-[#eeeeee]' : ''} ${isOpen ? 'hidden' : ''}`}>
+            <Menu as="div" className={`lg:hidden inline-block w-full text-left mt-4 sticky top-0 z-50  ${docsNavOpen && width <= 1024 ? 'bg-[#eeeeee]' : ''} ${isOpen ? 'hidden' : ''}`}>
                 <div className="flex justify-center">
                     <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
                         {

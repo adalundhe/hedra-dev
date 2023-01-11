@@ -60,7 +60,7 @@ const FlippedDescriptionCard = () => {
                                 enter="transition-opacity duration-[1500ms] delay-[500ms]"
                                 enterFrom="opacity-0"
                                 enterTo="opacity-100"
-                                leave="transition-opacity duration-[5000ms] delay-[500ms]"
+                                leave="transition-opacity duration-[1000ms] delay-[1000ms]"
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
@@ -76,10 +76,10 @@ const FlippedDescriptionCard = () => {
                         <li className="my-10 my-10 text-center flex justify-center items-center">
                             <Transition
                                     show={showList.inView}
-                                    enter="transition-opacity duration-[3500ms] delay-[1000ms]"
+                                    enter="transition-opacity duration-[1500ms] delay-[1000ms]"
                                     enterFrom="opacity-0"
                                     enterTo="opacity-100"
-                                    leave="transition-opacity duration-[5000ms] delay-[1000ms]"
+                                    leave="transition-opacity duration-[1000ms] delay-[1000ms]"
                                     leaveFrom="opacity-100"
                                     leaveTo="opacity-0"
                                 >
@@ -94,10 +94,10 @@ const FlippedDescriptionCard = () => {
                         <li className="my-10 my-10 text-center flex justify-center items-center">
                             <Transition
                                 show={showList.inView}
-                                enter="transition-opacity duration-[4500ms] delay-[1500ms]"
+                                enter="transition-opacity duration-[1500ms] delay-[1500ms]"
                                 enterFrom="opacity-0"
                                 enterTo="opacity-100"
-                                leave="transition-opacity duration-[5000ms] delay-[1500ms]"
+                                leave="transition-opacity duration-[1000ms] delay-[1000ms]"
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
@@ -113,10 +113,10 @@ const FlippedDescriptionCard = () => {
                         <li className="my-10 my-10 text-center flex justify-center items-center">
                             <Transition
                                 show={showList.inView}
-                                enter="transition-opacity duration-[5500ms] delay-[2000ms]"
+                                enter="transition-opacity duration-[1500ms] delay-[2000ms]"
                                 enterFrom="opacity-0"
                                 enterTo="opacity-100"
-                                leave="transition-opacity duration-[5000ms] delay-[2000ms]"
+                                leave="transition-opacity duration-[1000ms] delay-[1000ms]"
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                             >
