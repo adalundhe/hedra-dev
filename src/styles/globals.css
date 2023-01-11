@@ -207,15 +207,6 @@ body {
 }
 
 
-@media only screen and (min-width: 1400px) {  
- 
-  .react-terminal {
-    height: 45vmin !important;
-  }
-
-
-}
-
 @media only screen and (min-width: 1500px) {  
 
 
