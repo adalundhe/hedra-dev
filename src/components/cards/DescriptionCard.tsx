@@ -59,14 +59,14 @@ const DescriptionCard = () => {
     const textInView = useInView();
 
     useEffect(() => {
-        if (textInView.inView && tagLine.length < tagLineText.current.length){
+        if (tagLine.length < tagLineText.current.length){
             writeLine({
                 text: tagLineText.current,
                 targetText: tagLine,
                 setTargetText: updateTagLine
             })
         }
-    }, [textInView.inView])
+    }, [])
 
     return (
         <div className="w-screen text-center font-rany flex flex-col items-center bg-[#eeeeee] " ref={leaveRef.ref}>
@@ -87,7 +87,7 @@ const DescriptionCard = () => {
                         /> : null
                     }
                     <div className="mt-4">
-                    {textInView.inView || tagLine.length == tagLineText.current.length ? <FaPython /> : null}
+                    {leaveRef.inView || tagLine.length === tagLineText.current.length ? <FaPython /> : null}
                     </div>
                 </h3>
             </div>
