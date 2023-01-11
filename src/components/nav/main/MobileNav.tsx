@@ -23,7 +23,7 @@ const MobileNav = ({
             className={`w-full py-4 px-2 flex text-center text-[#2e3131] ${isOpen && width <= 768 ? 'h-screen bg-[#eeeeee]' : ''}`}
         >
 
-            <Menu as="div" className={`relative inline-block text-left w-full ${isOpen && width <= 768 ? 'h-screen' : ''}`}>
+            <Menu as="div" className={`outline-none relative inline-block text-left w-full ${isOpen && width <= 768 ? 'h-screen' : ''}`}>
                {
                 ({ open, close }) => (
                     <>
@@ -31,11 +31,11 @@ const MobileNav = ({
                             <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none">
                                 {
                                     !isOpen ?
-                                    <AiOutlineMenu className="text-[3rem]" onClick={() => setIsOpen(true)}/> :  
-                                    <GrClose className="text-[3rem]" onClick={() => setIsOpen(false)}/>
+                                    <AiOutlineMenu className="text-[3rem] outline-none" onClick={() => setIsOpen(true)}/> :  
+                                    <GrClose className="text-[3rem] outline-none" onClick={() => setIsOpen(false)}/>
                                 }
                             </Menu.Button>
-                            <div className='col-span-2 h-full w-full md:hidden flex items-center justify-center font-monserrat uppercase pr-4'>
+                            <div className='col-span-2 h-full w-full md:hidden flex items-center justify-center font-monserrat uppercase pr-4 outline-none'>
                                 <Link href="/" className='flex items-center'>
                                     <p className='ml-2 text-2xl'>Hedra</p>
                                 </Link>
