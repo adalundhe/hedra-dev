@@ -4,11 +4,11 @@ const CenterTextBlock = ({
 }: {
     icon?: JSX.Element,
     children: string
-}) => <div className="flex justify-center items-center my-12 text-[1.65rem] text-center px-20">
+}) => <div className="flex justify-center items-center my-12 text-[1.65rem] text-center lg:px-20 md:px-10 px-8 w-full">
         <div className="mr-3">
             {icon ?? null}
         </div>
-        <p>{children}</p>
+        <p className="break-words">{children}</p>
     </div>
 
 

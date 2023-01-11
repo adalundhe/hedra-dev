@@ -39,7 +39,7 @@ const MobileNavItems = ({
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
             >
-            <Menu.Items static>
+            <Menu.Items static className='outline-none'>
                 <div className="w-full h-screen bg-[#eeeeee] flex flex-col px-8">
                 {
                     navItems.map(navItem => 
