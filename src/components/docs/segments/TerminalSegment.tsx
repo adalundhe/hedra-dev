@@ -19,11 +19,14 @@ const TerminalSegment = ({
         <div className="h-[100%] w-[100%] flex items-center justify-center" ref={ref}>
             {
                 inView ?
-                <Terminal colorMode={ ColorMode.Dark} onInput={null}>
-                    <TerminalOutput>
-                    <p className='terminal-segment pl-2'>{command}</p>
+                    <Terminal colorMode={ ColorMode.Dark} onInput={null}>
+                        <TerminalOutput>
+                        <div className='terminal-command-segment-wrapper'>
+                            <p className='terminal-segment pl-[2%]'>{command}</p>
+                        </div>
                     </TerminalOutput>
-                </Terminal>  : <p></p>
+                    </Terminal>
+                : <p></p>
             }
         </div>
     </div>

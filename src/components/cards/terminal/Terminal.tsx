@@ -222,11 +222,17 @@ const TerminalController = () => {
   // Terminal has 100% width by default so it should usually be wrapped in a container div
   return (
     <div className="h-[100%] w-[90%] px-2 flex items-center justify-center" ref={ref}>
-      <Terminal colorMode={ ColorMode.Dark} onInput={null}>
-        {
-            inView ? terminalLineData : "Let's start!"
-        }
-      </Terminal> 
+
+        <Terminal colorMode={ ColorMode.Dark} onInput={null}>
+         
+            <TerminalOutput>
+                <div className='terminal-segment-wrapper'>
+                {
+                    inView ? terminalLineData : "Let's start!"
+                }
+                </div>
+             </TerminalOutput>
+        </Terminal> 
     </div>
   )
 };

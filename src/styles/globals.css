@@ -49,6 +49,7 @@ body {
   width: 100%;
   overflow: hidden !important;
   flex-shrink: 0;
+  height: 100% !important;
   
 }
 
@@ -62,8 +63,17 @@ body {
     line-height: 0.21rem !important;
   } 
 
-  .react-terminal {
+  .terminal-segment-wrapper {
     height: 55vmin !important;
+  }
+
+  .terminal-segment {
+    font-size: 0.85vmin !important;
+    line-height: 1vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
   }
 
 }
@@ -73,6 +83,16 @@ body {
     font-size: 0.16rem !important;  
     line-height: 0.26rem !important;
   } 
+
+  .terminal-segment {
+    font-size: 1.15vmin !important;
+    line-height: 1.3vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
+  }
+
 }
 
 
@@ -82,6 +102,16 @@ body {
     line-height: 0.375rem !important;
   } 
 
+  .terminal-segment {
+    font-size: 1.35vmin !important;
+    line-height: 1.5vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
+  }
+
+
 }
 
 @media only screen and (min-width: 400px)  {  
@@ -90,6 +120,16 @@ body {
     line-height: 0.45rem !important;
   } 
 
+    
+  .terminal-segment {
+    font-size: 1.45vmin !important;
+    line-height: 1.60vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
+  }
+
 }
 
 @media only screen and (min-width: 500px)  {  
@@ -97,6 +137,16 @@ body {
     font-size: 0.45rem !important;  
     line-height: 0.55rem !important;
   } 
+  
+  .terminal-segment {
+    font-size: 1.55vmin !important;
+    line-height: 1.7vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
+  }
+
 
 }
 
@@ -106,7 +156,14 @@ body {
     line-height: 0.65rem !important;
   } 
 
+  .terminal-segment {
+    font-size: 1.55vmin !important;
+    line-height: 1.7vmin !important;
+  }
 
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
+  }
 
 }
 
@@ -116,6 +173,15 @@ body {
     font-size: 0.6rem !important;  
     line-height: 0.7rem !important;
   } 
+
+  .terminal-segment {
+    font-size: 1.43vmin !important;
+    line-height: 1.58vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
+  }
   
 }
 
@@ -126,8 +192,17 @@ body {
     line-height: 0.8rem !important;
   } 
 
-  .react-terminal {
+  .terminal-segment-wrapper {
     height: 60vmin !important;
+  }
+
+  .terminal-segment {
+    font-size: 1.45vmin !important;
+    line-height: 1.6vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 50vmin !important;
   }
 
 }
@@ -138,6 +213,12 @@ body {
     line-height: 0.88rem !important;
   } 
 
+  .terminal-segment {
+    font-size: 1.47vmin !important;
+    line-height: 1.62vmin !important;
+  }
+  
+
 }
 
 @media only screen and (min-width: 900px)  {  
@@ -145,6 +226,15 @@ body {
     font-size: 0.88rem !important;  
     line-height: 0.98rem !important;
   } 
+
+  .terminal-segment {
+    font-size: 1.485vmin !important;
+    line-height: 1.635vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 52.5vmin !important;
+  }
   
 }
 
@@ -156,6 +246,14 @@ body {
     line-height: 1.05rem !important;
   } 
 
+  .terminal-segment {
+    font-size: 1.5vmin !important;
+    line-height: 1.65vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 55vmin !important;
+  }
   
 }
 
@@ -166,6 +264,15 @@ body {
     line-height: 1.1rem !important;
   } 
 
+  .terminal-segment {
+    font-size: 0.85vmin !important;
+    line-height: 1vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 32.5vmin !important;
+  }
+
 }
 
 @media only screen and (min-width: 1100px) {  
@@ -175,32 +282,55 @@ body {
   } 
 
       
-  .react-terminal {
-    height: 52.5vmin !important;
+  .terminal-segment-wrapper {
+    height: 55min !important;
+  }
+  
+  .terminal-segment {
+    font-size: 0.9vmin !important;
+    line-height: 1.05vmin !important;
   }
 
+  .terminal-command-segment-wrapper {
+    height: 35vmin !important;
+  }
+  
   
 }
 
 @media only screen and (min-width: 1200px) {  
 
+  
+  .terminal-segment-wrapper {
+    height: 52.5vmin !important;
+  }
+  
   .terminal-segment {
-    font-size: 0.95vmin !important;
-    line-height: 1.1vmin !important;
+    font-size: 1vmin !important;
+    line-height: 1.15vmin !important;
   }
-  
-  .react-terminal {
-    height: 50vmin !important;
+
+  .terminal-command-segment-wrapper {
+    height: 37.5vmin !important;
   }
-  
   
 }
 
 @media only screen and (min-width: 1300px) {  
 
  
-  .react-terminal {
-    height: 47.5vmin !important;
+  .terminal-segment-wrapper {
+    height: 50vmin !important;
+  }
+
+
+  .terminal-segment {
+    font-size: 1.05vmin !important;
+    line-height: 1.2vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 40vmin !important;
   }
 
 
@@ -211,9 +341,23 @@ body {
 
 
 
-  .react-terminal {
+  .terminal-segment-wrapper {
+    height: 47.5vmin !important;
+  }
+
+  .terminal-segment-wrapper {
+    height: 45vmin !important;
+  }
+
+  .terminal-segment {
+    font-size: 1.1vmin !important;
+    line-height: 1.25vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
     height: 42.5vmin !important;
   }
+
 
 }
   
@@ -221,48 +365,90 @@ body {
 @media only screen and (min-width: 1536px) {  
 
 
-  .react-terminal {
-    height: 42.5vmin !important;
+  .terminal-segment-wrapper {
+    height: 45vmin !important;
   }
+
+  .terminal-segment {
+    font-size: 0.75vmin !important;
+    line-height: 0.85vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 27.5vmin !important;
+  }
+
+
+
   
 }
 
 @media only screen and (min-width: 1600px) {  
 
-
-  .react-terminal {
-    height: 40vmin !important;
+  .terminal-segment {
+    font-size: 0.8vmin !important;
+    line-height: 0.9vmin !important;
   }
-  
+
+  .terminal-command-segment-wrapper {
+    height: 32.5vmin !important;
+  }
+
 }
 
 
 @media only screen and (min-width: 1700px) {  
 
+  .terminal-segment {
+    font-size: 0.95vmin !important;
+    line-height: 1.05vmin !important;
+  }
 
-
-  .react-terminal {
+  .terminal-command-segment-wrapper {
     height: 37.5vmin !important;
   }
-  
+
+}
+
+
+@media only screen and (min-width: 1800px) {  
+
+  .terminal-segment {
+    font-size: 1.05vmin !important;
+    line-height: 1.15vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 42.5vmin !important;
+  }
+
 }
 
 
 
 @media only screen and (min-width: 1900px) {  
 
-
-  .react-terminal {
-    height: 32.5vmin !important;
+  .terminal-segment {
+    font-size: 1.15vmin !important;
+    line-height: 1.25vmin !important;
   }
+
+  .terminal-command-segment-wrapper {
+    height: 47.5vmin !important;
+  }
+
   
 }
 
 @media only screen and (min-width: 2000px) {  
 
   .terminal-segment {
-    font-size: 1vmin !important;
-    line-height: 1.15vmin !important;
+    font-size: 1.25vmin !important;
+    line-height: 1.35vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 52.5vmin !important;
   }
   
 }
