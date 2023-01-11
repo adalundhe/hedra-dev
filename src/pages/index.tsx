@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       <MobileNavView>
         <>
           <NavBar /> 
-          <main className="page w-screen h-full bg-[#eeeeee] fixed overflow-y-scroll overflow-x-hidden flex flex-col">
+          <main className="page w-screen h-[calc(100%_-_138px)] bg-[#eeeeee] fixed overflow-y-scroll overflow-x-hidden flex flex-col">
             <MainPageView />
             <Footer/>
           </main>

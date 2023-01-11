@@ -24,7 +24,6 @@ const MainPageView = () => {
                 <div className="border-t border-[#14151a] w-1/2"></div>
             </div>
             <TenantsCard />
-            <Footer/>
         </> : <div></div>
     )
 }

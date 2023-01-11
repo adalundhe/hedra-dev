@@ -41,7 +41,7 @@ const MobileNav = ({
                                 </Link>
                             </div>
                         </div>
-                        <MobileNavItems open={open} close={close} navItems={navItems} />
+                        <MobileNavItems open={isOpen} close={close} navItems={navItems} />
                     </>
                 )
                }
