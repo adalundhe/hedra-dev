@@ -58,67 +58,38 @@ body {
 
 @media only screen and (min-width: 100px)  {  
   .react-terminal-wrapper  { 
-    font-size: 0.1rem !important;  
-    line-height: 0.2rem !important;
+    font-size: 0.11rem !important;  
+    line-height: 0.21rem !important;
   } 
 
   .react-terminal {
-    height: 50vmin !important;
+    height: 55vmin !important;
   }
 
-  .terminal-segment {
-    font-size: 1.0vmin !important;
-    line-height: 1.15vmin !important;
-  }
 }
 
 @media only screen and (min-width: 200px)  {  
   .react-terminal-wrapper  { 
-    font-size: 0.1rem !important;  
-    line-height: 0.2rem !important;
+    font-size: 0.16rem !important;  
+    line-height: 0.26rem !important;
   } 
-
-  .react-terminal {
-    height: 50vmin !important;
-  }
-
-  .terminal-segment {
-    font-size: 1.15vmin !important;
-    line-height: 1.3vmin !important;
-  }
 }
 
 
 @media only screen and (min-width: 300px)  {  
   .react-terminal-wrapper  { 
-    font-size: 0.2rem !important;  
-    line-height: 0.3rem !important;
+    font-size: 0.275rem !important;  
+    line-height: 0.375rem !important;
   } 
 
-  .react-terminal {
-    height: 50vmin !important;
-  }
-
-  .terminal-segment {
-    font-size: 1.35vmin !important;
-    line-height: 1.5vmin !important;
-  }
 }
 
 @media only screen and (min-width: 400px)  {  
   .react-terminal-wrapper  { 
-    font-size: 0.3rem !important;  
-    line-height: 0.4rem !important;
+    font-size: 0.35rem !important;  
+    line-height: 0.45rem !important;
   } 
 
-  .react-terminal {
-    height: 50vmin !important;
-  }
-
-  .terminal-segment {
-    font-size: 1.5vmin !important;
-    line-height: 1.65vmin !important;
-  }
 }
 
 @media only screen and (min-width: 500px)  {  
@@ -127,15 +98,6 @@ body {
     line-height: 0.55rem !important;
   } 
 
-  .react-terminal {
-    height: 50vmin !important;
-  }
-
-  .terminal-segment {
-    font-size: 1.5vmin !important;
-    line-height: 1.65vmin !important;
-  }
-  
 }
 
 @media only screen and (min-width: 600px)  {  
@@ -144,84 +106,66 @@ body {
     line-height: 0.65rem !important;
   } 
 
-  .react-terminal {
-    height: 50vmin !important;
-  }
 
-  .terminal-segment {
-    font-size: 1.5vmin !important;
-    line-height: 1.65vmin !important;
-  }
+
 }
 
 @media only screen and (min-width: 636px)  {  
 
-  .terminal-segment {
-    font-size: 1.45vmin !important;
-    line-height: 1.5vmin !important;
-  }
+  .react-terminal-wrapper  { 
+    font-size: 0.6rem !important;  
+    line-height: 0.7rem !important;
+  } 
+  
 }
 
 
 @media only screen and (min-width: 700px)  {  
   .react-terminal-wrapper  { 
-    font-size: 0.65rem !important;  
-    line-height: 0.75rem !important;
+    font-size: 0.7rem !important;  
+    line-height: 0.8rem !important;
   } 
 
   .react-terminal {
-    height: 50vmin !important;
+    height: 60vmin !important;
   }
+
 }
 
 @media only screen and (min-width: 800px)  {  
   .react-terminal-wrapper  { 
-    font-size: 0.75rem !important;  
-    line-height: 0.85rem !important;
+    font-size: 0.78rem !important;  
+    line-height: 0.88rem !important;
   } 
-
-  .react-terminal {
-    height: 50vmin !important;
-  }
-
 
 }
 
 @media only screen and (min-width: 900px)  {  
   .react-terminal-wrapper  { 
-    font-size: 0.85rem !important;  
-    line-height: 0.95rem !important;
+    font-size: 0.88rem !important;  
+    line-height: 0.98rem !important;
   } 
-
-  .react-terminal {
-    height: 50vmin !important;
-  }
-
   
 }
 
 @media only screen and (min-width: 1000px) {  
 
-  .terminal-segment {
-    font-size: 1.45vmin !important;
-    line-height: 1.6vmin !important;
-  }
 
-  .react-terminal {
-    height: 50vmin !important;
-  }
+  .react-terminal-wrapper  { 
+    font-size: 0.95rem !important;  
+    line-height: 1.05rem !important;
+  } 
+
+  
 }
 
 @media only screen and (min-width: 1024px) {  
 
-  .terminal-segment {
-    font-size: 0.85vmin !important;
-    line-height: 1vmin !important;
-  }
+  .react-terminal-wrapper  { 
+    font-size: 1rem !important;  
+    line-height: 1.1rem !important;
+  } 
 
-  .react-terminal {
-    height: 30vmin !important;
-  }
 }
 
 @media only screen and (min-width: 1100px) {  
@@ -230,14 +174,11 @@ body {
     line-height: 1.1rem !important;
   } 
 
-  .terminal-segment {
-    font-size: 0.9vmin !important;
-    line-height: 1.05vmin !important;
+      
+  .react-terminal {
+    height: 52.5vmin !important;
   }
 
-  .react-terminal {
-    height: 35vmin !important;
-  }
   
 }
 
@@ -248,30 +189,58 @@ body {
     line-height: 1.1vmin !important;
   }
   
+  .react-terminal {
+    height: 50vmin !important;
+  }
+  
   
 }
 
 @media only screen and (min-width: 1300px) {  
 
-  .terminal-segment {
-    font-size: 1.05vmin !important;
-    line-height: 1.2vmin !important;
+ 
+  .react-terminal {
+    height: 47.5vmin !important;
   }
 
 
-  
-  
 }
+
+
+@media only screen and (min-width: 1400px) {  
+ 
+  .react-terminal {
+    height: 45vmin !important;
+  }
+
+
+}
+
+@media only screen and (min-width: 1500px) {  
+
+
+
+  .react-terminal {
+    height: 42.5vmin !important;
+  }
+
+}
+  
 
 @media only screen and (min-width: 1536px) {  
 
-  .terminal-segment {
-    font-size: 0.7vmin !important;
-    line-height: 0.85vmin !important;
-  }
 
   .react-terminal {
-    height: 25vmin !important;
+    height: 42.5vmin !important;
+  }
+  
+}
+
+@media only screen and (min-width: 1600px) {  
+
+
+  .react-terminal {
+    height: 40vmin !important;
   }
   
 }
@@ -279,14 +248,10 @@ body {
 
 @media only screen and (min-width: 1700px) {  
 
-  .terminal-segment {
-    font-size: 0.8vmin !important;
-    line-height: 0.95vmin !important;
-  }
 
 
   .react-terminal {
-    height: 30vmin !important;
+    height: 37.5vmin !important;
   }
   
 }
@@ -295,14 +260,9 @@ body {
 
 @media only screen and (min-width: 1900px) {  
 
-  .terminal-segment {
-    font-size: 0.9vmin !important;
-    line-height: 1.05vmin !important;
-  }
-
 
   .react-terminal {
-    height: 35vmin !important;
+    height: 32.5vmin !important;
   }
   
 }

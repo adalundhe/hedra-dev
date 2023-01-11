@@ -58,24 +58,24 @@ const DescriptionCard = () => {
     const textInView = useInView();
 
     useEffect(() => {
-        if (textInView.inView && tagLine.length < tagLineText.current.length){
+        if (tagLine.length < tagLineText.current.length){
             writeLine({
                 text: tagLineText.current,
                 targetText: tagLine,
                 setTargetText: updateTagLine
             })
         }
-    }, [textInView.inView])
+    }, [])
 
     return (
         <div className="w-screen text-center font-rany flex flex-col items-center bg-[#eeeeee] " ref={leaveRef.ref}>
-            <div className="flex justify-center items-center px-10 h-[768px]">
+            <div className="flex justify-center items-center px-10 h-[768px] w-full">
                 <h3 className="md:text-4xl xs:text-2xl text-[2rem] break-words w-full text-[#2e3131] py-20 flex flex-col items-center justify-center h-[100%]" ref={textInView.ref}>
                     <p>
                     {tagLine}
                     </p>
                     <div className="mt-4">
-                    {textInView.inView || tagLine.length == tagLineText.current.length ? <FaPython /> : null}
+                    {leaveRef.inView || tagLine.length === tagLineText.current.length ? <FaPython /> : null}
                     </div>
                 </h3>
             </div>

@@ -18,7 +18,7 @@ const writeLine = ({
         } else {
             clearInterval(interval);
         }
-    }, 45)
+    }, 50)
 
 
 }
