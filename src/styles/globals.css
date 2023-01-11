@@ -90,7 +90,7 @@ body {
   }
 
   .terminal-command-segment-wrapper {
-    height: 50vmin !important;
+    height: 52.5vmin !important;
   }
 
 }
@@ -104,11 +104,11 @@ body {
 
   .terminal-segment {
     font-size: 1.35vmin !important;
-    line-height: 1.5vmin !important;
+    line-height: 1.65vmin !important;
   }
 
   .terminal-command-segment-wrapper {
-    height: 50vmin !important;
+    height: 55vmin !important;
   }
 
 
@@ -123,11 +123,11 @@ body {
     
   .terminal-segment {
     font-size: 1.45vmin !important;
-    line-height: 1.60vmin !important;
+    line-height: 1.75vmin !important;
   }
 
   .terminal-command-segment-wrapper {
-    height: 50vmin !important;
+    height: 57.5vmin !important;
   }
 
 }
@@ -140,11 +140,11 @@ body {
   
   .terminal-segment {
     font-size: 1.55vmin !important;
-    line-height: 1.7vmin !important;
+    line-height: 1.85vmin !important;
   }
 
   .terminal-command-segment-wrapper {
-    height: 50vmin !important;
+    height: 60vmin !important;
   }
 
 
@@ -158,11 +158,11 @@ body {
 
   .terminal-segment {
     font-size: 1.55vmin !important;
-    line-height: 1.7vmin !important;
+    line-height: 1.85vmin !important;
   }
 
   .terminal-command-segment-wrapper {
-    height: 50vmin !important;
+    height: 62.5vmin !important;
   }
 
 }
