@@ -9,7 +9,7 @@ import { IoMdBook } from 'react-icons/io'
 import { DocsNavSearch } from "./DocsNavSearch";
 import { GrClose } from 'react-icons/gr'
 import { GiSpellBook } from 'react-icons/gi'
-import { useDocsStore } from "../../../store";
+import { useDocsStore, useScrollStore } from "../../../store";
 import shallow from 'zustand/shallow'
 import getConfig from 'next/config';
 
@@ -28,20 +28,39 @@ const DocsNavMobile = () => {
         articles: state.articles
     }), []), shallow)
 
+    const {
+        scrollDirection
+    } = useScrollStore(useCallback((state) => ({
+        scrollDirection: state.scrollDirection
+    }), []))
+
     return (
         
             <Menu as="div" className={`lg:hidden inline-block w-full text-left mt-4 sticky top-0 z-50  ${docsNavOpen && width <= 1024 ? 'bg-[#eeeeee]' : ''} ${isOpen ? 'hidden' : ''}`}>
                 <div className="flex justify-center">
-                    <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none">
-                        {
-                            !docsNavOpen ?
-                            <GiSpellBook 
-                                className="text-[3rem] hover:text-[#038aff]/70" 
-                                onClick={() => setDocsNavOpen(true)}
-                            /> :  
-                            <GrClose className="text-[3rem] hover:text-[#038aff]/70" onClick={() => setDocsNavOpen(false)}/>
-                        }
-                    </Menu.Button>
+                    <Transition  
+                        as={Fragment}
+                        show={scrollDirection !== "down"}
+                        enter="transform transition ease-in-out duration-150"
+                        enterFrom="opacity-0 -translate-y-1/3"
+                        enterTo="opacity-100 translate-y-0"
+                        leave="transform transition ease-in-out duration-150"
+                        leaveFrom="opacity-100 translate-y-0 "
+                        leaveTo="-translate-y-1/3 opacity-0"
+                    >
+                        <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none">
+                            {
+                                !docsNavOpen ?
+                                <GiSpellBook 
+                                    className="text-[3rem] lg:hover:text-[#038aff]/80" 
+                                    onClick={() => setDocsNavOpen(true)}
+                                /> :  
+                                <GrClose className="text-[3rem] lg:hover:text-[#038aff]/80 lg:text-[#2e3131] text-[#038aff]/80" onClick={() => setDocsNavOpen(false)}/>
+                            }
+                        </Menu.Button>
+                    
+                    </Transition>
+                    
                 </div>
                 <Transition
                     as={Fragment}

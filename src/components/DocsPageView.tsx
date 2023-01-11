@@ -2,7 +2,6 @@ import { DocsArticle } from "./docs";
 import { useState, useContext, useEffect, useCallback, useRef, RefObject, useMemo, UIEventHandler, UIEvent } from "react";
 import { NavOpenContext, DocsNav } from "./nav"
 import { useWindowDimensions, useScrollDirection } from '../hooks'
-import { ArticleFooter } from "./footer";
 import { DocsSectionGuide } from "./docs";
 import { DocsNavMobile } from "./nav";
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
@@ -58,11 +57,13 @@ const DocsPageView = () => {
         lastScrollY,
         scrollThreshold,
         scrollTimer,
+        lastDirectionScrollY,
         setScrollDirection,
         setLastScrollY,
         setScrollRef,
         setClickedScroll,
-        setScrollTimer
+        setScrollTimer,
+        setLastDirectionScrollY
 
     } = useScrollStore(useCallback((state) => ({
         clickedScroll: state.clickedScroll,
@@ -70,11 +71,13 @@ const DocsPageView = () => {
         lastScrollY: state.lastScrollY,
         scrollThreshold: state.scrollThreshold,
         scrollTimer: state.scrollTimer,
+        lastDirectionScrollY: state.lastDirectionScrollY,
         setScrollDirection: state.setScrollDirection,
         setLastScrollY: state.setLastScrollY,
         setScrollRef: state.setScrollRef,
         setClickedScroll: state.setClickedScroll,
-        setScrollTimer: state.setScrollTimer
+        setScrollTimer: state.setScrollTimer,
+        setLastDirectionScrollY: state.setLastDirectionScrollY
     }), []))
 
     const ref = useRef<HTMLDivElement>(null);
@@ -185,6 +188,18 @@ const DocsPageView = () => {
                     if (clickedScroll){
                         event.stopPropagation()
                         event.preventDefault()
+                    }
+                    
+                    const scrollY = ref.current?.scrollTop ?? 0;
+                    const scrollDistance = Math.abs(scrollY - lastDirectionScrollY);
+
+
+                    if (scrollDistance >= 100) {
+
+                        const nextScrollDir = scrollY > lastDirectionScrollY ? "down" : scrollY < lastDirectionScrollY ? "up" : "none";
+                        
+                        setScrollDirection(nextScrollDir);
+                        setLastDirectionScrollY(scrollY > 0 ? scrollY : 0)
                     }
 
                 }}

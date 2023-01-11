@@ -6,6 +6,7 @@ export interface ScrollState {
     scrollRef?: RefObject<HTMLElement>;
     scrollDirection: string;
     lastScrollY: number;
+    lastDirectionScrollY: number;
     scrollThreshold: number;
     clickedScroll: boolean;
     scrollTimer: NodeJS.Timeout | null,
@@ -15,6 +16,7 @@ export interface ScrollState {
     setScrollThreshold: (updatedScrollThreshold: number) => void;
     setClickedScroll: (updatedClickedScroll: boolean) => void;
     setScrollTimer: (updatedTimer: NodeJS.Timeout | null) => void;
+    setLastDirectionScrollY: (updatedScrollY: number) => void;
 }
 
 
@@ -25,12 +27,14 @@ const useScrollStore = create<ScrollState>()((set) => ({
     scrollThreshold: 0,
     clickedScroll: false,
     scrollTimer: null,
+    lastDirectionScrollY: 0,
     setScrollRef: (updatedScrollRef) => set(() => ({ scrollRef: updatedScrollRef })),
     setScrollDirection: (updatedScrollDirection) => set(() => ({ scrollDirection: updatedScrollDirection })),
     setLastScrollY: (updatedScrollY) => set(() => ({ lastScrollY: updatedScrollY })),
     setScrollThreshold: (updatedScrollThreshold) => set(() => ({ scrollThreshold: updatedScrollThreshold })),
     setClickedScroll: (updatedClickedScroll) => set(() => ({ clickedScroll: updatedClickedScroll })),
-    setScrollTimer: (updatedTimer) => set(() => ({ scrollTimer: updatedTimer }))
+    setScrollTimer: (updatedTimer) => set(() => ({ scrollTimer: updatedTimer })),
+    setLastDirectionScrollY: (updatedScrollY) => set(() => ({ lastDirectionScrollY: updatedScrollY }))
 }));
 
 
