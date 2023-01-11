@@ -32,10 +32,13 @@ const DocsNavMobile = () => {
         
             <Menu as="div" className={`lg:hidden inline-block w-full text-left mt-4 sticky top-0 z-50  ${docsNavOpen && width <= 1024 ? 'bg-[#eeeeee]' : ''} ${isOpen ? 'hidden' : ''}`}>
                 <div className="flex justify-center">
-                    <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
+                    <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none">
                         {
                             !docsNavOpen ?
-                            <GiSpellBook className="text-[3rem] hover:text-[#038aff]/70" onClick={() => setDocsNavOpen(true)}/> :  
+                            <GiSpellBook 
+                                className="text-[3rem] hover:text-[#038aff]/70" 
+                                onClick={() => setDocsNavOpen(true)}
+                            /> :  
                             <GrClose className="text-[3rem] hover:text-[#038aff]/70" onClick={() => setDocsNavOpen(false)}/>
                         }
                     </Menu.Button>

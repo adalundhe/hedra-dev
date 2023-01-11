@@ -28,7 +28,7 @@ const MobileNav = ({
                 ({ open, close }) => (
                     <>
                         <div className="grid grid-cols-4 w-full">
-                            <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
+                            <Menu.Button className="inline-flex justify-center rounded px-2 py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none">
                                 {
                                     !isOpen ?
                                     <AiOutlineMenu className="text-[3rem]" onClick={() => setIsOpen(true)}/> :  
