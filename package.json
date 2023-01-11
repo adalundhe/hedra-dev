@@ -21,6 +21,7 @@
     "react-tooltip": "^5.3.1",
     "react-tsparticles": "^2.7.0",
     "tsparticles": "^2.7.0",
+    "typewriter-effect": "^2.19.0",
     "zod": "^3.18.0",
     "zustand": "^4.2.0"
   },

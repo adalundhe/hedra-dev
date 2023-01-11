@@ -9,6 +9,7 @@ import { Transition } from "@headlessui/react"
 import { useRef, useEffect, useState } from "react";
 import { useInView } from 'react-intersection-observer';
 import { writeLine } from "../../tools";
+import Typewriter from 'typewriter-effect';
 
 const FlippedDescriptionCard = () => {
 
@@ -35,9 +36,20 @@ const FlippedDescriptionCard = () => {
         <div className="w-screen text-center font-rany flex flex-col items-center bg-[#eeeeee]" ref={showList.ref}>
             <div className="flex justify-center items-center px-10 h-[768px]">
                 <h3 className="md:text-4xl xs:text-2xl text-[2rem] w-full text-[#2e3131] py-20 flex flex-col items-center justify-center h-[100%]" ref={textInView.ref}>
-                    <p>
-                    {tagLine}
-                    </p>
+                    {
+                        textInView.inView || tagLine.length == tagLineText.current.length ?
+                        <Typewriter
+                            onInit={(typewriter) => {
+                                typewriter
+                                .changeDelay(50)
+                                .typeString(tagLineText.current)
+                                .start()
+                            }}
+                            options={{
+                                cursor:""
+                            }}
+                        /> : null
+                    }
                     <div className="mt-4">
                     {textInView.inView || tagLine.length == tagLineText.current.length ? <FaPython /> : null}
                     </div>
