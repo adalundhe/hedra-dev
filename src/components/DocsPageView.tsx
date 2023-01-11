@@ -168,7 +168,7 @@ const DocsPageView = () => {
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
 
 
-                    if (scrollDistance >= scrollThreshold) {
+                    if (scrollDistance >= scrollThreshold && scrollY < window.innerHeight) {
 
                         const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
                         

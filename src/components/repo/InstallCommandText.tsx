@@ -1,33 +1,26 @@
-import { Tooltip } from 'react-tooltip';
-import { RxCaretRight } from 'react-icons/rx';
-import { BsCurrencyDollar } from 'react-icons/bs';
-import { IoMdCheckmark } from 'react-icons/io'
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import 'react-tooltip/dist/react-tooltip.css';
+import { HiClipboardCopy, HiClipboardCheck } from 'react-icons/hi'
 
 
 const InstallCommandText = () => {
 
     const installCommand = "pip install hedra";
-    const [tooltipText, setTooltipText] = useState("Click me!");
-    const [caretOpacity, setCaretOpacity] = useState(100);
-
+    const [sectionActive, setSectionActive] = useState(false);
     useEffect(() => {
 
+      
+        
         const interval = setInterval(() => {
 
-            setCaretOpacity(caretOpacity === 100 ? 0 : 100)
+            setSectionActive(false);
 
-            if (!inView){
-                setTooltipText("Click me!")
-            }
-
-        }, 1000)
+        }, 3000)
 
         return () => clearInterval(interval)
 
-    }, [caretOpacity]);
+    }, []);
+    
     
     const { ref, inView } = useInView();
 
@@ -37,37 +30,30 @@ const InstallCommandText = () => {
                 className='cursor-pointer font-rany'
                 id='copy-pip-install'
                 type='button'
-                onMouseEnter={()=> setTooltipText("Click me!")}
                 onClick={() => {
+
+                    setSectionActive(true)
                     if ("clipboard" in navigator) {
                         navigator.clipboard.writeText(installCommand);
                     } else {
                         document.execCommand("copy", true, installCommand);
                     }
 
-                    setTooltipText("Copied!")
                 }}
             >
-                <code className="bg-[#14151a] text-white 2xl:text-4xl text-2xl py-3 px-6 rounded-sm flex justify-center" ref={ref}>
+                <code 
+                    className={`bg-[#2e3131] text-[#eeeeee] 2xl:text-4xl text-2xl py-3 px-6 rounded flex justify-center border border-[3px] ${sectionActive ? 'border-[#038aff]/70' : 'border-transparent'}`} 
+                    ref={ref}
+                >
                     <div className='mr-2'>
                         {
-                            tooltipText === "Click me!" && inView ? <BsCurrencyDollar /> : <RxCaretRight />
+                            sectionActive && inView ? <HiClipboardCheck /> : <HiClipboardCopy />
                         }
                     </div>
                         {
-                            tooltipText === "Click me!" && inView ? installCommand : "Copied! Let's go!"
+                            sectionActive && inView ? "Copied! Let's go!" : installCommand
                         }
-                    {
-                        tooltipText === "Click me!" && inView ? 
-                        <div className={`ml-2 opacity-${caretOpacity}`}>
-                            <RxCaretRight />
-                        </div> :
-                        <div className='ml-2'>
-                            <IoMdCheckmark />
-                        </div>
-                    }
                 </code>
-                <Tooltip anchorId="copy-pip-install" content={tooltipText} events={['hover', 'click']} />
             </button>
         </div>
     )

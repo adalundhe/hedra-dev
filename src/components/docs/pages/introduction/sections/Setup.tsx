@@ -1,6 +1,6 @@
 import { Section } from "../../../sections"
 import { ExternalLink } from "../../../segments"
-import { CodeShortSegment, TerminalSegment, ArticleLink } from "../../../segments"
+import { CodeShortSegment, TerminalSegment, ArticleLink, CodeSegmentCopyable } from "../../../segments"
 
 
 const hedraOutput = `
@@ -35,9 +35,9 @@ const Setup = ({
         >
             <div>
                 <p>Hedra is available via <ExternalLink link="https://pypi.org/project/hedra/" text="PyPi" />. Install by running:</p>
-                <CodeShortSegment>pip install --no-cache --upgrade hedra</CodeShortSegment>
+                <CodeSegmentCopyable>pip install --no-cache --upgrade hedra</CodeSegmentCopyable>
                 <p>Then run:</p>
-                <CodeShortSegment>hedra --help</CodeShortSegment>
+                <CodeSegmentCopyable>hedra --help</CodeSegmentCopyable>
                 <p>which should output:</p>
                 <TerminalSegment 
                     command={hedraOutput}
