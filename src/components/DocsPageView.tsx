@@ -54,17 +54,17 @@ const DocsPageView = () => {
 
     const {
         clickedScroll,
-        scrollDirection,
         lastScrollY,
         scrollThreshold,
         scrollTimer,
+        mobileLastScrollY,
         setScrollDirection,
         setLastScrollY,
         setScrollRef,
         setClickedScroll,
         setScrollTimer,
-        setLastDirectionScrollY,
-         setShowMobileDocsNav
+        setShowMobileDocsNav,
+        setMobileLastScrollY
 
     } = useScrollStore(useCallback((state) => ({
         clickedScroll: state.clickedScroll,
@@ -73,13 +73,14 @@ const DocsPageView = () => {
         scrollThreshold: state.scrollThreshold,
         scrollTimer: state.scrollTimer,
         lastDirectionScrollY: state.lastDirectionScrollY,
+        mobileLastScrollY: state.mobileLastScrollY,
         setScrollDirection: state.setScrollDirection,
         setLastScrollY: state.setLastScrollY,
         setScrollRef: state.setScrollRef,
         setClickedScroll: state.setClickedScroll,
         setScrollTimer: state.setScrollTimer,
-        setLastDirectionScrollY: state.setLastDirectionScrollY,
-         setShowMobileDocsNav: state.setShowMobileDocsNav
+        setShowMobileDocsNav: state.setShowMobileDocsNav,
+        setMobileLastScrollY: state.setMobileLastScrollY
     }), []))
 
     const ref = useRef<HTMLDivElement>(null);
@@ -192,16 +193,17 @@ const DocsPageView = () => {
                         event.preventDefault();
                     } else {
                         const scrollY = ref.current?.scrollTop ?? 0;
+                        const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
 
-                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                        if (scrollDistance >= scrollThreshold) {
+                            setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
+                        }
 
-                        if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
+                        if (scrollY > mobileLastScrollY){
                             setShowMobileDocsNav(false);
-                            setSubSection(currentSubsection.next)
 
-                        } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
+                        } else {
                             setShowMobileDocsNav(true);
-                            setSubSection(currentSubsection.previous)
                         }
 
                     }
