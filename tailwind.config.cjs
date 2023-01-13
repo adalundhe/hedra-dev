@@ -2,6 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    theme: {
+      screens: {
+        iphone: '320px'
+      },
+    },
     extend: {
       fontFamily: {
         monserrat: ['Monserrat'],
