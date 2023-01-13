@@ -31,7 +31,7 @@ const CodeSegmentCopyable = ({
     return (
         <div className={`my-6 flex`}>
             <button
-                className={`cursor-pointer font-informe font-lighter tracking-wider overflow-x-auto w-full flex items-start overflow-y-hidden`}
+                className={`cursor-pointer font-informe font-lighter tracking-wider w-full flex items-start overflow-hidden`}
                 id='copy-pip-install'
                 type='button'
 
@@ -47,14 +47,14 @@ const CodeSegmentCopyable = ({
                 }}
             >
                 <code 
-                    className={`bg-[#2e3131] w-full h-[90px] text-[#eeeeee] text-2xl flex items-center rounded border border-[3px] ${sectionActive ? 'border-[#038aff]/90' : 'border-transparent lg:hover:border-[#038aff]/60'}`}
+                    className={`bg-[#2e3131] w-full h-[90px] text-[#eeeeee] text-2xl overflow-x-auto flex items-center rounded border border-[3px] ${sectionActive ? 'border-[#038aff]/90' : 'border-transparent lg:hover:border-[#038aff]/60'}`}
                 >
                     <div className={`mx-4 lg:text-3xl text-2xl`}>
                         {
                             sectionActive ? <HiClipboardCheck/> : <HiClipboardCopy/>
                         }
                     </div>
-                    <p className='flex flex-col justify-center break-keep whitespace-nowrap text-left mt-1'>{
+                    <p className='flex flex-col justify-center break-keep whitespace-nowrap w-full text-left mt-1'>{
                         sectionActive ? "Copied!" + buffer : sectionText
                     }</p>
                 </code>
