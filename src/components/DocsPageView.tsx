@@ -191,6 +191,21 @@ const DocsPageView = () => {
                         event.stopPropagation();
                         event.preventDefault();
                     }
+
+
+                    const scrollY = ref.current?.scrollTop ?? 0;
+
+                    const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+
+                    if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
+                        setShowMobileDocsNav(false);
+                        setSubSection(currentSubsection.next)
+
+                    } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
+                        setShowMobileDocsNav(true);
+                        setSubSection(currentSubsection.previous)
+                    }
+
               
                 }}
             >
