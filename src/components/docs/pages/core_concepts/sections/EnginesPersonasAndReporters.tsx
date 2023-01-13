@@ -45,6 +45,21 @@ class OptimizeBatchSize(Optimize):
     }
 `
 
+const reporterExample = `@depends(AnalyzeResults)
+class OutputPostgresResults(Submit):
+
+    # By passing an instance of PostgresConfig, we
+    # tell Hedra we want to use the Postgresql reporter.
+    config=PostgresConfig(
+        host='197.222.121.90',
+        port=5432,
+        username=os.getenv('POSTGRES_USERNAME'),
+        password=os.getenv('POSTGRES_PASSWORD'),
+        metrics_table='Test_Metrics',
+        events_table='Test_Events'
+
+    )`
+
 
 const EnginesPersonasAndOptimizers = ({
     subSectionName
@@ -182,7 +197,39 @@ const EnginesPersonasAndOptimizers = ({
                 perform.
             </p>
             <br/>
-            
+            <p>
+                <InlineCodeSegment reference="Reporters#reporters-overview">Reporters</InlineCodeSegment> are the final core mechanism Hedra uses, submitting both aggregate 
+                <ArticleLink article="Reporters" subsection="Metrics" text="metrics"/> and unaggregated <ArticleLink article="Reporters" subsection="Events" text="events"/>
+                (individual processed results) for storage via a variety of integrations.
+            </p>
+            <br/>
+            <p>
+                Like personas, you'll never directly call reporters - instead specifying which reporter you'd like to use by passing an instance of that
+                reporter's config class to a <HighlightedText>Submit</HighlightedText> stage:
+            </p>
+            <CodeSegment
+                language="python"
+                theme={{
+                    lineNumberColor: "eeeeee",
+                    lineNumberBgColor: "#14151a",
+                    backgroundColor: "#2e3131",
+                    textColor: "#eeeeee",
+                    functionColor: "#00f9fe",
+                    keywordColor: "#0dc9a9",
+                    sectionColor: "#00f9fe",
+                    numberColor: "#aaffaa",
+                    stringColor: "#7dfeff",
+                    commentColor: "#aaaaaa"
+                }}
+            >
+                {reporterExample}
+            </CodeSegment>
+            <p>
+                You can only specify one reporter type per Submit stage. However, since Hedra places no limits
+                on the number of Submit stages you can execute (so long as you adhere to the graph rules mentioned above),
+                you <em>can</em> specify multiple reporters by creating multiple Submit stages and passing each stage a
+                different reporter config class.
+            </p>
         </div>
         </Section>
 
