@@ -190,20 +190,20 @@ const DocsPageView = () => {
                     if (clickedScroll){
                         event.stopPropagation();
                         event.preventDefault();
-                    }
+                    } else {
+                        const scrollY = ref.current?.scrollTop ?? 0;
 
+                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
 
-                    const scrollY = ref.current?.scrollTop ?? 0;
+                        if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
+                            setShowMobileDocsNav(false);
+                            setSubSection(currentSubsection.next)
 
-                    const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                        } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
+                            setShowMobileDocsNav(true);
+                            setSubSection(currentSubsection.previous)
+                        }
 
-                    if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
-                        setShowMobileDocsNav(false);
-                        setSubSection(currentSubsection.next)
-
-                    } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
-                        setShowMobileDocsNav(true);
-                        setSubSection(currentSubsection.previous)
                     }
 
               
