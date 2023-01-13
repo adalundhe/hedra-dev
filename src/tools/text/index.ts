@@ -1,1 +1,2 @@
-export { writeLine } from './writeLine'
+export { writeLine } from './writeLine';
+export { asBuffer } from './asBuffer'

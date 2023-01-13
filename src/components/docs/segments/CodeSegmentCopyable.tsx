@@ -1,5 +1,6 @@
 import { HiClipboardCopy, HiClipboardCheck } from 'react-icons/hi'
 import { useState, useEffect } from 'react';
+import { asBuffer } from '../../../tools';
 
 const CodeSegmentCopyable = ({
     children
@@ -8,6 +9,8 @@ const CodeSegmentCopyable = ({
 }) => {
 
     const [sectionActive, setSectionActive] = useState(false);
+    const [sectionText, setSectionText] = useState(children);
+    const buffer = asBuffer(children);
 
     useEffect(() => {
 
@@ -28,9 +31,10 @@ const CodeSegmentCopyable = ({
     return (
         <div className={`my-6 flex`}>
             <button
-                className={`cursor-pointer font-rany  w-full`}
+                className={`cursor-pointer font-informe font-lighter tracking-wider overflow-x-auto w-full flex items-start overflow-y-hidden`}
                 id='copy-pip-install'
                 type='button'
+
                 onClick={() => {
 
                     setSectionActive(true)
@@ -43,15 +47,15 @@ const CodeSegmentCopyable = ({
                 }}
             >
                 <code 
-                    className={`h-[80px] bg-[#2e3131] text-[#eeeeee] text-lg py-3 pr-6 flex items-center w-full rounded border border-[3px]  ${sectionActive ? 'border-[#038aff]/70' : 'border-transparent'} `}
+                    className={`bg-[#2e3131] w-full h-[90px] text-[#eeeeee] text-2xl flex items-center rounded border border-[3px] ${sectionActive ? 'border-[#038aff]/90' : 'border-transparent lg:hover:border-[#038aff]/60'}`}
                 >
-                    <div className={`mx-4 text-[28px]`}>
+                    <div className={`mx-4 lg:text-3xl text-2xl`}>
                         {
                             sectionActive ? <HiClipboardCheck/> : <HiClipboardCopy/>
                         }
                     </div>
-                    <p className='flex flex-col justify-center items-center text-left'>{
-                        sectionActive ? "Copied!" : children
+                    <p className='flex flex-col justify-center break-keep whitespace-nowrap text-left mt-1'>{
+                        sectionActive ? "Copied!" + buffer : sectionText
                     }</p>
                 </code>
             </button>

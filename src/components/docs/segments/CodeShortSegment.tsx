@@ -26,7 +26,7 @@ const CodeShortSegment = ({
 
     return (
         <div className="my-6">
-            <code className="font-rany bg-[#2e3131] text-[#eeeeee] text-xl py-3 pr-6 rounded flex items-center">
+            <code className="font-informe font-lighter tracking-wider bg-[#2e3131] text-[#eeeeee] text-xl py-3 pr-6 rounded flex items-center">
                 <div className={`ml-2`}>
                     <BsCurrencyDollar /> 
                 </div>

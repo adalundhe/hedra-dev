@@ -46,7 +46,7 @@ const NavBar = () => {
                     <div className='flex items-center w-full'>
                         <div className='h-full w-fit md:flex hidden mr-10 items-center font-monserrat uppercase'>
                             <Link href="/" className='flex items-center'>
-                                <p className='ml-2 text-2xl'>Hedra</p>
+                                <p className='ml-2 text-2xl tracking-wide'>Hedra</p>
                             </Link>
                         </div>
                         <div className='h-full w-1/3 hidden md:grid grid-cols-4 h-[97px] gap-20 ml-10'>

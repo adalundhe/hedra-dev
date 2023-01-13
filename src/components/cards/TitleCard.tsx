@@ -10,7 +10,7 @@ const TitleCard = () => {
     return (
             <div className="w-screen h-screen flex justify-center items-center bg-transparent text-center font-monserrat text-[#2e3131] my-auto" ref={ref}>
                 <div className="flex flex-col items-center justify-center h-screen w-screen">
-                    <h1 className="2xl:text-[12rem] xl:text-9xl text-[6rem] tracking-wide uppercase w-100">Hedra</h1>
+                    <h1 className="2xl:text-[12rem] xl:text-[9rem] text-[6rem] tracking-widest uppercase w-100">Hedra</h1>
                     <Transition
                     show={inView}
                     unmount={false}

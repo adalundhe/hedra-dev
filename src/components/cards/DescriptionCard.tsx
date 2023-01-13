@@ -12,8 +12,7 @@ import Typewriter from 'typewriter-effect';
 
 
 
-const codeExample = `
-        from hedra import (
+const codeExample = `from hedra import (
             Setup,
             Execute,
             action,
@@ -178,7 +177,7 @@ const DescriptionCard = () => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <div className="w-[95%] code-block text-[2vmin] leading-[2vmin] font-sans text-left shadow-2xl bg-[#2e3131]  h-[100%]">
+                    <div className="w-[90vh] mx-[10vw] code-block-large text-[1.5vmin] leading-[1.5vmin] tracking-wider font-lighter font-informe text-left shadow-2xl bg-[#2e3131] h-[100%]">
                         <CodeBlock 
                             text={codeExample}
                             language={'python'}
@@ -189,10 +188,12 @@ const DescriptionCard = () => {
                                 lineNumberBgColor: "#14151a",
                                 backgroundColor: "#2e3131",
                                 textColor: "#eeeeee",
-                                keywordColor: "#abb7b7",
-                                sectionColor: "#fff9de",
-                                numberColor: "white",
-                                stringColor: "#95a5a6",
+                                functionColor: "#00f9fe",
+                                keywordColor: "#0dc9a9",
+                                sectionColor: "#00f9fe",
+                                numberColor: "#aaffaa",
+                                stringColor: "#7dfeff",
+                                commentColor: "#aaaaaa"
                             }}
                         />
                     </div>

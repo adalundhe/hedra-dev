@@ -13,7 +13,7 @@ const PointList = ({
         {
             points.map((point: string, idx: number) => 
                 <li className="flex items-center my-6" key={`${name}-${idx}`}>
-                    <div className="mr-3">
+                    <div className="mr-4">
                         {icons[idx]}
                     </div>
                     <p>{point}</p>

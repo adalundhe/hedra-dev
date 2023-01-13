@@ -14,6 +14,80 @@
   src: url("../../public/fonts/rany/Rany-Light.otf");
 }
 
+@font-face {
+  font-family: "Creato";
+  src: url("../../public/fonts/creato_display/CreatoDisplay-Light.otf");
+}
+
+
+@font-face {
+  font-family: "Onest";
+  src: url("../../public/fonts/onest/TTF/OnestLight1602-hint.ttf");
+}
+
+
+@font-face {
+  font-family: "Informe";
+  src: url("../../public/fonts/informe/Informe_light.otf");
+}
+
+@font-face {
+  font-family: "Eirene";
+  src: url("../../public/fonts/eirene_sans/EireneSans-Regular.otf");
+}
+
+@font-face {
+  font-family: "Zacbel";
+  src: url("../../public/fonts/zacbel_x/zacbelx-medium.ttf");
+}
+
+@font-face {
+  font-family: "Mexon";
+  src: url("../../public/fonts/mexon/Mexon.otf");
+}
+
+@font-face {
+  font-family: "Octarine";
+  src: url("../../public/fonts/octarine/OctarineFree/Octarine-Light.otf");
+}
+
+@font-face {
+  font-family: "Adero";
+  src: url("../../public/fonts/adero/Adero_Trial/OpenType-PS/AderoTrial-Regular.otf");
+}
+
+@font-face {
+  font-family: "Omega";
+  src: url("../../public/fonts/omega_sans/Omega+Sans+Regular.ttf");
+}
+
+@font-face {
+  font-family: "Arkhip";
+  src: url("../../public/fonts/arkhip/Arkhip_font/Arkhip_font.otf");
+}
+
+@font-face {
+  font-family: "Environment";
+  src: url("../../public/fonts/environment/Environment\ Regular\ \(Demo\)\ Regular.ttf");
+}
+
+@font-face {
+  font-family: "Geon";
+  src: url("../../public/fonts/geon/Geon.otf");
+}
+
+@font-face {
+  font-family: "Molot";
+  src: url("../../public/fonts/molot/Molot.otf");
+}
+
+@font-face {
+  font-family: "Avanti";
+  src: url("../../public/fonts/qt_avanti/QTAvanti.otf");
+}
+
+
+
 
 body {
   overflow: hidden;
@@ -42,6 +116,27 @@ body {
   width: 100% !important;
 }
 
+.code-segment-copyable {
+
+  overflow-x: overlay;
+  overflow-y: hidden;
+}
+
+code {
+  line-height: 1.35em !important;
+  padding-top: 1vmin !important;
+  padding-bottom: 1vmin !important;
+  padding-left: 1vmin !important;
+  padding-right: 1vmin !important;
+  height: 100%;
+}
+
+code:has( > .react-syntax-highlighter-line-number) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 
 
@@ -370,7 +465,7 @@ body {
   }
 
   .terminal-segment {
-    font-size: 0.75vmin !important;
+    font-size: 0.7vmin !important;
     line-height: 0.85vmin !important;
   }
 
@@ -386,8 +481,22 @@ body {
 @media only screen and (min-width: 1600px) {  
 
   .terminal-segment {
-    font-size: 0.8vmin !important;
+    font-size: 0.75vmin !important;
     line-height: 0.9vmin !important;
+  }
+
+  .terminal-command-segment-wrapper {
+    height: 30vmin !important;
+  }
+
+}
+
+
+@media only screen and (min-width: 1700px) {  
+
+  .terminal-segment {
+    font-size: 0.83vmin !important;
+    line-height: 0.98vmin !important;
   }
 
   .terminal-command-segment-wrapper {
@@ -397,29 +506,15 @@ body {
 }
 
 
-@media only screen and (min-width: 1700px) {  
-
-  .terminal-segment {
-    font-size: 0.95vmin !important;
-    line-height: 1.05vmin !important;
-  }
-
-  .terminal-command-segment-wrapper {
-    height: 37.5vmin !important;
-  }
-
-}
-
-
 @media only screen and (min-width: 1800px) {  
 
   .terminal-segment {
-    font-size: 1.05vmin !important;
-    line-height: 1.15vmin !important;
+    font-size: 0.93vmin !important;
+    line-height: 1.08vmin !important;
   }
 
   .terminal-command-segment-wrapper {
-    height: 42.5vmin !important;
+    height: 35vmin !important;
   }
 
 }
@@ -429,12 +524,12 @@ body {
 @media only screen and (min-width: 1900px) {  
 
   .terminal-segment {
-    font-size: 1.15vmin !important;
-    line-height: 1.25vmin !important;
+    font-size: 1.03vmin !important;
+    line-height: 1.18vmin !important;
   }
 
   .terminal-command-segment-wrapper {
-    height: 47.5vmin !important;
+    height: 37.5vmin !important;
   }
 
   
@@ -443,12 +538,12 @@ body {
 @media only screen and (min-width: 2000px) {  
 
   .terminal-segment {
-    font-size: 1.25vmin !important;
-    line-height: 1.35vmin !important;
+    font-size: 1.13vmin !important;
+    line-height: 1.28vmin !important;
   }
 
   .terminal-command-segment-wrapper {
-    height: 52.5vmin !important;
+    height: 40vmin !important;
   }
   
 }
