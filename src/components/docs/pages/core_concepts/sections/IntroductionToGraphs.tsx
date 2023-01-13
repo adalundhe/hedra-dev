@@ -118,13 +118,7 @@ const IntroductionToGraphs = ({
             </p>
             <br/>
             <p>
-                A good example is a restaurant kitchen where we're working to complete an order. We need certain parts of the order to be completed first (heating the oven, cutting the vegetables)
-                prior to other parts (adding the sauce on top, addin dressing). However since we have multiplle cooks, we can execue parts that do not depend upon each other at the same time. Not only
-                that, but we can prepare multiple orders at once!
-            </p>
-            <br/>
-            <p>
-                Likewise, Hedra can orchestrate stages to execute in almost any order we need. Certain stage types are required in order for a Graph to run, and most all stages have some degree of 
+                Hedra can orchestrate stages to execute in almost any order we need. Certain stage types are required in order for a Graph to run, and most all stages have some degree of 
                 limitation on what stages the can execute after or before (see the <ArticleLink article="Stages" subsection="Stages overview" text="Stage reference guide"/> for more information 
                 on stages can preceed or follow a certain stage type). If two stages have no shared dependencies, Hedra will execute them concurrently (start one without waiting for the other to complete).
                 If a stage is dependent upon one or more other stages, it will wait for all stage dependencies to complete first. 
@@ -158,7 +152,7 @@ const IntroductionToGraphs = ({
             </CodeSegment>
             <p>
                 Next comes our <InlineCodeSegment reference="Stages#execute">Execute</InlineCodeSegment> stage, <HighlightedText>ExecuteHTTPBin</HighlightedText>. This stage needs the confguration options we specified in 
-                our Setup stage, so we wrap in in a Depends hook and pass the TestSetup class as a dependency.
+                our Setup stage, so we wrap it in a Depends hook and pass the TestSetup class as a dependency.
             </p>
             <CodeSegment 
                 language="python"
