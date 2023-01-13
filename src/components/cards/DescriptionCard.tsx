@@ -177,7 +177,7 @@ const DescriptionCard = () => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <div className="w-[90vh] mx-[4vw] code-block-large lg:text-[1.5vmin] sm:text-[1.75vmin]  text-[2.25vmin] py-2 leading-[1.5vmin] tracking-wider font-lighter font-informe text-left shadow-2xl bg-[#2e3131] h-[100%]">
+                    <div className="w-[90vh] mx-[4vw] code-block-large lg:text-[1.5vmin] sm:text-[1.75vmin] text-[2.15vmin] py-2 leading-[1.5vmin] tracking-wider font-lighter font-informe text-left shadow-2xl bg-[#2e3131] h-[100%]">
                         <CodeBlock 
                             text={codeExample}
                             language={'python'}
