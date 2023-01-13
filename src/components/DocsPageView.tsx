@@ -168,40 +168,28 @@ const DocsPageView = () => {
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
 
+                    const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
 
-                    if (scrollDistance >= scrollThreshold && scrollY < window.innerHeight) {
-
-                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                    if (scrollDistance >= scrollThreshold) {
                         
                         setScrollDirection(nextScrollDir);
                         setLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
 
-                    if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
+                    if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
+                        setShowMobileDocsNav(false);
                         setSubSection(currentSubsection.next)
 
-                    } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
+                    } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
+                        setShowMobileDocsNav(true);
                         setSubSection(currentSubsection.previous)
                     }
                 })}
                 onScroll={(event: UIEvent<HTMLDivElement>) => {
 
-
-                    const scrollY = ref.current?.scrollTop ?? 0;
-                    const scrollDistance = Math.abs(scrollY - lastScrollY);
-                    let currentScrollDir = 'none'
-                    
-                    if (scrollDistance >= scrollThreshold) {
-
-                        currentScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
-                        
-                    }
-
-                    if (currentScrollDir === 'down'){
-                         setShowMobileDocsNav(false)
-
-                    } else if (currentScrollDir === 'up'){
-                         setShowMobileDocsNav(true)
+                    if (clickedScroll){
+                        event.stopPropagation();
+                        event.preventDefault();
                     }
               
                 }}

@@ -23,7 +23,7 @@ const Docs: NextPage = () => {
         <MobileNavView>
             <>
                 <NavBar />    
-                <main className={`page fixed w-screen flex flex-col h-[calc(100%_-_150px)] overscroll-none`}>
+                <main className={`page w-screen flex flex-col h-[calc(100%_-_150px)] fixed overscroll-none`}>
                     <DocsPageView/>
                 </main>
             </>

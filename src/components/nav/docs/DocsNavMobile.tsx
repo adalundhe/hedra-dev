@@ -28,11 +28,9 @@ const DocsNavMobile = () => {
     }), []), shallow)
 
     const {
-        showMobileDocsNav
+        showMobileDocsNav,
     } = useScrollStore(useCallback((state) => ({
-        showMobileDocsNav: state.showMobileDocsNav,
-        scrollRef: state.scrollRef,
-        scrollDirection: state.scrollDirection
+        showMobileDocsNav: state.showMobileDocsNav
     }), []))
 
     return (
