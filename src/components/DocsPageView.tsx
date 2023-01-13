@@ -58,13 +58,15 @@ const DocsPageView = () => {
         scrollThreshold,
         scrollTimer,
         mobileLastScrollY,
+        docsNavTimer,
         setScrollDirection,
         setLastScrollY,
         setScrollRef,
         setClickedScroll,
         setScrollTimer,
         setShowMobileDocsNav,
-        setMobileLastScrollY
+        setMobileLastScrollY,
+        setDocsNavTimer
 
     } = useScrollStore(useCallback((state) => ({
         clickedScroll: state.clickedScroll,
@@ -74,13 +76,15 @@ const DocsPageView = () => {
         scrollTimer: state.scrollTimer,
         lastDirectionScrollY: state.lastDirectionScrollY,
         mobileLastScrollY: state.mobileLastScrollY,
+        docsNavTimer: state.docsNavTimer,
         setScrollDirection: state.setScrollDirection,
         setLastScrollY: state.setLastScrollY,
         setScrollRef: state.setScrollRef,
         setClickedScroll: state.setClickedScroll,
         setScrollTimer: state.setScrollTimer,
         setShowMobileDocsNav: state.setShowMobileDocsNav,
-        setMobileLastScrollY: state.setMobileLastScrollY
+        setMobileLastScrollY: state.setMobileLastScrollY,
+        setDocsNavTimer: state.setDocsNavTimer
     }), []))
 
     const ref = useRef<HTMLDivElement>(null);
@@ -178,11 +182,9 @@ const DocsPageView = () => {
                     }
 
                     if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
-                        setShowMobileDocsNav(false);
                         setSubSection(currentSubsection.next)
 
                     } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
-                        setShowMobileDocsNav(true);
                         setSubSection(currentSubsection.previous)
                     }
                 })}
@@ -191,7 +193,15 @@ const DocsPageView = () => {
                     if (clickedScroll){
                         event.stopPropagation();
                         event.preventDefault();
+                        setShowMobileDocsNav(true);
                     } else {
+
+                        if (docsNavTimer !== null){
+                            clearTimeout(docsNavTimer)
+                            setDocsNavTimer(null)
+
+                        }
+
                         const scrollY = ref.current?.scrollTop ?? 0;
                         const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
 
@@ -200,10 +210,24 @@ const DocsPageView = () => {
                         }
 
                         if (scrollY > mobileLastScrollY ){
-                            setShowMobileDocsNav(false);
+
+                            const hideTimeout = setTimeout(() => {
+                                setShowMobileDocsNav(false);
+                            }, 500)
+                            
+                            setDocsNavTimer(hideTimeout);
 
                         } else if (scrollY < mobileLastScrollY) {
-                            setShowMobileDocsNav(true);
+
+                            const hideTimeout = setTimeout(() => {
+                                setShowMobileDocsNav(true);
+                            }, 500)
+                            
+                            setDocsNavTimer(hideTimeout);
+
+                        } else {
+
+                          
                         }
 
                     }
