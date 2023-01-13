@@ -193,7 +193,6 @@ const DocsPageView = () => {
                     if (clickedScroll){
                         event.stopPropagation();
                         event.preventDefault();
-                        setShowMobileDocsNav(true);
                     } else {
 
                         if (docsNavTimer !== null){
@@ -217,7 +216,7 @@ const DocsPageView = () => {
                             
                             setDocsNavTimer(hideTimeout);
 
-                        } else {
+                        } else if (scrollY < mobileLastScrollY) {
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(true);
