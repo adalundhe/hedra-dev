@@ -192,6 +192,24 @@ const DocsPageView = () => {
                         event.stopPropagation()
                         event.preventDefault()
                     }
+
+                    const scrollY = ref.current?.scrollTop ?? 0;
+                    const scrollDistance = Math.abs(scrollY - lastScrollY);
+
+
+                    if (scrollDistance >= scrollThreshold && scrollY < window.innerHeight) {
+
+                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                        
+                        setScrollDirection(nextScrollDir);
+                    }
+
+                    if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
+                        setShowMobileDocsNave(false)
+
+                    } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
+                        setShowMobileDocsNave(true)
+                    }
               
                 }}
             >
