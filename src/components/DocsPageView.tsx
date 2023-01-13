@@ -194,17 +194,17 @@ const DocsPageView = () => {
                         event.preventDefault()
                     }
                     
-                    const scrollY = ref.current?.scrollTop ?? 0;
-                    const scrollDistance = Math.abs(scrollY - lastDirectionScrollY);
+                    // const scrollY = ref.current?.scrollTop ?? 0;
+                    // const scrollDistance = Math.abs(scrollY - lastDirectionScrollY);
 
 
-                    if (scrollDistance >= 100) {
+                    // if (scrollDistance >= 100) {
 
-                        const nextScrollDir = scrollY > lastDirectionScrollY ? "down" : scrollY < lastDirectionScrollY ? "up" : "none";
+                    //     const nextScrollDir = scrollY > lastDirectionScrollY ? "down" : scrollY < lastDirectionScrollY ? "up" : "none";
                         
-                        setScrollDirection(nextScrollDir);
-                        setLastDirectionScrollY(scrollY > 0 ? scrollY : 0)
-                    }
+                    //     setScrollDirection(nextScrollDir);
+                    //     setLastDirectionScrollY(scrollY > 0 ? scrollY : 0)
+                    // }
 
                 }}
             >
