@@ -195,14 +195,14 @@ const DocsPageView = () => {
                         const scrollY = ref.current?.scrollTop ?? 0;
                         const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
 
-                        if (scrollDistance >= scrollThreshold) {
+                        if (scrollDistance >= 150) {
                             setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
                         }
 
-                        if (scrollY > mobileLastScrollY){
+                        if (scrollY > mobileLastScrollY ){
                             setShowMobileDocsNav(false);
 
-                        } else {
+                        } else if (scrollY < mobileLastScrollY) {
                             setShowMobileDocsNav(true);
                         }
 
