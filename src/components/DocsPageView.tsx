@@ -102,8 +102,7 @@ const DocsPageView = () => {
 
             
             const subsectionPath = routerPath.length > 1 ? articleSlugs[routerPath.at(1) as string] as string : subsection;
-            ref.current?.focus({preventScroll: true});
-    
+
             setSection(article as string);
             setSubSection(subsectionPath as string);
 
@@ -117,7 +116,6 @@ const DocsPageView = () => {
 
     const currentSubsection = useMemo(() => {
 
-        refs[subsection]?.scrollRef?.current?.focus({preventScroll: true})
         let subSectionSlug = subsection?.toLowerCase().replace(/[^A-Za-z0-9]/g, '-') ?? ""
         if (subSectionSlug[subSectionSlug.length -1] === '-'){
             subSectionSlug = subSectionSlug.slice(0, subSectionSlug.length - 1)

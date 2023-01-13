@@ -58,7 +58,7 @@ const IntroductionToHooks = ({
             <p>
                 This is because certain types of funcionality only make sense to execute at certain points in a graph. For example, it wouldn't make 
                 sense to call a <InlineCodeSegment reference="Hooks#setup">@setup()</InlineCodeSegment> hook to initialize a test during a stage where we're 
-                making requests! For further documentation on which Stages support which hook, view the <ArticleLink article="Hooks" subsection="hooks-overview" text="Hooks reference section"/>
+                making requests! For further documentation on which Stages support which hooks, view the <ArticleLink article="Hooks" subsection="hooks-overview" text="Hooks reference section"/>.
             </p>
         </div>
         </Section>

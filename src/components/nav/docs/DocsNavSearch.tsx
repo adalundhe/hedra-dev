@@ -137,8 +137,7 @@ const DocsNavSearch = ({
 
                                             setLastScrollY(sectionHeight)
                                 
-                                            refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'nearest', block: 'center' })
-                                            scrollRef?.current?.focus({preventScroll: true})
+                                            refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'nearest', block: 'center' });
                                         }
 
                                         
