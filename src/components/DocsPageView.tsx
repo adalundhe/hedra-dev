@@ -4,6 +4,7 @@ import { NavOpenContext, DocsNav } from "./nav"
 import { useWindowDimensions, useScrollDirection } from '../hooks'
 import { DocsSectionGuide } from "./docs";
 import { DocsNavMobile } from "./nav";
+import { Footer } from "./footer";
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
 import { useDocsStore, useScrollStore } from "../store";
 import shallow from 'zustand/shallow'
@@ -57,7 +58,6 @@ const DocsPageView = () => {
         lastScrollY,
         scrollThreshold,
         scrollTimer,
-        lastDirectionScrollY,
         setScrollDirection,
         setLastScrollY,
         setScrollRef,
@@ -156,7 +156,7 @@ const DocsPageView = () => {
         <>
             <DocsNavMobile />
            <div 
-                className={`h-screen overscroll-none lg:my-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
+                className={`overscroll-none lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
                 ref={ref}
                 onWheel={(() => {
 
@@ -193,18 +193,7 @@ const DocsPageView = () => {
                         event.stopPropagation()
                         event.preventDefault()
                     }
-                    
-                    // const scrollY = ref.current?.scrollTop ?? 0;
-                    // const scrollDistance = Math.abs(scrollY - lastDirectionScrollY);
-
-
-                    // if (scrollDistance >= 100) {
-
-                    //     const nextScrollDir = scrollY > lastDirectionScrollY ? "down" : scrollY < lastDirectionScrollY ? "up" : "none";
-                        
-                    //     setScrollDirection(nextScrollDir);
-                    //     setLastDirectionScrollY(scrollY > 0 ? scrollY : 0)
-                    // }
+ 
 
                 }}
             >
@@ -281,10 +270,14 @@ const DocsPageView = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="max-w-7xl mx-auto lg:px-12 h-fit">
+                        <div className="max-w-6xl ml-0 2xl:mx-auto overflow-hidden h-full">
+                            <Footer/>
+                        </div>
+                    </div>
                 </div>
                 <DocsSectionGuide />
             </div>
-                   
         </>
         
     )
