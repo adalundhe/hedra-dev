@@ -191,10 +191,10 @@ const DocsPageView = () => {
                         event.preventDefault()
                     }
 
-                    if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
+                    if (scrollDirection === 'down'){
                         setShowMobileDocsNave(false)
 
-                    } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
+                    } else if (scrollDirection === 'up'){
                         setShowMobileDocsNave(true)
                     }
               
