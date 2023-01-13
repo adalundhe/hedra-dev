@@ -64,7 +64,7 @@ const DocsPageView = () => {
         setClickedScroll,
         setScrollTimer,
         setLastDirectionScrollY,
-        setShowMobileDocsNave
+         setShowMobileDocsNav
 
     } = useScrollStore(useCallback((state) => ({
         clickedScroll: state.clickedScroll,
@@ -79,7 +79,7 @@ const DocsPageView = () => {
         setClickedScroll: state.setClickedScroll,
         setScrollTimer: state.setScrollTimer,
         setLastDirectionScrollY: state.setLastDirectionScrollY,
-        setShowMobileDocsNave: state.setShowMobileDocsNav
+         setShowMobileDocsNav: state.setShowMobileDocsNav
     }), []))
 
     const ref = useRef<HTMLDivElement>(null);
@@ -156,7 +156,7 @@ const DocsPageView = () => {
         <>
             <DocsNavMobile />
            <div 
-                className={`overscroll-none lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
+                className={`h-screen lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
                 ref={ref}
                 onWheel={(() => {
 
@@ -178,22 +178,30 @@ const DocsPageView = () => {
                     }
 
                     if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
-                        setShowMobileDocsNave(false)
                         setSubSection(currentSubsection.next)
 
                     } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
-                        setShowMobileDocsNave(true)
                         setSubSection(currentSubsection.previous)
                     }
                 })}
                 onScroll={(event: UIEvent<HTMLDivElement>) => {
+
+
+                    const scrollY = ref.current?.scrollTop ?? 0;
+                    const scrollDistance = Math.abs(scrollY - lastScrollY);
+                    let currentScrollDir = 'none'
                     
+                    if (scrollDistance >= scrollThreshold) {
 
-                    if (scrollDirection === 'down'){
-                        setShowMobileDocsNave(false)
+                        currentScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+                        
+                    }
 
-                    } else if (scrollDirection === 'up'){
-                        setShowMobileDocsNave(true)
+                    if (currentScrollDir === 'down'){
+                         setShowMobileDocsNav(false)
+
+                    } else if (currentScrollDir === 'up'){
+                         setShowMobileDocsNav(true)
                     }
               
                 }}
