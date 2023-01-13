@@ -93,6 +93,7 @@ body {
   overflow: hidden;
   background-color: #eeeeee;
   height: fit-content;
+  text-rendering: optimizeLegibility;
 }
 
 .page {
