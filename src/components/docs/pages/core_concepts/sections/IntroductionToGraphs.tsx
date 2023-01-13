@@ -327,7 +327,7 @@ const IntroductionToGraphs = ({
             </p>
             <br/>
             <p>
-                Finally we reach the <InlineCodeSegment reference="Stages#submit">Submit</InlineCodeSegment>  OutputJSONResults, the last stage in our graph.
+                Finally we reach the <InlineCodeSegment reference="Stages#submit">Submit</InlineCodeSegment> stage, OutputJSONResults.
             </p>
             <CodeSegment 
                 language="python"
