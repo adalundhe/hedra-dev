@@ -31,17 +31,9 @@ const InstallCommandText = () => {
     return(
         <div className="text-center w-screen h-[50vh]">   
             <button 
-                className='cursor-pointer w-1/2'
+                className='cursor-pointer w-full w-[95%] xs:w-3/4 lg:w-1/2'
                 id='copy-pip-install'
                 type='button'
-                onMouseEnter={
-                    () => {
-                        setSectionText("Click me to copy!" + buffer)
-                    }
-                }
-                onMouseLeave={
-                    () => setSectionText(installCommand)
-                }
                 onClick={() => {
 
                     setSectionActive(true)
@@ -54,10 +46,10 @@ const InstallCommandText = () => {
                 }}
             >
                 <code 
-                    className={`font-informe font-extralight px-20 tracking-wider bg-[#2e3131] text-[#eeeeee] text-3xl py-4 rounded flex justify-center border border-[3px] ${sectionActive ? 'border-[#038aff]/90' : 'border-transparent lg:hover:border-[#038aff]/60'} w-full`} 
+                    className={`font-informe font-extralight px-20 tracking-wider h-[65px] bg-[#2e3131] text-[#eeeeee] text-[1.4rem] xs:text-3xl overflow-x-auto rounded flex justify-center border border-[3px] ${sectionActive ? 'border-[#038aff]/90' : 'border-transparent lg:hover:border-[#038aff]/60'} w-full`} 
                     ref={ref}
                 >
-                    <div className='mr-2 mt-1'>
+                    <div className='mr-2 flex items-center'>
                         {
                             sectionActive && inView ? <HiClipboardCheck /> : <HiClipboardCopy />
                         }
