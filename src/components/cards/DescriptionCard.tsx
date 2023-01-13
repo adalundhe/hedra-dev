@@ -13,39 +13,39 @@ import Typewriter from 'typewriter-effect';
 
 
 const codeExample = `from hedra import (
-            Setup,
-            Execute,
-            action,
-            Analyze,
-            JSONConfig,
-            Submit,
-            depends,
-        )
+    Setup,
+    Execute,
+    action,
+    Analyze,
+    JSONConfig,
+    Submit,
+    depends,
+)
 
-        class SetupStage(Setup):
-            batch_size=1000
-            total_time='1m'
-
-
-        @depends(SetupStage)
-        class ExecuteHTTPStage(Execute):
-
-            @action()
-            async def http_get(self):
-                return await self.client.http.get('https://httpbin.org/get')
+class SetupStage(Setup):
+    batch_size=1000
+    total_time='1m'
 
 
-        @depends(ExecuteHTTPStage)
-        class AnalyzeStage(Analyze):
-            pass
+@depends(SetupStage)
+class ExecuteHTTPStage(Execute):
+
+    @action()
+    async def http_get(self):
+        return await self.client.http.get('https://httpbin.org/get')
 
 
-        @depends(AnalyzeStage)
-        class SubmitJSONResultsStage(Submit):
-            config=JSONConfig(
-                events_filepath='./events.json',
-                metrics_filepath='./metrics.json'
-            )
+@depends(ExecuteHTTPStage)
+class AnalyzeStage(Analyze):
+    pass
+
+
+@depends(AnalyzeStage)
+class SubmitJSONResultsStage(Submit):
+    config=JSONConfig(
+        events_filepath='./events.json',
+        metrics_filepath='./metrics.json'
+    )
 
 `
 
@@ -177,7 +177,7 @@ const DescriptionCard = () => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <div className="w-[90vh] mx-[10vw] code-block-large text-[1.5vmin] leading-[1.5vmin] tracking-wider font-lighter font-informe text-left shadow-2xl bg-[#2e3131] h-[100%]">
+                    <div className="w-[90vh] mx-[4vw] code-block-large lg:text-[1.5vmin] sm:text-[1.75vmin]  text-[2.25vmin] py-2 leading-[1.5vmin] tracking-wider font-lighter font-informe text-left shadow-2xl bg-[#2e3131] h-[100%]">
                         <CodeBlock 
                             text={codeExample}
                             language={'python'}
