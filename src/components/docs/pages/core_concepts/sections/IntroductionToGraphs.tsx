@@ -1,5 +1,8 @@
 import { Section } from "../../../sections";
-import { ArticleLink, CenterTextBlock, CodeSegment, HighlightedText, InlineCodeSegment } from "../../../segments";
+import { ArticleLink, CenterTextBlock, CodeSegment, HighlightedText, InlineCodeSegment, PointList } from "../../../segments";
+import { IoMdCheckmarkCircle } from 'react-icons/io'
+import { MdCancel } from 'react-icons/md'
+import { HiExclamationCircle } from 'react-icons/hi'
 
 
 const graphExample = `from hedra import (
@@ -19,6 +22,7 @@ class TestSetup(Setup):
 
 
 # This Execute stage depends upon our previous Setup stage
+@depends(TestSetup)
 class ExecuteHTTPStage(Execute):
     count=0
 
@@ -83,12 +87,127 @@ class OutputJSONResults(Submit):
     )
 `
 
+const invalidGraph = `from hedra import (
+    Setup,
+    Execute,
+    action,
+    Analyze,
+    JSONConfig,
+    Submit,
+    depends,
+)
+
+# Hedra requires a Setup stage first for all Graphs.
+class TestSetup(Setup):
+    batch_size=1000
+    total_time='1m'
+
+
+# This Execute stage depends upon our previous Setup stage
+@depends(TestSetup)
+class ExecuteHTTPStage(Execute):
+    count=0
+
+    @action()
+    async def http_get(self):
+        return await self.client.http.get('https://httpbin.org/get')
+    
+    @task()
+    async def http_get(self):
+        count += 1
+        return await self.client.http.get(f'https://httpbin.org/get?count={self.count}')
+
+
+# This Analyze stage now depends upon our TestSetup stage     
+@depends(TestSetup)
+class AnalyzeResults(Analyze):
+    pass
+
+
+# Finally, this Submit stage depends upon our Analyze stage
+@depends(AnalyzeResults)
+class OutputJSONResults(Submit):
+    config=JSONConfig(
+        events_filepath='./events.json',
+        metrics_filepath='./metrics.json'
+    )
+`
+
+const invalidGraphTwo = `from hedra import (
+    Setup,
+    Execute,
+    action,
+    Analyze,
+    JSONConfig,
+    Submit,
+    depends,
+)
+
+# Hedra requires a Setup stage first for all Graphs.
+class TestSetup(Setup):
+    batch_size=1000
+    total_time='1m'
+
+
+# This Execute stage has no dependencies and no Depends hook
+class ExecuteHTTPStage(Execute):
+    count=0
+
+    @action()
+    async def http_get(self):
+        return await self.client.http.get('https://httpbin.org/get')
+    
+    @task()
+    async def http_get(self):
+        count += 1
+        return await self.client.http.get(f'https://httpbin.org/get?count={self.count}')
+
+
+# This Analyze stage depends upon our Execute stage        
+@depends(ExecuteHTTPStage)
+class AnalyzeResults(Analyze):
+    pass
+
+
+# Finally, this Submit stage depends upon our Analyze stage
+@depends(AnalyzeResults)
+class OutputJSONResults(Submit):
+    config=JSONConfig(
+        events_filepath='./events.json',
+        metrics_filepath='./metrics.json'
+    )
+`
+
 
 const IntroductionToGraphs = ({
     subSectionName
 }: {
     subSectionName: string
-}) => <Section 
+}) => {
+
+    const graphRuleItems = [
+        "Valid graphs will use a minimum of one CPU core but no more than the number of cores on the machine",
+        "Valid graphs will execute concurrent stages In order of appearance in the graph file unless the user specifies otherwise",
+        "Valid graphs will always contain an Idle stage, all stages the user specifies, and a Complete stage",
+        "Valid graphs will honor any manual override of resource/thread provisioning"
+    ]
+
+    const graphConditionItems = [
+        "Valid graphs will always begin with at least one Setup stage with no prior dependencies",
+        "Valid graphs will always have some path to and terminate in at least one Submit stage for each other stage",
+        "Any given stage will always have at least one path to a terminal Submit stage",
+        "Any given stage will always have at least one path back to an initial Setup stage"
+    ]
+
+    const graphRuleInvalidItems = [
+        "If a valid graph fails, it will always terminate by transitioning to and executing an Error stage",
+        "Invalid graphs will always fail during the graph assembly part of the graph execution lifecycle",
+        "Valid graphs with invalid hooks will always fail during the system-specified Validate stage",
+        "Valid graphs with invalid configuration will always fail during the execution of the stage for which the invalid configuration was provided",
+    ]
+
+    return (
+        <Section 
         subSectionName={subSectionName}
         >
         <div>
@@ -233,8 +352,92 @@ const IntroductionToGraphs = ({
                 of the configuration class <InlineCodeSegment reference="Reporters#JSON">JSONConfig</InlineCodeSegment>. This class tells OutputJSONResults both that we want to use the <ArticleLink article="Reporters" subsection="JSON" text="JSON Reporter"/> 
                 and what configuration to use for the JSON Reporter.
             </p>
+            <br/>
+            <p>
+                Like stages, graphs also abide by a few basic rules:
+            </p>
+            <PointList
+                name="graph-rules-items"
+                icons={graphRuleItems.map(_ => <IoMdCheckmarkCircle/>)}
+                points={graphRuleItems}
+            />
+            <p>
+                Likewise:
+            </p>
+            <PointList
+                name="graph-condition-items"
+                icons={graphConditionItems.map(_ => <HiExclamationCircle/>)}
+                points={graphConditionItems}
+            />
+            <p>
+                Finally:
+            </p>
+            <PointList
+                name="graph-rules-items"
+                icons={graphRuleInvalidItems.map(_ => <MdCancel/>)}
+                points={graphRuleInvalidItems}
+            />
+            <p>
+                To the latter point, an example of an invalid graph would be:
+            </p>
+            <CodeSegment 
+                language="python"
+                theme={{
+                    lineNumberColor: "eeeeee",
+                    lineNumberBgColor: "#14151a",
+                    backgroundColor: "#2e3131",
+                    textColor: "#eeeeee",
+                    functionColor: "#00f9fe",
+                    keywordColor: "#0dc9a9",
+                    sectionColor: "#00f9fe",
+                    numberColor: "#aaffaa",
+                    stringColor: "#7dfeff",
+                    commentColor: "#aaaaaa"
+                }}
+            >
+                {invalidGraph}
+            </CodeSegment>
+            <p>
+               In this graph, both <HighlightedText>ExecuteHTTPBin</HighlightedText> and <HighlightedText>AnalyzeResults</HighlightedText> have <HighlightedText>TestSetup</HighlightedText>
+               as a dependency. Because of this, ExecuteHTTPBin cannot reach a terminal Submit stage, thus violating the rule that any given stage will always have at least one path to a 
+               terminal Submit stage.
+            </p>
+            <br/>
+            <p>
+                Let's look at another example of an invalid graph:
+            </p>
+            <CodeSegment 
+                language="python"
+                theme={{
+                    lineNumberColor: "eeeeee",
+                    lineNumberBgColor: "#14151a",
+                    backgroundColor: "#2e3131",
+                    textColor: "#eeeeee",
+                    functionColor: "#00f9fe",
+                    keywordColor: "#0dc9a9",
+                    sectionColor: "#00f9fe",
+                    numberColor: "#aaffaa",
+                    stringColor: "#7dfeff",
+                    commentColor: "#aaaaaa"
+                }}
+            >
+                {invalidGraphTwo}
+            </CodeSegment>
+            <p>
+                In this graph, while we have specified our Setup stage (<HighlightedText>TestSetup</HighlightedText>), we have forgotten to add it as a dependency to 
+                <HighlightedText>ExecuteHTTPBin</HighlightedText>. As a result, we have violated both the rule that any given stage will always have at least one path to a terminal Submit 
+                stage <em>and</em> the rule that any given stage will always have at least one path to a terminal Submit stage.
+            </p>
+            <br/>
+            <p>
+                Hedra validates graphs at run time but <em>before</em> executing a graph as to avoid graphs hanging or otherwise failing in unexpected ways. For further information on 
+                graph validation and graph execution lifecycle, view the <ArticleLink article="Graphs" subsection="Graph requirements" text="Graph Requirements"/> and 
+                <ArticleLink article="Graphs" subsection="Graph lifecycle" text="Graph Lifecycle"/> docummentation.
+            </p>
         </div>
         </Section>
+    )
+}
 
 
 export {
