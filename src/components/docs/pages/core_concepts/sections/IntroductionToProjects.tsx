@@ -1,12 +1,33 @@
 import { Section } from "../../../sections";
-import { InlineCodeSegment } from "../../../segments";
+import { ArticleLink, CodeSegment, InlineCodeSegment, PointList } from "../../../segments";
+import { VscFolderActive } from 'react-icons/vsc'
+
+
+const projectCLIFileStructure = `/<your_project_name>
+    /tests    
+        /plugins
+            __init__.py
+        __init__.py
+    .hedra.json
+    .gitignore
+`
 
 
 const IntroductionToProjects = ({
     subSectionName
 }: {
     subSectionName: string
-}) => <Section 
+}) => {
+
+    const projectBenefitItems = [
+        "Projects allow you to reference graphs by the name of the file (minus extension) instead of having to type the path each time",
+        "Projects allow you to easily synchronize changes in graphs via Hedra's Git integration",
+        "Projects allow you to run jobs on Hedra distributed clusters without having to provide authentication via CLI args each time",
+        "Projects allow Hedra to easily discover and keep track of new graphs as you write them"
+    ]
+
+    return (
+        <Section 
         subSectionName={subSectionName}
         >
         <div>
@@ -17,13 +38,31 @@ const IntroductionToProjects = ({
             </p>
             <br/>
             <p>
+                There are several advantages to working with projects:
+            </p>
+            <PointList
+                name="project-benefits-items"
+                icons={projectBenefitItems.map(_ => <VscFolderActive/>)}
+                points={projectBenefitItems}
+            />
+            <p>
                 Projects have three main components - the graph files within them, any plugins you create within that project,
                 and a <InlineCodeSegment reference="Working with Projects#initializing-a-project">.hedra.json</InlineCodeSegment> file.
                 Unlike some frameworks, Hedra does not strongly enforce Project directory and file structure, however
-                if you create a Project via CLI you'll find Hedra does generate the following:
+                if you create a Project via CLI you'll find Hedra does generate the following folders and files:
+            </p>
+            <CodeSegment showLines={false}>
+                {projectCLIFileStructure}
+            </CodeSegment>
+            <p>
+                If you want to learn more about why Hedra generates this folder/file structure 
+                you can learn more <ArticleLink article="Projects" subsection="Directory structure" text="here"/>.
+                Likewise, if you'd like to get started creating and working with Projects, feel free to jump to the <ArticleLink article="Working with Projects" subsection="Initializing a project" text="Working with Projects"/> section.
             </p>
         </div>
         </Section>
+    )
+}
 
 
 export {
