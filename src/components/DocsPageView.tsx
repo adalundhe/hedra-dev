@@ -63,7 +63,8 @@ const DocsPageView = () => {
         setScrollRef,
         setClickedScroll,
         setScrollTimer,
-        setLastDirectionScrollY
+        setLastDirectionScrollY,
+        setShowMobileDocsNave
 
     } = useScrollStore(useCallback((state) => ({
         clickedScroll: state.clickedScroll,
@@ -77,7 +78,8 @@ const DocsPageView = () => {
         setScrollRef: state.setScrollRef,
         setClickedScroll: state.setClickedScroll,
         setScrollTimer: state.setScrollTimer,
-        setLastDirectionScrollY: state.setLastDirectionScrollY
+        setLastDirectionScrollY: state.setLastDirectionScrollY,
+        setShowMobileDocsNave: state.setShowMobileDocsNav
     }), []))
 
     const ref = useRef<HTMLDivElement>(null);
@@ -178,9 +180,11 @@ const DocsPageView = () => {
 
                     if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
                         setSubSection(currentSubsection.next)
+                        setShowMobileDocsNave(false)
 
                     } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
                         setSubSection(currentSubsection.previous)
+                        setShowMobileDocsNave(true)
                     }
                 })}
                 onScroll={(event: UIEvent<HTMLDivElement>) => {

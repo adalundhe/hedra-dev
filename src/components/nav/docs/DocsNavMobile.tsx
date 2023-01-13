@@ -28,20 +28,20 @@ const DocsNavMobile = () => {
     }), []), shallow)
 
     const {
-        scrollRef,
-        scrollDirection
+        showMobileDocsNav
     } = useScrollStore(useCallback((state) => ({
+        showMobileDocsNav: state.showMobileDocsNav,
         scrollRef: state.scrollRef,
         scrollDirection: state.scrollDirection
     }), []))
 
     return (
         
-            <Menu as="div" className={`lg:hidden inline-block w-full text-left ${scrollDirection !== 'down' || docsNavOpen ? 'my-2' : 'mt-1'} sticky top-0 z-50  ${docsNavOpen && width <= 1024 ? 'bg-[#eeeeee]' : ''} ${isOpen ? 'hidden' : ''}`}>
+            <Menu as="div" className={`lg:hidden inline-block w-full text-left ${showMobileDocsNav || docsNavOpen ? 'my-2' : 'mt-1'} sticky top-0 z-50  ${docsNavOpen && width <= 1024 ? 'bg-[#eeeeee]' : ''} ${isOpen ? 'hidden' : ''}`}>
                 <div className="flex justify-center">
                     <Transition  
                         as={Fragment}
-                        show={scrollDirection !== "down" || docsNavOpen}
+                        show={showMobileDocsNav || docsNavOpen}
                         enter="transform transition ease-in-out duration-100"
                         enterFrom="opacity-0 -translate-y-1/3"
                         enterTo="opacity-100 translate-y-0"
