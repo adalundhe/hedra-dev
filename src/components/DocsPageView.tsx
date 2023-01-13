@@ -179,11 +179,9 @@ const DocsPageView = () => {
 
                     if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
                         setSubSection(currentSubsection.next)
-                        setShowMobileDocsNave(false)
 
                     } else if (scrollDirection === 'up' && lastScrollY <= currentSubsection.height){
                         setSubSection(currentSubsection.previous)
-                        setShowMobileDocsNave(true)
                     }
                 })}
                 onScroll={(event: UIEvent<HTMLDivElement>) => {
@@ -191,17 +189,6 @@ const DocsPageView = () => {
                     if (clickedScroll){
                         event.stopPropagation()
                         event.preventDefault()
-                    }
-
-                    const scrollY = ref.current?.scrollTop ?? 0;
-                    const scrollDistance = Math.abs(scrollY - lastScrollY);
-
-
-                    if (scrollDistance >= scrollThreshold && scrollY < window.innerHeight) {
-
-                        const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
-                        
-                        setScrollDirection(nextScrollDir);
                     }
 
                     if (scrollDirection === 'down' && lastScrollY >= currentSubsection.height){
