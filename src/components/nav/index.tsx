@@ -1,2 +1,2 @@
 export { DocsNav, DocsNavMobile } from './docs'
-export { NavOpenContext, MobileNavView, NavBar, ScrollNav } from './main'
+export { NavOpenContext, MobileNavView, NavBar } from './main'
