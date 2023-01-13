@@ -431,8 +431,7 @@ const IntroductionToGraphs = ({
             <br/>
             <p>
                 Hedra validates graphs at run time but <em>before</em> executing a graph as to avoid graphs hanging or otherwise failing in unexpected ways. For further information on 
-                graph validation and graph execution lifecycle, view the <ArticleLink article="Graphs" subsection="Graph requirements" text="Graph Requirements"/> and 
-                <ArticleLink article="Graphs" subsection="Graph lifecycle" text="Graph Lifecycle"/> docummentation.
+                graph validation and graph execution lifecycle, view the <ArticleLink article="Graphs" subsection="Graph requirements" text="Graph Requirements"/> and <ArticleLink article="Graphs" subsection="Graph lifecycle" text="Graph Lifecycle"/> docummentation.
             </p>
         </div>
         </Section>
