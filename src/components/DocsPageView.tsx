@@ -165,7 +165,6 @@ const DocsPageView = () => {
                         setScrollTimer(null)
                     } 
 
-
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
 
