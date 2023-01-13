@@ -194,7 +194,7 @@ const DocsPageView = () => {
                         event.stopPropagation();
                         event.preventDefault();
                     } 
-                    
+
                     if (docsNavTimer !== null){
                         clearTimeout(docsNavTimer)
                         setDocsNavTimer(null)
@@ -225,6 +225,7 @@ const DocsPageView = () => {
                         setDocsNavTimer(hideTimeout);
 
                     }
+
               
                 }}
             >
