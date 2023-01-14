@@ -148,42 +148,6 @@ const DocsPageView = () => {
 
     }, [subsection, section]);
 
-    useEffect(() => {
-
-        if (docsNavTimer !== null){
-            clearTimeout(docsNavTimer)
-            setDocsNavTimer(null)
-
-        }
-
-        const scrollY = ref.current?.scrollTop ?? 0;
-        const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
-
-        if (scrollDistance >= 150) {
-            setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
-        }
-
-        
-        if (scrollY > mobileLastScrollY ){
-
-            const hideTimeout = setTimeout(() => {
-                setShowMobileDocsNav(false);
-            }, 250)
-            
-            setDocsNavTimer(hideTimeout);
-
-        } else {
-
-            const hideTimeout = setTimeout(() => {
-                setShowMobileDocsNav(true);
-            }, 250)
-            
-            setDocsNavTimer(hideTimeout);
-
-        }
-
-    }, [ref.current?.scrollTop])
-    
 
     const docsSectionNames = articles.map(article => article.sectionName);
     const currentSectionIdx = docsSectionNames.indexOf(section);
@@ -198,12 +162,19 @@ const DocsPageView = () => {
            <div 
                 className={`h-screen lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
                 ref={ref}
-                onWheel={(() => {
+                onScrollCapture={(() => {
 
                     if (scrollTimer !== null){
                         clearTimeout(scrollTimer)
                         setScrollTimer(null)
                     } 
+
+
+                    if (docsNavTimer !== null){
+                        clearTimeout(docsNavTimer)
+                        setDocsNavTimer(null)
+
+                    }
 
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
@@ -216,11 +187,35 @@ const DocsPageView = () => {
                         setLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
 
+
+                    if (scrollDistance >= 150) {
+                        setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
+                    }
+
+
                     if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
                         setSubSection(currentSubsection.next)
 
                     } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
                         setSubSection(currentSubsection.previous)
+                    }
+
+                    if (scrollY > mobileLastScrollY ){
+
+                        const hideTimeout = setTimeout(() => {
+                            setShowMobileDocsNav(false);
+                        }, 250)
+                        
+                        setDocsNavTimer(hideTimeout);
+            
+                    } else {
+            
+                        const hideTimeout = setTimeout(() => {
+                            setShowMobileDocsNav(true);
+                        }, 250)
+                        
+                        setDocsNavTimer(hideTimeout);
+            
                     }
                 })}
    
