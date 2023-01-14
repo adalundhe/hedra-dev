@@ -202,23 +202,27 @@ const DocsPageView = () => {
                         setSubSection(currentSubsection.previous)
                     }
 
-                    if (scrollY > mobileLastScrollY ){
+                    if (windowWidth <= 768) {
+                        
+                        if (scrollY > mobileLastScrollY ){
 
-                        const hideTimeout = setTimeout(() => {
-                            setShowMobileDocsNav(false);
-                        }, 100)
-                        
-                        setDocsNavTimer(hideTimeout);
-            
-                    } else {
-            
-                        const hideTimeout = setTimeout(() => {
-                            setShowMobileDocsNav(true);
-                        }, 100)
-                        
-                        setDocsNavTimer(hideTimeout);
-            
+                            const hideTimeout = setTimeout(() => {
+                                setShowMobileDocsNav(false);
+                            }, 100)
+                            
+                            setDocsNavTimer(hideTimeout);
+                
+                        } else {
+                
+                            const hideTimeout = setTimeout(() => {
+                                setShowMobileDocsNav(true);
+                            }, 100)
+                            
+                            setDocsNavTimer(hideTimeout);
+                
+                        }
                     }
+
                 })}
    
             >
