@@ -2,6 +2,9 @@ import { Section } from "../../../sections";
 import { CodeSegmentCopyable } from "../../../segments";
 
 
+const hedraHelpOutput = ``
+
+
 const CLIOverview = ({
     subSectionName
 }: {
@@ -19,6 +22,9 @@ const CLIOverview = ({
                 To get started, first run:
             </div>
             <CodeSegmentCopyable>hedra --help</CodeSegmentCopyable>
+            <div>
+                which should output:
+            </div>
         </div>
         </Section>
 
