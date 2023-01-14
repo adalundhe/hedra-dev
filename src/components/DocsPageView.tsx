@@ -186,46 +186,46 @@ const DocsPageView = () => {
                         setSubSection(currentSubsection.previous)
                     }
                 })}
-                onScroll={(event: UIEvent<HTMLDivElement>) => {
+                // onScroll={(event: UIEvent<HTMLDivElement>) => {
 
-                    if (clickedScroll){
-                        event.stopPropagation();
-                        event.preventDefault();
-                    } 
+                //     if (clickedScroll){
+                //         event.stopPropagation();
+                //         event.preventDefault();
+                //     } 
 
-                    if (docsNavTimer !== null){
-                        clearTimeout(docsNavTimer)
-                        setDocsNavTimer(null)
+                //     if (docsNavTimer !== null){
+                //         clearTimeout(docsNavTimer)
+                //         setDocsNavTimer(null)
 
-                    }
+                //     }
 
-                    const scrollY = ref.current?.scrollTop ?? 0;
-                    const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
+                //     const scrollY = ref.current?.scrollTop ?? 0;
+                //     const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
 
-                    if (scrollDistance >= 150) {
-                        setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
-                    }
+                //     if (scrollDistance >= 150) {
+                //         setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
+                //     }
 
-                    if (scrollY > mobileLastScrollY ){
+                //     if (scrollY > mobileLastScrollY ){
 
-                        const hideTimeout = setTimeout(() => {
-                            setShowMobileDocsNav(false);
-                        }, 250)
+                //         const hideTimeout = setTimeout(() => {
+                //             setShowMobileDocsNav(false);
+                //         }, 250)
                         
-                        setDocsNavTimer(hideTimeout);
+                //         setDocsNavTimer(hideTimeout);
 
-                    } else {
+                //     } else {
 
-                        const hideTimeout = setTimeout(() => {
-                            setShowMobileDocsNav(true);
-                        }, 250)
+                //         const hideTimeout = setTimeout(() => {
+                //             setShowMobileDocsNav(true);
+                //         }, 250)
                         
-                        setDocsNavTimer(hideTimeout);
+                //         setDocsNavTimer(hideTimeout);
 
-                    }
+                //     }
 
               
-                }}
+                // }}
             >
                 <DocsNav /> 
                 <div className={`bg-[#eeeeee] min-w-0 lg:pl-6 lg:mt-10`}>
