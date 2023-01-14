@@ -190,7 +190,7 @@ const DocsPageView = () => {
                     }
 
 
-                    if (lastMobileScroll >= 150) {
+                    if (lastMobileScroll >= 500) {
                         setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
 
