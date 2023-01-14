@@ -201,6 +201,8 @@ const DocsPageView = () => {
 
                     } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
                         setSubSection(currentSubsection.previous)
+                    } else {
+                        setSubSection(subsection);
                     }
 
                     if (windowWidth <= 768) {
