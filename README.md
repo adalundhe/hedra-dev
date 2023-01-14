@@ -6,10 +6,8 @@
 Hedra.dev is Hedra's online documentation, powered by [NextJS](https://nextjs.org) and [CreateT3App](https://create.t3.gg/).
 
 ____
-<br/>
 
 ## <b>Getting started</b>
-____________
 <br/>
 
 ### <b>Requirements</b>
@@ -46,7 +44,6 @@ https://localhost:3000
 <br/>
 
 __________
-<br/>
 
 ## <b>License</b>
 
@@ -55,7 +52,6 @@ This software is licensed under the MIT License. See the LICENSE file in the top
 <br/>
 
 ______________
-<br/>
 
 ## <b>Contributing</b>
 
@@ -65,7 +61,6 @@ free to clone down this repository before then and report any bugs or issues you
 <br/>
 
 ___________
-<br/>
 
 ## <b>Code of Conduct</b>
 
