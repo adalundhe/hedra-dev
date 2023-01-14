@@ -178,6 +178,7 @@ const DocsPageView = () => {
                     }
 
                     const scrollY = ref.current?.scrollTop ?? 0;
+                    const clientHeight = ref.current?.clientHeight ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
                     const lastMobileScroll = Math.abs(scrollY - mobileLastScrollY);
 
@@ -212,7 +213,7 @@ const DocsPageView = () => {
                             
                             setDocsNavTimer(hideTimeout);
                 
-                        } else {   
+                        } else if (scrollY > mobileLastScrollY || Math.abs(clientHeight - scrollY) < 500) {   
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(false);
