@@ -1,28 +1,77 @@
-# Create T3 App
+# <b>Hedra.dev</b>
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+[![License](https://img.shields.io/github/license/scorbettUM/hedra-dev)](https://github.com/scorbettUM/hedra-dev/blob/main/LICENSE)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/scorbettUM/hedra/blob/main/CODE_OF_CONDUCT.md)
 
-## What's next? How do I make an app with this?
+Hedra.dev is Hedra's online documentation, powered by [NextJS](https://nextjs.org) and [CreateT3App](https://create.t3.gg/).
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+____
+<br/>
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## <b>Getting started</b>
+____________
+<br/>
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+### <b>Requirements</b>
 
-## Learn More
+* Git
+* Latest Node LTS (minimum v16.X)
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+<br/>
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### <b>Setup</b>
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+1. Clone this repository by running the following:
+```
+git clone https://github.com/scorbettUM/hedra-dev.git .
+```
 
-## How do I deploy this?
+2. Change directory into the repostiory and install dependencies:
+```
+cd hedra-dev && \
+npm install
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### <b>Running on your local machine</b>
+1. Run the development server:
+```
+npm run dev
+```
+
+2. Open your browser and navigate to:
+```
+https://localhost:3000
+```
+
+<br/>
+
+__________
+<br/>
+
+## <b>License</b>
+
+This software is licensed under the MIT License. See the LICENSE file in the top distribution directory for the full license text.
+
+<br/>
+
+______________
+<br/>
+
+## <b>Contributing</b>
+
+Hedra.dev is currently under active development and will be open to general contributions starting Spring, 2023. However, feel
+free to clone down this repository before then and report any bugs or issues you find!
+
+<br/>
+
+___________
+<br/>
+
+## <b>Code of Conduct</b>
+
+Hedra.dev follows the [Contributor Covenant code of conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md).
+If you observe behavior that violates those rules please report to:
+
+| Name            | Email                       | Twitter                                      |
+|-------          |--------                     |----------                                    |
+| Sean Corbett    | sean.corbett@umontana.edu   | [@sc_codeum](https://twitter.com/sc_codeUM/) |
