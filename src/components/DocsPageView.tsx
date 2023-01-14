@@ -150,42 +150,39 @@ const DocsPageView = () => {
 
     useEffect(() => {
 
-        if (windowWidth <= 768){
-            if (docsNavTimer !== null){
-                clearTimeout(docsNavTimer)
-                setDocsNavTimer(null)
-    
-            }
-    
-            const scrollY = ref.current?.scrollTop ?? 0;
-            const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
-    
-            if (scrollDistance >= 150) {
-                setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
-            }
-    
-            
-            if (scrollY > mobileLastScrollY ){
-    
-                const hideTimeout = setTimeout(() => {
-                    setShowMobileDocsNav(false);
-                }, 250)
-                
-                setDocsNavTimer(hideTimeout);
-    
-            } else {
-    
-                const hideTimeout = setTimeout(() => {
-                    setShowMobileDocsNav(true);
-                }, 250)
-                
-                setDocsNavTimer(hideTimeout);
-    
-            }
-            
+        if (docsNavTimer !== null){
+            clearTimeout(docsNavTimer)
+            setDocsNavTimer(null)
+
         }
 
-    }, [lastScrollY])
+        const scrollY = ref.current?.scrollTop ?? 0;
+        const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
+
+        if (scrollDistance >= 150) {
+            setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
+        }
+
+        
+        if (scrollY > mobileLastScrollY ){
+
+            const hideTimeout = setTimeout(() => {
+                setShowMobileDocsNav(false);
+            }, 250)
+            
+            setDocsNavTimer(hideTimeout);
+
+        } else {
+
+            const hideTimeout = setTimeout(() => {
+                setShowMobileDocsNav(true);
+            }, 250)
+            
+            setDocsNavTimer(hideTimeout);
+
+        }
+
+    }, [ref.current?.scrollTop])
     
 
     const docsSectionNames = articles.map(article => article.sectionName);
