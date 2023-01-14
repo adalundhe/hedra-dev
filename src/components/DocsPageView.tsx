@@ -108,7 +108,7 @@ const DocsPageView = () => {
             setSubSection(subsectionPath as string);
 
             setScrollRef(ref);
-            setShowMobileDocsNav(true)
+            setShowMobileDocsNav(true);
 
             setReady(true);
         }
@@ -203,20 +203,21 @@ const DocsPageView = () => {
                     }
 
                     if (windowWidth <= 768) {
-                        
+
                         if (scrollY > mobileLastScrollY ){
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(false);
-                            }, 100)
+                            }, 50)
                             
                             setDocsNavTimer(hideTimeout);
                 
-                        } else {
-                
+                        } else {   
+                            
+                            
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(true);
-                            }, 100)
+                            }, 50)
                             
                             setDocsNavTimer(hideTimeout);
                 
