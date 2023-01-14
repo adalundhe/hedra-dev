@@ -178,6 +178,7 @@ const DocsPageView = () => {
 
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
+                    const lastMobileScroll = Math.abs(scrollY - mobileLastScrollY);
 
                     const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
 
@@ -188,7 +189,7 @@ const DocsPageView = () => {
                     }
 
 
-                    if (scrollDistance >= 150) {
+                    if (lastMobileScroll >= 150) {
                         setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
 
