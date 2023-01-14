@@ -1,4 +1,5 @@
 import { Section } from "../../../sections";
+import { CodeSegmentCopyable } from "../../../segments";
 
 
 const CLIOverview = ({
@@ -15,8 +16,9 @@ const CLIOverview = ({
             </div>
             <br/>
             <div>
-                To get started, first 
+                To get started, first run:
             </div>
+            <CodeSegmentCopyable>hedra --help</CodeSegmentCopyable>
         </div>
         </Section>
 
