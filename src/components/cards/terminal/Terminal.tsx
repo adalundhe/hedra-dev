@@ -1,5 +1,5 @@
 import { useState, useRef, useLayoutEffect } from 'react';
-import Terminal, { ColorMode, TerminalOutput } from 'react-terminal-ui';
+import Terminal, { ColorMode, TerminalOutput } from '@shapes-org/react-terminal-ui';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 

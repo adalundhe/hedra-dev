@@ -58,9 +58,7 @@ const FlippedDescriptionCard = () => {
             <div className="w-screen grid-rows-2">
                 <div className="w-screen flex justify-center" ref={ref}>
                     <div className="w-[1160px] font-sans text-left text-base flex justify-center">         
-                        {
-                            inView || leaveRef.inView ? <TerminalController /> : <p></p>
-                        }
+                    <TerminalController />
                     </div>
                 </div>
                 <div className="text-3xl bg-[#eeeeee] my-20">

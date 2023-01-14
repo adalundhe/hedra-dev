@@ -1,5 +1,5 @@
 import { RefObject, useRef } from 'react';
-import create from 'zustand'
+import { create } from 'zustand'
 import { DocsLinkItem, DocsLinkSubsections, SearchDoc, ScrollRef } from './types';
 
 
