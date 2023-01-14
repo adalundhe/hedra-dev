@@ -163,7 +163,7 @@ const DocsPageView = () => {
         <>
             <DocsNavMobile />
            <div 
-                className={`h-screen lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
+                className={`h-screen overscroll-none lg:mt-10 grid grid-cols-[auto] lg:grid-cols-[24rem_auto] 2xl:grid-cols-[24rem_auto_24rem] overflow-x-hidden ${isOpen ?  'invisible' : ''} ${docsNavOpen ? 'invisible' : ''}`}
                 ref={ref}
                 onScroll={(() => {
 
@@ -181,32 +181,13 @@ const DocsPageView = () => {
 
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const clientHeight = ref.current?.clientHeight ?? 0;
-                    const bufferHeight = clientHeight * .2
+                    const bufferHeight = clientHeight * .2;
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
                     const lastMobileScroll = Math.abs(scrollY - mobileLastScrollY);
-
-                    console.log(bufferHeight)
-
-                    const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
-
-                    if (scrollDistance >= scrollThreshold) {
-                        
-                        setScrollDirection(nextScrollDir);
-                        setLastScrollY(scrollY > 0 ? scrollY : 0)
-                    }
-
 
                     if (lastMobileScroll >= 500) {
                         setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
                     }
-
-
-                    if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
-                        setSubSection(currentSubsection.next ?? subsection)
-
-                    } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
-                        setSubSection(currentSubsection.previous)
-                    } 
 
                     if (windowWidth <= 768) {
 
@@ -214,11 +195,11 @@ const DocsPageView = () => {
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(true);
-                            }, 50)
+                            }, 100)
                             
                             setDocsNavTimer(hideTimeout);
                 
-                        } else if (scrollY > mobileLastScrollY || Math.abs(clientHeight - scrollY) < bufferHeight) {   
+                        } else if (scrollY > mobileLastScrollY || Math.abs(clientHeight - scrollY) < currentSubsection.lastSubSectionHeight) {   
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(false);
@@ -228,6 +209,21 @@ const DocsPageView = () => {
                 
                         }
                     }
+
+                    const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
+
+                    if (scrollDistance >= scrollThreshold) {
+                        
+                        setScrollDirection(nextScrollDir);
+                        setLastScrollY(scrollY > 0 ? scrollY : 0)
+                    }
+
+                    if (nextScrollDir === 'down' && lastScrollY >= currentSubsection.height ){
+                        setSubSection(currentSubsection.next ?? subsection)
+
+                    } else if (nextScrollDir === 'up' && lastScrollY <= currentSubsection.height){
+                        setSubSection(currentSubsection.previous)
+                    } 
 
                 })}
    

@@ -12,7 +12,7 @@ const exampleGRPCClientCall = `from my_grpc_project.proto import (
 )
 
 @action()
-async def httpbin_get(self):
+async def grpc_hello_world(self):
     # An example Client call to the HTTP engine
     return await self.client.grpc.get(
         "127.0.0.1:9000",
