@@ -204,7 +204,7 @@ const DocsPageView = () => {
 
                     if (windowWidth <= 768) {
 
-                        if (scrollY < mobileLastScrollY ){
+                        if (scrollY <= mobileLastScrollY){
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(true);
