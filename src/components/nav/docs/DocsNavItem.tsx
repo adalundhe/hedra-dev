@@ -47,12 +47,14 @@ const DocsNavItem = ({
         scrollRef,
         setLastScrollY,
         setClickedScroll,
-        setMobileLastScrollY
+        setMobileLastScrollY,
+        setShowMobileDocsNav
     } = useScrollStore(useCallback((state) => ({
         scrollRef: state.scrollRef,
         setLastScrollY: state.setLastScrollY,
         setClickedScroll: state.setClickedScroll,
-        setMobileLastScrollY: state.setMobileLastScrollY
+        setMobileLastScrollY: state.setMobileLastScrollY,
+        setShowMobileDocsNav: state.setShowMobileDocsNav
     }), []))
     
 
@@ -99,6 +101,7 @@ const DocsNavItem = ({
                         setSection(sectionName)
                         setSubSection(subSectionName)
                         setMobileLastScrollY(sectionHeight)
+                        setShowMobileDocsNav((true))
 
                         if (selectedSubSectionIdx === 0){
                             refs[subSectionName]?.scrollRef?.current?.scrollTo({top: 0});
