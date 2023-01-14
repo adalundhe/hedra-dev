@@ -206,7 +206,7 @@ const DocsPageView = () => {
 
                         const hideTimeout = setTimeout(() => {
                             setShowMobileDocsNav(false);
-                        }, 250)
+                        }, 100)
                         
                         setDocsNavTimer(hideTimeout);
             
@@ -214,7 +214,7 @@ const DocsPageView = () => {
             
                         const hideTimeout = setTimeout(() => {
                             setShowMobileDocsNav(true);
-                        }, 150)
+                        }, 100)
                         
                         setDocsNavTimer(hideTimeout);
             
