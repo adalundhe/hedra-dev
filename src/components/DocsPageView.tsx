@@ -131,6 +131,7 @@ const DocsPageView = () => {
         const currentSubsections = subsections[section] ?? [];
         const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number
         let sectionHeight = subsections[section]?.slice(0, currentSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
+        const lastSubSection = currentSubsections.at(currentSubsections.length - 1) ?? "";
         const heightBuffer = (refs[subsection]?.height ?? 0)/2
         
         if ((sectionHeight + heightBuffer) < (ref.current?.clientHeight ?? 0)){
@@ -144,7 +145,8 @@ const DocsPageView = () => {
             height: sectionHeight,
             next: nextSubSection,
             previous: previousSubSection,
-            slug: subSectionSlug
+            slug: subSectionSlug,
+            lastSubSectionHeight: (refs[lastSubSection]?.height ?? 0) * .5
         });
 
     }, [subsection, section]);
@@ -179,8 +181,11 @@ const DocsPageView = () => {
 
                     const scrollY = ref.current?.scrollTop ?? 0;
                     const clientHeight = ref.current?.clientHeight ?? 0;
+                    const bufferHeight = clientHeight * .2
                     const scrollDistance = Math.abs(scrollY - lastScrollY);
                     const lastMobileScroll = Math.abs(scrollY - mobileLastScrollY);
+
+                    console.log(bufferHeight)
 
                     const nextScrollDir = scrollY > lastScrollY ? "down" : scrollY < lastScrollY ? "up" : "none";
 
@@ -205,7 +210,7 @@ const DocsPageView = () => {
 
                     if (windowWidth <= 768) {
 
-                        if (scrollY <= mobileLastScrollY || scrollY < 500){
+                        if (scrollY <= mobileLastScrollY || scrollY < bufferHeight){
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(true);
@@ -213,7 +218,7 @@ const DocsPageView = () => {
                             
                             setDocsNavTimer(hideTimeout);
                 
-                        } else if (scrollY > mobileLastScrollY || Math.abs(clientHeight - scrollY) < 500) {   
+                        } else if (scrollY > mobileLastScrollY || Math.abs(clientHeight - scrollY) < bufferHeight) {   
 
                             const hideTimeout = setTimeout(() => {
                                 setShowMobileDocsNav(false);
