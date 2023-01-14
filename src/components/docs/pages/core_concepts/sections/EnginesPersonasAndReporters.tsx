@@ -169,12 +169,15 @@ const EnginesPersonasAndOptimizers = ({
                 powerful algorithms like dual annealing and differential evolution to identify ideal parameters for your test.
             </p>
             <br/>
-            <p>
-                Optimizers have a slightly different API than engines, which you invoke via calls to the Client API or personas (which you provide as a configuration option). You 
-                first specify that you want to run optimization by inserting an <InlineCodeSegment reference="Stages#optimize">Optimize</InlineCodeSegment> stage in your graph. 
+            <div>
+                Optimizers have a slightly different API than engines, which you invoke via calls to the Client API or personas (which you provide as a configuration option). 
+             </div>
+             <br/>
+             <div>   
+                You first specify that you want to run optimization by inserting an <InlineCodeSegment reference="Stages#optimize">Optimize</InlineCodeSegment> stage in your graph. 
                 You then provide the <HighlightedText>Optimize</HighlightedText> stage the optimization algorithm you want to use and configuration parameters you want to optimize
                 as configuration via class attributes.
-            </p>
+            </div>
             <CodeSegment
                 language="python"
                 theme={{
