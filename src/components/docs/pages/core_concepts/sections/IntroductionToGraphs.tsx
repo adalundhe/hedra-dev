@@ -211,10 +211,10 @@ const IntroductionToGraphs = ({
         subSectionName={subSectionName}
         >
         <div>
-            <p>
+            <div>
                 By this point, you'll notice that each example script has been adding pieces of functionality. We've now reached the point where we can show and discuss
                 a full graph.
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -232,26 +232,26 @@ const IntroductionToGraphs = ({
             >
                 {graphExample}
             </CodeSegment>
-            <p>
+            <div>
                 <InlineCodeSegment reference="Graphs#graph-overview">Graphs</InlineCodeSegment> are <em>workflows</em>, organized actions and tasks that Hedra orchestrates for you represeted by stages and hooks.
-            </p>
+            </div>
             <br/>
-            <p>
+            <div>
                 Hedra can orchestrate stages to execute in almost any order we need. Certain stage types are required in order for a Graph to run, and most all stages have some degree of 
                 limitation on what stages the can execute after or before (see the <ArticleLink article="Stages" subsection="Stages overview" text="Stage reference guide"/> for more information 
                 on stages can preceed or follow a certain stage type). If two stages have no shared dependencies, Hedra will execute them concurrently (start one without waiting for the other to complete).
                 If a stage is dependent upon one or more other stages, it will wait for all stage dependencies to complete first. 
-            </p>
+            </div>
             <br/>
-            <p>
+            <div>
                 To specify these dependcies we use the <InlineCodeSegment reference="Hooks#depends">@depends()</InlineCodeSegment> hook, wrapping stage classes and passing one more other stages 
                 that the hooked stage depends upon (that we want to complete before and in order for hooked stage to run).
-            </p>
+            </div>
             <br/>
-            <p>
+            <div>
                 Breaking down our example above - we first start with a <InlineCodeSegment reference="Stages#execute">Setup</InlineCodeSegment> stage called <HighlightedText>TestSetup</HighlightedText> We provide test configuration 
                 to this stage, which the stage then consumes while running and provides to all dependant stages. The Setup stage also initializes any Action or Task hooks found in dependant stages.
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -269,10 +269,10 @@ const IntroductionToGraphs = ({
             >
                 {setupExample}
             </CodeSegment>
-            <p>
+            <div>
                 Next comes our <InlineCodeSegment reference="Stages#execute">Execute</InlineCodeSegment> stage, <HighlightedText>ExecuteHTTPBin</HighlightedText>. This stage needs the confguration options we specified in 
                 our Setup stage, so we wrap it in a Depends hook and pass the TestSetup class as a dependency.
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -290,17 +290,17 @@ const IntroductionToGraphs = ({
             >
                 {executeExample}
             </CodeSegment>
-            <p>
+            <div>
                 Note that <HighlightedText>ExecuteHTTPBin</HighlightedText> contains <em>both</em> of the aformentoned Action and Task hook types. Since we passed <HighlightedText>TestSetup</HighlightedText> as a dependency of 
                 <HighlightedText>ExecuteHTTPBin</HighlightedText>, <HighlightedText>TestSetup</HighlightedText> is aware of <HighlightedText>ExecuteHTTPBin</HighlightedText> and will setup the Execute stage's Action and Task hooks.
                 Recall the general Stage rule:
-            </p>
+            </div>
             <CenterTextBlock>A Stage may contain any number of hooks of the types it supports</CenterTextBlock>
-            <p>
+            <div>
                 Once our Execute stage has completed, it makes sense that we'll want to aggregate timings results for the requests we executed during <HighlightedText>ExecuteHTTPBin</HighlightedText>'s run. We can do this by specifying an 
                 <InlineCodeSegment reference="Stages#execute">Analyze</InlineCodeSegment> stage like <HighlightedText>AnalyzeResults</HighlightedText>, wrapping it in a Depends hook, and passing our <HighlightedText>ExecuteHTTPBin</HighlightedText> 
                 stage as a dependnecy.
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -318,17 +318,17 @@ const IntroductionToGraphs = ({
             >
                 {analyzeExample}
             </CodeSegment>
-            <p>
+            <div>
                 The first thing you'll likely notice about our Analyze stage is that we aren't providing any confiuration via class attributes or Hooks. That's okay! Recall the general Stage rule:
-            </p>
+            </div>
             <CenterTextBlock>Stages do not necessarily require user-specified hooks or configuration to be valid.</CenterTextBlock>
-            <p>
+            <div>
                 In the case of <HighlightedText>AnalyzeResults</HighlightedText>, we don't need to specify any addtional configuration or Hooks for it to know how to aggregate ExecuteHTTPBin's results into summary metrics.
-            </p>
+            </div>
             <br/>
-            <p>
+            <div>
                 Finally we reach the <InlineCodeSegment reference="Stages#submit">Submit</InlineCodeSegment> stage, OutputJSONResults.
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -346,40 +346,40 @@ const IntroductionToGraphs = ({
             >
                 {submitExample}
             </CodeSegment>
-            <p>
+            <div>
                 Since our Submit stage is responsible for using Hedra's <InlineCodeSegment reference="Reporters#reporters-overview">Reporters</InlineCodeSegment> to store and output aggregate metrics and unaggregated results, 
                 it should depend upon our Analyze stage (<HighlightedText>AnalyzeResults</HighlightedText>). As before, we wrap OutputJSONResults with the Depends hook, passing AnalyzeResults as a dependecy. We also pass an instance 
                 of the configuration class <InlineCodeSegment reference="Reporters#JSON">JSONConfig</InlineCodeSegment>. This class tells OutputJSONResults both that we want to use the <ArticleLink article="Reporters" subsection="JSON" text="JSON Reporter"/> 
                 and what configuration to use for the JSON Reporter.
-            </p>
+            </div>
             <br/>
-            <p>
+            <div>
                 Like stages, graphs also abide by a few basic rules:
-            </p>
+            </div>
             <PointList
                 name="graph-rules-items"
                 icons={graphRuleItems.map(_ => <IoMdCheckmarkCircle/>)}
                 points={graphRuleItems}
             />
-            <p>
+            <div>
                 Likewise:
-            </p>
+            </div>
             <PointList
                 name="graph-condition-items"
                 icons={graphConditionItems.map(_ => <HiExclamationCircle/>)}
                 points={graphConditionItems}
             />
-            <p>
+            <div>
                 Finally:
-            </p>
+            </div>
             <PointList
                 name="graph-rules-items"
                 icons={graphRuleInvalidItems.map(_ => <MdCancel/>)}
                 points={graphRuleInvalidItems}
             />
-            <p>
+            <div>
                 To the latter point, an example of an invalid graph would be:
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -397,15 +397,15 @@ const IntroductionToGraphs = ({
             >
                 {invalidGraph}
             </CodeSegment>
-            <p>
+            <div>
                In this graph, both <HighlightedText>ExecuteHTTPBin</HighlightedText> and <HighlightedText>AnalyzeResults</HighlightedText> have <HighlightedText>TestSetup</HighlightedText>
                as a dependency. Because of this, ExecuteHTTPBin cannot reach a terminal Submit stage, thus violating the rule that any given stage will always have at least one path to a 
                terminal Submit stage.
-            </p>
+            </div>
             <br/>
-            <p>
+            <div>
                 Let's look at another example of an invalid graph:
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -423,16 +423,16 @@ const IntroductionToGraphs = ({
             >
                 {invalidGraphTwo}
             </CodeSegment>
-            <p>
+            <div>
                 In this graph, while we have specified our Setup stage (<HighlightedText>TestSetup</HighlightedText>), we have forgotten to add it as a dependency to 
                 <HighlightedText>ExecuteHTTPBin</HighlightedText>. As a result, we have violated both the rule that any given stage will always have at least one path to a terminal Submit 
                 stage <em>and</em> the rule that any given stage will always have at least one path to a terminal Submit stage.
-            </p>
+            </div>
             <br/>
-            <p>
+            <div>
                 Hedra validates graphs at run time but <em>before</em> executing a graph as to avoid graphs hanging or otherwise failing in unexpected ways. For further information on 
                 graph validation and graph execution lifecycle, view the <ArticleLink article="Graphs" subsection="Graph requirements" text="Graph Requirements"/> and <ArticleLink article="Graphs" subsection="Graph lifecycle" text="Graph Lifecycle"/> docummentation.
-            </p>
+            </div>
         </div>
         </Section>
     )

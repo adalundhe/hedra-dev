@@ -54,10 +54,10 @@ const IntroductionToStages = ({
         subSectionName={subSectionName}
         >
         <div>
-            <p>
+            <div>
                 <HighlightedText>Stages</HighlightedText> are groups of individual actions or tasks within a workflow, represented as Python
                 classes that inherit from a single <InlineCodeSegment reference="Stages#stages-overview">Stage</InlineCodeSegment> class type.
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -75,11 +75,11 @@ const IntroductionToStages = ({
             >
                 {stageExample}
             </CodeSegment>
-            <p>
+            <div>
                 Stages are responsible for executing the hooks assigned to them (if any) or otherwise providing the graph with additional information required 
                 to complete the workflow such as test concurrency, time limit for subsetquent stages, reporter configuration, etc. Stages are not limited to a single 
                 hook or hook type:
-            </p>
+            </div>
             <CodeSegment 
                 language="python"
                 theme={{
@@ -97,20 +97,20 @@ const IntroductionToStages = ({
             >
                 {multipleHooksExample}
             </CodeSegment>
-            <p>
+            <div>
                 A Stage can execute as many hooks of the types it supports as you specify. Stages adhere to the following general rules:
-            </p>
+            </div>
             <PointList
                 name="stage-api-convention-items"
                 icons={stageApiConventionItems.map(_ => <GiCometSpark/>)}
                 points={stageApiConventionItems}
             />
-            <p>
+            <div>
                 The internal workings of a stage are encapsulated within protected methods, wrapped with the <InlineCodeSegment reference="Hooks#Internal">@Internal()</InlineCodeSegment>
                 hook. This hook ensures that these methods aren't accidentally overriden, and Hedra will abort any graph that accidentally overrides a protected 
                 method. Protected methods for a Stage vary, but <em>always</em> include the <InlineCodeSegment>run()</InlineCodeSegment> method. You should avoid 
                 naming any methods you provide to a Stage "run" in order to avoid your graph terminating early.
-            </p>
+            </div>
         </div>
         </Section>
     )

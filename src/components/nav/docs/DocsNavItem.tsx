@@ -104,7 +104,6 @@ const DocsNavItem = ({
                         setSubSection(subSectionName)
                         setMobileLastScrollY(sectionHeight)
                         setShowMobileDocsNav(true)
-                        setDocsNavTimer(null)
 
                         if (selectedSubSectionIdx === 0){
                             refs[subSectionName]?.scrollRef?.current?.scrollTo({top: 0});
