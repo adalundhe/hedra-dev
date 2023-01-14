@@ -8,14 +8,12 @@ Hedra.dev is Hedra's online documentation, powered by [NextJS](https://nextjs.or
 ____
 
 ## <b>Getting started</b>
-<br/>
 
 ### <b>Requirements</b>
 
 * Git
 * Latest Node LTS (minimum v16.X)
 
-<br/>
 
 ### <b>Setup</b>
 
