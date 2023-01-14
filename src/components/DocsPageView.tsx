@@ -54,6 +54,7 @@ const DocsPageView = () => {
 
     const {
         clickedScroll,
+        scrollDirection,
         lastScrollY,
         scrollThreshold,
         scrollTimer,
@@ -146,6 +147,45 @@ const DocsPageView = () => {
         });
 
     }, [subsection, section]);
+
+    useEffect(() => {
+
+        if (windowWidth <= 768){
+            if (docsNavTimer !== null){
+                clearTimeout(docsNavTimer)
+                setDocsNavTimer(null)
+    
+            }
+    
+            const scrollY = ref.current?.scrollTop ?? 0;
+            const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
+    
+            if (scrollDistance >= 150) {
+                setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
+            }
+    
+            
+            if (scrollY > mobileLastScrollY ){
+    
+                const hideTimeout = setTimeout(() => {
+                    setShowMobileDocsNav(false);
+                }, 250)
+                
+                setDocsNavTimer(hideTimeout);
+    
+            } else {
+    
+                const hideTimeout = setTimeout(() => {
+                    setShowMobileDocsNav(true);
+                }, 250)
+                
+                setDocsNavTimer(hideTimeout);
+    
+            }
+            
+        }
+
+    }, [lastScrollY])
     
 
     const docsSectionNames = articles.map(article => article.sectionName);
@@ -186,46 +226,7 @@ const DocsPageView = () => {
                         setSubSection(currentSubsection.previous)
                     }
                 })}
-                // onScroll={(event: UIEvent<HTMLDivElement>) => {
-
-                //     if (clickedScroll){
-                //         event.stopPropagation();
-                //         event.preventDefault();
-                //     } 
-
-                //     if (docsNavTimer !== null){
-                //         clearTimeout(docsNavTimer)
-                //         setDocsNavTimer(null)
-
-                //     }
-
-                //     const scrollY = ref.current?.scrollTop ?? 0;
-                //     const scrollDistance = Math.abs(scrollY - mobileLastScrollY);
-
-                //     if (scrollDistance >= 150) {
-                //         setMobileLastScrollY(scrollY > 0 ? scrollY : 0)
-                //     }
-
-                //     if (scrollY > mobileLastScrollY ){
-
-                //         const hideTimeout = setTimeout(() => {
-                //             setShowMobileDocsNav(false);
-                //         }, 250)
-                        
-                //         setDocsNavTimer(hideTimeout);
-
-                //     } else {
-
-                //         const hideTimeout = setTimeout(() => {
-                //             setShowMobileDocsNav(true);
-                //         }, 250)
-                        
-                //         setDocsNavTimer(hideTimeout);
-
-                //     }
-
-              
-                // }}
+   
             >
                 <DocsNav /> 
                 <div className={`bg-[#eeeeee] min-w-0 lg:pl-6 lg:mt-10`}>
