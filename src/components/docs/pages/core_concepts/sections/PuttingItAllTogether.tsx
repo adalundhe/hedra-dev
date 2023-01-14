@@ -75,9 +75,8 @@ const PuttingItAllTogether = ({
             </div>
             <br/>
             <div>
-                This concludes the basic overview of the fundamental concepts required to work with Hedra. In the next section, we'll dive deeper into 
-                Engines, Optimizers, Personas and Reporters. However, you should now have no fear in exploring the rest of the documentation. Let your 
-                curiosity guide you!
+                This concludes the overview of fundamental concepts and components of Hedra. From here, we recommend treating the rest of this
+                documentation like an open-air park - explore as you want or need an have fun!
             </div>
         </div>
         </Section>

@@ -41,7 +41,6 @@ const IntroductionToStages = ({
 
     const stageApiConventionItems = [
         "Configuration is specified as class attributes",
-        "API methods and attributes are invoked as attributes within any methods",
         "Methods decorated by hooks are executed according to that Stage type's lifecycle",
         'Methods not decorated by hooks must be called in "hooked" methods or are ignored',
         'A Stage may contain any number of hooks of the types it supports',

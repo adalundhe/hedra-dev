@@ -66,17 +66,6 @@ const useDocsStore = create<DocsState>()((set, get) => {
   
       },
       {
-          sectionName: "Deeper Dive",
-          sectionPath: "/docs/DeeperDive",
-          sectionSubsections: [
-              "Engines and Hook Lifecycle",
-              "Personas and Hook Schedulng",
-              "Optimizers and automated test configuration",
-              "Getting results with Reporters",
-          ]
-  
-      },
-      {
           sectionName: "Command Line",
           sectionPath: "/docs/command_line",
           sectionSubsections: [
