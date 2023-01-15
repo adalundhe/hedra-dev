@@ -14,8 +14,6 @@ const CLIReference = ({
 
     const commands = useCommandsStore(useCallback((state) => state.commands, []), shallow)
 
-    console.log(commands)
-
     return (
         <Section 
         subSectionName={subSectionName}

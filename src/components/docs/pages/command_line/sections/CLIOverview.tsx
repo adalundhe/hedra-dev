@@ -97,7 +97,7 @@ const CLIOverview = ({
         >
         <div>
             <div>
-                Hedra's command line is the primary way you'll interact with Hedra - from running graphs to communicating 
+                Hedra's command line is the primary way to interact with Hedra - from running graphs to communicating 
                 with distributed deployments.
             </div>
             <br/>
@@ -110,7 +110,7 @@ const CLIOverview = ({
             </div>
             <TerminalSegment command={hedraHelpOutput} />
             <div>
-                Hedra's CLI follows a structure similar to Docker or similar tooling, where comands a grouped by category names:
+                Hedra's CLI follows a structure similar to Docker, where commands a grouped by category names:
             </div>
             <PointList
                 name="cli-category-items"
@@ -118,7 +118,7 @@ const CLIOverview = ({
                 points={cliCategoryItems}
             />
             <div>
-                Hedra also offers a <InlineCodeSegment>ping</InlineCodeSegment> comand to quickly verify an application or service is 
+                Hedra also offers a <InlineCodeSegment>ping</InlineCodeSegment> command to quickly verify an application or service is 
                 reachable before running a graph.
             </div>
             <WarningSegment
