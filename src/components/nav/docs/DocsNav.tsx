@@ -43,27 +43,6 @@ const DocsNav = () => {
 
     }, [router.isReady])
 
-    // useEffect(() => {
-    //     const articleNames = articles.map(article => article.sectionName);
-    //     const curretnSectionIdx = articleNames.indexOf(section);
-    //     const previousSections = articleNames.slice(0, curretnSectionIdx);
-
-    //     console.log(previousSections)
-
-    //     let sectionHeights = previousSections.reduce((sum: number, sectionName: string) => {
-    //         const subSectionHeight = navRefs[sectionName]?.height ?? 0;
-    //         return sum + subSectionHeight;
-    //     }, 0) ?? 0;
-
-    //     const currentSubsections = subsections[section] ?? [];
-    //     const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number
-    //     let subSectionHeights = subsections[section]?.slice(0, currentSubSectionIdx).reduce((sum: number, subSection: string) => sum + (navRefs[subSection]?.height ?? 0), 0) ?? 0;
-
-    //     console.log(subSectionHeights, sectionHeights, ref.current?.clientHeight, navRefs[subsection]?.scrollRef?.current?.scrollHeight)
-   
-    //     ref.current?.scrollTo({top: subSectionHeights + sectionHeights, behavior: 'smooth'});
-
-    // }, [subsection, section])
 
     return (
         <div className="lg:flex hidden lg:sticky top-0 left-0 right-0 py-0 z-50 h-[90vh] pt-10">

@@ -138,9 +138,7 @@ const DocsNavSearch = ({
                                 
                                             refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'nearest', block: 'center' });
                                         }
-
-                                        navRefs[sectionName]?.scrollRef?.current?.scrollIntoView({behavior: 'smooth'})
-                                        
+ 
                                         const updatedRef = {
                                             ...navRefs[sectionName],
                                             isOpen: true
@@ -149,9 +147,12 @@ const DocsNavSearch = ({
                                         navRefs[sectionName] = updatedRef
                                         setDocsNavRefs(navRefs)
 
-                                        navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({behavior: 'smooth'})
+                                        navRefs[sectionName]?.scrollRef?.current?.scrollIntoView({block: 'start', inline: 'start', behavior: 'smooth'})
                                         
-                                        
+                                        setTimeout(() => {
+                                            navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})
+                                        }, 500)
+
                                     }}
                                 >   
                                     <p className='h-full text-xl mr-2 text-[#14151a] hover:text-[#038aff]/70'>{matches[matchName]?.name}</p>

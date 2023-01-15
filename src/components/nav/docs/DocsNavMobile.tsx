@@ -2,7 +2,7 @@ import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
 import { DocsLinkItem } from "../../../store/types";
 import { NavOpenContext } from "../main/NavProvider"
-import { useContext, Fragment, useState, useCallback } from "react"
+import { useContext, Fragment, useState, useCallback, useEffect, useRef } from "react"
 import { useWindowDimensions } from '../../../hooks'
 import { Menu } from '@headlessui/react'
 import { DocsNavSearch } from "./DocsNavSearch";
@@ -11,15 +11,18 @@ import { GiArchiveResearch } from 'react-icons/gi'
 import { useDocsStore, useScrollStore } from "../../../store";
 import { shallow } from 'zustand/shallow'
 import getConfig from 'next/config';
+import { useRouter } from "next/router";
 
 const { publicRuntimeConfig } = getConfig()
 
 
 const DocsNavMobile = () => {
 
+    const ref = useRef<HTMLDivElement>(null);
     const { width } = useWindowDimensions();
     const [searchVisible, setSearchVisible] = useState(false);
     const { isOpen, docsNavOpen, setDocsNavOpen } = useContext(NavOpenContext);
+    const router = useRouter();
 
     const { 
         articles
@@ -29,9 +32,20 @@ const DocsNavMobile = () => {
 
     const {
         showMobileDocsNav,
+        setNavRef
     } = useScrollStore(useCallback((state) => ({
-        showMobileDocsNav: state.showMobileDocsNav
+        showMobileDocsNav: state.showMobileDocsNav,
+        setNavRef: state.setNavScrollRef      
     }), []))
+
+
+    useEffect(() => {
+
+        if (router.isReady){
+            setNavRef(ref)
+        }
+
+    }, [router.isReady])
 
     return (
         
@@ -82,7 +96,7 @@ const DocsNavMobile = () => {
                                     <DocsNavSearch 
                                         setSearchVisible={setSearchVisible}
                                     />
-                                    <div className={`px-8 h-[30vh] w-full ${searchVisible ? 'invisible' : ''}`}>
+                                    <div className={`px-8 h-[90vh] w-full ${searchVisible ? 'invisible' : ''}`}>
                                     {
                                         articles.map((docsLink: DocsLinkItem, idx: number) => 
                                             <div key={`docs-group-mobile-${idx}`}>

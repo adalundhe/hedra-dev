@@ -54,19 +54,6 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
     }, [router.isReady])
 
 
-    // useEffect(() => {
-
-    //     if (docsLink.sectionName === section){
-    //         const currentSection = docsNavRefs[docsLink.sectionName] ?? {};
-    //         currentSection.isOpen = docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : true;
-    //         docsNavRefs[docsLink.sectionName] = currentSection;
-    //         setDocsNavRefs(docsNavRefs);
-
-    //     }
-
-
-    // }, [section, subsection])
-
     return (
         <div key={docsLink.sectionPath} className='py-4' ref={sectionRef}>
             <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
