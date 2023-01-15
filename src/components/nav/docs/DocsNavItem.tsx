@@ -68,23 +68,23 @@ const DocsNavItem = ({
     useEffect(() => {
 
         if (router.isReady){
-            setNavRefs({
-                ...navRefs, 
-                [subSectionName]: {
-                    scrollRef: divRef,
-                    height: divRef.current?.clientHeight,
-                    viewRef: ref,
-                    inView: inView
-                }
-            })
+            navRefs[subSectionName] = {
+                scrollRef: divRef,
+                height: divRef.current?.clientHeight,
+                viewRef: ref,
+                inView: inView
+            }
+        
+            setNavRefs(navRefs)
         }
 
-    }, [router.isReady])
+    }, [section, subsection, router.isReady])
 
 
     return (
         <div
             className='w-full'
+            ref={divRef}
         >
             <button 
                 className={`w-full outline-none py-4 text-left flex items-center cursor-pointer px-2 my-1 ${subSectionName === subsection ? 'bg-[#038aff]/5 hover:text-[#038aff] text-[#038aff]/70  rounded-sm' : 'hover:bg-[#2e3131]/5 text-[#14151a]/70 hover:text-[#14151a]'}`}
@@ -115,9 +115,7 @@ const DocsNavItem = ({
 
                         router.push(`/docs/${section}#${subSectionName}`)
                         
-                    }
-                    
-                    
+                    }    
                 
                 }}
             >
@@ -127,7 +125,7 @@ const DocsNavItem = ({
                     }
                 </div>
                 <div ref={ref}>
-                    <p ref={divRef} className={subSectionStyle}>{subSectionName}</p>
+                    <p className={subSectionStyle}>{subSectionName}</p>
                 </div>
             </button>
         </div>

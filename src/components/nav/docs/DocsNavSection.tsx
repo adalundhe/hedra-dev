@@ -17,10 +17,12 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
     const { ref, inView } = useInView()
 
     const { 
+        docsNavRefs,
         section,
         subsection,
         setSection, 
         setSubSection,
+        setDocsNavRefs
     } = useDocsStore(useCallback((state) => ({
         docsNavRefs: state.docsNavRefs,
         articles: state.articles,
@@ -37,26 +39,47 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
 
     useEffect(() => {
 
-        if (docsLink.sectionName === section){
-
-            sectionRef?.current?.scrollIntoView({  block: 'start', behavior: 'smooth' })
-            setSectionOpen(true)
+        if (router.isReady){
+            docsNavRefs[docsLink.sectionName] = {
+                scrollRef: sectionRef,
+                height: sectionRef.current?.clientHeight,
+                viewRef: ref,
+                inView: inView,
+                isOpen: docsLink.sectionName === section
+            }
+        
+            setDocsNavRefs(docsNavRefs)
         }
 
+    }, [router.isReady])
 
-    }, [section, subsection])
+
+    // useEffect(() => {
+
+    //     if (docsLink.sectionName === section){
+    //         const currentSection = docsNavRefs[docsLink.sectionName] ?? {};
+    //         currentSection.isOpen = docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : true;
+    //         docsNavRefs[docsLink.sectionName] = currentSection;
+    //         setDocsNavRefs(docsNavRefs);
+
+    //     }
+
+
+    // }, [section, subsection])
 
     return (
-        <div key={docsLink.sectionPath} className='py-4' ref={ref}>
-            <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7" ref={sectionRef}>
+        <div key={docsLink.sectionPath} className='py-4' ref={sectionRef}>
+            <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
                 {
-                    sectionOpen &&docsLink.sectionName === section  ?
+                    docsNavRefs[docsLink.sectionName]?.isOpen &&docsLink.sectionName === section  ?
                     <button
                         className="text-left flex items-center"
                         type="button"
                         onClick={() => {
-
-                            setSectionOpen(docsLink.sectionName === section ? !sectionOpen : false)
+                            const currentSection = docsNavRefs[docsLink.sectionName] ?? {};
+                            currentSection.isOpen = docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : false;
+                            docsNavRefs[docsLink.sectionName] = currentSection;
+                            setDocsNavRefs(docsNavRefs);
                         }}
                     >
                         <div className="mr-2">
@@ -75,13 +98,18 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
                         type="button"
                         onClick={() => {
 
+                            const currentSection = docsNavRefs[docsLink.sectionName] ?? {};
+                            currentSection.isOpen = docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : true;
+                            docsNavRefs[docsLink.sectionName] = currentSection;
+                            setDocsNavRefs(docsNavRefs);
+
                             setSection(docsLink.sectionName)
 
                             const updatedSubSection =  docsLink.sectionSubsections.includes(subsection) ? subsection :  docsLink.sectionSubsections.at(0) as string;
                             setSubSection(updatedSubSection)
 
                             router.push(`${docsLink.sectionName}/#${updatedSubSection.toLowerCase().replace(/[^A-Za-z0-9]/g, '-')}`)
-                            setSectionOpen(docsLink.sectionName === section ? !sectionOpen : true)
+
                         }}
                     >
                         <div className="mr-2" ref={ref}>
@@ -100,8 +128,7 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
             </div>
             <DocsNavItems 
                 sectionName={docsLink.sectionName}
-                open={sectionOpen}
-                setSectionOpen={setSectionOpen}
+                open={docsNavRefs[docsLink.sectionName]?.isOpen as boolean}
                 docsItemSubsections={docsLink.sectionSubsections as string[]}
             />
         </div>

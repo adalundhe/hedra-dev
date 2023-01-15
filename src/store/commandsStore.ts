@@ -13,6 +13,7 @@ const useCommandsStore = create<CommandsState>((set) => {
     const commands: CommandReference[] = [
         {
             command: "hedra graph create",
+            commandCategory: "graph",
             description: 'Creates a graph starter template, with stages, engines, and reporters configurable by optional arguments.',
             requiredArguments: [],
             optionalArguments: [
@@ -71,6 +72,7 @@ Graph generated!
         },
         {
             command: "hedra graph run",
+            commandCategory: "graph",
             description: "Runs the specified graph, which can be referenced either by path or (if this command is run in a project directory) by name",
             requiredArguments: [
                 {
@@ -141,6 +143,7 @@ Loading graph - Test
         },
         {
             command: "hedra graph check",
+            commandCategory: "graph",
             description: "Checks that the specified graph adheres to Hedra's rules for valid graphs.",
             requiredArguments: [
                 {
@@ -181,6 +184,7 @@ Validation complete!
         },
         {
             command: "hedra plugin create",
+            commandCategory: "plugin",
             description: "Creates a plugin starter template for the specified type of plugin at the specified path.",
             requiredArguments: [
                 {
@@ -216,6 +220,7 @@ Plugin generated!
         },
         {
             command: "hedra project about",
+            commandCategory: "project",
             description: "Provides a summary of the project in the current directory - including known graphs, plugins, and project config options.",
             requiredArguments: [],
             optionalArguments: [
@@ -255,6 +260,7 @@ Core Options:
         },
         {
             command: "hedra project create",
+            commandCategory: "project",
             description: "Creates a project synced to the specified git repository URL at the specified path.",
             requiredArguments: [
                 {
@@ -343,6 +349,7 @@ Project created!
         },
         {
             command: "hedra project get",
+            commandCategory: "project",
             description: "Clones down an existing project from the specified Git remote repository.",
             requiredArguments: [
                 {
@@ -438,6 +445,7 @@ Project fetch complete!
         },
         {
             command: "hedra project sync",
+            commandCategory: "project",
             description: "Pulls down the latest changes on the set or speciied branch of the project's remote Git repository, discoveres new graphs and plugins, then pushes any changes made locally.",
             requiredArguments: [],
             optionalArguments: [
@@ -546,6 +554,59 @@ Found - 2 - new graphs and - 0 - plugins.
 Synchronizing project state with remote at - https://github.com/hedra/example.git...
 Saving project state to .hedra.json config.
 Sync complete!
+
+`
+        },
+        {
+            command: "hedra ping",
+            commandCategory: "helper",
+            description: "Executes a one-off request against the specified URI.",
+            requiredArguments: [
+                {
+                    name: "[uri]",
+                    description: "URL or URI of the application/service we want to verify we can connect to.",
+                    valueType: "string",
+                    example: "https://httpbin.org/get"
+                }
+            ],
+            optionalArguments: [
+                {
+                    name: "--engine",
+                    description: "Engine we want to use whe testing the connection.",
+                    valueType: "string",
+                    defaultValue: "http",
+                    example: "grpc",
+                    isFlag: false
+                },
+                {
+                    name: "--timeout",
+                    description: "Timeout (in seconds) for the connection attempt.",
+                    valueType: "integer",
+                    defaultValue: 60,
+                    example: 15,
+                    isFlag: false
+                },
+                {
+                    name: '--log-level',
+                    description: 'Sets the log level for the Hedra logger when running this command.',
+                    valueType: 'string',
+                    example: 'error',
+                    defaultValue: 'info',
+                    isFlag: false
+                }
+            ],
+            exampleCommand: "hedra ping https://httpbin.org/get",
+            exampleOutput: `      :::    :::       ::::::::::       :::::::::       :::::::::           :::  
+     :+:    :+:       :+:              :+:    :+:      :+:    :+:        :+: :+: 
+    +:+    +:+       +:+              +:+    +:+      +:+    +:+       +:+   +:+ 
+   +#++:++#++       +#++:++#         +#+    +:+      +#++:++#:       +#++:++#++: 
+  +#+    +#+       +#+              +#+    +#+      +#+    +#+      +#+     +#+  
+ #+#    #+#       #+#              #+#    #+#      #+#    #+#      #+#     #+#   
+###    ###       ##########       #########       ###    ###      ###     ###     0.6.21
+
+
+Pinging target - https://httpbin.org/get - using engine - http.
+Successfully connected to - https://httpbin.org/get!
 
 `
         }

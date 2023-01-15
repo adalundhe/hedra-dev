@@ -41,14 +41,17 @@ const DocsNavSearch = ({
     })
 
     const { 
+        articles,
         section,
         subsection,
         refs,
         subsections,
         navRefs,
         setSection, 
-        setSubSection
+        setSubSection,
+        setDocsNavRefs
     } = useDocsStore(useCallback((state) => ({
+        articles: state.articles,
         section: state.selectedSection,
         subsection: state.selectedSubSection,
         refs: state.subSectionRefs,
@@ -56,16 +59,18 @@ const DocsNavSearch = ({
         navRefs: state.docsNavRefs,
         setSubSections: state.setSubSections,
         setSection: state.setSelectedSection,
-        setSubSection: state.setSelectedSubSection
+        setSubSection: state.setSelectedSubSection,
+        setDocsNavRefs: state.setDocsNavRefs
     }), []), shallow)
 
 
     const {
-        scrollRef,
+        navRef,
         setLastScrollY
 
     } = useScrollStore(useCallback((state) => ({
         scrollRef: state.scrollRef,
+        navRef: state.navScrollRef,
         setLastScrollY: state.setLastScrollY
     }), []))
     
@@ -125,12 +130,6 @@ const DocsNavSearch = ({
                                         setIsFocused(false);
                                         ref.current?.blur();
 
-                                        navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({ 
-                                            inline: 'start',
-                                            block: 'start',
-                                            behavior: 'smooth'
-                                         })
-
                                         if (sectionName !== section || subSectionName !== subsection){
                                             const selectedSubSectionIdx = subsections[sectionName]?.indexOf(subSectionName) as number
                                             const sectionHeight = subsections[sectionName]?.slice(0, selectedSubSectionIdx).reduce((sum: number, subSection: string) => sum + (refs[subSection]?.height ?? 0), 0) ?? 0;
@@ -140,6 +139,17 @@ const DocsNavSearch = ({
                                             refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'nearest', block: 'center' });
                                         }
 
+                                        navRefs[sectionName]?.scrollRef?.current?.scrollIntoView({behavior: 'smooth'})
+                                        
+                                        const updatedRef = {
+                                            ...navRefs[sectionName],
+                                            isOpen: true
+                                        }
+
+                                        navRefs[sectionName] = updatedRef
+                                        setDocsNavRefs(navRefs)
+
+                                        navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({behavior: 'smooth'})
                                         
                                         
                                     }}

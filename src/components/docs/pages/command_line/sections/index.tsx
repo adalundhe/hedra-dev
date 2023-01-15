@@ -1,9 +1,9 @@
 import { CLIOverview } from './CLIOverview';
-import { CLIReference } from './CLIReference';
+import { CLIReferenceSection } from './CLIReferenceSection';
 import { CLILoggingOptions } from './CLILoggingOptions';
 
 
-type Section = typeof CLIOverview | typeof CLIReference | typeof CLILoggingOptions 
+type Section = typeof CLIOverview | typeof CLIReferenceSection | typeof CLILoggingOptions 
 
 const CommandLineSection = ({
     subSectionName
@@ -13,7 +13,11 @@ const CommandLineSection = ({
 
     const sections: {[key:string]: Section} = {
         'CLI Overview': CLIOverview,
-        'CLI Reference': CLIReference,
+        'Graph commands': CLIReferenceSection,
+        "Project commands": CLIReferenceSection,
+        "Plugin commands": CLIReferenceSection,
+        "Cloud commands": CLIReferenceSection,
+        "Helper commands": CLIReferenceSection,
         'CLI Logging Options': CLILoggingOptions,
     }
 

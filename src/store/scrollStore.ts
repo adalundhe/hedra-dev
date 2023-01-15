@@ -4,6 +4,7 @@ import { create } from 'zustand';
 
 export interface ScrollState {
     scrollRef?: RefObject<HTMLElement>;
+    navScrollRef?: RefObject<HTMLElement>;
     scrollDirection: string;
     lastScrollY: number;
     lastDirectionScrollY: number;
@@ -23,6 +24,7 @@ export interface ScrollState {
     setShowMobileDocsNav: (updatedShowState: boolean) => void;
     setMobileLastScrollY: (updatedScroll: number) => void;
     setDocsNavTimer: (updatedTimer: NodeJS.Timeout | null) => void;
+    setNavScrollRef: (updatedRef: RefObject<HTMLElement>) => void;
 }
 
 
@@ -37,6 +39,7 @@ const useScrollStore = create<ScrollState>()((set) => ({
     showMobileDocsNav: true,
     mobileLastScrollY: 0,
     docsNavTimer: null,
+    navScrollRef: undefined,
     setScrollRef: (updatedScrollRef) => set(() => ({ scrollRef: updatedScrollRef })),
     setScrollDirection: (updatedScrollDirection) => set(() => ({ scrollDirection: updatedScrollDirection })),
     setLastScrollY: (updatedScrollY) => set(() => ({ lastScrollY: updatedScrollY })),
@@ -47,6 +50,7 @@ const useScrollStore = create<ScrollState>()((set) => ({
     setShowMobileDocsNav: (updatedShowState) => set(() => ({ showMobileDocsNav: updatedShowState })),
     setMobileLastScrollY: (updatedScroll) => set(() => ({ mobileLastScrollY: updatedScroll })),
     setDocsNavTimer: (updatedTimer) => set(() => ({ scrollTimer: updatedTimer })),
+    setNavScrollRef: (updatedRef) => set(() => ({ navScrollRef: updatedRef }))
 }));
 
 

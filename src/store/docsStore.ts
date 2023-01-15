@@ -70,8 +70,11 @@ const useDocsStore = create<DocsState>()((set, get) => {
           sectionPath: "/docs/command_line",
           sectionSubsections: [
               "CLI Overview",
-              "CLI Reference",
-              "CLI Logging Options"
+              "Graph commands",
+              "Project commands",
+              "Plugin commands",
+              "Cloud commands",
+              "Helper commands"
           ]
   
       },

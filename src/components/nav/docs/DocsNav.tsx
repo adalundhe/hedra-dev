@@ -2,10 +2,11 @@ import { Transition } from "@headlessui/react";
 import { DocsNavSection } from "./DocsNavSection";
 import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
 import { DocsNavSearch } from "./DocsNavSearch";
-import { UIEvent, useCallback, useEffect, useRef, useState } from "react";
-import { useDocsStore } from "../../../store";
+import { UIEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useDocsStore, useScrollStore } from "../../../store";
 import { shallow } from 'zustand/shallow'
 import getConfig from 'next/config';
+import { useRouter } from "next/router";
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -15,19 +16,57 @@ const DocsNav = () => {
     const ref = useRef<HTMLDivElement>(null);
     const [ready, setReady] = useState(false);
     const [searchVisible, setSearchVisible] = useState(false);
+    const router = useRouter()
 
     useEffect(() => {
         setReady(true)
     }, [])
 
     const { 
-        articles
+        articles,
     } = useDocsStore(useCallback((state) => ({
         articles: state.articles
     }), []), shallow)
 
+    const {
+        setNavRef
+    } = useScrollStore(useCallback((state) => ({
+        setNavRef: state.setNavScrollRef      
+    }), []))
+
+
+    useEffect(() => {
+
+        if (router.isReady){
+            setNavRef(ref)
+        }
+
+    }, [router.isReady])
+
+    // useEffect(() => {
+    //     const articleNames = articles.map(article => article.sectionName);
+    //     const curretnSectionIdx = articleNames.indexOf(section);
+    //     const previousSections = articleNames.slice(0, curretnSectionIdx);
+
+    //     console.log(previousSections)
+
+    //     let sectionHeights = previousSections.reduce((sum: number, sectionName: string) => {
+    //         const subSectionHeight = navRefs[sectionName]?.height ?? 0;
+    //         return sum + subSectionHeight;
+    //     }, 0) ?? 0;
+
+    //     const currentSubsections = subsections[section] ?? [];
+    //     const currentSubSectionIdx = currentSubsections?.indexOf(subsection) as number
+    //     let subSectionHeights = subsections[section]?.slice(0, currentSubSectionIdx).reduce((sum: number, subSection: string) => sum + (navRefs[subSection]?.height ?? 0), 0) ?? 0;
+
+    //     console.log(subSectionHeights, sectionHeights, ref.current?.clientHeight, navRefs[subsection]?.scrollRef?.current?.scrollHeight)
+   
+    //     ref.current?.scrollTo({top: subSectionHeights + sectionHeights, behavior: 'smooth'});
+
+    // }, [subsection, section])
+
     return (
-        <div className="lg:flex hidden lg:sticky top-0 left-0 right-0 py-0 z-50 h-[70vh] pt-10">
+        <div className="lg:flex hidden lg:sticky top-0 left-0 right-0 py-0 z-50 h-[90vh] pt-10">
             <Transition
                 appear={true}
                 show={ready}

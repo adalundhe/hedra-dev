@@ -9,35 +9,44 @@ import { shallow } from 'zustand/shallow'
 const DocsNavItems = ({ 
     sectionName,
     open,
-    setSectionOpen,
     docsItemSubsections
  }: {
     sectionName: string,
     open: boolean,
-    setSectionOpen: (open: boolean) => void,
     docsItemSubsections: string[]
  }) => {
 
     const { 
+        docsNavRefs,
         section,
         subsection,
+        setDocsNavRefs
     } = useDocsStore(useCallback((state) => ({
+        docsNavRefs: state.docsNavRefs,
+        articles: state.articles,
         section: state.selectedSection,
-        subsection: state.selectedSubSection
+        subsection: state.selectedSubSection,
+        setDocsNavRefs: state.setDocsNavRefs
     }), []), shallow)
     
     const { width } = useWindowDimensions();
 
     useEffect(() => {
         if (width < 1024 || section !== sectionName){
-            setSectionOpen(false)
+            const currentSection = docsNavRefs[sectionName] ?? {};
+            currentSection.isOpen = false;
+            docsNavRefs[sectionName] = currentSection;
+            setDocsNavRefs(docsNavRefs);
         }
     }, [width])
 
     useEffect(() => {
 
         if (sectionName === section){
-            setSectionOpen(true)
+            const currentSection = docsNavRefs[sectionName] ?? {};
+            currentSection.isOpen = true;
+            docsNavRefs[sectionName] = currentSection;
+            setDocsNavRefs(docsNavRefs);
         }
 
     }, [section, subsection])

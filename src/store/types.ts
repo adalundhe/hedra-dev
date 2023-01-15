@@ -39,6 +39,7 @@ export type ScrollRef = {
     viewRef?: (node?: Element | null | undefined) => void;
     inView?: boolean;
     height?: number;
+    isOpen?: boolean;
 }
 
 
@@ -62,6 +63,7 @@ export type CommandOptionalArgument ={
 
 export type CommandReference = {
     command: string;
+    commandCategory: string;
     description: string;
     requiredArguments: CommandRequiredArgument[];
     optionalArguments: CommandOptionalArgument[];
