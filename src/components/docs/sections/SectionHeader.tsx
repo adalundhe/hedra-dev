@@ -15,7 +15,13 @@ const SectionHeader = ({
     const router = useRouter();
     const ref = useRef<HTMLDivElement>(null);
 
-    const subSection = useDocsStore(useCallback((state) => state.selectedSubSection, []))
+    const {
+        subsection,
+        subsections
+    } = useDocsStore(useCallback((state) => ({
+        subsection: state.selectedSubSection,
+        subsections: state.selectedSubSections
+    }), []))
 
     let sectionHref = subSectionName.toLowerCase().replace(/[^A-Za-z0-9]/g, '-');
     if (sectionHref[sectionHref.length -1] === '-'){
@@ -25,7 +31,7 @@ const SectionHeader = ({
 
     useEffect(() => {
 
-        if (router.isReady && subSectionName === subSection){
+        if (router.isReady && subSectionName === subsection && subsections.indexOf(subSectionName) > 0){
 
             const timeout = setTimeout(() => {
                 ref.current?.scrollIntoView({block: 'start', inline: 'start', behavior: 'smooth'})

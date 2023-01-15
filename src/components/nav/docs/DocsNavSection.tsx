@@ -34,9 +34,6 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
     }), []), shallow)
 
 
-    const [sectionOpen, setSectionOpen] = useState(true);
-
-
     useEffect(() => {
 
         if (router.isReady){
@@ -54,17 +51,21 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
     }, [router.isReady])
 
 
+
     return (
         <div key={docsLink.sectionPath} className='py-4' ref={sectionRef}>
             <div className="flex rounded py-2 text-sm font-medium hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-7">
                 {
-                    docsNavRefs[docsLink.sectionName]?.isOpen &&docsLink.sectionName === section  ?
+                    docsNavRefs[docsLink.sectionName]?.isOpen && docsLink.sectionName === section  ?
                     <button
                         className="text-left flex items-center"
                         type="button"
                         onClick={() => {
-                            const currentSection = docsNavRefs[docsLink.sectionName] ?? {};
-                            currentSection.isOpen = docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : false;
+                            const currentSection ={
+                                ... docsNavRefs[docsLink.sectionName],
+                                isOpen: docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : false
+                            }
+
                             docsNavRefs[docsLink.sectionName] = currentSection;
                             setDocsNavRefs(docsNavRefs);
                         }}
@@ -73,7 +74,7 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
                             <RxCaretDown className={docsLink.sectionName === section ? "text-xl text-[#038aff]/70" : "text-xl text-[#14151a]"} />
                         </div>
                         <h3 className={
-                            "text-xl text-[#14151a] hover:bold cursor-pointer hover:text-[#038aff]/70 w-fit"
+                            `text-xl text-[#14151a] hover:bold ${docsLink.sectionName === section ? 'cursor-not-allowed' : 'cursor-pointer hover:text-[#038aff]/70'} w-fit`
                         }>
                         {
                             docsLink.sectionName
@@ -85,8 +86,11 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
                         type="button"
                         onClick={() => {
 
-                            const currentSection = docsNavRefs[docsLink.sectionName] ?? {};
-                            currentSection.isOpen = docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : true;
+                            const currentSection ={
+                                ... docsNavRefs[docsLink.sectionName],
+                                isOpen: docsLink.sectionName === section ? !docsNavRefs[docsLink.sectionName]?.isOpen : true
+                            }
+                            console.log(currentSection)
                             docsNavRefs[docsLink.sectionName] = currentSection;
                             setDocsNavRefs(docsNavRefs);
 
