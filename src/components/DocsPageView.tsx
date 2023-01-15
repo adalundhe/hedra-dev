@@ -111,6 +111,7 @@ const DocsPageView = () => {
             setShowMobileDocsNav(true);
 
             setReady(true);
+
         }
         
     }, [router.isReady])

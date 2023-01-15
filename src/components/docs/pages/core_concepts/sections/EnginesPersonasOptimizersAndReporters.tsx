@@ -61,7 +61,7 @@ class OutputPostgresResults(Submit):
     )`
 
 
-const EnginesPersonasAndOptimizers = ({
+const EnginesPersonasOptimizersAndReporters = ({
     subSectionName
 }: {
     subSectionName: string
@@ -238,5 +238,5 @@ const EnginesPersonasAndOptimizers = ({
 
 
 export {
-    EnginesPersonasAndOptimizers
+    EnginesPersonasOptimizersAndReporters
 }

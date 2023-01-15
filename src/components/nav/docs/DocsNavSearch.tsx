@@ -1,11 +1,12 @@
 import { GoSearch } from 'react-icons/go'
 import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useDocsSearch, useKeyCommand, useFocus } from '../../../hooks';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useDocsSearch, useKeyCommand, useFocus, useWindowDimensions } from '../../../hooks';
 import { AiFillMacCommand } from 'react-icons/ai'
 import { useRouter } from 'next/router';
 import { useDocsStore, useScrollStore } from '../../../store';
 import { shallow } from 'zustand/shallow'
+import { NavOpenContext } from '../main';
 
 
 const DocsNavSearch = ({
@@ -14,10 +15,21 @@ const DocsNavSearch = ({
     setSearchVisible(searchVisible: boolean): void
 }) => {
     
+
+    const { setDocsNavOpen } = useContext(NavOpenContext);
     const { query, setQuery, matches } = useDocsSearch();
 
     const { isFocused, setIsFocused, ref } = useFocus<HTMLInputElement>();
-    const router = useRouter();
+    
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    const { width } = useWindowDimensions();
+
+    useEffect(() => {
+        
+        setWindowWidth(width)
+
+    }, [windowWidth, width])
 
     useEffect(() => {
         setSearchVisible(isFocused)
@@ -41,7 +53,6 @@ const DocsNavSearch = ({
     })
 
     const { 
-        articles,
         section,
         subsection,
         refs,
@@ -51,7 +62,6 @@ const DocsNavSearch = ({
         setSubSection,
         setDocsNavRefs
     } = useDocsStore(useCallback((state) => ({
-        articles: state.articles,
         section: state.selectedSection,
         subsection: state.selectedSubSection,
         refs: state.subSectionRefs,
@@ -65,7 +75,6 @@ const DocsNavSearch = ({
 
 
     const {
-        navRef,
         setLastScrollY
 
     } = useScrollStore(useCallback((state) => ({
@@ -121,8 +130,7 @@ const DocsNavSearch = ({
                                     className="text-left flex items-center rounded-sm py-2 pl-2 hover:bg-[#038aff]/5 w-full"
                                     type="button" 
                                     onClick={() => {
-                                        
-                            
+
                                         setSection(sectionName);
                                         setSubSection(subSectionName);
                                         
@@ -138,7 +146,7 @@ const DocsNavSearch = ({
                                 
                                             refs[subSectionName]?.scrollRef?.current?.scrollIntoView({ inline: 'nearest', block: 'center' });
                                         }
- 
+
                                         const updatedRef = {
                                             ...navRefs[sectionName],
                                             isOpen: true
@@ -146,12 +154,18 @@ const DocsNavSearch = ({
 
                                         navRefs[sectionName] = updatedRef
                                         setDocsNavRefs(navRefs)
-
-                                        navRefs[sectionName]?.scrollRef?.current?.scrollIntoView({block: 'start', inline: 'start', behavior: 'smooth'})
                                         
-                                        setTimeout(() => {
-                                            navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})
-                                        }, 500)
+                                        if (windowWidth > 768){
+
+                                            navRefs[sectionName]?.scrollRef?.current?.scrollIntoView({block: 'start', inline: 'start', behavior: 'smooth'})
+                                            
+                                            setTimeout(() => {
+                                                navRefs[subSectionName]?.scrollRef?.current?.scrollIntoView({block: 'center', inline: 'center', behavior: 'smooth'})
+                                            }, 500)
+
+                                        } else {
+                                            setDocsNavOpen(false)
+                                        }
 
                                     }}
                                 >   
