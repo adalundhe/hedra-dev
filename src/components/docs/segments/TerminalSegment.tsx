@@ -15,6 +15,7 @@ const TerminalSegment = ({
 
   // Terminal has 100% width by default so it should usually be wrapped in a container div
   return (
+    <>
     <div className='font-sans text-left text-base flex mt-8 h-full' ref={ref}>
         <div className="h-[100%] w-[100%] flex items-center justify-center" >
             <Terminal colorMode={ ColorMode.Dark} onInput={null}>
@@ -26,6 +27,8 @@ const TerminalSegment = ({
             </Terminal>
         </div>
     </div>
+    <br/>
+    </>
   )
 };
 

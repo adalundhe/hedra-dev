@@ -1,7 +1,7 @@
 import { RxDotFilled, RxDot } from 'react-icons/rx';
 import { useInView } from "react-intersection-observer"
 import { useCallback, useEffect, useMemo, useRef } from 'react';
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 import { useDocsStore, useScrollStore } from '../../../store';
 import { useRouter } from 'next/router';
 

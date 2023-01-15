@@ -7,7 +7,7 @@ import { DocsNavMobile } from "./nav";
 import { Footer } from "./footer";
 import { RxCaretLeft, RxCaretRight } from 'react-icons/rx'
 import { useDocsStore, useScrollStore } from "../store";
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 import { useRouter } from "next/router";
 import Articles from "./docs/pages";
 

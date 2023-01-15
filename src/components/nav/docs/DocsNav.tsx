@@ -4,7 +4,7 @@ import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
 import { DocsNavSearch } from "./DocsNavSearch";
 import { UIEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useDocsStore } from "../../../store";
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig()

@@ -5,7 +5,7 @@ import { useDocsSearch, useKeyCommand, useFocus } from '../../../hooks';
 import { AiFillMacCommand } from 'react-icons/ai'
 import { useRouter } from 'next/router';
 import { useDocsStore, useScrollStore } from '../../../store';
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 
 const DocsNavSearch = ({

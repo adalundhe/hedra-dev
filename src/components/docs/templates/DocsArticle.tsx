@@ -1,7 +1,7 @@
 import { cloneElement, useCallback, useEffect, useRef, useState } from "react";
 import { useWindowDimensions } from "../../../hooks";
 import { useDocsStore } from "../../../store";
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 const DocsArticle = ({ children }: {children: JSX.Element}) => {
 

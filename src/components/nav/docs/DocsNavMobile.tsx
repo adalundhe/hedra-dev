@@ -9,7 +9,7 @@ import { DocsNavSearch } from "./DocsNavSearch";
 import { GrClose } from 'react-icons/gr'
 import { GiArchiveResearch } from 'react-icons/gi'
 import { useDocsStore, useScrollStore } from "../../../store";
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig()

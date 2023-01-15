@@ -40,3 +40,31 @@ export type ScrollRef = {
     inView?: boolean;
     height?: number;
 }
+
+
+export type CommandRequiredArgument = {
+    name: string;
+    description: string;
+    valueType: string;
+    example: string | number | boolean
+}
+
+
+export type CommandOptionalArgument ={
+    name: string;
+    description: string;
+    valueType: string;
+    example: string | number | boolean;
+    defaultValue: string | number | boolean;
+    isFlag: boolean;
+}
+
+
+export type CommandReference = {
+    command: string;
+    description: string;
+    requiredArguments: CommandRequiredArgument[];
+    optionalArguments: CommandOptionalArgument[];
+    exampleCommand: string;
+    exampleOutput: string;
+}

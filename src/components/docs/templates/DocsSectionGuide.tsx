@@ -3,7 +3,7 @@ import { useWindowDimensions } from '../../../hooks'
 import { RxDotFilled, RxDot } from 'react-icons/rx'
 import { DocsLinkItem, DocsLinkSubsections } from "../../../store/types";
 import { useDocsStore, useScrollStore } from "../../../store";
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 import { useRouter } from "next/router";
 
 

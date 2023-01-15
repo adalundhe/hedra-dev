@@ -3,7 +3,7 @@ import { Transition } from "@headlessui/react"
 import { useWindowDimensions } from '../../../hooks'
 import { DocsNavItem } from "./DocsNavItem"
 import { useDocsStore } from "../../../store"
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 
 const DocsNavItems = ({ 

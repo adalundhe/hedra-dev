@@ -1,7 +1,7 @@
 import { RefObject, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { useInView } from "react-intersection-observer"
 import { useDocsStore } from "../../../store";
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { ScrollRef } from "../../../store/types";
 
 const SectionHeader = ({

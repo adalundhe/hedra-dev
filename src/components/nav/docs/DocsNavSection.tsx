@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from 'next/router';
 import { useInView } from 'react-intersection-observer';
 import { useDocsStore } from '../../../store';
-import shallow from 'zustand/shallow'
+import { shallow } from 'zustand/shallow'
 
 
 const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
@@ -39,6 +39,7 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
 
         if (docsLink.sectionName === section){
 
+            sectionRef?.current?.scrollIntoView({  block: 'start', behavior: 'smooth' })
             setSectionOpen(true)
         }
 

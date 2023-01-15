@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
-import shallow from "zustand/shallow";
+import { shallow } from "zustand/shallow";
 import { useDocsStore } from "../../../store";
 import { SectionHeader } from "./SectionHeader";
 

@@ -496,8 +496,8 @@ code:has( > .react-syntax-highlighter-line-number) {
 @media only screen and (min-width: 1700px) {  
 
   .terminal-segment {
-    font-size: 0.83vmin !important;
-    line-height: 0.98vmin !important;
+    font-size: 0.8vmin !important;
+    line-height: 0.95vmin !important;
   }
 
   .terminal-command-segment-wrapper {
@@ -510,8 +510,8 @@ code:has( > .react-syntax-highlighter-line-number) {
 @media only screen and (min-width: 1800px) {  
 
   .terminal-segment {
-    font-size: 0.93vmin !important;
-    line-height: 1.08vmin !important;
+    font-size: 0.85vmin !important;
+    line-height: 1vmin !important;
   }
 
   .terminal-command-segment-wrapper {
@@ -525,8 +525,8 @@ code:has( > .react-syntax-highlighter-line-number) {
 @media only screen and (min-width: 1900px) {  
 
   .terminal-segment {
-    font-size: 1.03vmin !important;
-    line-height: 1.18vmin !important;
+    font-size: 0.9vmin !important;
+    line-height: 1.05vmin !important;
   }
 
   .terminal-command-segment-wrapper {
@@ -539,8 +539,8 @@ code:has( > .react-syntax-highlighter-line-number) {
 @media only screen and (min-width: 2000px) {  
 
   .terminal-segment {
-    font-size: 1.13vmin !important;
-    line-height: 1.28vmin !important;
+    font-size: 1vmin !important;
+    line-height: 1.15vmin !important;
   }
 
   .terminal-command-segment-wrapper {

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { useCallback, useRef } from "react"
-import shallow from "zustand/shallow"
+import { shallow } from "zustand/shallow"
 import { useDocsStore, useScrollStore } from "../../../store"
 
 
