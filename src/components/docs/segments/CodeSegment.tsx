@@ -9,12 +9,14 @@ const CodeSegment = ({
     children,
     showLines,
     theme,
-    language
+    language,
+    hideCopy
 }: {
     children: string,
     showLines?: boolean,
     theme?: {[key: string]: string},
-    language?: string
+    language?: string,
+    hideCopy?: boolean
 }) => {
 
     const [sectionActive, setSectionActive] = useState(false);
@@ -76,11 +78,11 @@ const CodeSegment = ({
                             wrapLines
                         />
                     </div>
-                    <div className="flex pt-[1vmin] text-[#eeeeee] text-[1.75rem] pr-[1vmin] text-center h-full pl-[2vmin]">
+                   <div className={`flex pt-[1vmin] text-[#eeeeee] text-[1.75rem] pr-[1vmin] text-center h-full pl-[2vmin] ${hideCopy ? 'invisible' : ''}`}>
                     {
                         sectionActive ? <HiClipboardCheck/> : <HiClipboardCopy/>
                     }
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>

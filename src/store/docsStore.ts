@@ -82,9 +82,13 @@ const useDocsStore = create<DocsState>()((set, get) => {
           sectionName: "Working with Graphs",
           sectionPath: "/docs/working_with_graphs",
           sectionSubsections: [
-              "Running an existing graph",
+              "My first graph",
               "Validating graph changes",
-              "Creating a graph from template"
+              "Using an optimizer",
+              "Checkpointing results",
+              "Cross-graph communication",
+              "Using multiple reporters",
+              "Creating a graph from template",
           ]
   
       },

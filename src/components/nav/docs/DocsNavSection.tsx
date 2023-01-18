@@ -58,7 +58,7 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
                 {
                     docsNavRefs[docsLink.sectionName]?.isOpen && docsLink.sectionName === section  ?
                     <button
-                        className="text-left flex items-center"
+                        className={`text-left flex items-center ${docsLink.sectionName === section ? 'cursor-not-allowed' : 'cursor-pointer'} `}
                         type="button"
                         onClick={() => {
                             const currentSection ={
@@ -74,7 +74,7 @@ const DocsNavSection = ({docsLink}: { docsLink: DocsLinkItem}) => {
                             <RxCaretDown className={docsLink.sectionName === section ? "text-xl text-[#038aff]/70" : "text-xl text-[#14151a]"} />
                         </div>
                         <h3 className={
-                            `text-xl text-[#14151a] hover:bold ${docsLink.sectionName === section ? 'cursor-not-allowed' : 'cursor-pointer hover:text-[#038aff]/70'} w-fit`
+                            `text-xl text-[#14151a] hover:bold ${docsLink.sectionName === section ? '' : 'hover:text-[#038aff]/70'} w-fit`
                         }>
                         {
                             docsLink.sectionName

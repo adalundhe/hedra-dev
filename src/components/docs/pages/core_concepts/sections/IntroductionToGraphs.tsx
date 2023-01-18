@@ -193,7 +193,7 @@ const IntroductionToGraphs = ({
     ]
 
     const graphConditionItems = [
-        "Valid graphs will always begin with at least one Setup stage with no prior dependencies",
+        "Valid graphs will always begin with either at least one Setup or Validate stage with no prior dependencies",
         "Valid graphs will always have some path to and terminate in at least one Submit stage for each other stage",
         "Any given stage will always have at least one path to a terminal Submit stage",
         "Any given stage will always have at least one path back to an initial Setup stage"

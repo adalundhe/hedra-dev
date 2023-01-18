@@ -1,5 +1,5 @@
 import { Section } from "../../../sections"
-import { ExternalLink, TutorialLink, PointList } from "../../../segments"
+import { ExternalLink, TutorialLink, PointList, ArticleLink } from "../../../segments"
 import { RiDiscussFill } from 'react-icons/ri'
 import { GiBrain } from 'react-icons/gi';
 import { GoBeaker } from 'react-icons/go';
@@ -22,8 +22,8 @@ const Welcome = ({
             </p>
             <br/>
             <p>
-                If you haven't worked with Hedra before or if it's been a minute - we recommend starting with the <TutorialLink article="My First Graph" subsection="Getting started" text="My First Graph" />  tutorial. From there
-                we recommend the <TutorialLink article="Managing projects" subsection="Setup" text="Managing Projects" /> tutorial to learn how to work with multiple graphs.
+                If you haven't worked with Hedra before or if it's been a minute - we recommend starting with the <ArticleLink article="Working with Graphs" subsection="My first graph" text="My First Graph" />  tutorial. From there
+                we recommend the <ArticleLink article="Working with Projects" subsection="Creating a Project" text="Creating a Project" /> tutorial to learn how to work with multiple graphs.
             </p>
             <br/>
             <p>
