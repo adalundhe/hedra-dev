@@ -11,7 +11,7 @@ const RepoDisplay = () => {
             <Transition
             show={inView}
             unmount={false}
-            enter="transition-opacity duration-[500ms]"
+            enter="transition-opacity duration-[1000ms]"
             enterFrom="opacity-0"
             enterTo="opacity-100"
             leave="transition-opacity duration-[5000ms]"
