@@ -7,7 +7,7 @@ const RepoDisplay = () => {
     const { ref, inView } = useInView();    
 
     return (
-        <div ref={ref}>
+        <div ref={ref} className="h-screen flex flex-col items-center justify-center my-10 w-screen">
             <Transition
             show={inView}
             unmount={false}
@@ -18,9 +18,7 @@ const RepoDisplay = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >    
-            <div className="h-screen flex flex-col items-center justify-center my-10 w-screen">
-                <InstallCommandText />
-            </div>          
+           <InstallCommandText />       
         </Transition>
         </div>
     )
