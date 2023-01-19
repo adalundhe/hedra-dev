@@ -296,7 +296,7 @@ const MyFirstGraph = ({
         >
         <div>
             <p>
-                In this section we're going to dive riht in into creating a test graph, explaining things from a pratical point of view as opposed to 
+                In this section we're going to dive right in into creating a test graph, explaining things from a pratical point of view as opposed to 
                 nitty-gritty details or broad theoretical strokes.
             </p>
             <br/>
