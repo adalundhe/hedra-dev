@@ -15,15 +15,15 @@ const config = {
   },
   publicRuntimeConfig: {
     // Will be available on both server and client
-    hedraVersion: '0.6.21',
+    hedraVersion: '0.6.25',
     hedraSupportedPythonVersions: [
       '3.8',
       '3.9',
       '3.10',
       '3.11'
     ],
-    bannerAnnouncement: 'Hedra 0.6.21 is available!',
-    bannerAnnouncementLink: "hedra-0-6-21"
+    bannerAnnouncement: 'Hedra 0.6.25 is available!',
+    bannerAnnouncementLink: "hedra-0-6-25"
   },
   async redirects() {
     return [

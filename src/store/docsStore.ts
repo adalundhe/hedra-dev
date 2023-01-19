@@ -84,7 +84,10 @@ const useDocsStore = create<DocsState>()((set, get) => {
           sectionSubsections: [
               "My first graph",
               "Validating graph changes",
-              "Using an optimizer",
+              "Converting actions to tasks",
+              "Checking results",
+              "Adding an optimizer",
+              "Using multiple enignes",
               "Checkpointing results",
               "Cross-graph communication",
               "Using multiple reporters",

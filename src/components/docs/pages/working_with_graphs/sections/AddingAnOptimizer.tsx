@@ -302,7 +302,7 @@ const optimizedSecondStageResults = `"TestHTTPBinAlt.http_get": {
             },`
 
 
-const UsingAnOptimizer = ({
+const AddingAnOptimizer = ({
     subSectionName
 }: {
     subSectionName: string
@@ -326,14 +326,13 @@ const UsingAnOptimizer = ({
                 {secondExecuteStageResults}
             </CodeSegment>
             <p>
-                It's clear that our second Execute stage greatly benefitted from the higher batch size. However,
-                is there a way to find an optimal batch size so that <em>both</em> our Execute stages perform as well?
+                it's clear that our second Execute stage greatly benefitted from the higher batch size. Is there a way to find 
+                an optimal batch size so that <em>both</em> our Execute stages perform well?
             </p>
             <br/>
             <p>
-                This is where Hedra's <HighlightedText>Optimizers</HighlightedText> come in handy! Let's automate the discovery 
-                of a good batch size by adding an <HighlightedText>Optimize</HighlightedText> stage and setting it as the dependency 
-                for both our Execute stages.
+                This is where <HighlightedText>Optimizers</HighlightedText> come in! Let's find a good batch size by adding an <HighlightedText>Optimize</HighlightedText> stage, 
+                setting it as the dependency for both our Execute stages.
             </p>
             <CodeSegment
                 language="python"
@@ -353,10 +352,9 @@ const UsingAnOptimizer = ({
                 {addOptimizeStage}
             </CodeSegment>
             <div>
-                We add an Optimize stage with both Setup stages as a dependency. We then set OptimizeBatchSize as the sole dependecy
-                for both Execute stages. In the Optimize stage, we specify the algorithm as <ArticleLink article="Optimizers" subsection="shg" text="shg" />,
-                set the optimization stage total time limit as three minutes, and the maximum number of iterations (times the algorithm will attempt to find 
-                the best parameters possible) to twenty.
+                We'll need to add both our Setup stages as dependencies for our Optimize stage and our Optimize stage as a dependency for both our 
+                Execute stages. We then specify the algorithm as <ArticleLink article="Optimizers" subsection="shg" text="shg" />, set the total time limit 
+                to three minutes, and the maximum number of iterations (times the algorithm will attempt to find the best parameters possible) to twenty.
             </div>
             <br/>
             <div>
@@ -364,7 +362,7 @@ const UsingAnOptimizer = ({
             </div>
             <CodeSegmentCopyable>hedra graph check my_first_test.py</CodeSegmentCopyable>
             <div>
-                which outputs:
+                which retruns:
             </div>
             <TerminalSegment command={validateOutput}/>
             <div>
@@ -377,8 +375,9 @@ const UsingAnOptimizer = ({
             </div>
             <TerminalSegment command={optimizeOutput}/>
             <div>
-                The optimization stage will run for either three minutes or a maximum of twenty interations before returning the optimized batch size 
-                which our Execute stages will use <em>instead</em> of the batch sizes we specified in the earlier Setup stages.
+                Upon completion of all iterations or reaching the specified time limit, our stage returns the batch size (or additional parameters) that 
+                resulted in the highest actions-per-second rate, which our Execute stages will use instead of the batch sizes we specified in the earlier 
+                Setup stages.
             </div>
             <br/>
             <TerminalSegment command={optimizeCompleteOutput}/>
@@ -413,5 +412,5 @@ const UsingAnOptimizer = ({
 }
 
 export {
-    UsingAnOptimizer
+    AddingAnOptimizer
 }
