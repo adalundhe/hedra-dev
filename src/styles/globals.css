@@ -539,8 +539,8 @@ code:has( > .react-syntax-highlighter-line-number) {
 @media only screen and (min-width: 2000px) {  
 
   .terminal-segment {
-    font-size: 1vmin !important;
-    line-height: 1.15vmin !important;
+    font-size: 0.95vmin !important;
+    line-height: 1.1vmin !important;
   }
 
   .terminal-command-segment-wrapper {

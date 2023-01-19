@@ -3,7 +3,9 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 import { ArticleLink, CenterTextBlock, CodeSegment, CodeSegmentCopyable, HighlightedText, InlineCodeSegment, PointList, TerminalSegment } from "../../../segments"
 
 
-const switchToHTTP2Engine = `from hedra import (
+const switchToHTTP2Engine = `import random
+from hedra.reporting.events.types import HTTPEvent
+from hedra import (
 	Analyze,
 	Execute,
     Optimize,
@@ -27,7 +29,8 @@ class SetupAltTest(Setup):
 @depends(SetupTest, SetupAltTest)
 class OptimizeBatchSize(Optimize):
     algorithm='shg'
-    stage_time_limit='3m'
+    stage_time_limit='1m'
+    optimize_iterations=10
 
 
 @depends(OptimizeBatchSize)
@@ -46,7 +49,7 @@ class TestHTTPBin(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this'
+                'test': random.randint(0, 10)
             }
         )
 
@@ -58,7 +61,7 @@ class TestHTTPBin(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this too!'
+                'test': random.randint(0, 10)
             }
         )
 
@@ -66,6 +69,10 @@ class TestHTTPBin(Execute):
     async def http2_delete(self):
         # Let's also make our HTTP request here HTTP2
         return await self.client.http2.delete('https://httpbin.org/delete')
+    
+    @check('http_get', 'http_post', 'http_put', 'http_delete')
+    async def check_response(self, result: HTTPEvent):
+        assert result.status >= 200 and result.status < 300
 
      
 @depends(OptimizeBatchSize)
@@ -85,7 +92,7 @@ class TestHTTPBinAlt(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this'
+                'test': random.randint(0, 10)
             }
         )
 
@@ -98,7 +105,7 @@ class TestHTTPBinAlt(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this too!'
+                'test': random.randint(0, 10)
             }
         )
 
@@ -106,7 +113,10 @@ class TestHTTPBinAlt(Execute):
     async def http_delete(self):
         return await self.client.http.delete('https://httpbin.org/delete')
 
-
+    @check('http_get', 'http_post', 'http_put', 'http_delete')
+    async def check_response(self, result: HTTPEvent):
+        assert result.status >= 200 and result.status < 300
+        
 
 @depends(TestHTTPBin, TestHTTPBinAlt)
 class ProcessResults(Analyze):
@@ -238,7 +248,7 @@ const UsingMultipleEngines = ({
                 We also might want to verify that the HTTPBin server we're targeting accepts HTTP2 using Hedra's <InlineCodeSegment reference="Command Line#helper-commands">ping</InlineCodeSegment> command.
                 Run:
             </div>
-            <CodeSegmentCopyable>hedra graph check https://httpbin.org/get --engine http2</CodeSegmentCopyable>
+            <CodeSegmentCopyable>hedra ping https://httpbin.org/get --engine http2</CodeSegmentCopyable>
             <div>
                 which returns:
             </div>

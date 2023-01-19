@@ -155,7 +155,6 @@ class TestHTTPBinAlt(Execute):
             }
         )
 
-
     @action()
     async def http_delete(self):
         return await self.client.http.delete('https://httpbin.org/delete')

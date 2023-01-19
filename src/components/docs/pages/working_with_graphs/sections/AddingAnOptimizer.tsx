@@ -60,7 +60,9 @@ const secondExecuteStageResults = `"TestHTTPBinAlt.http_get": {
 `
 
 
-const addOptimizeStage = `from hedra import (
+const addOptimizeStage = `import random
+from hedra.reporting.events.types import HTTPEvent
+from hedra import (
 	Analyze,
 	Execute,
     Optimize,
@@ -79,6 +81,7 @@ class SetupTest(Setup):
 class SetupAltTest(Setup):
     batch_size=16000
     total_time='1m'
+    optimize_iterations=10
 
 
 # Here we provide both our Setup stages as dependencies
@@ -87,7 +90,8 @@ class SetupAltTest(Setup):
 @depends(SetupTest, SetupAltTest)
 class OptimizeBatchSize(Optimize):
     algorithm='shg'
-    stage_time_limit='3m'
+    stage_time_limit='1m'
+
 
 
 # We then set OptimizeBatchSize as our dependency
@@ -99,7 +103,7 @@ class TestHTTPBin(Execute):
     async def http_get(self):
         return await self.client.http.get('https://httpbin.org/get')
 
-    @action()
+    @task()
     async def http_post(self):
         return await self.client.http.post(
             'https://httpbin.org/post', 
@@ -107,11 +111,11 @@ class TestHTTPBin(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this'
+                'test': random.randint(0, 10)
             }
         )
-
-    @action()
+    
+    @task()
     async def http_put(self):
         return await self.client.http.put(
             'https://httpbin.org/put', 
@@ -119,7 +123,7 @@ class TestHTTPBin(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this too!'
+                'test': random.randint(0, 10)
             }
         )
 
@@ -127,6 +131,9 @@ class TestHTTPBin(Execute):
     async def http_delete(self):
         return await self.client.http.delete('https://httpbin.org/delete')
 
+    @check('http_get', 'http_post', 'http_put', 'http_delete')
+    async def check_response(self, result: HTTPEvent):
+        assert result.status >= 200 and result.status < 300
 
 # Likewise set OptimizeBatchSize as our dependency
 # since we want to use the optimized params.       
@@ -137,7 +144,7 @@ class TestHTTPBinAlt(Execute):
     async def http_get(self):
         return await self.client.http.get('https://httpbin.org/get')
 
-    @action()
+    @task()
     async def http_post(self):
         return await self.client.http.post(
             'https://httpbin.org/post', 
@@ -145,11 +152,11 @@ class TestHTTPBinAlt(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this'
+                'test': random.randint(0, 10)
             }
         )
-
-    @action()
+    
+    @task()
     async def http_put(self):
         return await self.client.http.put(
             'https://httpbin.org/put', 
@@ -157,7 +164,7 @@ class TestHTTPBinAlt(Execute):
                 'Content-Type': 'application/json'
             },
             data={
-                'test': 'this too!'
+                'test': random.randint(0, 10)
             }
         )
 
@@ -165,6 +172,9 @@ class TestHTTPBinAlt(Execute):
     async def http_delete(self):
         return await self.client.http.delete('https://httpbin.org/delete')
 
+    @check('http_get', 'http_post', 'http_put', 'http_delete')
+    async def check_response(self, result: HTTPEvent):
+        assert result.status >= 200 and result.status < 300
 
 
 @depends(TestHTTPBin, TestHTTPBinAlt)
@@ -354,7 +364,7 @@ const AddingAnOptimizer = ({
             <div>
                 We'll need to add both our Setup stages as dependencies for our Optimize stage and our Optimize stage as a dependency for both our 
                 Execute stages. We then specify the algorithm as <ArticleLink article="Optimizers" subsection="shg" text="shg" />, set the total time limit 
-                to three minutes, and the maximum number of iterations (times the algorithm will attempt to find the best parameters possible) to twenty.
+                to one minutes, and the maximum number of iterations (times the algorithm will attempt to find the best parameters possible) to ten.
             </div>
             <br/>
             <div>
