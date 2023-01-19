@@ -291,7 +291,7 @@ class SaveStagesToDisk(Checkpoint):
     # under the given context key, transform it as
     # needed, and store it at the provided path.
     @save(key='results', checkpoint_filepath='./results.json')
-    async def save_to_disk(self, results: Dict[str, Dict[str, Union[int, float, List[Any]]]]):        
+    async def save_to_disk(self, results: Dict[str, Dict[str, Any]):        
         return json.dumps(results, indent=4)
 
 
