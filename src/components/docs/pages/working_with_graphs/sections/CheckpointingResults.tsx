@@ -681,19 +681,18 @@ const CheckpointingResults = ({
             </div>
             <TerminalSegment command={preCheckpointOutput}/>
             <div>
-                Run the graph a few more times, taking care to note how much memory the graph now uses via Top or another usage monitoring tool. While on our persona machine 
-                this usage may not be an issue, on smaller machines (like those run on cloud services) though this amount of memory may cause issues. 
+                Run the graph a few more times, taking care to note how much memory the graph now uses via Top or another usage monitoring tool. Using several gigabytes of 
+                memory might not be an issue on our personal machine, but on smaller machines (like those run on cloud services) it could cause stability issues. 
             </div>
             <br/>
             <div>
-                Once an Execute stage has completed its run, we don't necessarily need to store its results in-memory for the rest of the graph's execution. Instead, we can 
-                use Hedra's <InlineCodeSegment reference="Stages#checkpoint">Checkpoint</InlineCodeSegment> stage type, <InlineCodeSegment reference="Hooks#save">@save()</InlineCodeSegment> hook,
-                to write results to disk. We can then later load this checkpointed data via a Checkpoint stage and <InlineCodeSegment reference="Hooks#restore">@restore()</InlineCodeSegment> hook
-                before passing it to an Analyze stage where it can be aggregated.
+                We don't have to store the results for Execute stage results in-memory for the entire graph execution. Instead, we can use Hedra's <InlineCodeSegment reference="Stages#checkpoint">Checkpoint</InlineCodeSegment> stage 
+                type and <InlineCodeSegment reference="Hooks#save">@save()</InlineCodeSegment> hook to write results to a file. We can then load this data with another Checkpoint stage 
+                and <InlineCodeSegment reference="Hooks#restore">@restore()</InlineCodeSegment> hook at a later point - passing it to an Analyze stage for aggregation into metrics.
             </div>
             <br/>
             <div>
-                Let's go ahead and the first Checkpoint stage we'll need with a Save hook. Import the Checkpoint stage and save hook, then modify the graph as below:
+                Let's add the first Checkpoint stage and Save hook to write the results of our first two Execute stages to disk.
             </div>
             <CodeSegment
                 language="python"
@@ -729,10 +728,10 @@ const CheckpointingResults = ({
             </div>
             <br/>
             <div>
-                Checkpoint stages can have both Save and Restore hooks. While Save hooks offload the specified in-memory data to file, Restore hooks 
-                allow us to read back in checkpointed data from those files and store them back in memory. More specifically, Save and Restore hooks allow
-                us to manage data stored in a graph's <ArticleLink article="Graphs" subsection="context" text="context"/> - an arbitrary key-value store 
-                that Hedra uses to pass data between stages in a graph.
+                A Checkpoint stage can have both Save and Restore hooks, with Restore hooks executing first then Save hooks. While Save hooks offload the 
+                specified in-memory data to file, Restore hooks allow us to read back in checkpointed data from those files and store them back in memory. 
+                Combined, Save and Restore hooks allow us to manage data stored in a graph's <ArticleLink article="Graphs" subsection="context" text="context"/> - 
+                an arbitrary key-value store that Hedra uses to pass data between stages in a graph.
             </div>
             <br/>
             <div>
